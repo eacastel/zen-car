@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '../components/Layout'
 import Button from '../components/Button'
+import Seo from '../components/Seo' // Import the Seo component
 
 const HomePage = () => {
   return (
@@ -62,9 +63,10 @@ const HomePage = () => {
 
 export default HomePage
 
+// Use the Seo component in the Head export for metadata
 export const Head = () => (
-  <>
-    <title>Zen Car Buying | Your Trusted Concierge for Used Cars</title>
-    <meta name="description" content="Discover incredible deals on lightly used cars." />
-  </>
+  <Seo
+    title="Zen Car Buying | Your Trusted Concierge for Used Cars"
+    description="Discover incredible deals on lightly used cars."
+  />
 )
