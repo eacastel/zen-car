@@ -1,14 +1,17 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby TailwindCSS Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter with TailwindCSS and common dev tools. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@kosvrouvas`,
+    title: `Zen Car Buying`,
+    description: `Discover incredible deals on lightly used cars.`,
+    author: `@zencar`,
+    siteUrl: `https://zencarbuying.com`
   },
   flags: {
     THE_FLAG: false
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -16,35 +19,35 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-plugin-postcss`,
+        options: {
+          postCssPlugins: [
+            require(`tailwindcss`),
+            require(`autoprefixer`),
+          ],
+        },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Zen Car Buying`,
+        short_name: `ZenCar`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#6B8385`, 
+        theme_color: `#F99F1B`, 
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/zen-car-buying-logo.png`, 
       },
     },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        // The property ID; the tracking code won't be generated without it
         trackingId: "YOUR_GOOGLE_ANALYTICS_TRACKING_ID",
-        // Defines where to place the tracking script - `true` in the head and `false` in the body
         head: false,
-        // Setting this parameter is optional
         anonymize: true,
-        // Setting this parameter is also optional
         respectDNT: true,
-        // Avoids sending pageview hits from custom paths
         exclude: ["/preview/**", "/do-not-track/me/too/"],
-        // Delays sending pageview hits on route update (in milliseconds)
         pageTransitionDelay: 0,
         // Enables Google Optimize using your container Id
         optimizeId: "YOUR_GOOGLE_OPTIMIZE_TRACKING_ID",
@@ -57,25 +60,11 @@ module.exports = {
         // Any additional optional fields
         sampleRate: 5,
         siteSpeedSampleRate: 10,
-        cookieDomain: "example.com",
+        cookieDomain: "zencarbuying.com",
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,
-    {
-      resolve: `gatsby-plugin-postcss`,
-      options: {
-        postCssPlugins: [require("tailwindcss"), require("autoprefixer")]
-      }
-    },
-    {
-      resolve: `gatsby-plugin-purgecss`,
-      options: {
-        printRejected: false,
-        develop: false,
-        tailwind: true,
-      },
-    }
   ],
 }
