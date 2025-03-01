@@ -28,7 +28,7 @@ module.exports = {
       options: {
         checkSupportedExtensions: false,
       },
-    }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
