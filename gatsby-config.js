@@ -7,8 +7,28 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          formats: ["auto", "webp", "png"], 
+          placeholder: "dominantColor",
+          quality: 90,
+          breakpoints: [750, 1080, 1366, 1920],
+        },
+        failOn: "none",
+        base64Width: 20,
+        forceBase64Format: "png",
+        useMozJpeg: false, 
+        stripMetadata: true,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-sharp`,
+      options: {
+        checkSupportedExtensions: false,
+      },
+    }
     {
       resolve: `gatsby-source-filesystem`,
       options: {
