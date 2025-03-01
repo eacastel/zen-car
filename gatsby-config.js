@@ -5,9 +5,6 @@ module.exports = {
     author: `@zencar`,
     siteUrl: `https://zencarbuying.com`
   },
-  flags: {
-    THE_FLAG: false
-  },
   plugins: [
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,

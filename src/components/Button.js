@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { motion } from 'framer-motion'
 
 const Button = ({ to, children, color = 'primary', size = 'base' }) => {
   const sizes = {
@@ -15,12 +16,18 @@ const Button = ({ to, children, color = 'primary', size = 'base' }) => {
   }
 
   return (
-    <Link
-      to={to}
-      className={`${colors[color]} ${sizes[size]} rounded-lg font-semibold transition-colors duration-200`}
+    <motion.div 
+      whileHover={{ scale: 1.05 }} 
+      whileTap={{ scale: 0.95 }} 
+      transition={{ duration: 0.2 }}
     >
-      {children}
-    </Link>
+      <Link
+        to={to}
+        className={`${colors[color]} ${sizes[size]} rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2`}
+      >
+        {children}
+      </Link>
+    </motion.div>
   )
 }
 

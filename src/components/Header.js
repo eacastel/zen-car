@@ -1,22 +1,20 @@
 import React, { useState } from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { graphql, useStaticQuery } from 'gatsby'
 import { Squash as Hamburger } from 'hamburger-react'
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false)
 
-  // Query for the logo image
   const data = useStaticQuery(graphql`
     query {
-      logo: file(relativePath: { eq: "zen-car-buying-logo-header.png" }) {
+      logo: file(relativePath: { eq: "zen-car-buying-logo-header-white.png" }) {
         childImageSharp {
           gatsbyImageData(
-            layout: CONSTRAINED
-            placeholder: BLURRED
             width: 300
-            formats: [AUTO, WEBP, AVIF]
+            placeholder: BLURRED
+            formats: [AUTO, WEBP]
+            quality: 90
           )
         }
       }
@@ -25,78 +23,90 @@ export default function Header() {
 
   const logoImage = getImage(data.logo)
 
+  const navItems = [
+    { name: "Pricing", path: "/pricing" },
+    { name: "About", path: "/about" },
+    { name: "Testimonials", path: "/testimonials" },
+    { name: "Contact", path: "/contact" },
+  ];
+
   return (
-    <header className="bg-primary text-white" role="banner">
-      <nav className="container mx-auto px-4 md:px-6 py-4" aria-label="Main navigation">
+    <header className="bg-primary/85 backdrop-blur-md sticky top-0 z-50 border-b border-secondary">
+      <nav className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          {/* Logo with consistent sizing */}
-          <Link
-            to="/"
-            className="flex items-center focus:outline-none focus:ring-2 focus:ring-accent z-50"
-          >
+          {/* Logo */}
+          <Link to="/" className="z-50 flex-shrink-0" style={{ width: '300px' }}>
             <GatsbyImage
               image={logoImage}
               alt="Zen Car Buying Logo"
-              className="h-16 w-auto object-contain"
-              imgStyle={{ 
-                width: 'auto',
-                height: '100%',
-                maxWidth: '300px'
-              }}
+              className="h-16 w-auto"
+              imgStyle={{ objectFit: 'contain', maxWidth: '300px' }}
             />
-            <span className="sr-only">Zen Car Buying</span>
           </Link>
 
-          {/* Hamburger Menu for Mobile */}
-          <div className="md:hidden">
-            <Hamburger
-              toggled={isOpen}
-              toggle={setOpen}
-              size={24}
-              color="#FFFFFF"
-              distance="sm"
-              rounded
-            />
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-x-6 xl:gap-x-8 flex-1 justify-end">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className="text-white hover:text-accent transition-colors font-bold text-sm xl:text-base whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                activeClassName="text-accent"
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="ml-4">
+              <Link
+                to="/contact"
+                className="bg-accent text-white px-5 py-2 rounded-md font-bold text-sm xl:text-base whitespace-nowrap
+                transition-all duration-200 ease-in-out hover:bg-accent-dark hover:shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
+              >
+                Get Started
+              </Link>
+            </div>
           </div>
 
-          {/* Navigation Links - Tightened spacing */}
-          <div
-            className={`${isOpen ? 'block' : 'hidden'} md:flex md:items-center absolute md:static top-full left-0 right-0 bg-primary z-40 shadow-lg md:shadow-none`}
+          {/* Mobile Hamburger Menu */}
+          <div className="lg:hidden">
+            <button
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              className="focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+            >
+              <Hamburger
+                toggled={isOpen}
+                toggle={setOpen}
+                size={28} /* 🔥 Slightly larger for easier tap */
+                color="#FFFFFF"
+                rounded
+              />
+            </button>
+          </div>
+
+          {/* Mobile Navigation */}
+          <div 
+            className={`${isOpen ? 'block' : 'hidden'} lg:hidden absolute top-full left-0 right-0 bg-primary z-40 shadow-lg`}
+            aria-hidden={!isOpen}
           >
-            <ul className="flex flex-col w-full md:w-auto md:flex-row md:items-center md:gap-x-4 lg:gap-x-6 space-y-4 md:space-y-0 py-4 md:py-0 px-4 md:px-0">
-              <li className="border-b border-gray-600 md:border-none w-full md:w-auto">
-                <Link
-                  to="/services"
-                  className="block text-white font-bold hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent py-2 md:py-0"
-                  activeClassName="text-accent"
-                >
-                  Services
-                </Link>
-              </li>
-              <li className="border-b border-gray-600 md:border-none w-full md:w-auto">
-                <Link
-                  to="/how-it-works"
-                  className="block text-white font-bold hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent py-2 md:py-0"
-                  activeClassName="text-accent"
-                >
-                  How It Works
-                </Link>
-              </li>
-              <li className="border-b border-gray-600 md:border-none w-full md:w-auto">
-                <Link
-                  to="/about"
-                  className="block text-white font-bold hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent py-2 md:py-0"
-                  activeClassName="text-accent"
-                >
-                  About
-                </Link>
-              </li>
-              <li className="w-full md:w-auto mt-4 md:mt-0">
+            <ul className="flex flex-col items-center py-4 space-y-4">
+              {navItems.map((item) => (
+                <li key={item.path} className="w-full text-center">
+                  <Link
+                    to={item.path}
+                    className="block text-white hover:text-accent py-2 px-4 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                    activeClassName="text-accent"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+              <li className="mt-4">
                 <Link
                   to="/contact"
-                  className="block bg-accent px-4 py-2 rounded text-white font-bold hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-white whitespace-nowrap text-center md:text-left"
+                  className="bg-accent text-white px-8 py-2 rounded-md font-bold text-sm xl:text-base whitespace-nowrap
+                  transition-all duration-200 ease-in-out hover:bg-accent-dark hover:shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
                 >
-                  Free Consultation
+                  Get Started
                 </Link>
               </li>
             </ul>

@@ -15,3 +15,40 @@ a {
 
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face {
+  font-family: 'Pirulen';
+  src: url('/fonts/Pirulen-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica Light Oblique';
+  src: url('/fonts/helvetica-light-oblique.woff2') format('woff2');
+  font-weight: 300;
+  font-style: oblique; /* ✅ This ensures proper italic rendering */
+  font-display: swap;
+}

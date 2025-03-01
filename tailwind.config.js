@@ -15,6 +15,11 @@ module.exports = {
         white: '#FFFFFF'
       },
     },
+    fontFamily: {
+      pirulen: ['Pirulen', 'sans-serif'],
+      poppins: ['Poppins', 'sans-serif'],
+      helvetica: ['Helvetica Light Oblique', 'sans-serif']
+  },
   },
   variants: {},
   plugins: [],

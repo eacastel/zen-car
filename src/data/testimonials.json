@@ -1,0 +1,31 @@
+[
+    {
+      "name": "Allan A.",
+      "quote": "My Zen Guide helped me navigate the confusing EV marketplace with ease. I couldn’t be happier with my new car.",
+      "image": "Allan-A.jpeg",
+      "rating": "⭐⭐⭐⭐⭐",
+      "note": "We saved our client 20%!"
+    },
+    {
+      "name": "James D.",
+      "quote": "I never knew buying a car could be this stress-free!",
+      "image": "testimonial-james.webp",
+      "rating": "⭐⭐⭐⭐⭐",
+      "note": "We saved this client 20%."
+    },
+    {
+      "name": "Sophia M.",
+      "quote": "The best car-buying experience ever. Highly recommend!",
+      "image": "testimonial-sophia.webp",
+      "rating": "⭐⭐⭐⭐⭐",
+      "note": "We saved this client 20%."
+    },
+    {
+      "name": "David P.",
+      "quote": "They found the perfect car for me in just 3 days!",
+      "image": "testimonial-david.webp",
+      "rating": "⭐⭐⭐⭐⭐",
+      "note": "We saved this client 20%."
+    }
+  ]
+  
