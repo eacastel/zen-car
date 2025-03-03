@@ -38,7 +38,7 @@ function CustomizeWizard() {
   }
 
   return (
-    <section className="py-12 bg-secondary">
+    <section className="bg-secondary">
       <div className="container mx-auto px-6">
         {/* Big Card Container */}
         <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
@@ -276,7 +276,7 @@ export default function Pricing() {
   return (
     <Layout>
       {/* Section 1: Hero Call-to-Action */}
-      <section className="relative py-40 flex items-center overflow-hidden">
+      <section className="relative p-40 flex items-center overflow-hidden">
         <GatsbyImage
           image={heroBg}
           alt="Hero Background"
@@ -286,7 +286,7 @@ export default function Pricing() {
         <div className="absolute inset-0 bg-black opacity-70"></div>
         {/* Content Wrapper with Dotted Border */}
         <div className="relative container mx-auto px-2 text-center text-white max-w-3xl">
-          <div className="inline-block p-12 border-4 border-accent rounded-xl">
+          <div className="inline-block p-12 border-2 border-accent rounded-xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Discover Your Perfect Car Buying Experience
             </h1>
@@ -301,11 +301,12 @@ export default function Pricing() {
       </section>
 
       {/* Section 2: “The Zen Experience” Package */}
-      <section className="py-16 bg-secondary">
+      <section className="pt-16 pb-8 bg-secondary">
         <div className="container mx-auto px-6">
           {/* Introduction Paragraph for Zen Experience */}
-          <p className="text-lg md:text-xl m-12 mt-2 text-center text-primary">
-            Ready to place your order? Our exclusive Zen Experience package is the most complete, all‑in‑one solution for a stress‑free car buying journey. Enjoy premium support, expert guidance, and unbeatable value.
+         
+            <h2 className="text-3xl font-bold text-accent mb-4 text-center">Ready to place your order?</h2>
+            <p className="text-lg md:text-xl mx-12 pb-8 mt-2 text-center text-primary">Our Zen Experience package is the most complete, all‑in‑one solution for a stress‑free car buying journey. Enjoy premium support, expert guidance, and unbeatable value.
           </p>
           <div className="bg-white p-8 rounded-2xl shadow-lg relative border-2 border-primary">
             <div className="flex flex-col lg:flex-row items-center">
@@ -314,7 +315,7 @@ export default function Pricing() {
                 <span className="absolute -top-5 right-0 bg-primary text-white text-sm uppercase px-6 py-2 rounded-tl-lg rounded-br-lg shadow-md font-bold">
                   Best Value
                 </span>
-                <h2 className="text-3xl font-bold text-primary mb-4">“The Zen Experience”</h2>
+                <h3 className="text-3xl font-bold text-primary mb-4">“The Zen Experience”</h3>
                 <p className="text-xl text-accent font-semibold mb-4">
                   $1,000 <span className="text-gray-400 ml-1 line-through text-lg">$1,250</span>
                 </p>
@@ -343,9 +344,9 @@ export default function Pricing() {
               </Button>
             </div>
           </div>
-          {/* Introduction Paragraph for Customize Your Package */}
-          <p className="text-lg md:text-xl mx-12 mt-20 text-center text-primary">
-            Prefer a tailored solution? Customize your package by selecting only the services you need – and enjoy your complimentary 15‑minute consultation with every package purchase.
+          {/* Introduction Paragraph for Customize Your Package */}          
+          <h2 className="text-3xl font-bold text-accent mt-20 text-center">Prefer a tailored solution?</h2>
+          <p className="text-lg md:text-xl mx-12 mt-4 text-center text-primary">Customize your package by selecting only the services you need – and enjoy your complimentary 15‑minute consultation with every package purchase.
           </p>
         </div>
       </section>
