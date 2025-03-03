@@ -249,22 +249,22 @@ export default function Pricing() {
     query {
       heroImage: file(relativePath: { eq: "hero4.png" }) {
         childImageSharp {
-          gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+          gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, formats: [AUTO, WEBP])
         }
       }
       zenExperience: file(relativePath: { eq: "hyundai2.png" }) {
         childImageSharp {
-          gatsbyImageData(width: 600, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+          gatsbyImageData(width: 600, placeholder: BLURRED, formats: [AUTO, WEBP])
         }
       }
       inventory: file(relativePath: { eq: "hyundai.png" }) {
         childImageSharp {
-          gatsbyImageData(width: 400, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+          gatsbyImageData(width: 400, placeholder: BLURRED, formats: [AUTO, WEBP])
         }
       }
       purchase: file(relativePath: { eq: "kia1.png" }) {
         childImageSharp {
-          gatsbyImageData(width: 400, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+          gatsbyImageData(width: 400, placeholder: BLURRED, formats: [AUTO, WEBP])
         }
       }
     }
