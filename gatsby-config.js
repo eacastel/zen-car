@@ -16,7 +16,7 @@ module.exports = {
           quality: 90,
           breakpoints: [750, 1080, 1366, 1920],
         },
-        failOn: "none",
+        failOnError: "false",
         base64Width: 20,
         forceBase64Format: "png",
         useMozJpeg: false, 
