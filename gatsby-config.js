@@ -12,7 +12,7 @@ module.exports = {
       options: {
         defaults: {
           formats: ["auto", "webp", "png"], 
-          placeholder: "dominantColor",
+          placeholder: "blurred",
           quality: 90,
           breakpoints: [750, 1080, 1366, 1920],
         },
