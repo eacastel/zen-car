@@ -11,7 +11,7 @@ module.exports = {
       resolve: `gatsby-plugin-sharp`,
       options: {
         defaults: {
-          formats: ["auto", "webp", "png"], 
+          formats: ["webp", "png"], 
           placeholder: "blurred",
           quality: 90,
           breakpoints: [750, 1080, 1366, 1920],
