@@ -7,7 +7,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { FaCheckCircle, FaRegCircle, FaCheckSquare, FaRegSquare } from 'react-icons/fa'
 
 /* ======================
-   Section 3: Customize Your Package (Updated with Three Columns & Accessibility)
+   Section 3: Customize Your Package (Updated with Three Columns, Accessibility & Discount Logic)
 ======================== */
 function CustomizeWizard() {
   const researchOptions = [
@@ -26,6 +26,9 @@ function CustomizeWizard() {
     (inventorySourcing ? 250 : 0) +
     (purchaseAssistance ? 500 : 0)
 
+  // If the total equals $1,250 then apply the Zen Experience discount.
+  const discountedTotal = totalPrice === 1250 ? 1000 : totalPrice
+
   // Helper for keyboard events on interactive elements.
   const handleKeyDown = (e, action) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -35,7 +38,7 @@ function CustomizeWizard() {
   }
 
   return (
-    <section className="pb-12 pt-0 bg-secondary">
+    <section className="py-12 bg-secondary">
       <div className="container mx-auto px-6">
         {/* Big Card Container */}
         <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
@@ -208,7 +211,14 @@ function CustomizeWizard() {
                     )}
                   </div>
                   <div className="border-t pt-4">
-                    <p className="font-bold text-lg text-center">Total Price: ${totalPrice}</p>
+                    <p className="font-bold text-lg text-center">
+                      Total Price: ${discountedTotal}
+                    </p>
+                    {totalPrice === 1250 && (
+                      <p className="text-sm text-green-600 text-center">
+                        Special Zen Experience Discount Applied – Save $250!
+                      </p>
+                    )}
                   </div>
                   <div className="mt-4 text-center">
                     <Button to="/checkout" color="accent" size="base">
@@ -218,7 +228,9 @@ function CustomizeWizard() {
                 </div>
               ) : (
                 <div className="border p-4 rounded-lg bg-gray-50 shadow-sm text-center">
-                  <p className="text-gray-500">Your package summary will appear here once you make a selection.</p>
+                  <p className="text-gray-500">
+                    Your package summary will appear here once you make a selection.
+                  </p>
                 </div>
               )}
             </div>
@@ -264,27 +276,29 @@ export default function Pricing() {
   return (
     <Layout>
       {/* Section 1: Hero Call-to-Action */}
-      <section className="py-40 relative">
-  <GatsbyImage
-    image={heroBg}
-    alt="Hero Background"
-    className="absolute inset-0 w-full h-full"
-    style={{ zIndex: -1 }}
-  />
-  <div className="absolute inset-0 bg-black opacity-70"></div>
-  <div className="relative container mx-auto px-6 text-center text-white max-w-3xl">
-    <h1 className="text-4xl md:text-5xl font-bold mb-4">
-      Discover Your Perfect Car Buying Experience
-    </h1>
-    <p className="text-lg md:text-xl mb-4">
-      Start with a free 15‑minute consultation to kick off your stress‑free car buying journey.
-    </p>
-
-    <Button to="/schedule" color="accent" size="lg">
-      Schedule Your Free Consultation
-    </Button>
-  </div>
-</section>
+      <section className="relative py-40 flex items-center overflow-hidden">
+        <GatsbyImage
+          image={heroBg}
+          alt="Hero Background"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ zIndex: -1 }}
+        />
+        <div className="absolute inset-0 bg-black opacity-70"></div>
+        {/* Content Wrapper with Dotted Border */}
+        <div className="relative container mx-auto px-2 text-center text-white max-w-3xl">
+          <div className="inline-block p-12 border-4 border-accent rounded-xl">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Discover Your Perfect Car Buying Experience
+            </h1>
+            <p className="text-lg md:text-xl mb-8">
+              Schedule a free 15‑minute consultation with a zen guide today.
+            </p>
+            <Button to="/schedule" color="accent" size="lg">
+              Schedule Your Free Consultation
+            </Button>
+          </div>
+        </div>
+      </section>
 
       {/* Section 2: “The Zen Experience” Package */}
       <section className="py-16 bg-secondary">
@@ -293,11 +307,11 @@ export default function Pricing() {
           <p className="text-lg md:text-xl m-12 mt-2 text-center text-primary">
             Ready to place your order? Our exclusive Zen Experience package is the most complete, all‑in‑one solution for a stress‑free car buying journey. Enjoy premium support, expert guidance, and unbeatable value.
           </p>
-          <div className="bg-white p-8 rounded-2xl shadow-lg relative">
+          <div className="bg-white p-8 rounded-2xl shadow-lg relative border-2 border-primary">
             <div className="flex flex-col lg:flex-row items-center">
               <div className="lg:w-1/2 text-center">
                 {/* Best Value Sticker */}
-                <span className="absolute -top-5 right-0 bg-accent text-white text-sm uppercase px-6 py-2 rounded-tl-lg rounded-br-lg shadow-md font-bold">
+                <span className="absolute -top-5 right-0 bg-primary text-white text-sm uppercase px-6 py-2 rounded-tl-lg rounded-br-lg shadow-md font-bold">
                   Best Value
                 </span>
                 <h2 className="text-3xl font-bold text-primary mb-4">“The Zen Experience”</h2>
@@ -323,8 +337,8 @@ export default function Pricing() {
                 <GatsbyImage image={zenImg} alt="The Zen Experience" className="w-full h-auto rounded" />
               </div>
             </div>
-            <div className="mt-6 flex justify-center">
-              <Button to="/contact" color="accent" size="lg" className="bg-orange-700 hover:bg-orange-500">
+            <div className="mt-8 flex justify-center">
+              <Button to="/contact" color="accent" size="lg" className="bg-clementine hover:bg-orange-500">
                 Get the Zen Experience
               </Button>
             </div>

@@ -39,7 +39,7 @@ export default function Header() {
             <GatsbyImage
               image={logoImage}
               alt="Zen Car Buying Logo"
-              className="h-16 w-auto"
+              className="w-auto"
               imgStyle={{ objectFit: 'contain', maxWidth: '300px' }}
             />
           </Link>
