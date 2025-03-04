@@ -1,106 +1,92 @@
-import React from 'react'
-import Layout from '../components/Layout'
-import Seo from '../components/Seo'
-import Button from '../components/Button'
-import { FaCheckCircle } from 'react-icons/fa'
+import React from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import { getImage } from "gatsby-plugin-image";
+import Layout from "../components/Layout";
+import Seo from "../components/Seo";
+import HeroSection from "../components/pricing-page/HeroSection";
+import ZenExperienceSection from "../components/pricing-page/ZenExperienceSection";
+import CustomizeWizard from "../components/pricing-page/CustomizeWizard";
+import { loadStripe } from "@stripe/stripe-js";
 
-const pricingData = [
-  {
-    title: 'Research Recommendations',
-    price: '$250 - $500',
-    description: 'Get expert model and year recommendations based on your needs.',
-    details: [
-      'Personalized recommendations for make/model/year',
-      'Reliability and market analysis',
-      'Delivered in 48 hours'
-    ],
-    options: [
-      { label: '1 Car - $250', link: '/contact' },
-      { label: '2 Cars - $400', link: '/contact' },
-      { label: '3 Cars - $500', link: '/contact' }
-    ]
-  },
-  {
-    title: 'Inventory Sourcing',
-    price: '$250',
-    description: 'Find the best available cars that match your recommendations.',
-    details: [
-      '5-10 matching vehicles',
-      'Verified pricing, condition & location',
-      'Requires Research Package'
-    ],
-    options: [{ label: 'Add Inventory Sourcing', link: '/contact' }]
-  },
-  {
-    title: 'Purchase Assistance',
-    price: '$500',
-    description: 'We handle negotiation, dealer communication, and paperwork.',
-    details: [
-      'Dealer communication & negotiation',
-      'Financing and paperwork guidance',
-      'Up to 2 vehicles'
-    ],
-    options: [{ label: 'Get Purchase Assistance', link: '/contact' }]
-  },
-  {
-    title: 'The Complete Service',
-    price: '$1,000',
-    description: 'Get the full stress-free experience with all services included.',
-    details: [
-      'All research, sourcing & purchase assistance',
-      'Best value package',
-      'End-to-end car buying help'
-    ],
-    options: [{ label: 'Go All In', link: '/contact' }]
+// Initialize Stripe.js using a cached promise
+let stripePromise;
+const getStripe = () => {
+  if (!stripePromise) {
+    stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLIC_KEY);
   }
-]
+  return stripePromise;
+};
 
-export default function Pricing() {
+const Pricing = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      heroImage: file(relativePath: { eq: "hero4.png" }) {
+        childImageSharp {
+          gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, formats: [AUTO, WEBP])
+        }
+      }
+      zenExperience: file(relativePath: { eq: "hyundai2.png" }) {
+        childImageSharp {
+          gatsbyImageData(width: 600, placeholder: BLURRED, formats: [AUTO, WEBP])
+        }
+      }
+      inventory: file(relativePath: { eq: "hyundai.png" }) {
+        childImageSharp {
+          gatsbyImageData(width: 400, placeholder: BLURRED, formats: [AUTO, WEBP])
+        }
+      }
+      purchase: file(relativePath: { eq: "kia1.png" }) {
+        childImageSharp {
+          gatsbyImageData(width: 400, placeholder: BLURRED, formats: [AUTO, WEBP])
+        }
+      }
+    }
+  `);
+
+  const heroBg = getImage(data.heroImage);
+  const zenImg = getImage(data.zenExperience);
+  const siteUrl = process.env.GATSBY_SITE_URL;
+
   return (
     <Layout>
-      <section className="py-20 bg-secondary text-center" aria-labelledby="pricing-heading">
-        <div className="container mx-auto px-6">
-          <h1 id="pricing-heading" className="text-4xl font-bold text-primary mb-12">
-            Our <span className="text-accent">Pricing & Packages</span>
-          </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-12">
-            Choose the level of support you need—from expert recommendations to full purchase assistance.
-          </p>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {pricingData.map((packageItem, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-lg text-center">
-                <h2 className="text-2xl font-bold text-primary">{packageItem.title}</h2>
-                <p className="text-xl text-accent font-semibold my-3">{packageItem.price}</p>
-                <p className="text-gray-700 mb-4">{packageItem.description}</p>
-
-                <ul className="text-left mb-6">
-                  {packageItem.details.map((detail, i) => (
-                    <li key={i} className="flex items-center text-gray-700">
-                      <FaCheckCircle className="text-accent mr-2" /> {detail}
-                    </li>
-                  ))}
-                </ul>
-
-                {packageItem.options.map((option, i) => (
-                  <Button key={i} to={option.link} color="accent" size="base">
-                    {option.label}
-                  </Button>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HeroSection heroBg={heroBg} />
+      <ZenExperienceSection zenImg={zenImg} siteUrl={siteUrl} getStripe={getStripe} />
+      <CustomizeWizard />
     </Layout>
-  )
-}
+  );
+};
 
-// ✅ SEO Metadata for Pricing Page
-export const Head = () => (
-  <Seo
-    title="Zen Car Buying Pricing | Choose Your Car Buying Package"
-    description="Explore Zen Car Buying's pricing and packages. Get expert car recommendations, inventory sourcing, and purchase assistance."
-    pathname="/pricing"
-  />
-)
+export default Pricing;
+
+export const Head = () => {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Nationwide Car Buying Consultation and Assistance",
+    "provider": {
+      "@type": "Organization",
+      "name": "Zen Car Buying",
+      "url": "https://www.zencarbuying.com",
+      "logo": "https://www.zencarbuying.com/logo.png"
+    },
+    "areaServed": "US",
+    "description": "Zen Car Buying offers a comprehensive, nationwide car buying experience including a free 15‑minute consultation, expert recommendations, inventory sourcing, and purchase assistance.",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "USD",
+      "price": "Varies",
+      "availability": "https://schema.org/InStock"
+    }
+  };
+
+  return (
+    <>
+      <Seo
+        title="Zen Car Buying Pricing | Nationwide Car Buying Packages"
+        description="Discover Zen Car Buying's comprehensive, nationwide car buying experience. Get a free 15‑minute consultation, expert recommendations, inventory sourcing, and purchase assistance across the USA."
+        pathname="/pricing"
+      />
+      <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
+    </>
+  );
+};

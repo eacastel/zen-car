@@ -1,4 +1,27 @@
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ✅ Prevent page shift */
+html {
+  overflow-y: scroll;
+}
+
+/* ✅ Ensure Calendly popup scales properly */
+.calendly-popup,
+.calendly-overlay {
+  @apply fixed inset-0 w-screen h-screen z-[999999] flex items-center justify-center bg-black/50;
+}
+
+/* ✅ Scale Calendly popup on large screens */
+.calendly-popup iframe {
+  width: 90vw !important; /* Take up 90% of the screen width */
+  max-width: 800px !important; /* Limit width to 800px on large screens */
+  height: 90vh !important; /* Take up 90% of the viewport height */
+  max-height: 90vh !important;
+  display: block !important;
+  border-radius: 8px; /* Optional: Add rounded corners for better look */
+}
 
 h1 {
   @apply text-2xl;
@@ -12,10 +35,6 @@ h3 {
 a {
   @apply text-blue-600;
 }
-
-@tailwind components;
-@tailwind utilities;
-
 
 @font-face {
   font-family: 'Pirulen';
@@ -52,3 +71,4 @@ a {
   font-style: oblique; /* ✅ This ensures proper italic rendering */
   font-display: swap;
 }
+

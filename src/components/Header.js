@@ -25,8 +25,8 @@ export default function Header() {
 
   const navItems = [
     { name: "Pricing", path: "/pricing" },
-    { name: "About", path: "/about" },
-    { name: "Testimonials", path: "/testimonials" },
+   /* { name: "About", path: "/about" }, */
+    /*  { name: "Testimonials", path: "/testimonials" }, */
     { name: "Contact", path: "/contact" },
   ];
 
@@ -58,7 +58,7 @@ export default function Header() {
             ))}
             <div className="ml-4">
               <Link
-                to="/contact"
+                to="/pricing"
                 className="bg-accent text-white px-5 py-2 rounded-md font-bold text-sm xl:text-base whitespace-nowrap
                 transition-all duration-200 ease-in-out hover:bg-accent-dark hover:shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
               >
@@ -76,7 +76,7 @@ export default function Header() {
               <Hamburger
                 toggled={isOpen}
                 toggle={setOpen}
-                size={28} /* 🔥 Slightly larger for easier tap */
+                size={28} /* Slightly larger for easier tap */
                 color="#FFFFFF"
                 rounded
               />
@@ -102,7 +102,7 @@ export default function Header() {
               ))}
               <li className="mt-4">
                 <Link
-                  to="/contact"
+                  to="/pricing"
                   className="bg-accent text-white px-8 py-2 rounded-md font-bold text-sm xl:text-base whitespace-nowrap
                   transition-all duration-200 ease-in-out hover:bg-accent-dark hover:shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
                 >

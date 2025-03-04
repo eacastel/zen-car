@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 export default function Footer() {
   return (
     <footer className="bg-primary text-white py-8">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-bold mb-4">Zen Car Buying</h3>

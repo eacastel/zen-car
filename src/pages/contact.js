@@ -5,7 +5,7 @@ import Seo from '../components/Seo'
 export default function ContactPage() {
   return (
     <Layout>
-      <section className="container mx-auto px-6 py-16">
+      <section className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px] py-16">
         <h1 className="text-4xl font-bold text-primary mb-8">Contact Us</h1>
         
         <form className="max-w-2xl mx-auto" netlify name="contact" method="POST" data-netlify="true">

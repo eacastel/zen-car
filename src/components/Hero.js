@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import Button from './Button'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import CalendlyButton from "../components/CalendlyButton";
 
 export function Hero() {
   const data = useStaticQuery(graphql`
@@ -32,7 +32,7 @@ export function Hero() {
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/50 flex items-center">
-        <div className="container mx-auto px-6 text-center text-white">
+        <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px] text-center text-white">
           <p className="text-lg uppercase tracking-wider mb-4 font-pirulen">THE ZEN APPROACH TO CAR BUYING</p>
 
           <h1 className="text-4xl md:text-5xl font-poppins font-bold mb-4">
@@ -47,9 +47,9 @@ export function Hero() {
             "Find the perfect lightly used car at 50–70% off new car prices."
           </p>
 
-          <Button to="/contact" color="accent" size="lg">
-            Schedule Your Free Consultation
-          </Button>
+          <CalendlyButton size="lg" color="accent">
+          Schedule Your Free Consultation
+        </CalendlyButton>
         </div>
       </div>
     </section>

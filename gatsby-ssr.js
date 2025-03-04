@@ -7,7 +7,7 @@
 // You can delete this file if you're not using it
 import * as React from "react"
 
-export const onRenderBody = ({ setHeadComponents }) => {
+export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
   setHeadComponents([
     <link
       rel="preload"
@@ -49,5 +49,6 @@ export const onRenderBody = ({ setHeadComponents }) => {
       crossOrigin="anonymous"
       key="HelveticaFont"
     />,
-  ])
+  ]),
+  setHtmlAttributes({ lang: "en" })
 }

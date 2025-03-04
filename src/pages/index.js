@@ -1,10 +1,11 @@
 import React from 'react'
 import Layout from '../components/Layout'
-import Button from '../components/Button'
+import CalendlyButton from "../components/CalendlyButton";
 import Seo from '../components/Seo'
 import { Hero } from '../components/Hero'
 import { motion } from "framer-motion"
 import Testimonials from '../components/Testimonials'
+
 
 const icons = {
   recommendations: (
@@ -39,7 +40,7 @@ const HomePage = () => {
 
 {/* ✅ Key Benefits Section */}
 <section className="py-16 bg-secondary" aria-labelledby="benefits-heading">
-  <div className="container mx-auto px-6">
+  <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
     <h2 id="benefits-heading" className="text-4xl font-bold text-primary text-center mb-12">
       Why Choose <span className="text-accent">Zen Car Buying?</span>
     </h2>
@@ -62,7 +63,7 @@ const HomePage = () => {
 
 {/* ✅ How It Works Section */}
 <section className="bg-primary text-white py-20" aria-labelledby="how-it-works">
-  <div className="container mx-auto px-6">
+  <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
     <h2 id="how-it-works" className="text-4xl font-bold text-center mb-12">
       Our <span className="text-accent">Proven 3-Step Process</span>
     </h2>
@@ -94,16 +95,16 @@ const HomePage = () => {
 
       {/* ✅ CTA Section */}
       <section className="bg-accent text-white py-20 text-center" aria-labelledby="cta-heading">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
           <h2 id="cta-heading" className="text-4xl font-bold mb-6">
             Ready to Find Your <span className="text-primary">Perfect Car?</span>
           </h2>
           <p className="text-lg mb-6">
             Get expert guidance and stress-free car buying at the best prices.
           </p>
-          <Button to="/contact" color="primary" size="lg">
-            Schedule Your Free Consultation
-          </Button>
+          <CalendlyButton size="lg" color="primary">
+          Schedule Your Free Consultation
+        </CalendlyButton>
         </div>
       </section>
     </Layout>
