@@ -37,7 +37,7 @@ export default function Testimonials() {
                     node {
                         childImageSharp {
                             gatsbyImageData(
-                                width: 200
+                                width: 300
                                 height: 200
                                 placeholder: BLURRED
                                 formats: [AUTO, WEBP]
@@ -56,7 +56,7 @@ export default function Testimonials() {
         dots: false,
         infinite: true,
         speed: 800,
-        slidesToShow: 3,
+        slidesToShow: 2,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
@@ -95,7 +95,7 @@ export default function Testimonials() {
                     <GatsbyImage
                         image={image}
                         alt={`Photo of ${testimonial.name}`}
-                        className="rounded-md mb-4 w-[200px] h-[200px] object-cover object-center"
+                        className="rounded-md mb-4 w-[300px] h-[200px] object-cover object-center"
                     />
                 ) : (
                     <div className="w-24 h-24 bg-gray-300 rounded-full mb-4" />
@@ -109,7 +109,7 @@ export default function Testimonials() {
                 )}
 
                 {/* ✅ Quote */}
-                <p className="text-xl italic text-gray-700">"{testimonial.quote}"</p>
+                <p className="text-l italic text-gray-700">"{testimonial.quote}"</p>
 
                 {/* ✅ Star Rating */}
                 <div className="flex justify-center mt-3" aria-label={`Rated ${testimonial.rating} stars`}>
