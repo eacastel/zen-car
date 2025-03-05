@@ -3,7 +3,7 @@ import { FaCheckCircle, FaRegCircle, FaCheckSquare, FaRegSquare } from "react-ic
 import Button from "../Button";
 
 const CustomizeWizard = () => {
-  // Updated prices: 1 Car: $250, 2 Cars: $350, 3 Cars: $450
+  // Updated research options: 1 Car: $250, 2 Cars: $350, 3 Cars: $450.
   const researchOptions = [
     {
       label: "Don't Need A Recommendation",
@@ -32,14 +32,13 @@ const CustomizeWizard = () => {
   const [purchaseAssistance, setPurchaseAssistance] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Calculate the sum without discount
+  // Calculate total without discount
   const totalPrice =
     (researchSelection ? researchSelection.price : 0) +
     (inventorySourcing ? 250 : 0) +
     (purchaseAssistance ? 500 : 0);
 
-  // Discount applies only if a research option with a price (i.e. not "Don't Need A Recommendation") is selected, 
-  // and both inventory sourcing and purchase assistance are true.
+  // Discount applies if research (with cost) AND both inventory and purchase are selected.
   const discountApplicable = researchSelection && researchSelection.price > 0 && inventorySourcing && purchaseAssistance;
   const finalAmount = discountApplicable ? totalPrice - 200 : totalPrice;
 
@@ -53,29 +52,49 @@ const CustomizeWizard = () => {
   const handlePurchase = async () => {
     setLoading(true);
     let descriptionLines = [];
+    let selectedProducts = [];
+
     if (researchSelection) {
       descriptionLines.push(`Research: ${researchSelection.label} Option – $${researchSelection.price}`);
+      if (researchSelection.price > 0) {
+        selectedProducts.push({
+          name: `Research Recommendation: ${researchSelection.label}`,
+          price: researchSelection.price,
+          description: researchSelection.description
+        });
+      }
     }
     if (inventorySourcing) {
       descriptionLines.push(`Inventory Sourcing: $250`);
+      selectedProducts.push({
+        name: "Inventory Sourcing",
+        price: 250,
+        description: "Receive up to 5 vehicle recommendations per match."
+      });
     }
     if (purchaseAssistance) {
       descriptionLines.push(`Purchase Assistance: $500`);
+      selectedProducts.push({
+        name: "Purchase Assistance",
+        price: 500,
+        description: "Negotiation, warranty checks, paperwork assistance, and dealer coordination."
+      });
     }
     const description = descriptionLines.join("\n");
 
     const payload = {
-      amount: totalPrice, // send the original total so the backend can apply discount if needed
+      amount: totalPrice, // Sending original total; backend can apply discount logic if needed
       selections: {
         research: researchSelection,
         inventory: inventorySourcing,
-        purchase: purchaseAssistance,
+        purchase: purchaseAssistance
       },
-      description,
+      products: selectedProducts, // New field with selected product details
+      description
     };
 
     try {
-      const response = await fetch("/api/checkout", {
+      const response = await fetch("/.netlify/functions/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
