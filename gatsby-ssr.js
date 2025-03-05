@@ -10,6 +10,16 @@ import * as React from "react"
 export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
   setHeadComponents([
     <link
+      key="calendly-css"
+      rel="stylesheet"
+      href="https://assets.calendly.com/assets/external/widget.css"
+    />,
+    <script
+      key="calendly-js"
+      src="https://assets.calendly.com/assets/external/widget.js"
+      async
+    />,
+    <link
       rel="preload"
       href="/fonts/Pirulen-Regular.woff2"
       as="font"

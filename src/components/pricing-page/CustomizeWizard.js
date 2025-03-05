@@ -347,7 +347,7 @@ const CustomizeWizard = () => {
                       <p className="font-bold text-lg text-center">Total Price: ${finalAmount}</p>
                       {discountApplicable && (
                         <p className="text-sm text-green-600 text-center">
-                          Special Zen Experience Discount Applied – Save $200!
+                          Zen Experience Discount Applied – Save $200!
                         </p>
                       )}
                     </div>

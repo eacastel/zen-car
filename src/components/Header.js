@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { Squash as Hamburger } from 'hamburger-react'
+import CalendlyButtonHeader from "../components/CalendlyButtonHeader";
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false)
@@ -25,7 +26,7 @@ export default function Header() {
 
   const navItems = [
     { name: "Pricing", path: "/pricing" },
-   /* { name: "About", path: "/about" }, */
+    /* { name: "About", path: "/about" }, */
     /*  { name: "Testimonials", path: "/testimonials" }, */
     { name: "Contact", path: "/contact" },
   ];
@@ -57,13 +58,9 @@ export default function Header() {
               </Link>
             ))}
             <div className="ml-4">
-              <Link
-                to="/pricing"
-                className="bg-accent text-white px-5 py-2 rounded-md font-bold text-sm xl:text-base whitespace-nowrap
-                transition-all duration-200 ease-in-out hover:bg-accent-dark hover:shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
-              >
+              <CalendlyButtonHeader size="lg" color="accent">
                 Get Started
-              </Link>
+              </CalendlyButtonHeader>
             </div>
           </div>
 
@@ -84,7 +81,7 @@ export default function Header() {
           </div>
 
           {/* Mobile Navigation */}
-          <div 
+          <div
             className={`${isOpen ? 'block' : 'hidden'} lg:hidden absolute top-full left-0 right-0 bg-primary z-40 shadow-lg`}
             aria-hidden={!isOpen}
           >
@@ -101,13 +98,9 @@ export default function Header() {
                 </li>
               ))}
               <li className="mt-4">
-                <Link
-                  to="/pricing"
-                  className="bg-accent text-white px-8 py-2 rounded-md font-bold text-sm xl:text-base whitespace-nowrap
-                  transition-all duration-200 ease-in-out hover:bg-accent-dark hover:shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
-                >
+                <CalendlyButtonHeader size="lg" color="accent">
                   Get Started
-                </Link>
+                </CalendlyButtonHeader>
               </li>
             </ul>
           </div>
