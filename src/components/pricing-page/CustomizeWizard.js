@@ -3,6 +3,7 @@ import { FaCheckCircle, FaRegCircle, FaCheckSquare, FaRegSquare } from "react-ic
 import Button from "../Button";
 
 const CustomizeWizard = () => {
+  // Updated prices: 1 Car: $250, 2 Cars: $350, 3 Cars: $450
   const researchOptions = [
     {
       label: "Don't Need A Recommendation",
@@ -16,12 +17,12 @@ const CustomizeWizard = () => {
     },
     {
       label: "2 Cars",
-      price: 400,
+      price: 350,
       description: "Select your expert recommendation option."
     },
     {
       label: "3 Cars",
-      price: 500,
+      price: 450,
       description: "Select your expert recommendation option."
     }
   ];
@@ -31,12 +32,16 @@ const CustomizeWizard = () => {
   const [purchaseAssistance, setPurchaseAssistance] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Calculate the sum without discount
   const totalPrice =
     (researchSelection ? researchSelection.price : 0) +
     (inventorySourcing ? 250 : 0) +
     (purchaseAssistance ? 500 : 0);
 
-  const finalAmount = totalPrice === 1250 ? 1000 : totalPrice;
+  // Discount applies only if a research option with a price (i.e. not "Don't Need A Recommendation") is selected, 
+  // and both inventory sourcing and purchase assistance are true.
+  const discountApplicable = researchSelection && researchSelection.price > 0 && inventorySourcing && purchaseAssistance;
+  const finalAmount = discountApplicable ? totalPrice - 200 : totalPrice;
 
   const handleKeyDown = (e, action) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -48,7 +53,6 @@ const CustomizeWizard = () => {
   const handlePurchase = async () => {
     setLoading(true);
     let descriptionLines = [];
-
     if (researchSelection) {
       descriptionLines.push(`Research: ${researchSelection.label} Option – $${researchSelection.price}`);
     }
@@ -61,17 +65,17 @@ const CustomizeWizard = () => {
     const description = descriptionLines.join("\n");
 
     const payload = {
-      amount: totalPrice,
+      amount: totalPrice, // send the original total so the backend can apply discount if needed
       selections: {
         research: researchSelection,
         inventory: inventorySourcing,
-        purchase: purchaseAssistance
+        purchase: purchaseAssistance,
       },
-      description
+      description,
     };
 
     try {
-      const response = await fetch("/.netlify/functions/checkout", {
+      const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
@@ -90,28 +94,7 @@ const CustomizeWizard = () => {
   };
 
   return (
-    // Wrap in a main for semantic structure (SEO/accessibility)
     <main>
-      {/*
-        Example Gatsby Head usage for SEO:
-        export const Head = () => (
-          <>
-            <title>Customize Your Zen Car Package</title>
-            <meta name="description" content="Tailor your used-car buying experience with our custom package options." />
-            <link rel="canonical" href="https://yourdomain.com/customize-package" />
-            <script type="application/ld+json">
-              {JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Product",
-                name: "Zen Car Buying Package",
-                description: "Tailored car buying services.",
-                brand: "Zen Car Buying"
-              })}
-            </script>
-          </>
-        );
-      */}
-
       <section className="bg-secondary py-12">
         <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
           <h2
@@ -131,10 +114,6 @@ const CustomizeWizard = () => {
               Customize Your Package
             </h2>
 
-            {/* 
-              Use a responsive grid. On mobile (default), it’s 1 column; on md+ it’s 3 columns.
-              This ensures each column stacks on smaller screens.
-            */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Column 1: Research Recommendation */}
               <div
@@ -146,18 +125,13 @@ const CustomizeWizard = () => {
                   <div className="bg-accent text-white rounded-full min-w-8 h-8 flex items-center justify-center mr-2 font-bold">
                     1
                   </div>
-                  <h4
-                    className="text-lg font-semibold text-black"
-                    id="research-rec-header"
-                  >
+                  <h4 className="text-lg font-semibold text-black" id="research-rec-header">
                     Research Recommendation
                   </h4>
                 </div>
                 <p className="mb-2 text-gray-700 text-sm">
                   Choose your expert recommendation option.
                 </p>
-
-                {/* Treat these like radio options via ARIA roles */}
                 <fieldset>
                   <legend className="sr-only">Research Recommendations</legend>
                   <div className="flex flex-col gap-3">
@@ -172,18 +146,14 @@ const CustomizeWizard = () => {
                           role="radio"
                           aria-checked={isSelected}
                           tabIndex={0}
-                          aria-label={`${
-                            option.label
-                          } option, costs $${option.price || 0}`}
+                          aria-label={`${option.label} option, costs $${option.price || 0}`}
                           onClick={() => setResearchSelection(option)}
                           onKeyDown={(e) =>
                             handleKeyDown(e, () => setResearchSelection(option))
                           }
                           className="flex flex-col border p-3 rounded-lg cursor-pointer transition-colors hover:bg-gray-100"
                           style={{
-                            border: isSelected
-                              ? "2px solid #F59E0B"
-                              : "1px solid #D1D5DB"
+                            border: isSelected ? "2px solid #F59E0B" : "1px solid #D1D5DB"
                           }}
                         >
                           <div className="flex items-center justify-between">
@@ -226,10 +196,7 @@ const CustomizeWizard = () => {
                     <div className="bg-accent text-white rounded-full min-w-8 h-8 flex items-center justify-center mr-2 font-bold">
                       2
                     </div>
-                    <h4
-                      className="text-lg font-semibold text-black"
-                      id="inventory-header"
-                    >
+                    <h4 className="text-lg font-semibold text-black" id="inventory-header">
                       Inventory Sourcing
                     </h4>
                   </div>
@@ -247,9 +214,7 @@ const CustomizeWizard = () => {
                     }
                     className="flex flex-col border p-3 rounded-lg cursor-pointer transition-colors hover:bg-gray-100"
                     style={{
-                      border: inventorySourcing
-                        ? "2px solid #F59E0B"
-                        : "1px solid #D1D5DB"
+                      border: inventorySourcing ? "2px solid #F59E0B" : "1px solid #D1D5DB"
                     }}
                   >
                     <div className="flex items-center justify-between">
@@ -282,10 +247,7 @@ const CustomizeWizard = () => {
                     <div className="bg-accent text-white rounded-full min-w-8 h-8 flex items-center justify-center mr-2 font-bold">
                       3
                     </div>
-                    <h4
-                      className="text-lg font-semibold text-black"
-                      id="purchase-header"
-                    >
+                    <h4 className="text-lg font-semibold text-black" id="purchase-header">
                       Purchase Assistance
                     </h4>
                   </div>
@@ -303,9 +265,7 @@ const CustomizeWizard = () => {
                     }
                     className="flex flex-col border p-3 rounded-lg cursor-pointer transition-colors hover:bg-gray-100"
                     style={{
-                      border: purchaseAssistance
-                        ? "2px solid #F59E0B"
-                        : "1px solid #D1D5DB"
+                      border: purchaseAssistance ? "2px solid #F59E0B" : "1px solid #D1D5DB"
                     }}
                   >
                     <div className="flex items-center justify-between">
@@ -324,10 +284,7 @@ const CustomizeWizard = () => {
                       <div className="text-xl font-bold text-accent">$500</div>
                     </div>
                     <p className="mt-2 text-gray-600 text-sm">
-                      Detail the negotiation, warranty checks, and paperwork assistance. 
-                      Contact dealer, coordinate a video walk-through, get photos of any 
-                      wear and tear, finalize pricing, assist in evaluating extended 
-                      warranties, recommend shipping companies, and hand off dealer to client.
+                      Detail the negotiation, warranty checks, and paperwork assistance. Contact dealer, coordinate a video walk-through, get photos of any wear and tear, finalize pricing, assist in evaluating extended warranties, recommend shipping companies, and hand off dealer to client.
                     </p>
                   </div>
                 </div>
@@ -340,10 +297,7 @@ const CustomizeWizard = () => {
                     className="border p-4 rounded-lg bg-gray-50 shadow-sm text-left"
                     aria-labelledby="package-summary-header"
                   >
-                    <h3
-                      className="text-xl font-bold text-primary mb-4"
-                      id="package-summary-header"
-                    >
+                    <h3 className="text-xl font-bold text-primary mb-4" id="package-summary-header">
                       Package Summary
                     </h3>
                     <div className="mb-4">
@@ -371,17 +325,15 @@ const CustomizeWizard = () => {
                       )}
                     </div>
                     <div className="border-t pt-4">
-                      <p className="font-bold text-lg text-center">
-                        Total Price: ${finalAmount}
-                      </p>
-                      {totalPrice === 1250 && (
+                      <p className="font-bold text-lg text-center">Total Price: ${finalAmount}</p>
+                      {discountApplicable && (
                         <p className="text-sm text-green-600 text-center">
-                          Special Zen Experience Discount Applied – Save $250!
+                          Special Zen Experience Discount Applied – Save $200!
                         </p>
                       )}
                     </div>
                     <div className="mt-4 text-center">
-                      <Button onClick={handlePurchase} color="accent" size="base">
+                      <Button onClick={handlePurchase} color="accent" size="base" className="bg-clementine hover:bg-orange-500">
                         {loading ? "Processing..." : "Proceed to Checkout"}
                       </Button>
                     </div>
