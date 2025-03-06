@@ -101,7 +101,7 @@ const ZenExperienceSection = ({ zenImg, siteUrl, getStripe }) => {
                 Experience
               </h3>
 
-              <p className="text-primary text-lg mb-4 text-center">
+              <p className="text-primary text-lg mb-4 text-center md:mx-16">
                 Get our complete stress‑free experience with all services included.
               </p>
               <p className="text-xl text-accent font-semibold mb-4">
