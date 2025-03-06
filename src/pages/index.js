@@ -44,7 +44,7 @@ const HomePage = () => {
     <h2 id="benefits-heading" className="text-4xl font-medium text-accent text-center mb-12">
       Why Choose <span className="text-accent">Zen Car Buying?</span>
     </h2>
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+    <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
       {[
         { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'Tailored suggestions based on your needs & budget.' },
         { title: 'Nationwide Vehicle Sourcing & Shipping', key: 'sourcing', desc: 'Find the best deals, no matter where you live.' },

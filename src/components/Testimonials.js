@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa'
 
+
 // Custom arrow components
 const PrevArrow = ({ onClick }) => (
     <button
