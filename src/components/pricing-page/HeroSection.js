@@ -23,7 +23,7 @@ const HeroSection = ({ heroBg }) => {
         <div className="inline-block p-6 md:p-12 border-2 border-accent rounded-xl" role="presentation">
           <h1 
             id="hero-heading" 
-            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight"
+            className="text-2xl sm:text-3xl md:text-4xl font-medium mb-4 leading-tight"
           >
             Discover Your Perfect Car Buying Experience
           </h1>
