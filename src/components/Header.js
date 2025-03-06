@@ -9,7 +9,7 @@ export default function Header() {
 
   const data = useStaticQuery(graphql`
     query {
-      logo: file(relativePath: { eq: "zen-car-buying-logo-header-white.png" }) {
+      logo: file(relativePath: { eq: "zen-car-buying-logo-full-color.png" }) {
         childImageSharp {
           gatsbyImageData(
             width: 300
@@ -32,7 +32,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-primary/85 backdrop-blur-md sticky top-0 z-50 border-b border-secondary">
+    <header className="bg-white backdrop-blur-md sticky top-0 z-50 border-b border-white">
       <nav className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -51,7 +51,7 @@ export default function Header() {
               <Link
                 key={item.path}
                 to={item.path}
-                className="text-white hover:text-accent transition-colors font-bold text-sm xl:text-base whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                className="text-primary hover:text-accent transition-colors font-bold text-sm xl:text-base whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
                 activeClassName="text-accent"
               >
                 {item.name}

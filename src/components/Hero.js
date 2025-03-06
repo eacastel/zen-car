@@ -35,16 +35,16 @@ export function Hero() {
         <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px] text-center text-white">
           <p className="text-lg uppercase tracking-wider mb-4 font-pirulen">THE ZEN APPROACH TO CAR BUYING</p>
 
-          <h1 className="text-4xl md:text-5xl font-poppins font-bold mb-4">
-            Save Thousands on Your Next Car
+          <h1 className="text-4xl md:text-5xl font-poppins  mb-4">
+          Stress-Free, Data-Driven Car Buying Assistance
           </h1>
 
           <p className="text-lg font-poppins  tracking-widest mb-3 uppercase">
-            Stress-Free, Data-Driven Car Buying Assistance 
+          Save Thousands on Your Next Car 
           </p>
 
           <p className="text-xl font-helvetica italic mb-8">
-            "Find the perfect lightly used car at 50–70% off new car prices."
+          Let our Zen Guides find you a lightly used cars at up to 30-50% off new car prices
           </p>
 
           <CalendlyButton size="lg" color="accent">

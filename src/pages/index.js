@@ -41,20 +41,19 @@ const HomePage = () => {
 {/* ✅ Key Benefits Section */}
 <section className="py-16 bg-secondary" aria-labelledby="benefits-heading">
   <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
-    <h2 id="benefits-heading" className="text-4xl font-bold text-primary text-center mb-12">
+    <h2 id="benefits-heading" className="text-4xl font-medium text-accent text-center mb-12">
       Why Choose <span className="text-accent">Zen Car Buying?</span>
     </h2>
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
       {[
         { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'Tailored suggestions based on your needs & budget.' },
-        { title: 'Expert Guidance on Warranty & Financing', key: 'warranty', desc: 'We help you navigate extended warranties and loan options.' },
         { title: 'Nationwide Vehicle Sourcing & Shipping', key: 'sourcing', desc: 'Find the best deals, no matter where you live.' },
-        { title: 'Negotiation & Purchase Assistance', key: 'negotiation', desc: 'We ensure you get the best price and stress-free buying.' },
+        { title: 'Purchase Assistance', key: 'negotiation', desc: 'We ensure you get the best price and stress-free buying.' },
       ].map((benefit, index) => (
         <div key={index} className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
           <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}
-          <h3 className="text-xl font-semibold text-primary">{benefit.title}</h3>
-          <p className="text-gray-700">{benefit.desc}</p>
+          <h3 className="text-xl font-medium text-primary">{benefit.title}</h3>
+          <p className="text-gray-500">{benefit.desc}</p>
         </div>
       ))}
     </div>
@@ -64,21 +63,22 @@ const HomePage = () => {
 {/* ✅ How It Works Section */}
 <section className="bg-primary text-white py-20" aria-labelledby="how-it-works">
   <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
-    <h2 id="how-it-works" className="text-4xl font-bold text-center mb-12">
-      Our <span className="text-accent">Proven 3-Step Process</span>
+    <h2 id="how-it-works" className="text-4xl font-medium text-center text-accent mb-12">
+      Our <span className="text-accent">Proven 4-Step Process</span>
     </h2>
-    <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-12">
+    <div className="grid md:grid-cols-1 lg:grid-cols-4 gap-12">
       {[
-        { title: 'Schedule Consultation', desc: 'Book your free 15-minute call to discuss your needs.', step: '1' },
-        { title: 'Get Recommendations', desc: 'Receive expert vehicle recommendations based on your budget and preferences.', step: '2' },
-        { title: 'Close the Deal', desc: 'We assist with negotiation and paperwork to ensure a smooth purchase.', step: '3' },
+        { title: 'Schedule Consultation', desc: 'Book your free 15-minute call.', step: '1' },
+        { title: 'Get Recommendations', desc: 'Receive vehicle recommendations based on your budget and preferences.', step: '2' },
+        { title: 'Review Inventory', desc: 'Get vehicles that match our recommendation.', step: '3' },
+        { title: 'Purchase Assistance', desc: 'Let our Zen Guides do the work so you don’t have to.', step: '4' },
       ].map((step, index) => (
         <motion.div 
           key={index} 
-          className="text-center p-6 bg-white/10 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+          className="text-center p-6 bg-white/10 rounded-lg shadow-lg border-primary border-2 hover:shadow-xl transition-shadow duration-300"
           whileHover={{ scale: 1.05 }}
         >
-          <div className="text-4xl font-bold text-accent-dark bg-white/20 px-5 py-2 inline-block rounded-full mb-3">
+          <div className="text-4xl font-bold text-accent bg-primary px-5 py-2 inline-block rounded-full mb-3">
             {step.step}
           </div>
           <h3 className="text-xl font-semibold">{step.title}</h3>
@@ -96,7 +96,7 @@ const HomePage = () => {
       {/* ✅ CTA Section */}
       <section className="bg-accent text-white py-20 text-center" aria-labelledby="cta-heading">
         <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
-          <h2 id="cta-heading" className="text-4xl font-bold mb-6">
+          <h2 id="cta-heading" className="text-4xl font-medium mb-6">
             Ready to Find Your <span className="text-primary">Perfect Car?</span>
           </h2>
           <p className="text-lg mb-6">
