@@ -24,6 +24,8 @@ const Seo = ({ title, description, pathname, children }) => {
   return (
     <>
       <title>{metaTitle}</title>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="description" content={metaDescription} />
       <meta property="og:title" content={metaTitle} />
       <meta property="og:description" content={metaDescription} />

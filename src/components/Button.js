@@ -15,8 +15,7 @@ const Button = ({ to, onClick, children, color = 'accent', size = 'base', classN
     secondary: 'bg-secondary text-primary hover:bg-secondary-dark',
   };
 
-  // Reset default button styling
-  const reset = "appearance-none border-0 focus:outline-none";
+
 
   const finalClassName = `inline-flex items-center justify-center ${colors[color]} ${sizes[size]} appearance-none border-0 focus:outline-none focus:ring-0 rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg ${disabled ? "opacity-50 cursor-not-allowed" : ""} ${className}`;
 

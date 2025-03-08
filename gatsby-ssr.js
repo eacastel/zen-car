@@ -8,7 +8,15 @@
 import * as React from "react"
 
 export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
+  setHtmlAttributes({ lang: 'en' });
   setHeadComponents([
+    <script
+      key="cookieyes"
+      id="cookieyes"
+      type="text/javascript"
+      src="https://cdn-cookieyes.com/client_data/8c59c8ad81a02c384705b628/script.js"
+      defer
+    />,
     <link
       key="calendly-css"
       rel="stylesheet"
@@ -59,6 +67,5 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
       crossOrigin="anonymous"
       key="HelveticaFont"
     />,
-  ]),
-  setHtmlAttributes({ lang: "en" })
+  ])
 }
