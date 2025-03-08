@@ -4,12 +4,14 @@ import { Link } from "gatsby";
 export default function Footer() {
   return (
     <footer className="bg-primary text-white py-8 mt-auto">
-      <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 md:max-w-[750px] lg:max-w-[1280px]">
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 md:gap-12 lg:gap-16">
+          
+          {/* Larger First Column */}
           <div>
             <h3 className="text-xl font-bold mb-4">Zen Car Buying</h3>
-            <p className="text-secondary">
-              Your trusted concierge for stress-free car purchases
+            <p className="text-secondary leading-relaxed">
+              Your trusted concierge for stress-free car purchases. Let our experts guide you to the best deals with personalized advice and expert strategies.
             </p>
           </div>
 
@@ -18,18 +20,10 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  to="/services"
+                  to="/pricing"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/about"
-                  className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
-                >
-                  About Us
+                  Pricing
                 </Link>
               </li>
               <li>
@@ -37,7 +31,15 @@ export default function Footer() {
                   to="/contact"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
-                  Contact
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/blog"
+                  className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  Blog
                 </Link>
               </li>
             </ul>
