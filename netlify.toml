@@ -3,3 +3,13 @@ package = "@netlify/plugin-gatsby"
 
 [functions]
   directory = "netlify/functions"
+
+[build]
+  command = "gatsby build"
+  publish = "public"
+
+[build.processing.secrets_scan]
+  omit_paths = [
+    "public/page-data/**",
+    "public/blog/**"
+  ]
