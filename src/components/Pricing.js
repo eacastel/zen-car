@@ -43,7 +43,7 @@ const Pricing = () => {
     }
   `);
 
-  const heroBg = getImage(data.heroImage);
+
   const zenImg = getImage(data.zenExperience);
   const siteUrl = process.env.GATSBY_SITE_URL;
 

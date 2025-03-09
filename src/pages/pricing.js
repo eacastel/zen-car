@@ -3,7 +3,6 @@ import { graphql, useStaticQuery } from "gatsby";
 import { getImage } from "gatsby-plugin-image";
 import Layout from "../components/Layout";
 import Seo from "../components/Seo";
-import HeroSection from "../components/pricing-page/HeroSection";
 import ZenExperienceSection from "../components/pricing-page/ZenExperienceSection";
 import CustomizeWizard from "../components/pricing-page/CustomizeWizard";
 import { loadStripe } from "@stripe/stripe-js";
@@ -20,11 +19,6 @@ const getStripe = () => {
 const Pricing = () => {
   const data = useStaticQuery(graphql`
     query {
-      heroImage: file(relativePath: { eq: "hero4.png" }) {
-        childImageSharp {
-          gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, formats: [AUTO, WEBP])
-        }
-      }
       zenExperience: file(relativePath: { eq: "hyundai2.png" }) {
         childImageSharp {
           gatsbyImageData(width: 600, placeholder: BLURRED, formats: [AUTO, WEBP])
@@ -43,13 +37,12 @@ const Pricing = () => {
     }
   `);
 
-  const heroBg = getImage(data.heroImage);
   const zenImg = getImage(data.zenExperience);
   const siteUrl = process.env.GATSBY_SITE_URL;
 
   return (
     <Layout>
-      <HeroSection heroBg={heroBg} />
+      
       <ZenExperienceSection zenImg={zenImg} siteUrl={siteUrl} getStripe={getStripe} />
       <CustomizeWizard />
     </Layout>

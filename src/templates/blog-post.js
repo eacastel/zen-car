@@ -7,7 +7,7 @@ import CallToAction from '../components/CallToAction'
 
 
 const BlogPost = ({ data }) => {
-    const { title, date, body, metadata, featureImage } = data.contentfulBlogPost;
+    const { title, body, metadata, featureImage } = data.contentfulBlogPost;
     const tags = metadata?.tags || [];
     const featureImageData = getImage(featureImage);
     const relatedPosts = data.allContentfulBlogPost.nodes;
@@ -18,12 +18,11 @@ const BlogPost = ({ data }) => {
                 {/* Main Content */}
                 <article className="prose mx-auto lg:col-span-2 px-4 md:px-8 py-8  border border-secondary bg-secondary rounded-lg shadow-md">
 
-                    <header className="border-b border-primary/20 pb-2 mb-2">
+                    <header className="border-b border-primary/20 pb-2 mb-4">
                         <h1 className="text-4xl md:text-5xl font-poppins mb-2 leading-8 text-primary">
                             {title}
                         </h1>
                         </header>
-                        <p className="text-sm text-primary mb-4">{date}</p>
 
                         {/* Feature Image */}
                         {featureImageData && (

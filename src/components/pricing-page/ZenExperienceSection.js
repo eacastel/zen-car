@@ -4,7 +4,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Button from "../Button";
 import { FaCheckCircle } from "react-icons/fa";
 
-const ZenExperienceSection = ({ zenImg, siteUrl, getStripe }) => {
+const ZenExperienceSection = ({ siteUrl, getStripe }) => {
 
   const data = useStaticQuery(graphql`
       query {
@@ -78,60 +78,51 @@ const ZenExperienceSection = ({ zenImg, siteUrl, getStripe }) => {
           role="region"
           aria-labelledby="zen-package-title"
         >
-          <div className="flex flex-col lg:flex-row items-center">
-            {/* Text Content */}
-            <div className="lg:w-1/2 text-center">
-              <span
-                className="absolute -top-5 right-0 bg-accent text-white text-sm uppercase px-6 py-2 rounded-tl-lg rounded-br-lg shadow-md font-bold"
-                aria-label="Best value offer"
-              >
-                Best Value
-              </span>
+          {/* Text Content in Single Column */}
+          <div className="text-center">
+            <span
+              className="absolute -top-5 right-0 bg-accent text-white text-sm uppercase px-6 py-2 rounded-tl-lg rounded-br-lg shadow-md font-bold"
+              aria-label="Best value offer"
+            >
+              Best Value
+            </span>
 
-              <GatsbyImage
-                image={logoImage}
-                alt="Zen Car Buying Logo"
-                className="w-auto"
-                imgStyle={{ objectFit: 'contain', maxWidth: '150px' }}
-              />
-              <h3
-                id="zen-package-title"
-                className="text-xl font-medium text-primary mb-4 uppercase tracking-wider font-pirulen"
-              >
-                Experience
-              </h3>
+            <GatsbyImage
+              image={logoImage}
+              alt="Zen Car Buying Logo"
+              className="w-auto mx-auto"
+              imgStyle={{ objectFit: 'contain', maxWidth: '150px' }}
+            />
 
-              <p className="text-primary text-lg mb-4 text-center md:mx-16">
-                Get our complete stress‑free experience with all services included.
-              </p>
-              <p className="text-xl text-accent font-semibold mb-4">
-                $1,000 <span className="text-gray-400 ml-1 line-through text-lg">$1,250</span>
-              </p>
-              <ul className="mb-4 space-y-2 text-center">
-                {[
-                  "All research, sourcing & purchase assistance",
-                  "Best value package (Save $250)",
-                  "End‑to‑end car buying help",
-                ].map((detail, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center justify-center text-gray-700"
-                  >
-                    <FaCheckCircle className="text-accent mr-2 text-lg" aria-hidden="true" />
-                    <span>{detail}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <h3
+              id="zen-package-title"
+              className="text-xl font-medium text-primary mb-4 uppercase tracking-wider font-pirulen"
+            >
+              Full Zen Experience
+            </h3>
 
-            {/* Image Section */}
-            <div className="lg:w-1/2 mt-6 lg:mt-0 flex justify-center">
-              <GatsbyImage
-                image={zenImg}
-                alt="Illustration of the Zen Experience package with expert guidance and research"
-                className="w-full h-auto rounded"
-              />
-            </div>
+            <p className="text-primary text-lg mb-4 text-center">
+              Our full Zen experience offers the most complete, stress free car buying experience.
+            </p>
+            <p className="text-xl text-accent font-semibold mb-4">
+              $1,000 <span className="text-gray-400 ml-1 line-through text-lg">$1,250</span>
+            </p>
+
+            <ul className="mb-4 space-y-2 text-center">
+              {[
+                "Our end to end car buying solution",
+                "Get the full experience with all services included",
+                "Research, inventory sourcing and purchase assistance",
+              ].map((detail, i) => (
+                <li
+                  key={i}
+                  className="flex items-center justify-center text-gray-700"
+                >
+                  <FaCheckCircle className="text-accent mr-2 text-lg" aria-hidden="true" />
+                  <span>{detail}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* CTA Button */}
@@ -141,9 +132,9 @@ const ZenExperienceSection = ({ zenImg, siteUrl, getStripe }) => {
               color="accent"
               size="lg"
               className="whitespace-nowrap px-6 py-3 text-sm md:text-base"
-              aria-label="Purchase the Zen Experience package"
+              aria-label="Get the Full Zen Experience"
             >
-              {loading ? "Processing..." : "Get the Zen Experience"}
+              {loading ? "Processing..." : "Get the Full Zen Experience"}
             </Button>
           </div>
         </div>

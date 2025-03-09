@@ -1,10 +1,27 @@
 import * as React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { getImage } from 'gatsby-plugin-image'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
+import HeroSection from '../components/pricing-page/HeroSection'
 
 export default function ContactPage() {
+  // Correct use of useStaticQuery within the component
+  const data = useStaticQuery(graphql`
+    query {
+      heroImage: file(relativePath: { eq: "hero4.png" }) {
+        childImageSharp {
+          gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, formats: [AUTO, WEBP])
+        }
+      }
+    }
+  `);
+
+  const heroBg = getImage(data.heroImage);
+
   return (
     <Layout>
+      <HeroSection heroBg={heroBg} />
       <section className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px] py-16">
         <h1 className="text-4xl font-bold text-primary mb-8">Contact Us</h1>
         
