@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Squash as Hamburger } from "hamburger-react";
-import CalendlyButtonHeader from "../components/CalendlyButtonHeader";
+import ButtonHeader from "../components/ButtonHeader";
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
 
   const data = useStaticQuery(graphql`
     query {
-      logo: file(relativePath: { eq: "zen-car-buying-logo-header-white.png" }) {
+      logo: file(relativePath: { eq: "zen-car-buying-logo-full-color.png" }) {
         childImageSharp {
           gatsbyImageData(
             width: 300
@@ -25,13 +25,12 @@ export default function Header() {
   const logoImage = getImage(data.logo);
 
   const navItems = [
-    { name: "Pricing", path: "/pricing" },
     { name: "Contact", path: "/contact" },
     { name: "Blog", path: "/blog" }, 
   ];
 
   return (
-    <header className="bg-primary backdrop-blur-md sticky top-0 z-50 border-b border-white">
+    <header className="bg-secondary backdrop-blur-md sticky top-0 z-50 border-b border-accent">
       <nav
         className="container mx-auto px-4 py-3"
         role="navigation"
@@ -59,7 +58,7 @@ export default function Header() {
               <Link
                 key={item.path}
                 to={item.path}
-                className="text-white hover:text-accent transition-colors font-bold text-sm xl:text-base whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                className="text-primary hover:text-accent transition-colors font-bold text-sm xl:text-base whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
                 activeClassName="text-accent"
                 aria-label={`Go to ${item.name} page`}
               >
@@ -70,7 +69,7 @@ export default function Header() {
             {/* Click-to-Call Phone Number with SVG Icon */}
             <a
               href="tel:+18886516088"
-              className="flex items-center text-md xl:text-lg font-semibold text-white hover:text-accent transition-colors whitespace-nowrap"
+              className="flex items-center text-md xl:text-lg font-semibold text-primary hover:text-accent transition-colors whitespace-nowrap"
               aria-label="Call Zen Car Buying at (888) 651-6088"
             >
               {/* Phone Icon */}
@@ -86,11 +85,11 @@ export default function Header() {
               (888) 651-6088
             </a>
 
-            {/* Calendly Button */}
+            {/* Button */}
             <div className="ml-4">
-              <CalendlyButtonHeader size="lg" color="accent">
+              <ButtonHeader size="lg" color="accent">
                 Get Started
-              </CalendlyButtonHeader>
+              </ButtonHeader>
             </div>
           </div>
 
@@ -154,9 +153,10 @@ export default function Header() {
 
               {/* Mobile "Get Started" Button */}
               <li className="mt-4">
-                <CalendlyButtonHeader size="lg" color="accent">
+
+                <ButtonHeader onClick="/pricing" size="lg" color="accent">
                   Get Started
-                </CalendlyButtonHeader>
+                </ButtonHeader>
               </li>
             </ul>
           </div>

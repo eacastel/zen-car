@@ -14,7 +14,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { amount, selections, description } = JSON.parse(event.body);
+    const { amount, selections, description, metadata } = JSON.parse(event.body);
     if (!amount || !selections) {
       return {
         statusCode: 400,
@@ -88,6 +88,10 @@ exports.handler = async (event) => {
       metadata: {
         selections: JSON.stringify(selections),
         description: description.substring(0, 500),
+        agreedToTerms: 
+        metadata.termsAccepted === true || metadata.termsAccepted2 === true
+        ? "true"
+        : "false",
       },
     };
 
@@ -104,4 +108,5 @@ exports.handler = async (event) => {
       body: JSON.stringify({ error: "Internal Server Error" }),
     };
   }
+  
 };

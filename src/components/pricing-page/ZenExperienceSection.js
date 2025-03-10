@@ -24,9 +24,16 @@ const ZenExperienceSection = ({ siteUrl, getStripe }) => {
   const logoImage = getImage(data.logo)
 
   const [loading, setLoading] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const handleZenPurchase = async () => {
+    if (!termsAccepted) {
+      alert("Please accept the Terms and Conditions before proceeding.");
+      return;
+    }
+
     setLoading(true);
+
     const payload = {
       amount: 1250,
       selections: {
@@ -36,6 +43,9 @@ const ZenExperienceSection = ({ siteUrl, getStripe }) => {
       },
       description:
         "Zen Experience Package: All services combined with a special discount – pay only $1,000 instead of $1,250.",
+      metadata: {
+        termsAccepted: "true"
+      }
     };
 
     try {
@@ -44,6 +54,7 @@ const ZenExperienceSection = ({ siteUrl, getStripe }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+
       const data = await response.json();
       if (data.url) {
         window.location.href = data.url;
@@ -62,7 +73,7 @@ const ZenExperienceSection = ({ siteUrl, getStripe }) => {
       className="pt-16 pb-8 bg-secondary"
       aria-labelledby="zen-experience-heading"
     >
-      <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
+      <div className="container mx-auto px-4 md:px-6 md:max-w-[900px] lg:px-12 ">
         <h2
           id="zen-experience-heading"
           className="text-xl sm:text-4xl md:text-4xl font-medium text-accent mb-4 text-center"
@@ -123,19 +134,44 @@ const ZenExperienceSection = ({ siteUrl, getStripe }) => {
                 </li>
               ))}
             </ul>
-          </div>
 
-          {/* CTA Button */}
-          <div className="mt-8 flex justify-center">
-            <Button
-              onClick={handleZenPurchase}
-              color="accent"
-              size="lg"
-              className="whitespace-nowrap px-6 py-3 text-sm md:text-base"
-              aria-label="Get the Full Zen Experience"
-            >
-              {loading ? "Processing..." : "Get the Full Zen Experience"}
-            </Button>
+
+            {/* CTA Button */}
+            <div className="mt-8 flex justify-center">
+              <Button
+                onClick={handleZenPurchase}
+                color="accent"
+                size="lg"
+                className="whitespace-nowrap px-6 py-3 text-sm md:text-base"
+                aria-label="Get the Full Zen Experience"
+              >
+                {loading ? "Processing..." : "Get the Full Zen Experience"}
+              </Button>
+            </div>
+
+            {/* Terms and Conditions Checkbox */}
+            <div className="flex items-center justify-center m-4">
+              <input
+                type="checkbox"
+                id="terms"
+                checked={termsAccepted}
+                aria-checked={termsAccepted}
+                onChange={(e) => setTermsAccepted(e.target.checked)}
+                className="mr-2 cursor-pointer"
+              />
+              <label htmlFor="terms" className="text-sm text-primary">
+                I agree to the{" "}
+                <a
+                  href="/terms"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent underline"
+                >
+                  Terms and Conditions
+                </a>
+              </label>
+            </div>
+
           </div>
         </div>
       </div>

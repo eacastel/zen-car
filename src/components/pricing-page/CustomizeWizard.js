@@ -32,6 +32,8 @@ const CustomizeWizard = () => {
   const [purchaseAssistance, setPurchaseAssistance] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const [termsAccepted2, setTermsAccepted2] = useState(false);
+
   // Calculate total without discount
   const totalPrice =
     (researchSelection ? researchSelection.price : 0) +
@@ -49,7 +51,11 @@ const CustomizeWizard = () => {
     }
   };
 
-  const handlePurchase = async () => {
+  const handleCustomPurchase = async () => {
+    if (!termsAccepted2) {
+      alert("Please accept the Terms and Conditions before proceeding.");
+      return;
+    }
     setLoading(true);
     let descriptionLines = [];
     let selectedProducts = [];
@@ -90,7 +96,10 @@ const CustomizeWizard = () => {
         purchase: purchaseAssistance
       },
       products: selectedProducts, // New field with selected product details
-      description
+      description,
+      metadata: {
+        termsAccepted: termsAccepted2
+      }
     };
 
     try {
@@ -254,7 +263,7 @@ const CustomizeWizard = () => {
                         <div className="text-xl font-bold text-accent">$250</div>
                       </div>
                       <p className="mt-2 text-gray-600 text-sm">
-                      Find vehicles that match your criteria.
+                        Find vehicles that match your criteria.
                       </p>
                     </div>
                   </div>
@@ -273,7 +282,7 @@ const CustomizeWizard = () => {
                       </h4>
                     </div>
                     <p className="mb-2 text-gray-700 text-sm">
-                    We coordinate the transaction.
+                      We coordinate the transaction.
                     </p>
                     <div
                       role="checkbox"
@@ -354,10 +363,34 @@ const CustomizeWizard = () => {
                         )}
                       </div>
                       <div className="mt-4 text-center">
-                        <Button onClick={handlePurchase} color="accent" size="base" className="bg-clementine hover:bg-orange-500">
+                        <Button onClick={handleCustomPurchase} color="accent" size="base" className="bg-clementine hover:bg-orange-500">
                           {loading ? "Processing..." : "Proceed to Checkout"}
                         </Button>
                       </div>
+                      {/* Terms and Conditions Checkbox */}
+                      <div className="flex items-center justify-center m-4">
+                        <input
+                          type="checkbox"
+                          id="terms2"
+                          checked={termsAccepted2}
+                          aria-checked={termsAccepted2}
+                          onChange={(e) => setTermsAccepted2(e.target.checked)}
+                          className="mr-2 cursor-pointer"
+                        />
+                        <label htmlFor="terms2" className="text-sm text-primary">
+                          I agree to the{" "}
+                          <a
+                            href="/terms"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-accent underline"
+                          >
+                            Terms and Conditions
+                          </a>
+                        </label>
+                      </div>
+
+
                     </div>
                   ) : (
                     <div className="border p-4 rounded-lg bg-gray-50 shadow-sm text-center">
