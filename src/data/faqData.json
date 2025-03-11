@@ -1,0 +1,97 @@
+[
+    {
+        "question": "What is a Zen Guide?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "A Zen Guide is a car-buying concierge that helps you find, negotiate, and purchase your next vehicle without the hassle of spending long hours shopping at dealerships. We handle everything from research to inventory sourcing to coordinating video walkthroughs, shipping, and paperwork. This ensures you get the best deal with minimal stress."
+            }
+        ]
+    },
+    {
+        "question": "How does Zen Car Buying’s concierge service work?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "Our service follows a simple proven process. You can use us for all 3 steps or à la carte to meet your specific needs:<br />- Consultation and Research: We discuss your needs, budget, and preferences and recommend the best year/make/model/trim for you.<br />- Inventory Sourcing: We research and locate the best available vehicles that match your preferences anywhere in the U.S.<br />- Purchase Assistance: We negotiate the price, financing, and any additional details on your behalf, including coordinating the paperwork and delivery."
+            }
+        ]
+    },
+    {
+        "question": "What are the benefits of using a car-buying concierge?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "Using our service offers several advantages, such as:"
+            },
+            {
+                "type": "list",
+                "content": [
+                    "Saves you time by handling research and negotiations.",
+                    "Eliminates the stress of dealing with pushy salespeople.",
+                    "Helps you get the best possible deal without hidden fees.",
+                    "Provides expert insights and market knowledge.",
+                    "Gives access to a broader selection of vehicles."
+                ]
+            },
+            {
+                "type": "text",
+                "content": "With these benefits, you can enjoy a hassle-free car-buying experience."
+            }
+        ]
+    },
+    {
+        "question": "Do you work with both new and used cars?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "Yes! Whether you're looking for a brand-new car or a high-quality, lightly used vehicle, we can help you find the best option to fit your budget and preferences."
+            }
+        ]
+    },
+    {
+        "question": "How much does the service cost?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "Our pricing varies based on the level of assistance you need. We offer different packages ranging from consultation-only services to full concierge support. <a href='/pricing' class='text-primary underline hover:text-accent'>View our pricing here</a>."
+            }
+        ]
+    },
+    {
+        "question": "Will I still need to visit a dealership?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "Not necessarily. If you prefer, we can handle everything remotely and arrange for the car to be delivered to you. However, if you'd like to test drive the car or a similar car before purchasing, we can coordinate that as well."
+            }
+        ]
+    },
+    {
+        "question": "Do you only work with specific brands or dealerships?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "No, we work independently, meaning we have no affiliations with specific brands or dealerships. Our priority is finding the best car for you at the best price, regardless of the seller."
+            }
+        ]
+    },
+    {
+        "question": "Can you help with trade-ins?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "Yes! We can assist in evaluating your current vehicle and finding the best trade-in value, ensuring you get the most money toward your next purchase."
+            }
+        ]
+    },
+    {
+        "question": "How do I get started?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "Getting started is easy! Simply <span class='calendly-popup text-accent underline cursor-pointer hover:text-accent-dark'>click here</span> to schedule your free 15-minute consultation with one of our Zen Guides."
+            }
+        ]
+    }
+]

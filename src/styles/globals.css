@@ -21,6 +21,24 @@ html, body {
   background-color: rgba(0, 0, 0, 0.7); /* Darker overlay for better focus */
 }
 
+.calendly-popup {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100vh !important;
+  overflow-y: auto !important;  /* Ensures scrolling */
+  display: flex !important;
+  flex-direction: column !important;
+  background-color: #fff; /* Ensures background fills correctly */
+}
+
+.calendly-overlay {
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dimmed overlay */
+  z-index: 9999;
+}
+
 h1 {
   @apply text-2xl;
 }

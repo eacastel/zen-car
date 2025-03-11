@@ -74,7 +74,7 @@ export default function Testimonials() {
         <section className="py-20 bg-secondary text-center" aria-labelledby="testimonials-heading">
             <div className="container mx-auto px-10">
                 {/* ✅ Section Title */}
-                <h2 id="testimonials-heading" className="text-4xl font-medium text-primary mb-12">
+                <h2 id="testimonials-heading" className="text-4xl font-medium text-accent mb-12">
                     What Our <span className="text-accent">Happy Customers</span> Say
                 </h2>
 

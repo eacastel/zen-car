@@ -63,8 +63,8 @@ const HomePage = () => {
 {/* ✅ How It Works Section */}
 <section className="bg-primary text-white py-20" aria-labelledby="how-it-works">
   <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
-    <h2 id="how-it-works" className="text-4xl font-medium text-center text-accent mb-12">
-      Our <span className="text-accent">Proven 4-Step Process</span>
+    <h2 id="how-it-works" className="text-4xl font-medium text-center text-white mb-12">
+      Our <span className="text-white">Proven 4-Step Process</span>
     </h2>
     <div className="grid md:grid-cols-1 lg:grid-cols-4 gap-12">
       {[

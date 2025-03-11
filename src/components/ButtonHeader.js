@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 
 const ButtonHeader = ({
   to = "/pricing",  // Default link to /pricing
+  onClick,          // Added onClick prop handling
   children = "Getting Started",
   color = "accent",
   size = "base",
@@ -18,19 +19,33 @@ const ButtonHeader = ({
     ${className}
   `;
 
+  // Ensures `onClick` is treated only as a function
+  const handleClick = typeof onClick === 'function' ? onClick : undefined;
+
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ duration: 0.2 }}
     >
-      <Link
-        to={to}
-        className={finalClassName}
-        {...rest}
-      >
-        {children}
-      </Link>
+      {handleClick ? (
+        <button
+          onClick={handleClick}
+          disabled={disabled}
+          className={finalClassName}
+          {...rest}
+        >
+          {children}
+        </button>
+      ) : (
+        <Link
+          to={to}
+          className={finalClassName}
+          {...rest}
+        >
+          {children}
+        </Link>
+      )}
     </motion.div>
   );
 };

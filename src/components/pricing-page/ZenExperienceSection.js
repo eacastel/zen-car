@@ -92,7 +92,7 @@ const ZenExperienceSection = ({ siteUrl, getStripe }) => {
           {/* Text Content in Single Column */}
           <div className="text-center">
             <span
-              className="absolute -top-5 right-0 bg-accent text-white text-sm uppercase px-6 py-2 rounded-tl-lg rounded-br-lg shadow-md font-bold"
+              className="absolute -top-5 right-0  bg-accent text-white text-sm uppercase px-6 py-2 rounded-tl-lg rounded-br-lg shadow-md font-bold"
               aria-label="Best value offer"
             >
               Best Value
@@ -127,9 +127,9 @@ const ZenExperienceSection = ({ siteUrl, getStripe }) => {
               ].map((detail, i) => (
                 <li
                   key={i}
-                  className="flex items-center justify-center text-gray-700"
+                  className="flex items-start  justify-start text-left md:items-center md:justify-center md:text-center text-gray-700"
                 >
-                  <FaCheckCircle className="text-accent mr-2 text-lg" aria-hidden="true" />
+                  <FaCheckCircle className="text-accent mt-1 min-w-8 mr-2 text-lg" aria-hidden="true" />
                   <span>{detail}</span>
                 </li>
               ))}

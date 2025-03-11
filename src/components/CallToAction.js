@@ -13,7 +13,7 @@ export default function CallToAction() {
           className="text-4xl md:text-5xl lg:text-6xl font-medium mb-6 leading-tight"
         >
           Ready to Find Your{" "}
-          <span className="text-primary">Perfect Car?</span>
+          <span className="text-white">Perfect Car?</span>
         </h2>
 
         <p className="text-lg md:text-xl mb-6">
