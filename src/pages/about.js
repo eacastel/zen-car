@@ -4,6 +4,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import CallToAction from '../components/CallToAction'
+import { motion } from "framer-motion"
 
 export default function AboutPage({ data }) {
   const trustImage1 = getImage(data.trustImage1)
@@ -11,61 +12,85 @@ export default function AboutPage({ data }) {
 
   return (
     <Layout>
-      <section
-        className="container mx-auto px-4 md:px-6 pt-8 pb-16 max-w-[900px]"
-        itemscope
-        itemtype="https://schema.org/AboutPage"
+    <section
+      className="container mx-auto px-4 md:px-6 pt-8 pb-16 max-w-[900px]"
+      itemscope
+      itemtype="https://schema.org/AboutPage"
+    >
+      <h1
+        id="page-title"
+        className="text-3xl md:text-4xl lg:text-5xl font-medium text-primary mb-12"
       >
-        <h1
-          id="page-title"
-          className="text-3xl md:text-4xl lg:text-5xl font-medium text-primary mb-12"
-        >
-          About Zen Car Buying
-        </h1>
+        About Zen Car Buying
+      </h1>
 
-        {/* Intro Section */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div>
-            <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
-              Finding the perfect used car at the right price can be challenging. 
-              At <strong>Zen Car Buying</strong>, our dedicated{' '}
-              <strong>used car buying concierge</strong> service ensures you get the best value without the stress.
-            </p>
-            <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
-              We specialize in sourcing <strong>lightly used cars</strong> and <strong>luxury used cars</strong> at incredible savings — often at <strong>50-70% less</strong> than their original sticker price.  
-              Imagine owning a <strong>$50,000 BMW 3 series</strong> for only $30,000 or a <strong>$80,000 Audi e-tron electric SUV</strong> for just $40,000.
-            </p>
-            <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
-              Our trusted experts offer professional guidance at every step, 
-              ensuring you secure a top-quality vehicle with confidence.
-            </p>
-          </div>
-
-          {/* Trust Image */}
-          <div>
-            <GatsbyImage
-              image={trustImage1}
-              alt="Row of cars at a dealership showcasing available inventory"
-              className="rounded-lg shadow-lg"
-            />
-          </div>
+      {/* Intro Section */}
+      <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div>
+          <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+            Finding the perfect used car at the right price can be challenging. 
+            At <strong>Zen Car Buying</strong>, our dedicated{' '}
+            <strong>used car buying concierge</strong> service ensures you get the best value without the stress.
+          </p>
+          <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+            We specialize in sourcing <strong>lightly used cars</strong> and <strong>luxury used cars</strong> at incredible savings — often at <strong>50-70% less</strong> than their original sticker price.  
+            Imagine owning a <strong>$50,000 BMW 3 series</strong> for only $30,000 or a <strong>$80,000 Audi e-tron electric SUV</strong> for just $40,000.
+          </p>
+          <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+            Our trusted experts offer professional guidance at every step, 
+            ensuring you secure a top-quality vehicle with confidence.
+          </p>
         </div>
 
-        {/* Why Used Cars are Complex */}
-        <h2 className="text-2xl font-semibold text-primary mb-4">
-          Why Buying a Used Car is More Complex
-        </h2>
-        <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
-          Unlike buying a new car, the used car market introduces multiple factors that can make finding the right vehicle overwhelming:
-        </p>
-        <ul className="list-disc pl-5 space-y-2 text-base md:text-lg text-primary mb-8">
-          <li>Model year changes that alter features and options.</li>
-          <li>Multiple trim levels with varying equipment.</li>
-          <li>Vehicle history differences — lease returns from careful owners vs. high-mileage ex-rental cars.</li>
-        </ul>
+        {/* Trust Image */}
+        <div>
+          <GatsbyImage
+            image={trustImage1}
+            alt="Row of cars at a dealership showcasing available inventory"
+            className="rounded-lg shadow-lg"
+          />
+        </div>
+      </div>
+
+      {/* Why Used Cars are Complex */}
+      <h2 className="text-2xl font-semibold text-primary mb-4">
+        Why Buying a Used Car is More Complex
+      </h2>
+      <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+        Unlike buying a new car, the used car market introduces multiple factors that can make finding the right vehicle overwhelming:
+      </p>
+      <ul className="list-disc pl-5 space-y-2 text-base md:text-lg text-primary mb-8">
+        <li>Model year changes that alter features and options.</li>
+        <li>Multiple trim levels with varying equipment.</li>
+        <li>Vehicle history differences — lease returns from careful owners vs. high-mileage ex-rental cars.</li>
+      </ul>
+
+        {/* Our Proven 4-Step Process */}
+        <section className="my-12">
+        <h2 className="text-2xl font-semibold text-primary mb-4">Our Proven 4-Step Process</h2>
+          <p className="text-base md:text-lg text-primary leading-relaxed mb-4">At Zen Car Buying, our trusted used car buying concierge service follows a streamlined 4-step process designed to help you secure the perfect vehicle with ease. From the initial consultation to expert vehicle recommendations, detailed inventory sourcing, and comprehensive purchase assistance, we simplify the complex world of used car buying. Whether you're searching for lightly used cars, luxury used cars, or want to explore car shipping services for out-of-state deals, our process ensures you get exceptional value — all while minimizing stress.</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 mt-12 gap-6">
+            {[  
+              { step: '1', title: 'Schedule Consultation', desc: 'Book a free 15-minute call to discuss your needs and budget.' },
+              { step: '2', title: 'Get Recommendations', desc: 'Receive personalized vehicle suggestions tailored to you.' },
+              { step: '3', title: 'Review Inventory', desc: 'We locate the best options nationwide to match your needs.' },
+              { step: '4', title: 'Purchase Assistance', desc: 'Our experts handle negotiation, paperwork, and delivery.' },
+            ].map((item, index) => (
+              <motion.div 
+                key={index} 
+                className="border-2 border-primary p-6 rounded-lg text-center shadow-md hover:shadow-lg transition-shadow duration-300"
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="text-4xl font-bold text-accent mb-2">{item.step}</div>
+                <h3 className="text-lg font-semibold text-primary mb-2">{item.title}</h3>
+                <p className="text-primary text-sm">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
         {/* Nationwide Savings Section */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 gap-8 pt-10 mb-12">
           <div>
             <GatsbyImage
               image={trustImage2}
@@ -75,7 +100,7 @@ export default function AboutPage({ data }) {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold text-primary mb-4">
+            <h2 className="text-2xl font-semibold text-primary mb-2">
               Nationwide Car Shipping for More Savings
             </h2>
             <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
@@ -115,7 +140,6 @@ export default function AboutPage({ data }) {
     </Layout>
   )
 }
-
 
 export const query = graphql`
   query {
