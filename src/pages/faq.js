@@ -3,7 +3,7 @@ import Layout from '../components/Layout';
 import Seo from '../components/Seo';
 import faqData from '../data/faqData.json';
 import { motion } from 'framer-motion';
-import { openCalendlyPopup } from '../utils/openCalendly'; // Import your Calendly utility
+import { openCalendlyPopup } from '../utils/openCalendly';
 
 const FAQPage = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -15,18 +15,21 @@ const FAQPage = () => {
   useEffect(() => {
     const attachCalendlyTriggers = () => {
       const calendlyLinks = document.querySelectorAll('.calendly-popup');
-      calendlyLinks.forEach(link => link.addEventListener('click', (e) => {
-        e.preventDefault();
-        openCalendlyPopup();
-      }));
+      calendlyLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.stopPropagation(); // Prevent FAQ heading from triggering
+          e.preventDefault();
+          openCalendlyPopup();
+        });
+      });
 
       return () => {
         calendlyLinks.forEach(link => link.removeEventListener('click', openCalendlyPopup));
       };
     };
 
-    attachCalendlyTriggers();  // Attach initially
-    const observer = new MutationObserver(attachCalendlyTriggers); // Handle dynamic content
+    attachCalendlyTriggers();
+    const observer = new MutationObserver(attachCalendlyTriggers);
     observer.observe(document.body, { childList: true, subtree: true });
 
     return () => observer.disconnect();

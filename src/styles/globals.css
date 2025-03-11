@@ -5,39 +5,12 @@
 
 /* Prevent page shift */
 html, body {
-  height: 100%;
-  overflow-y: auto;
-  overscroll-behavior: contain; /* Prevent bounce effect */
+  min-height: 100vh;            /* Fixes Calendly popup clipping issues */
+  height: auto;                 /* Ensures full content height */
+  overflow-y: visible;          /* Ensures body scrolling when necessary */
+  overscroll-behavior: contain; /* Maintains bounce prevention */
 }
 
-.calendly-popup {
-  width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
-  overflow-y: auto;
-}
-
-.calendly-overlay {
-  background-color: rgba(0, 0, 0, 0.7); /* Darker overlay for better focus */
-}
-
-.calendly-popup {
-  width: 100% !important;
-  height: 100% !important;
-  max-height: 100vh !important;
-  overflow-y: auto !important;  /* Ensures scrolling */
-  display: flex !important;
-  flex-direction: column !important;
-  background-color: #fff; /* Ensures background fills correctly */
-}
-
-.calendly-overlay {
-  position: fixed !important;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Dimmed overlay */
-  z-index: 9999;
-}
 
 h1 {
   @apply text-2xl;

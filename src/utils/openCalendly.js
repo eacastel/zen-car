@@ -18,9 +18,7 @@ export const openCalendlyPopup = () => {
         calendlyPopup.style.height = "100vh";
         calendlyPopup.style.maxHeight = "100vh";
         calendlyPopup.style.overflow = "auto";  // Enable scrolling
-        calendlyPopup.style.overflowY = "scroll"; // Allow scrolling for better mobile UX
-        calendlyPopup.style.display = "flex";
-        calendlyPopup.style.flexDirection = "column";
+
 
         calendlyPopup.setAttribute("role", "dialog");
         calendlyPopup.setAttribute("aria-modal", "true");
