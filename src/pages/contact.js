@@ -86,7 +86,7 @@ export default function ContactPage() {
           Contact Zen Car Buying
         </h1>
 
-        <p className="text-lg text-center text-gray-700 max-w-2xl mx-auto mb-8">
+        <p className="text-lg text-center text-primary max-w-2xl mx-auto mb-8">
           We're here to help you find the perfect car without the hassle. Reach out via phone, text, or email for fast support, or schedule a free consultation below.
         </p>
 
@@ -106,12 +106,12 @@ export default function ContactPage() {
 
         {/* Contact Details */}
         <section>
-          <div className="text-center text-lg text-gray-800 mb-12 space-y-4">
+          <div className="text-center text-lg text-primary mb-12 space-y-4">
             <p>
               <strong>Phone:</strong>{' '}
               <a
                 href="tel:+11234567890"
-                className="text-black hover:text-accent-dark"
+                className="text-primary font-bold hover:text-accent-dark"
               >
                 +1 (123) 456-7890
               </a>
@@ -121,7 +121,7 @@ export default function ContactPage() {
               <strong>Text:</strong>{' '}
               <a
                 href="sms:+11234567890"
-                className="text-black hover:text-accent-dark"
+                className="text-primary font-bold hover:text-accent-dark"
               >
                 +1 (123) 456-7890
               </a>
@@ -131,7 +131,7 @@ export default function ContactPage() {
               <strong>Email:</strong>{' '}
               <a
                 href="mailto:info@zencarbuying.com"
-                className="text-black hover:text-accent-dark"
+                className="text-primary font-bold hover:text-accent-dark"
               >
                 info@zencarbuying.com
               </a>

@@ -17,7 +17,7 @@ const FAQPage = () => {
       const calendlyLinks = document.querySelectorAll(".calendly-popup")
       calendlyLinks.forEach(link => {
         link.addEventListener("click", e => {
-          e.stopPropagation() // Prevent FAQ heading from triggering
+          e.stopPropagation()
           e.preventDefault()
           openCalendlyPopup()
         })
@@ -39,9 +39,17 @@ const FAQPage = () => {
 
   return (
     <Layout>
-      <Seo title="Frequently Asked Questions (FAQ)" />
-      <section id="faq" className="max-w-4xl mx-auto py-12 px-6">
-      <h1
+      <Seo 
+        title="Frequently Asked Questions (FAQ) - Zen Car Buying"
+        description="Get expert guidance on buying a used car. Discover how our car buying concierge service can help you find the best deals, source inventory nationwide, and avoid costly mistakes."
+      />
+      
+      <section 
+        id="faq" 
+        className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 pt-8 pb-16 max-w-[900px]"
+        aria-labelledby="page-title"
+      >
+        <h1
           id="page-title"
           className="text-3xl md:text-4xl lg:text-5xl font-medium text-primary mb-12"
         >
@@ -80,7 +88,7 @@ const FAQPage = () => {
                   itemscope
                   itemprop="acceptedAnswer"
                   itemtype="https://schema.org/Answer"
-                  className="mt-2 text-gray-700 space-y-4"
+                  className="mt-2 text-primary space-y-4"
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
@@ -111,9 +119,12 @@ const FAQPage = () => {
 
                     if (block.type === "ordered-list") {
                       return (
-                        <ol key={idx} className="list-decimal pl-5 space-y-2 marker:text-primary font-bold">
+                        <ol 
+                          key={idx} 
+                          className="list-decimal pl-5 space-y-2 marker:text-primary font-bold"
+                        >
                           {block.content.map((item, listIdx) => (
-                            <li key={listIdx} className="text-gray-700">
+                            <li key={listIdx} className="text-primary">
                               <strong className="font-bold text-primary">
                                 {item.label}:
                               </strong>{" "}
@@ -123,7 +134,6 @@ const FAQPage = () => {
                         </ol>
                       )
                     }
-                    
 
                     return null
                   })}

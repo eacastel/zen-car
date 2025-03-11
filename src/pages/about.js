@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
@@ -11,10 +11,14 @@ export default function AboutPage({ data }) {
 
   return (
     <Layout>
-      <section className="container mx-auto px-4 md:px-2 lg:px-6 py-16">
-      <h1
+      <section
+        className="container mx-auto px-4 md:px-6 pt-8 pb-16 max-w-[900px]"
+        itemscope
+        itemtype="https://schema.org/AboutPage"
+      >
+        <h1
           id="page-title"
-          className="text-3xl md:text-4xl lg:text-5xl  font-medium text-primary mb-12"
+          className="text-3xl md:text-4xl lg:text-5xl font-medium text-primary mb-12"
         >
           About Zen Car Buying
         </h1>
@@ -22,16 +26,18 @@ export default function AboutPage({ data }) {
         {/* Intro Section */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           <div>
-            <p className="text-lg text-gray-700 mb-4">
-              The used car market is filled with incredible deals, offering car
-              buyers an opportunity to own lightly used, significantly more
-              expensive vehicles at 50-70% the cost of a new car. 
+            <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+              Finding the perfect used car at the right price can be challenging. 
+              At <strong>Zen Car Buying</strong>, our dedicated{' '}
+              <strong>used car buying concierge</strong> service ensures you get the best value without the stress.
             </p>
-            <p className="text-lg text-gray-700 mb-4">
-              That’s like getting a <strong>$50,000 BMW 3 series</strong> for
-              only $30,000 or a <strong>$80,000 Audi e-tron electric SUV</strong> for only $40,000. These incredible deals exist in the
-              entry-luxury market as well, with cars from Toyota, Honda, and
-              Subaru offering amazing bargains!
+            <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+              We specialize in sourcing <strong>lightly used cars</strong> and <strong>luxury used cars</strong> at incredible savings — often at <strong>50-70% less</strong> than their original sticker price.  
+              Imagine owning a <strong>$50,000 BMW 3 series</strong> for only $30,000 or a <strong>$80,000 Audi e-tron electric SUV</strong> for just $40,000.
+            </p>
+            <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+              Our trusted experts offer professional guidance at every step, 
+              ensuring you secure a top-quality vehicle with confidence.
             </p>
           </div>
 
@@ -39,7 +45,7 @@ export default function AboutPage({ data }) {
           <div>
             <GatsbyImage
               image={trustImage1}
-              alt="Happy customer driving away in their new car"
+              alt="Row of cars at a dealership showcasing available inventory"
               className="rounded-lg shadow-lg"
             />
           </div>
@@ -49,14 +55,13 @@ export default function AboutPage({ data }) {
         <h2 className="text-2xl font-semibold text-primary mb-4">
           Why Buying a Used Car is More Complex
         </h2>
-        <p className="text-lg text-gray-700 mb-4">
-          Unlike new car shopping where "what you see is what you get," the used
-          car market introduces multiple factors like:
+        <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+          Unlike buying a new car, the used car market introduces multiple factors that can make finding the right vehicle overwhelming:
         </p>
-        <ul className="list-disc pl-5 space-y-2 text-lg text-gray-700 mb-8">
+        <ul className="list-disc pl-5 space-y-2 text-base md:text-lg text-primary mb-8">
           <li>Model year changes that alter features and options.</li>
           <li>Multiple trim levels with varying equipment.</li>
-          <li>History differences — lease return from a careful owner vs. a high-mileage ex-rental car.</li>
+          <li>Vehicle history differences — lease returns from careful owners vs. high-mileage ex-rental cars.</li>
         </ul>
 
         {/* Nationwide Savings Section */}
@@ -64,20 +69,21 @@ export default function AboutPage({ data }) {
           <div>
             <GatsbyImage
               image={trustImage2}
-              alt="Car being delivered with confidence through nationwide shipping"
+              alt="Car delivery service showing a customer receiving a newly purchased vehicle"
               className="rounded-lg shadow-lg"
             />
           </div>
 
           <div>
             <h2 className="text-2xl font-semibold text-primary mb-4">
-              Nationwide Inventory Sourcing
+              Nationwide Car Shipping for More Savings
             </h2>
-            <p className="text-lg text-gray-700 mb-4">
-              With modern technology and affordable shipping costs, car shoppers
-              can confidently purchase vehicles from dealerships thousands of
-              miles away. We've saved our customers thousands by sourcing cars
-              from markets where inventory is more competitive and affordable.
+            <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+              With affordable shipping options available, you aren’t limited to cars in your local area. 
+              Our <strong>car buying concierge</strong> experts source vehicles from across the U.S., often saving our clients thousands of dollars by purchasing in regions with better deals.
+            </p>
+            <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+              Whether you're looking for a luxury used car, a high-quality SUV, or an affordable sedan, we’ll find the perfect match for your budget.
             </p>
           </div>
         </div>
@@ -86,29 +92,30 @@ export default function AboutPage({ data }) {
         <h2 className="text-2xl font-semibold text-primary mb-4">
           What About Repairs?
         </h2>
-        <p className="text-lg text-gray-700 mb-4">
-          Most of the cars your Zen Guide will recommend will still have some
-          portion of the original manufacturer warranty remaining. This allows
-          you to purchase a comprehensive used car warranty, often extending
-          the manufacturer’s original bumper-to-bumper coverage.
+        <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+          Concerned about costly repairs for used cars? 
+          Most of the vehicles we recommend are still under the original manufacturer warranty, making them eligible for comprehensive extended warranties. 
+          This often extends the manufacturer’s original bumper-to-bumper coverage, giving you added peace of mind.
         </p>
 
         {/* Closing CTA Section */}
         <h2 className="text-2xl font-semibold text-primary mb-4">
           Let Your Zen Guide Help
         </h2>
-        <p className="text-lg text-gray-700 mb-4">
-          Our proven system ensures you get the car of your dreams — without the
-          stress. Let us guide you to the perfect vehicle at the perfect price.
+        <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+          Our proven system has helped countless customers find <strong>luxury used cars</strong> and 
+          reliable vehicles at unbeatable prices.  
+          Whether you're buying your dream BMW or searching for the <strong>best used cars under $30,000</strong>, we’ve got you covered.
         </p>
-      
-         
-
+        <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+          Let us guide you to the perfect vehicle at the perfect price.
+        </p>
       </section>
       <CallToAction />
     </Layout>
   )
 }
+
 
 export const query = graphql`
   query {
@@ -127,8 +134,8 @@ export const query = graphql`
 
 export const Head = () => (
   <Seo
-    title="About Zen Car Buying | Your Trusted Car Buying Guide"
-    description="Learn how Zen Car Buying helps you find the perfect used car at 50-70% less than new prices. Schedule a free 15-minute consultation today."
+    title="About Zen Car Buying | Expert Used Car Buying Concierge"
+    description="Looking for a trusted used car buying concierge? Zen Car Buying helps you find luxury used cars and lightly used vehicles at 50-70% off new car prices. Schedule a free consultation today."
     pathname="/about"
   />
 )
