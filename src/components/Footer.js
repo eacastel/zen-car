@@ -23,7 +23,23 @@ export default function Footer() {
                   to="/pricing"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
-                  Pricing
+                  Get Started
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/faq"
+                  className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  About
                 </Link>
               </li>
               <li>
@@ -31,15 +47,7 @@ export default function Footer() {
                   to="/contact"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/blog"
-                  className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
-                >
-                  Blog
+                  Contact
                 </Link>
               </li>
             </ul>

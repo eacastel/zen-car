@@ -25,10 +25,10 @@ export default function Header() {
   const logoImage = getImage(data.logo);
 
   const navItems = [
-    { name: "About Us", path: "/about" },
+    { name: "About", path: "/about" },
     { name: "FAQ", path: "/faq" },
-    { name: "Contact", path: "/contact" },
     { name: "Blog", path: "/blog" },
+    { name: "Contact", path: "/contact" },
   ];
 
   return (

@@ -34,10 +34,11 @@ const Button = ({
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ duration: 0.2 }}
+      className="cursor-pointer"
     >
       {handleClick ? (
         <button
-          onClick={handleClick} // ✅ Corrected `onClick` handling
+          onClick={handleClick}
           disabled={disabled}
           className={finalClassName}
           {...rest}

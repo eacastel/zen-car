@@ -39,7 +39,7 @@ const FAQPage = () => {
     <Layout>
       <Seo title="Frequently Asked Questions (FAQ)" />
       <section id="faq" className="max-w-4xl mx-auto py-12 px-6">
-        <h1 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions (FAQ)</h1>
+        <h1 className="text-3xl text-primary font-bold text-center mb-8">Frequently Asked Questions (FAQ)</h1>
 
         <div itemscope itemtype="https://schema.org/FAQPage" className="space-y-6">
           {faqData.map(({ question, answer }, index) => (
