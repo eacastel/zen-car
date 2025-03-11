@@ -79,7 +79,10 @@ export default function ContactPage() {
         </div>
 
         {/* Heading Section */}
-        <h1 className="text-4xl font-bold text-primary text-center mb-6">
+        <h1
+          id="page-title"
+          className="text-3xl md:text-4xl lg:text-5xl text-center font-medium text-primary my-12"
+        >
           Contact Zen Car Buying
         </h1>
 

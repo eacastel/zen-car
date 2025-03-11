@@ -14,9 +14,9 @@ const BlogPage = ({ data }) => {
         className="container mx-auto px-6 md:px-12 lg:px-24 xl:px-32 py-8"
         aria-labelledby="page-title"
       >
-        <h1
+      <h1
           id="page-title"
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-8"
+          className="text-3xl md:text-4xl lg:text-5xl font-medium text-primary mb-12"
         >
           Latest Articles
         </h1>

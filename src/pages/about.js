@@ -12,7 +12,10 @@ export default function AboutPage({ data }) {
   return (
     <Layout>
       <section className="container mx-auto px-4 md:px-2 lg:px-6 py-16">
-        <h1 className="text-4xl font-bold text-primary text-center mb-8">
+      <h1
+          id="page-title"
+          className="text-3xl md:text-4xl lg:text-5xl  font-medium text-primary mb-12"
+        >
           About Zen Car Buying
         </h1>
 

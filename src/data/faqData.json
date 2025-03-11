@@ -13,7 +13,28 @@
         "answer": [
             {
                 "type": "text",
-                "content": "Our service follows a simple proven process. You can use us for all 3 steps or à la carte to meet your specific needs:<br />- Consultation and Research: We discuss your needs, budget, and preferences and recommend the best year/make/model/trim for you.<br />- Inventory Sourcing: We research and locate the best available vehicles that match your preferences anywhere in the U.S.<br />- Purchase Assistance: We negotiate the price, financing, and any additional details on your behalf, including coordinating the paperwork and delivery."
+                "content": "Our service follows a simple proven process. You can use us for all 4 steps or <i>à-la-carte</i> to meet your specific needs:"
+            },
+            {
+                "type": "ordered-list",
+                "content": [
+                    {
+                        "label": "Consultation",
+                        "description": "We discuss your needs, budget, and preferences."
+                    },
+                    {
+                        "label": "Recommendations",
+                        "description": "We recommend the best year / make / model / trim for you."
+                    },
+                    {
+                        "label": "Inventory Sourcing",
+                        "description": "We research and locate the best available vehicles that match your preferences anywhere in the U.S."
+                    },
+                    {
+                        "label": "Purchase Assistance",
+                        "description": "We negotiate the price, financing, and any additional details on your behalf, including coordinating the paperwork and delivery."
+                    }
+                ]
             }
         ]
     },
@@ -54,7 +75,7 @@
         "answer": [
             {
                 "type": "text",
-                "content": "Our pricing varies based on the level of assistance you need. We offer different packages ranging from consultation-only services to full concierge support. <a href='/pricing' class='text-primary underline hover:text-accent'>View our pricing here</a>."
+                "content": "Our pricing varies based on the level of assistance you need. We offer different packages ranging from consultation-only services to full concierge support. <a href='/pricing' class='text-primary font-bold underline hover:text-accent'>View our pricing here</a>."
             }
         ]
     },
