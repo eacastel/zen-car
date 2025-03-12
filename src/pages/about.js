@@ -145,7 +145,7 @@ export const query = graphql`
   query {
     trustImage1: file(relativePath: { eq: "row-of-cars.png" }) {
       childImageSharp {
-        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
+        gatsbyImageData(layout: CONSTRAINED, width: 400, height: 400, placeholder: BLURRED)
       }
     }
     trustImage2: file(relativePath: { eq: "sleek-bmw.png" }) {

@@ -3,6 +3,7 @@ import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import CalendlyButton from '../components/CalendlyButton'
 import Button from '../components/Button' // Added for 'Get Started' Button
+import ContactForm from '../components/ContactForm'
 
 // SVG Icons
 const PhoneIcon = () => (
@@ -110,20 +111,20 @@ export default function ContactPage() {
             <p>
               <strong>Phone:</strong>{' '}
               <a
-                href="tel:+11234567890"
+                href="tel:+18886516088"
                 className="text-primary font-bold hover:text-accent-dark"
               >
-                +1 (123) 456-7890
+                (888) 651-6088
               </a>
             </p>
 
             <p>
               <strong>Text:</strong>{' '}
               <a
-                href="sms:+11234567890"
+                href="sms:+18886516088"
                 className="text-primary font-bold hover:text-accent-dark"
               >
-                +1 (123) 456-7890
+                (888) 651-6088
               </a>
             </p>
 
@@ -142,69 +143,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Form Section */}
-        <section className="bg-gray-100 p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold text-primary text-center mb-4">
-            Contact Form
-          </h2>
-          <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            className="space-y-6 max-w-lg mx-auto"
-          >
-            {/* Hidden Netlify Field */}
-            <input type="hidden" name="form-name" value="contact" />
-
-            <div>
-              <label htmlFor="name" className="block text-primary font-bold mb-2">
-                Full Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                className="w-full p-3 border border-primary rounded focus:ring-2 focus:ring-accent"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-primary font-bold mb-2">
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                className="w-full p-3 border border-primary rounded focus:ring-2 focus:ring-accent"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-primary font-bold mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                required
-                className="w-full p-3 border border-primary rounded focus:ring-2 focus:ring-accent"
-              ></textarea>
-            </div>
-
-            <div className="text-center">
-              <button
-                type="submit"
-                className="bg-primary text-white px-8 py-3 rounded hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-accent"
-              >
-                Send Message
-              </button>
-            </div>
-          </form>
-        </section>
+        <ContactForm />
       </section>
     </Layout>
   )
