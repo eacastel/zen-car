@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Squash as Hamburger } from "hamburger-react";
-import ButtonHeader from "../components/ButtonHeader";
+import ButtonHeader from "../components/CalendlyButtonHeader";
+import CalendlyButtonHeader from "../components/CalendlyButtonHeader";
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
@@ -25,6 +26,7 @@ export default function Header() {
   const logoImage = getImage(data.logo);
 
   const navItems = [
+    { name: "Pricing", path: "/pricing" },
     { name: "About", path: "/about" },
     { name: "FAQ", path: "/faq" },
     { name: "Blog", path: "/blog" },
@@ -95,14 +97,36 @@ export default function Header() {
 
           {/* Button */}
           <div className="ml-4">
-            <ButtonHeader size="lg" color="accent">
+            <CalendlyButtonHeader size="lg" color="accent">
               Get Started
-            </ButtonHeader>
+            </CalendlyButtonHeader>
           </div>
         </div>
 
-        {/* Mobile Hamburger Menu */}
-        <div className="lg:hidden">
+        {/* Mobile Header: Add Phone Icon Next to Hamburger */}
+<div className="flex items-center gap-4 lg:hidden">
+  {/* Phone Number Icon */}
+  <a
+    href="tel:+18886516088"
+    className="text-primary hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+    aria-label="Call Zen Car Buying at (888) 651-6088"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 24"
+      fill="currentColor"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
+      />
+    </svg>
+  </a>
+
+  {/* Mobile Hamburger Menu */}
           <button
             aria-label={isOpen ? "Close menu" : "Open menu"}
             className="focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
@@ -111,7 +135,7 @@ export default function Header() {
               toggled={isOpen}
               toggle={setOpen}
               size={28}
-              color="#000"
+              color="#6B8385"
               rounded
             />
           </button>
@@ -133,29 +157,7 @@ export default function Header() {
               </ButtonHeader>
             </li>
 
-            {/* Phone Number - Second */}
-            <li>
-              <a
-                href="tel:+18886516088"
-                className="flex items-center mt-4 mb-1 text-lg font-semibold text-white hover:text-accent transition-colors"
-                aria-label="Call Zen Car Buying at (888) 651-6088"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  stroke="currentColor"
-                  className="w-5 h-5 mr-1"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
-                  />
-                </svg>
-                (888) 651-6088
-              </a>
-            </li>
+            
 
             {/* Navigation Links */}
             {navItems.map((item) => (

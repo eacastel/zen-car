@@ -5,6 +5,8 @@ import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import CallToAction from '../components/CallToAction'
 import { motion } from "framer-motion"
+import { openCalendlyPopup } from "../utils/openCalendly";
+
 
 export default function AboutPage({ data }) {
   const trustImage1 = getImage(data.trustImage1)
@@ -28,16 +30,16 @@ export default function AboutPage({ data }) {
       <div className="grid md:grid-cols-2 gap-8 mb-12">
         <div>
           <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
-            Finding the perfect used car at the right price can be challenging. 
-            At <strong>Zen Car Buying</strong>, our dedicated{' '}
-            <strong>used car buying concierge</strong> service ensures you get the best value without the stress.
+            Finding the perfect used car can be challenging. 
+            At <strong>Zen Car Buying</strong>, {' '}
+            <strong>used car buying concierge</strong> service ensures you get the best value without the stress of traditional car buying. Our modern approach takes advantage of systems and tools so you don’t have to step into a single dealership!.
           </p>
           <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
             We specialize in sourcing <strong>lightly used cars</strong> and <strong>luxury used cars</strong> at incredible savings — often at <strong>50-70% less</strong> than their original sticker price.  
-            Imagine owning a <strong>$50,000 BMW 3 series</strong> for only $30,000 or a <strong>$80,000 Audi e-tron electric SUV</strong> for just $40,000.
+            Imagine owning a <strong>$50,000 BMW 3 series</strong> for only $30,000 or a <strong>$90,000 Audi e-tron electric SUV</strong> for just $40,000.
           </p>
           <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
-            Our trusted experts offer professional guidance at every step, 
+            Our Zen Guides offer professional guidance at every step, 
             ensuring you secure a top-quality vehicle with confidence.
           </p>
         </div>
@@ -60,21 +62,31 @@ export default function AboutPage({ data }) {
         Unlike buying a new car, the used car market introduces multiple factors that can make finding the right vehicle overwhelming:
       </p>
       <ul className="list-disc pl-5 space-y-2 text-base md:text-lg text-primary mb-8">
-        <li>Model year changes that alter features and options.</li>
+        <li>Model year changes that alter styling, standard features and options.</li>
         <li>Multiple trim levels with varying equipment.</li>
-        <li>Vehicle history differences — lease returns from careful owners vs. high-mileage ex-rental cars.</li>
+        <li>Vehicle history — the used car market is filled with less desirable vehicles such as cars that were previously used in rental fleets!</li>
       </ul>
 
         {/* Our Proven 4-Step Process */}
         <section className="my-12">
         <h2 className="text-2xl font-semibold text-primary mb-4">Our Proven 4-Step Process</h2>
-          <p className="text-base md:text-lg text-primary leading-relaxed mb-4">At Zen Car Buying, our trusted used car buying concierge service follows a streamlined 4-step process designed to help you secure the perfect vehicle with ease. From the initial consultation to expert vehicle recommendations, detailed inventory sourcing, and comprehensive purchase assistance, we simplify the complex world of used car buying. Whether you're searching for lightly used cars, luxury used cars, or want to explore car shipping services for out-of-state deals, our process ensures you get exceptional value — all while minimizing stress.</p>
+        <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
+  At <strong>Zen Car Buying</strong>, we follow a streamlined 4-step process designed to help you secure the perfect vehicle. It starts with a <button
+    type="button"
+    onClick={(e) => {
+      e.preventDefault();
+      openCalendlyPopup();
+    }}
+    className="text-accent underline cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent"
+    aria-label="Schedule a free 15-minute consultation"
+  > free 15-minute consultation  </button> which sets the foundation for your Zen Guide to deliver vehicle recommendations in an easy to read proposal format, inventory sourcing, and purchase assistance. We remove the stress and simplify the complex world of car buying. 
+</p>
           <div className="grid grid-cols-2 md:grid-cols-4 mt-12 gap-6">
             {[  
-              { step: '1', title: 'Schedule Consultation', desc: 'Book a free 15-minute call to discuss your needs and budget.' },
-              { step: '2', title: 'Get Recommendations', desc: 'Receive personalized vehicle suggestions tailored to you.' },
-              { step: '3', title: 'Review Inventory', desc: 'We locate the best options nationwide to match your needs.' },
-              { step: '4', title: 'Purchase Assistance', desc: 'Our experts handle negotiation, paperwork, and delivery.' },
+              { step: '1', title: 'Schedule Consultation', desc: 'Book your free 15-minute call to go over your budget, and preferences.' },
+              { step: '2', title: 'Get Recommendations', desc: 'Receive a customized proposal with your recommendation.' },
+              { step: '3', title: 'Review Inventory', desc: 'We locate and provide the best vehicles matching our recommendation.' },
+              { step: '4', title: 'Purchase Assistance', desc: 'Let your Zen Guides do the work so you don’t have to.' },
             ].map((item, index) => (
               <motion.div 
                 key={index} 
@@ -120,7 +132,6 @@ export default function AboutPage({ data }) {
         <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
           Concerned about costly repairs for used cars? 
           Most of the vehicles we recommend are still under the original manufacturer warranty, making them eligible for comprehensive extended warranties. 
-          This often extends the manufacturer’s original bumper-to-bumper coverage, giving you added peace of mind.
         </p>
 
         {/* Closing CTA Section */}

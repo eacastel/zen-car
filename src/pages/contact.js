@@ -3,7 +3,7 @@ import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import CalendlyButton from '../components/CalendlyButton'
 import Button from '../components/Button' // Added for 'Get Started' Button
-import ContactForm from '../components/ContactForm'
+
 
 // SVG Icons
 const PhoneIcon = () => (
@@ -53,7 +53,7 @@ export default function ContactPage() {
         <div className="flex flex-col md:flex-row gap-4 md:gap-8 justify-center mb-8">
           {/* Call Button */}
           <a
-            href="tel:+11234567890"
+            href="tel:+18886516088"
             className="bg-primary text-white px-6 py-3 rounded-lg text-lg font-bold hover:bg-primary-dark hover:scale-105 transition-transform duration-200 text-center w-full md:w-auto"
             aria-label="Call Zen Car Buying"
           >
@@ -62,7 +62,7 @@ export default function ContactPage() {
 
           {/* Text Us Button */}
           <a
-            href="sms:+11234567890"
+            href="sms:+18886516088"
             className="bg-secondary text-primary px-6 py-3 rounded-lg text-lg font-bold border-2 border-primary hover:border-black hover:scale-105 transition-transform duration-200 text-center w-full md:w-auto"
             aria-label="Text Zen Car Buying"
           >
@@ -101,49 +101,9 @@ export default function ContactPage() {
         {/* 'Get Started' Button */}
         <div className="text-center mb-12">
           <Button to="/pricing" size="lg" color="primary">
-            Get The Zen Experience
+            Ready To Buy
           </Button>
         </div>
-
-        {/* Contact Details */}
-        <section>
-          <div className="text-center text-lg text-primary mb-12 space-y-4">
-            <p>
-              <strong>Phone:</strong>{' '}
-              <a
-                href="tel:+18886516088"
-                className="text-primary font-bold hover:text-accent-dark"
-              >
-                (888) 651-6088
-              </a>
-            </p>
-
-            <p>
-              <strong>Text:</strong>{' '}
-              <a
-                href="sms:+18886516088"
-                className="text-primary font-bold hover:text-accent-dark"
-              >
-                (888) 651-6088
-              </a>
-            </p>
-
-            <p>
-              <strong>Email:</strong>{' '}
-              <a
-                href="mailto:info@zencarbuying.com"
-                className="text-primary font-bold hover:text-accent-dark"
-              >
-                info@zencarbuying.com
-              </a>
-            </p>
-
-            <p className="text-xl font-bold text-primary mt-8"></p>
-          </div>
-        </section>
-
-        {/* Contact Form Section */}
-        <ContactForm />
       </section>
     </Layout>
   )

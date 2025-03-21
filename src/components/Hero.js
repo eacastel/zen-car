@@ -40,11 +40,9 @@ export function Hero() {
             Stress-Free, Data-Driven Car Buying Assistance
           </h1>
 
-          <p className="text-lg font-poppins tracking-widest mb-3 uppercase">
-            Save Thousands on Your Next Car
-          </p>
+ 
 
-          <p className="text-xl font-helvetica italic mb-8">
+          <p className="text-xl font-poppins tracking-widest uppercase mb-8">
             Let our Zen Guides find you a lightly used car at up to 30-50% off new car prices.
           </p>
 
@@ -54,9 +52,7 @@ export function Hero() {
               Schedule Your Free Consultation
             </CalendlyButton>
 
-            <Button to="tel:+18886516088" color="primary" size="lg">
-              Call Now: (888) 651-6088
-            </Button>
+
           </div>
         </div>
       </div>

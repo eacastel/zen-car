@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
+import { openCalendlyPopup } from "../utils/openCalendly";
 
 export default function Footer() {
   return (
@@ -11,27 +12,19 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Zen Car Buying</h3>
             <p className="text-secondary leading-relaxed">
-              Your trusted concierge for stress-free car purchases. Let our experts guide you to the best deals with personalized advice and expert strategies.
+              Your trusted concierge for stress-free car purchases. Let our Zen Guides guide you to the best deals with personalized advice and expert strategies.
             </p>
           </div>
 
           <div>
             <h4 className="font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li>
+            <li>
                 <Link
                   to="/pricing"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
-                  Get Started
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/faq"
-                  className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
-                >
-                  FAQ
+                  Pricing
                 </Link>
               </li>
               <li>
@@ -44,12 +37,34 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  to="/faq"
+                  className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  FAQ
+                </Link>
+              </li>
+
+              <li>
+                <Link
                   to="/contact"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   Contact
                 </Link>
               </li>
+              <li>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault(); // Prevent navigation
+                openCalendlyPopup();
+              }}
+              className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+              aria-label="Schedule a call with Zen Car Buying"
+            >
+              Get Started
+            </button>
+          </li>
             </ul>
           </div>
 

@@ -60,7 +60,7 @@ export default function Testimonials() {
         slidesToShow: 2,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 3000,
+        autoplaySpeed: 12000,
         arrows: true,
         prevArrow: <PrevArrow />,
         nextArrow: <NextArrow />,
@@ -75,7 +75,7 @@ export default function Testimonials() {
             <div className="container mx-auto px-10">
                 {/* ✅ Section Title */}
                 <h2 id="testimonials-heading" className="text-4xl font-medium text-accent mb-12">
-                    What Our <span className="text-accent">Happy Customers</span> Say
+                    What Our <span className="text-accent">Customers</span> Say
                 </h2>
 
                 {/* ✅ Slick Carousel Container */}

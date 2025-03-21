@@ -10,10 +10,10 @@ export default function CallToAction() {
       <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
         <h2
           id="cta-heading"
-          className="text-4xl md:text-5xl lg:text-6xl font-medium mb-6 leading-tight"
+          className="text-3xl md:text-4xl lg:text-5xl font-medium mb-6 leading-tight"
         >
-          Ready to Find Your{" "}
-          <span className="text-white">Perfect Car?</span>
+          Experience the joy of {" "}
+          <span className="text-white">compassionate car buying</span>
         </h2>
 
         <p className="text-lg md:text-xl mb-6">
@@ -22,7 +22,7 @@ export default function CallToAction() {
 
         <div className="inline-block">
           <Button to="/pricing" size="lg" color="primary">
-            Discover the Zen Experience
+            Schedule Your Free Consultation
           </Button>
         </div>
       </div>

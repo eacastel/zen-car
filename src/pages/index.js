@@ -48,7 +48,7 @@ const HomePage = () => {
       {[
         { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'Tailored suggestions based on your needs & budget.' },
         { title: 'Nationwide Vehicle Sourcing & Shipping', key: 'sourcing', desc: 'Find the best deals, no matter where you live.' },
-        { title: 'Purchase Assistance', key: 'negotiation', desc: 'We ensure you get the best price and stress-free buying.' },
+        { title: 'Stress Free Buying', key: 'negotiation', desc: 'We ensure you get the best price and stress-free buying.' },
       ].map((benefit, index) => (
         <div key={index} className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
           <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}
@@ -68,10 +68,10 @@ const HomePage = () => {
     </h2>
     <div className="grid md:grid-cols-1 lg:grid-cols-4 gap-12">
       {[
-        { title: 'Schedule Consultation', desc: 'Book your free 15-minute call to go over your budget, needs and preferences.', step: '1' },
-        { title: 'Get Recommendations', desc: 'Receive vehicle recommendations based on your input.', step: '2' },
+        { title: 'Schedule Consultation', desc: 'Book your free 15-minute call to go over your budget, and preferences.', step: '1' },
+        { title: 'Get Recommendations', desc: 'Receive a customized proposal with your recommendation.', step: '2' },
         { title: 'Review Inventory', desc: 'We locate and provide the best vehicles matching our recommendation.', step: '3' },
-        { title: 'Purchase Assistance', desc: 'Let our Zen Guides do the work so you don’t have to.', step: '4' },
+        { title: 'Purchase Assistance', desc: 'Let your Zen Guides do the work so you don’t have to.', step: '4' },
       ].map((step, index) => (
         <motion.div 
           key={index} 
