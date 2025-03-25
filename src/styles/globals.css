@@ -9,6 +9,8 @@ html, body {
   height: auto;                 /* Ensures full content height */
   overflow-y: visible;          /* Ensures body scrolling when necessary */
   overscroll-behavior: contain; /* Maintains bounce prevention */
+  overflow-x: hidden;
+  max-width: 100%; /* Ensures no content exceeds screen width */
 }
 
 

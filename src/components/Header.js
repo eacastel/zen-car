@@ -43,7 +43,7 @@ export default function Header() {
         {/* Logo (Left Side) */}
         <Link
           to="/"
-          className="z-50 flex-shrink-0"
+          className="z-50 flex-shrink-0 mr-6"
           style={{ width: "300px" }}
           aria-label="Go to Home Page"
         >
@@ -63,7 +63,7 @@ export default function Header() {
           {/* Phone Number */}
           <a
             href="tel:+18886516088"
-            className="flex items-center text-md xl:text-lg font-semibold text-primary hover:text-accent transition-colors whitespace-nowrap"
+            className="flex items-center text-md xl:text-lg font-semibold text-primary hover:text-accent transition-colors whitespace-nowrap mr-4"
             aria-label="Call Zen Car Buying at (888) 651-6088"
           >
             <svg
@@ -104,7 +104,7 @@ export default function Header() {
         </div>
 
         {/* Mobile Header: Add Phone Icon Next to Hamburger */}
-<div className="flex items-center gap-4 lg:hidden">
+<div className="flex items-center gap-6 lg:hidden">
   {/* Phone Number Icon */}
   <a
     href="tel:+18886516088"
