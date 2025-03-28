@@ -106,5 +106,21 @@ export const Head = () => (
     title="Zen Car Buying | Stress-Free Used Car Concierge"
     description="Save thousands on your next used car with expert guidance. Get personalized recommendations, sourcing, and negotiation help."
     pathname="/"
-  />
+  >
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Zen Car Buying",
+        "url": "https://zencarbuying.com",
+        "logo": "https://zencarbuying.com/logo.png",
+        "sameAs": [
+          "https://www.facebook.com/zencarbuying",
+          "https://www.instagram.com/zencarbuying"
+        ],
+        "description":
+          "Zen Car Buying helps you find luxury and lightly used cars at 50–70% off with expert concierge help."
+      })}
+    </script>
+  </Seo>
 )

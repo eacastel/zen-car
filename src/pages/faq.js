@@ -148,3 +148,31 @@ const FAQPage = () => {
 }
 
 export default FAQPage
+
+export const Head = ({ location }) => (
+  <Seo
+    title="Frequently Asked Questions (FAQ) - Zen Car Buying"
+    description="Get expert guidance on buying a used car. Discover how our car buying concierge service can help you find the best deals, source inventory nationwide, and avoid costly mistakes."
+    pathname={location.pathname}
+    schemaMarkup={{
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqData.map(({ question, answer }) => ({
+        "@type": "Question",
+        "name": question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": answer.map(block =>
+            block.type === "text"
+              ? block.content
+              : block.type === "list" || block.type === "ordered-list"
+              ? block.content.map(item =>
+                  typeof item === "string" ? item : `${item.label}: ${item.description}`
+                ).join(" ")
+              : ""
+          ).join(" ")
+        }
+      }))
+    }}
+  />
+)

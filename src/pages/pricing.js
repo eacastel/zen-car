@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import Seo from "../components/Seo";
 import CustomizeWizard from "../components/pricing-page/CustomizeWizard";
+import TestimonialsPricing from '../components/TestimonialsPricing'
 
 // Cached Stripe client using your publishable key
 
@@ -11,6 +12,7 @@ const Pricing = () => {
   return (
     <Layout>
       <CustomizeWizard />
+      <TestimonialsPricing />
     </Layout>
   );
 };
@@ -22,6 +24,7 @@ export const Head = () => {
     "@context": "https://schema.org",
     "@type": "Service",
     "serviceType": "Nationwide Car Buying Consultation and Assistance",
+    "serviceOutput": "Concierge-style used car buying support, including price negotiation, vehicle sourcing, and shipping coordination.",
     "provider": {
       "@type": "Organization",
       "name": "Zen Car Buying",
@@ -35,8 +38,27 @@ export const Head = () => {
       "priceCurrency": "USD",
       "price": "Varies",
       "availability": "https://schema.org/InStock"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Car Buying Packages",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Free 15-Minute Consultation",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Complete Concierge Service",
+          "price": "Varies",
+          "priceCurrency": "USD"
+        }
+      ]
     }
-  };
+  }
+  
 
   return (
     <>

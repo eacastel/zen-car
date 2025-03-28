@@ -86,7 +86,7 @@ export default function Testimonials() {
                                     <div className="flex flex-col items-center bg-white p-4 md:p-6 rounded-lg shadow-lg relative">
 
                                         {testimonial.note && (
-                                            <div className="px-2 mb-2 text-accent font-poppins tracking-widest text-xs uppercase">
+                                            <div className="px-2 mb-2 text-accent font-poppins tracking-widest text-md font-medium uppercase">
                                                 {testimonial.note}
                                             </div>
                                         )}

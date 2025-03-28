@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import CallToAction from '../components/CallToAction'
+import Seo from '../components/Seo'
 
 
 const BlogPost = ({ data }) => {
@@ -108,3 +109,43 @@ export const query = graphql`
 `;
 
 export default BlogPost;
+
+export const Head = ({ data, location }) => {
+    const { title, excerpt, featureImage } = data.contentfulBlogPost;
+  
+    const imageUrl = featureImage?.gatsbyImageData?.images?.fallback?.src
+      ? `https://zencarbuying.com${featureImage.gatsbyImageData.images.fallback.src}`
+      : null;
+  
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": location.href
+      },
+      "headline": title,
+      "description": excerpt,
+      ...(imageUrl && { "image": imageUrl }),
+      "publisher": {
+        "@type": "Organization",
+        "name": "Zen Car Buying",
+        "url": "https://zencarbuying.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://zencarbuying.com/icons/icon-512x512.png"
+        }
+      }
+    };
+  
+    return (
+      <Seo
+        title={title}
+        description={excerpt}
+        pathname={location.pathname}
+      >
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
+      </Seo>
+    );
+  };
+  

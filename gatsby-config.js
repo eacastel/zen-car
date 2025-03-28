@@ -4,9 +4,9 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Zen Car Buying`,
-    description: `Discover incredible deals on lightly used cars.`,
-    author: `@zencar`,
+    title: `Zen Car Buying | Expert Help for Lightly Used & Luxury Cars`,
+    description: `Zen Car Buying is your expert concierge for finding lightly used cars, luxury vehicles, and affordable deals nationwide. We simplify the process with a 4-step stress-free car buying system.`,
+    author: `@zencarbuying`,
     siteUrl: `https://zencarbuying.com`
   },
   plugins: [

@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import CalendlyButton from "../components/CalendlyButton";
-import Button from "../components/Button"; // Importing the existing Button component
+
 
 export function Hero() {
   const data = useStaticQuery(graphql`
@@ -27,7 +27,7 @@ export function Hero() {
       {/* Background Image */}
       <GatsbyImage
         image={heroImage}
-        alt="Zen Car Buying - Stress-Free Car Buying"
+        alt="Luxury used car parked in a cityscape, ideal for affordable and premium car buying with Zen Car Buying"
         className="w-full h-full object-cover"
       />
 

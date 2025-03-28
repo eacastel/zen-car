@@ -168,9 +168,9 @@ export const query = graphql`
 `
 
 export const Head = () => (
-  <Seo
-    title="About Zen Car Buying | Expert Used Car Buying Concierge"
-    description="Looking for a trusted used car buying concierge? Zen Car Buying helps you find luxury used cars and lightly used vehicles at 50-70% off new car prices. Schedule a free consultation today."
-    pathname="/about"
-  />
+     <Seo
+       title="About Zen Car Buying | Expert Used Car Buying Concierge"
+       description="Zen Car Buying is your trusted partner for luxury used cars, lightly used vehicles, and out-of-state car sourcing. Our expert Zen Guides help first-time buyers and savvy car shoppers save thousands — stress-free."
+       pathname="/about"
+     />
 )

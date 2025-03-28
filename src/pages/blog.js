@@ -79,15 +79,15 @@ const BlogPage = ({ data }) => {
 
 export const Head = ({ location }) => (
   <Seo
-    title="Latest Articles - Zen Car Buying"
-    description="Discover expert tips, car buying strategies, and industry insights on the Zen Car Buying blog. Stay informed and make smarter vehicle purchases."
+    title="Used Car Buying Tips & Guides | Zen Car Buying Blog"
+    description="Explore expert car buying tips, market insights, and strategies from Zen Car Buying. Learn how to save on used cars, understand financing, warranties, and more."
     pathname={location.pathname}
     schemaMarkup={{
       "@context": "https://schema.org",
       "@type": "Blog",
       "name": "Zen Car Buying Blog",
       "description":
-        "Expert advice and guides to help you make informed car buying decisions.",
+         "Used car buying strategies, cost-saving guides, and expert advice from Zen Car Buying.",
       "url": "https://zencarbuying.com/blog",
       "publisher": {
         "@type": "Organization",
