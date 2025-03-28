@@ -1,8 +1,27 @@
 import React, { useState } from "react";
 import { FaCheckCircle, FaRegCircle, FaCheckSquare, FaRegSquare } from "react-icons/fa";
 import Button from "../Button";
+import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 const CustomizeWizard = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      logo: file(relativePath: { eq: "zen-logo-lotus.png" }) {
+        childImageSharp {
+          gatsbyImageData(
+            width: 150
+            placeholder: BLURRED
+            formats: [AUTO, WEBP]
+            quality: 90
+          )
+        }
+      }
+    }
+  `)
+
+const logoImage = getImage(data.logo)
+  
   // Updated research options: 1 Car: $250, 2 Cars: $350, 3 Cars: $450.
   const researchOptions = [
     {
@@ -126,23 +145,24 @@ const CustomizeWizard = () => {
       <section className="bg-secondary py-12">
         <div className="container mx-auto px-4 md:px-2 md:max-w-[1280px] lg:px-6 lg:max-w-[1280px]">
 
-          <div className="">
-            <h2
-              id="customize-your-package"
-              className="text-xl sm:text-4xl md:text-4xl font-medium text-accent mb-4 text-center"
-            >
-              Prefer a tailored solution?
-            </h2>
-            <p className="text-lg md:text-xl mx-auto max-w-3xl pb-8 mt-2 text-center text-primary">
-              Customize your package by selecting the services you need and enjoy our complimentary 15 minute consultation with a Zen Guide
-            </p>
-          </div>
+
 
           <div className=" mx-4 md:mx-2  lg:mx-6 lg:max-w-[1280px] rounded-2xl shadow-lg relative border-2 border-primary">
             <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
-              <h2 className="text-3xl font-medium text-primary mb-6">
+              <GatsbyImage
+              image={logoImage}
+              alt="Zen Car Buying Logo"
+              className="w-auto mx-auto"
+              imgStyle={{ objectFit: 'contain', maxWidth: '150px' }}
+            />
+
+            <h2 className="text-3xl font-medium text-primary mt-4 mb-4 uppercase tracking-wider font-pirulen">
                 Customize Your Package
               </h2>
+
+              <p className="text-lg md:text-xl mx-auto max-w-3xl pb-8 mt-2 text-center text-primary">
+Choose all services and get the full Zen Experience, along a special $200 discount for the most complete, all‑in‑one solution for a stress‑free car buying journey. 
+            </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Column 1: Research Recommendation */}

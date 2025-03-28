@@ -31,12 +31,12 @@ export default function AboutPage({ data }) {
         <div>
           <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
             Finding the perfect used car can be challenging. 
-            At <strong>Zen Car Buying</strong>, {' '}
-            <strong>used car buying concierge</strong> service ensures you get the best value without the stress of traditional car buying. Our modern approach takes advantage of systems and tools so you don’t have to step into a single dealership!.
+            At <strong>Zen Car Buying</strong>, we are a {' '}
+            <strong>used car buying concierge</strong> service that solves for that using years of experience buying used cars. Our Zen Guides ensure you get the best value without the stress of traditional car buying. And with our modern approach we take advantage of systems and tools so you don’t have to step into a single dealership!
           </p>
           <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
-            We specialize in sourcing <strong>lightly used cars</strong> and <strong>luxury used cars</strong> at incredible savings — often at <strong>50-70% less</strong> than their original sticker price.  
-            Imagine owning a <strong>$50,000 BMW 3 series</strong> for only $30,000 or a <strong>$90,000 Audi e-tron electric SUV</strong> for just $40,000.
+            We specialize in sourcing <strong>lightly used cars</strong> and <strong>luxury used cars</strong> at incredible savings — often at <strong>50-70% less</strong> than their original new car sticker price.  
+            Imagine owning a lightly used <strong>$50,000 BMW 3 series</strong> for only $30,000 or a <strong>$90,000 Audi e-tron electric SUV</strong> for just $40,000.
           </p>
           <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
             Our Zen Guides offer professional guidance at every step, 
@@ -63,7 +63,7 @@ export default function AboutPage({ data }) {
       </p>
       <ul className="list-disc pl-5 space-y-2 text-base md:text-lg text-primary mb-8">
         <li>Model year changes that alter styling, standard features and options.</li>
-        <li>Multiple trim levels with varying equipment.</li>
+        <li>Multiple trim levels with varying equipment that changes every year.</li>
         <li>Vehicle history — the used car market is filled with less desirable vehicles such as cars that were previously used in rental fleets!</li>
       </ul>
 
@@ -81,11 +81,11 @@ export default function AboutPage({ data }) {
     aria-label="Schedule a free 15-minute consultation"
   > free 15-minute consultation  </button> which sets the foundation for your Zen Guide to deliver vehicle recommendations in an easy to read proposal format, inventory sourcing, and purchase assistance. We remove the stress and simplify the complex world of car buying. 
 </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 mt-12 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 mt-12 gap-6">
             {[  
-              { step: '1', title: 'Schedule Consultation', desc: 'Book your free 15-minute call to go over your budget, and preferences.' },
+              { step: '1', title: 'Schedule Consultation', desc: 'Book your free 15-minute call to go over your budget and preferences.' },
               { step: '2', title: 'Get Recommendations', desc: 'Receive a customized proposal with your recommendation.' },
-              { step: '3', title: 'Review Inventory', desc: 'We locate and provide the best vehicles matching our recommendation.' },
+              { step: '3', title: 'Review Inventory', desc: 'We locate and provide the best vehicles matching your recommendation.' },
               { step: '4', title: 'Purchase Assistance', desc: 'Let your Zen Guides do the work so you don’t have to.' },
             ].map((item, index) => (
               <motion.div 

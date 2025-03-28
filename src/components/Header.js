@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Squash as Hamburger } from "hamburger-react";
-import ButtonHeader from "../components/CalendlyButtonHeader";
 import CalendlyButtonHeader from "../components/CalendlyButtonHeader";
 
 export default function Header() {
@@ -26,9 +25,10 @@ export default function Header() {
   const logoImage = getImage(data.logo);
 
   const navItems = [
-    { name: "Pricing", path: "/pricing" },
+
     { name: "About", path: "/about" },
     { name: "FAQ", path: "/faq" },
+    { name: "Pricing", path: "/pricing" },
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },
   ];
@@ -63,22 +63,10 @@ export default function Header() {
           {/* Phone Number */}
           <a
             href="tel:+18886516088"
-            className="flex items-center text-md xl:text-lg font-semibold text-primary hover:text-accent transition-colors whitespace-nowrap mr-4"
+            className="flex items-center text-sm xl:text-base font-bold text-primary hover:text-accent transition-colors whitespace-nowrap mr-2"
             aria-label="Call Zen Car Buying at (888) 651-6088"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              stroke="currentColor"
-              className="w-5 h-5 mr-1"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
-              />
-            </svg>
+
             (888) 651-6088
           </a>
 
@@ -102,30 +90,7 @@ export default function Header() {
             </CalendlyButtonHeader>
           </div>
         </div>
-
-        {/* Mobile Header: Add Phone Icon Next to Hamburger */}
-<div className="flex items-center gap-6 lg:hidden">
-  {/* Phone Number Icon */}
-  <a
-    href="tel:+18886516088"
-    className="text-primary hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-    aria-label="Call Zen Car Buying at (888) 651-6088"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 20 24"
-      fill="currentColor"
-      stroke="currentColor"
-      className="w-6 h-6"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
-      />
-    </svg>
-  </a>
-
+        <div className="flex items-center lg:hidden">
   {/* Mobile Hamburger Menu */}
           <button
             aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -152,9 +117,9 @@ export default function Header() {
 
             {/* Mobile "Get Started" Button - First for CTA Priority */}
             <li className="mt-4 w-full text-center">
-              <ButtonHeader onClick="/pricing" size="lg" color="accent">
-                Get Started
-              </ButtonHeader>
+              <CalendlyButtonHeader size="lg" color="accent">
+              Get Started
+            </CalendlyButtonHeader>
             </li>
 
             

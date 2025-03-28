@@ -1,49 +1,15 @@
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import { getImage } from "gatsby-plugin-image";
 import Layout from "../components/Layout";
 import Seo from "../components/Seo";
-import ZenExperienceSection from "../components/pricing-page/ZenExperienceSection";
 import CustomizeWizard from "../components/pricing-page/CustomizeWizard";
-import { loadStripe } from "@stripe/stripe-js";
 
 // Cached Stripe client using your publishable key
-let stripePromise;
-const getStripe = () => {
-  if (!stripePromise) {
-    stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLIC_KEY);
-  }
-  return stripePromise;
-};
+
 
 const Pricing = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      zenExperience: file(relativePath: { eq: "hyundai2.png" }) {
-        childImageSharp {
-          gatsbyImageData(width: 600, placeholder: BLURRED, formats: [AUTO, WEBP])
-        }
-      }
-      inventory: file(relativePath: { eq: "hyundai.png" }) {
-        childImageSharp {
-          gatsbyImageData(width: 400, placeholder: BLURRED, formats: [AUTO, WEBP])
-        }
-      }
-      purchase: file(relativePath: { eq: "kia1.png" }) {
-        childImageSharp {
-          gatsbyImageData(width: 400, placeholder: BLURRED, formats: [AUTO, WEBP])
-        }
-      }
-    }
-  `);
-
-  const zenImg = getImage(data.zenExperience);
-  const siteUrl = process.env.GATSBY_SITE_URL;
 
   return (
     <Layout>
-      
-      <ZenExperienceSection zenImg={zenImg} siteUrl={siteUrl} getStripe={getStripe} />
       <CustomizeWizard />
     </Layout>
   );
