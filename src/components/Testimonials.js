@@ -7,7 +7,6 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa'
 
-
 // Custom arrow components
 const PrevArrow = ({ onClick }) => (
     <button
@@ -30,7 +29,6 @@ const NextArrow = ({ onClick }) => (
 )
 
 export default function Testimonials() {
-    // **Fetch images**
     const data = useStaticQuery(graphql`
         query {
             allFile(filter: { sourceInstanceName: { eq: "images" } }) {
@@ -38,8 +36,8 @@ export default function Testimonials() {
                     node {
                         childImageSharp {
                             gatsbyImageData(
-                                width: 300
-                                height: 200
+                                width: 600
+                                height: 400
                                 placeholder: BLURRED
                                 formats: [AUTO, WEBP]
                                 transformOptions: { cropFocus: CENTER }
@@ -52,7 +50,6 @@ export default function Testimonials() {
         }
     `)
 
-    // **Slick Slider Settings**
     const settings = {
         dots: false,
         infinite: true,
@@ -62,7 +59,7 @@ export default function Testimonials() {
         autoplay: true,
         autoplaySpeed: 12000,
         arrows: true,
-        prevArrow: <PrevArrow />,
+        prevArrow: <PrevArrow />, 
         nextArrow: <NextArrow />,
         responsive: [
             { breakpoint: 1024, settings: { slidesToShow: 2, slidesToScroll: 1 } },
@@ -72,63 +69,56 @@ export default function Testimonials() {
 
     return (
         <section className="py-20 bg-secondary text-center" aria-labelledby="testimonials-heading">
-            <div className="container mx-auto px-10">
-                {/* ✅ Section Title */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 id="testimonials-heading" className="text-4xl font-medium text-accent mb-12">
                     What Our <span className="text-accent">Customers</span> Say
                 </h2>
 
-                {/* ✅ Slick Carousel Container */}
                 <div className="relative w-full max-w-6xl mx-auto">
                     <Slider {...settings}>
-                    {testimonialsData.map((testimonial, index) => {
-    const image = getImage(data.allFile.edges.find(edge =>
-        testimonial.image.includes(edge.node.name)
-    )?.node.childImageSharp.gatsbyImageData)
+                        {testimonialsData.map((testimonial, index) => {
+                            const image = getImage(data.allFile.edges.find(edge =>
+                                testimonial.image.includes(edge.node.name)
+                            )?.node.childImageSharp.gatsbyImageData)
 
-    return (
-        <div key={index} className="px-4">
-            <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg relative">
-                
+                            return (
+                                <div key={index} className="px-2 md:px-4">
+                                    <div className="flex flex-col items-center bg-white p-4 md:p-6 rounded-lg shadow-lg relative">
 
-                {/* ✅ Profile Image */}
-                {image ? (
-                    <GatsbyImage
-                        image={image}
-                        alt={`Photo of ${testimonial.name}`}
-                        className="rounded-md mb-4 w-[300px] h-[200px] object-cover object-center"
-                    />
-                ) : (
-                    <div className="w-24 h-24 bg-gray-300 rounded-full mb-4" />
-                )}
+                                        {testimonial.note && (
+                                            <div className="px-2 mb-2 text-accent font-poppins tracking-widest text-xs uppercase">
+                                                {testimonial.note}
+                                            </div>
+                                        )}
 
-                {/* ✅ Savings Note (Above Image) */}
-                {testimonial.note && (
-                    <div className=" top-0 mt-0 px-4 my-4 text-accent font-poppins  tracking-widest mb-3 uppercase">
-                        {testimonial.note}
-                    </div>
-                )}
+                                        {image ? (
+                                            <div className="w-full overflow-hidden rounded-md mb-4">
+                                                <GatsbyImage
+                                                    image={image}
+                                                    alt={`Photo of ${testimonial.name}`}
+                                                    className="rounded-md mb-4 w-full max-w-[400px] h-auto object-cover"
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div className="w-24 h-24 bg-gray-300 rounded-full mb-4" />
+                                        )}
 
-                {/* ✅ Quote */}
-                <p className="text-l italic text-gray-700">"{testimonial.quote}"</p>
+                                        <p className="text-base italic text-gray-700 px-2">"{testimonial.quote}"</p>
 
-                {/* ✅ Star Rating */}
-                <div className="flex justify-center mt-3" aria-label={`Rated ${testimonial.rating} stars`}>
-                    {[...Array(5)].map((_, i) => (
-                        <FaStar key={i} className={`text-accent text-lg ${i < 5 ? '' : 'opacity-50'}`} />
-                    ))}
-                </div>
+                                        <div className="flex justify-center mt-3" aria-label={`Rated ${testimonial.rating} stars`}>
+                                            {[...Array(5)].map((_, i) => (
+                                                <FaStar key={i} className={`text-accent text-lg ${i < 5 ? '' : 'opacity-50'}`} />
+                                            ))}
+                                        </div>
 
-                {/* ✅ Name */}
-                <div className="mt-4 text-lg font-semibold text-primary">{testimonial.name}</div>
-            </div>
-        </div>
-    )
-})}
+                                        <div className="mt-4 text-lg font-semibold text-primary">{testimonial.name}</div>
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </Slider>
                 </div>
 
-                {/* ✅ SEO Schema Markup for Reviews */}
                 <script type="application/ld+json">
                     {JSON.stringify({
                         "@context": "https://schema.org",

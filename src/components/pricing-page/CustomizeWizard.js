@@ -160,8 +160,8 @@ const logoImage = getImage(data.logo)
                 Customize Your Package
               </h2>
 
-              <p className="text-lg md:text-xl mx-auto max-w-3xl pb-8 mt-2 text-center text-primary">
-Choose all services and get the full Zen Experience, along a special $200 discount for the most complete, all‑in‑one solution for a stress‑free car buying journey. 
+              <p className="text-lg md:text-xl mx-auto max-w-4xl pb-8 mt-2 text-center text-primary">
+              Choose all services to unlock the full Zen Experience — and enjoy a special $200 discount on our most complete, all‑in‑one solution for a truly stress‑free car buying journey. 
             </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
