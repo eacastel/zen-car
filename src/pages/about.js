@@ -40,7 +40,15 @@ export default function AboutPage({ data }) {
           </p>
           <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
             Our Zen Guides offer professional guidance at every step, 
-            ensuring you secure a top-quality vehicle with confidence.
+            ensuring you secure a top-quality vehicle with confidence. <button
+    type="button"
+    onClick={(e) => {
+      e.preventDefault();
+      openCalendlyPopup();
+    }}
+    className="text-accent underline cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent"
+    aria-label="Schedule a free 15-minute consultation"
+  > Click here</button> to get started.
           </p>
         </div>
 
@@ -144,7 +152,15 @@ export default function AboutPage({ data }) {
           Whether you're buying your dream BMW or searching for the <strong>best used cars under $30,000</strong>, we’ve got you covered.
         </p>
         <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
-          Let us guide you to the perfect vehicle at the perfect price.
+          Let us guide you to the perfect vehicle at the perfect price. <button
+    type="button"
+    onClick={(e) => {
+      e.preventDefault();
+      openCalendlyPopup();
+    }}
+    className="text-accent underline cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent"
+    aria-label="Schedule a free 15-minute consultation"
+  > Click here</button> to schedule your free 15 minute consultation.
         </p>
       </section>
       <CallToAction />

@@ -2,7 +2,9 @@ import * as React from 'react'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import CalendlyButton from '../components/CalendlyButton'
-import Button from '../components/Button' // Added for 'Get Started' Button
+import Button from '../components/Button' 
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { useStaticQuery, graphql } from 'gatsby'
 
 
 // SVG Icons
@@ -45,7 +47,26 @@ const EmailIcon = () => (
   </svg>
 )
 
+
+
 export default function ContactPage() {
+  const { bmwMountain } = useStaticQuery(graphql`
+    query {
+      bmwMountain: file(relativePath: { eq: "bmw-mountain.png" }) {
+        childImageSharp {
+          gatsbyImageData(
+          layout: CONSTRAINED
+          width: 900
+          height:400
+          placeholder: BLURRED
+          transformOptions: { cropFocus: CENTER }
+          formats: [AUTO, WEBP]
+          )
+        }
+      }
+    }
+  `)
+  const bmwImage = getImage(bmwMountain)
   return (
     <Layout>
       <section className="container mx-auto px-4 md:px-2 lg:px-6 py-16">
@@ -104,15 +125,55 @@ export default function ContactPage() {
             Ready To Buy
           </Button>
         </div>
+        {bmwImage && (
+  <div className="mt-6 flex justify-center">
+    <GatsbyImage
+      image={bmwImage}
+      alt="BMW parked with a scenic mountain background"
+      className="rounded-lg shadow-md max-w-3xl w-full"
+    />
+  </div>
+)}
       </section>
     </Layout>
   )
 }
 
 export const Head = () => (
-  <Seo
-    title="Contact Zen Car Buying | Free 15-Minute Consultation"
-    description="Get in touch with Zen Car Buying. Call, text, or email us for expert car-buying advice, or schedule your free 15-minute consultation today."
-    pathname="/contact"
-  />
+  <>
+    <Seo
+      title="Contact Zen Car Buying | Free 15-Minute Consultation"
+      description="Get in touch with Zen Car Buying. Call, text, or email us for expert car-buying advice, or schedule your free 15-minute consultation today."
+      pathname="/contact"
+      image="https://zencarbuying.com/images/contact-hero.jpg" // adjust to your actual image path
+    />
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact Zen Car Buying",
+        "url": "https://zencarbuying.com/contact",
+        "mainEntityOfPage": "https://zencarbuying.com/contact",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Zen Car Buying",
+          "url": "https://zencarbuying.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://zencarbuying.com/logo.png"
+          }
+        },
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+1-888-651-6088",
+            "contactType": "Customer Support",
+            "areaServed": "US",
+            "availableLanguage": "English"
+          }
+        ]
+      })}
+    </script>
+  </>
 )
+
