@@ -10,10 +10,10 @@ export default function CallToAction() {
       <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
         <h2
           id="cta-heading"
-          className="text-3xl md:text-4xl lg:text-5xl font-medium mb-6 leading-tight"
+          className="text-3xl !leading-snug md:text-4xl lg:text-5xl font-medium mb-6 "
         >
-          Experience the joy of {" "}
-          <span className="text-white">compassionate car buying</span>
+          "Experience the joy of {" "}
+          <span className="text-white">compassionate car buying."</span>
         </h2>
 
         <p className="text-lg md:text-xl mb-6">
