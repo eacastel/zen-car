@@ -13,15 +13,18 @@ const lastScrollY = useRef(0);
 useEffect(() => {
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
-
-    if (currentScrollY > lastScrollY.current) {
+  
+    if (currentScrollY <= 10) {
+      // near the top of the page: always show
+      setShowHeader(true);
+    } else if (currentScrollY > lastScrollY.current) {
       // scrolling down
       setShowHeader(false);
     } else if (currentScrollY < lastScrollY.current) {
       // scrolling up
       setShowHeader(true);
     }
-
+  
     lastScrollY.current = currentScrollY;
   };
 
