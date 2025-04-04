@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Squash as Hamburger } from "hamburger-react";
@@ -6,6 +6,31 @@ import CalendlyButtonHeader from "../components/CalendlyButtonHeader";
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
+
+  const [showHeader, setShowHeader] = useState(true);
+const lastScrollY = useRef(0);
+
+useEffect(() => {
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY.current) {
+      // scrolling down
+      setShowHeader(false);
+    } else if (currentScrollY < lastScrollY.current) {
+      // scrolling up
+      setShowHeader(true);
+    }
+
+    lastScrollY.current = currentScrollY;
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
+
+
 
   const data = useStaticQuery(graphql`
     query {
@@ -34,7 +59,11 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white backdrop-blur-md sticky top-0 z-50 border-b border-primary">
+<header
+  className={`bg-white backdrop-blur-md fixed top-0 left-0 w-full z-50 border-b border-primary transition-transform duration-300 ease-in-out transform ${
+    showHeader ? "translate-y-0" : "-translate-y-full"
+  }`}
+>
       <nav
         className="container mx-auto px-4 py-3 flex items-center justify-between"
         role="navigation"
@@ -91,7 +120,7 @@ export default function Header() {
           </div>
         </div>
         <div className="flex items-center lg:hidden">
-  {/* Mobile Hamburger Menu */}
+          {/* Mobile Hamburger Menu */}
           <button
             aria-label={isOpen ? "Close menu" : "Open menu"}
             className="focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
@@ -108,9 +137,8 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         <div
-          className={`${
-            isOpen ? "block" : "hidden"
-          } lg:hidden absolute top-full left-0 right-0 bg-primary z-40 shadow-lg`}
+          className={`${isOpen ? "block" : "hidden"
+            } lg:hidden absolute top-full left-0 right-0 bg-primary z-40 shadow-lg`}
           aria-hidden={!isOpen}
         >
           <ul className="flex flex-col items-center py-4 space-y-4">
@@ -118,11 +146,11 @@ export default function Header() {
             {/* Mobile "Get Started" Button - First for CTA Priority */}
             <li className="mt-4 w-full text-center">
               <CalendlyButtonHeader size="lg" color="accent">
-              Get Started
-            </CalendlyButtonHeader>
+                Get Started
+              </CalendlyButtonHeader>
             </li>
 
-            
+
 
             {/* Navigation Links */}
             {navItems.map((item) => (

@@ -4,7 +4,6 @@ import Seo from "../components/Seo"
 import faqData from "../data/faqData.json"
 import { motion, AnimatePresence } from "framer-motion"
 import { openCalendlyPopup } from "../utils/openCalendly"
-import CallToAction from '../components/CallToAction'
 
 const FAQPage = () => {
   const [openIndex, setOpenIndex] = useState(null)
@@ -78,7 +77,7 @@ const FAQPage = () => {
                 onClick={() => toggleFAQ(index)}
                 aria-expanded={openIndex === index}
               >
-                {question}
+                <span className="inline-block align-middle pr-2">Q:</span>{question}
               </motion.button>
 
               <AnimatePresence initial={false}>
@@ -88,7 +87,7 @@ const FAQPage = () => {
                     itemscope
                     itemprop="acceptedAnswer"
                     itemtype="https://schema.org/Answer"
-                    className="mt-2 text-primary space-y-4"
+                    className="mt-2 text-primary space-y-4 pl-4 border-l-4 border-accent"
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
@@ -106,7 +105,7 @@ const FAQPage = () => {
 
                       if (block.type === "list") {
                         return (
-                          <ul key={idx} className="list-disc pl-5 space-y-2">
+                          <ul key={idx} className="list-disc pl-6 space-y-2">
                             {block.content.map((item, listIdx) => (
                               <li
                                 key={listIdx}
@@ -121,7 +120,7 @@ const FAQPage = () => {
                         return (
                           <ol 
                             key={idx} 
-                            className="list-decimal pl-5 space-y-2 marker:text-primary font-bold"
+                            className="list-decimal pl-6 space-y-2 marker:text-primary font-bold"
                           >
                             {block.content.map((item, listIdx) => (
                               <li key={listIdx} className="text-primary">
@@ -144,7 +143,6 @@ const FAQPage = () => {
           ))}
         </div>
       </section>
-      <CallToAction />
     </Layout>
   )
 }
