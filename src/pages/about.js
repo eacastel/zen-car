@@ -89,7 +89,7 @@ export default function AboutPage({ data }) {
     aria-label="Schedule a free 15-minute consultation"
   > free 15-minute consultation  </button> which sets the foundation for your Zen Guide to deliver vehicle recommendations in an easy to read proposal format, inventory sourcing, and purchase assistance. We remove the stress and simplify the complex world of car buying. 
 </p>
-          <div className="grid grid-cols-2 lg:grid-cols-4 mt-12 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 mt-12 gap-6">
             {[  
               { step: '1', title: 'Schedule Consultation', desc: 'Book your free 15-minute call to go over your budget and preferences.' },
               { step: '2', title: 'Get Recommendations', desc: 'Receive a customized proposal with your recommendation.' },

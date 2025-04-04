@@ -143,11 +143,11 @@ const logoImage = getImage(data.logo)
   return (
     <main>
       <section className="bg-secondary py-12">
-        <div className="container mx-auto px-4 md:px-2 md:max-w-[1280px] lg:px-6 lg:max-w-[1280px]">
+        <div className="container mx-auto px-0 md:px-2 md:max-w-[1280px] lg:px-6 lg:max-w-[1280px]">
 
 
 
-          <div className=" mx-4 md:mx-2  lg:mx-6 lg:max-w-[1280px] rounded-2xl shadow-lg relative border-2 border-primary">
+          <div className=" mx-1 md:mx-2  lg:mx-6 lg:max-w-[1280px] rounded-2xl shadow-lg relative border-2 border-primary">
             <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
               <GatsbyImage
               image={logoImage}

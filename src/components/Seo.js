@@ -13,7 +13,7 @@ const Seo = ({ title, description, pathname, children }) => {
             siteUrl
           }
         }
-        logo: file(relativePath: { eq: "zen-car-buying-logo-full-color.png" }) {
+        logo: file(relativePath: { eq: "zen-car-buying-logo.png" }) {
           publicURL
         }
       }
