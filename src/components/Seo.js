@@ -23,7 +23,7 @@ const Seo = ({ title, description, pathname, children }) => {
   const metaTitle = title || site.siteMetadata.title
   const metaDescription = description || site.siteMetadata.description
   const canonical = pathname ? `${site.siteMetadata.siteUrl}${pathname}` : null
-  const logoUrl = `${site.siteMetadata.siteUrl}${logo.publicURL}`
+  const logoUrl = `${site.siteMetadata.siteUrl}/images/zen-car-buying-logo.png`;
 
   return (
     <>
