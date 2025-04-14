@@ -34,7 +34,7 @@ const Seo = ({ title, description, image, pathname, children }) => {
     name: "Zen Car Buying",
     description: defaultDescription,
     url: siteUrl,
-    logo: `${siteUrl}/images/zen-car-buying-logo.png`,
+    logo: `${siteUrl}/zen-car-buying-logo.png`,
     image: metaImage,
     priceRange: "$$",
     areaServed: "US",
@@ -42,9 +42,8 @@ const Seo = ({ title, description, image, pathname, children }) => {
     serviceType: "Car Buying Concierge",
     "sameAs": [
       "https://www.facebook.com/zencarbuying",
-      "https://twitter.com/zencarbuying",
       "https://www.linkedin.com/company/zencarbuying",
-      "https://www.yelp.com/biz/zen-car-buying"
+      "https://www.yelp.com/biz/zencarbuying"
     ],
     aggregateRating: {
       "@type": "AggregateRating",
@@ -80,12 +79,11 @@ const Seo = ({ title, description, image, pathname, children }) => {
       {/* Open Graph (Facebook, LinkedIn) */}
       <meta property="og:title" content={metaTitle} />
       <meta property="og:description" content={metaDescription} />
-      <meta property="og:image" content={metaImage} />
       <meta property="og:url" content={url} />
       <meta property="og:type" content="website" />
       <meta
         property="og:image:alt"
-        content="Zen Car Buying | Nationwide Used Car Concierge"
+        content="Zen Car Buying | Stress-Free Nationwide Concierge Service for New, Lightly Used & Luxury Cars"
       />
 
       {/* Twitter Card */}
