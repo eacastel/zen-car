@@ -378,7 +378,7 @@ const CustomizeWizard = () => {
                           <span className="text-sm text-gray-700">
                             I agree to the{" "}
                             <a
-                              href="/terms-of-service"
+                              href="/terms-and-conditions"
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-primary underline hover:text-accent"
