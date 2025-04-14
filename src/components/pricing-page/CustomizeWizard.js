@@ -124,16 +124,16 @@ const CustomizeWizard = () => {
 
   return (
     <main>
-      <section className="bg-secondary py-12">
+      <section className="bg-secondary py-6 md:py-12">
         <div className="container mx-auto px-0 md:px-2 md:max-w-[1280px] lg:px-6 lg:max-w-[1280px]">
 
 
 
-          <div className=" mx-1 md:mx-2  lg:mx-6 lg:max-w-[1280px] rounded-2xl shadow-lg relative border-2 border-primary">
+          <div className="mx-1 md:mx-2 lg:mx-6 lg:max-w-[1280px] rounded-2xl shadow-lg relative border-2 border-primary">
             <div className="bg-white p-4 md:p-8 lg:p-12 rounded-2xl shadow-lg text-center">
 
 
-              <h2 className="text-3xl font-medium text-primary mt-4 mb-4 uppercase tracking-wider font-pirulen">
+              <h2 className="text-3xl font-medium text-primary md:mt-4 mb-4 uppercase tracking-wider font-pirulen">
                 Customize Your Package
               </h2>
 
