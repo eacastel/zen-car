@@ -69,7 +69,7 @@ module.exports = {
         theme_color: `#F99F1B`, 
         display: `minimal-ui`,
         icon: `src/images/zen-car-buying-logo.png`, 
-        include_favicon: false,
+        include_favicon: true,
       },
     },
     {
@@ -92,7 +92,7 @@ module.exports = {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
         host: "https://zencarbuying.com",
-        sitemap: "https://zencarbuying.com/sitemap.xml",
+        sitemap: "https://zencarbuying.com/sitemap-0.xml",
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
