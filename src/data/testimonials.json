@@ -1,31 +1,23 @@
 [
-    {
-      "name": "Allan --2024 Hyundai Ioniq 6",
-      "quote": "My Zen Guide helped me navigate the confusing EV marketplace with ease. I couldn’t be happier with my new Ioniq 6.",
-      "image": "Allan-A.jpeg",
-      "rating": "⭐⭐⭐⭐⭐",
-      "note": "I saved more than 20% off of the MSRP"
-    },
-    {
-      "name": "Andrew --2019 Audi eTron Presitge",
-      "quote": "I was shopping for the new Cadillac Lyriq electric SUV. The lease payments were crazy high! I reached out to Zen Car Buying to see if they could help and they turned me onto the idea of purchasing a slightly used luxury SUV EV. My Zen Guide educated me on the EV market and why buying used is a smart move. I couldn't be happier with my eTron, it even has massaging seats!",
-      "image": "andy-zen-car-buying.jpeg",
-      "rating": "⭐⭐⭐⭐⭐",
-      "note": "I love this SUV"
-    },
-    {
-      "name": "Vicky --2025 Kia Soul",
-      "quote": "I had an amazing experience with Zen Car Buying—I never knew a car concierge service like this existed! As a senior, buying a car can feel overwhelming, but they made it completely stress-free. I was looking for a Kia Soul, and they sourced great options, coordinated with dealerships to get photos, videos, and walkthroughs, and negotiated an excellent deal. They even helped process all the paperwork and delivered the car right to me. Their white glove service was professional, patient, and incredibly helpful. I love my new Kia Soul and truly appreciate how Zen Car Buying made the process simple, smooth, and enjoyable. Highly recommend!",
-      "rating": "⭐⭐⭐⭐⭐",
-      "note": "Stress-Free, White Glove Car Concierge Service for Seniors and Everyone!"
-    },
-    {
-      "name": "Bart --2021 BMW 330xi",
-      "quote": "As a first time buyer of a BMW, I found the options to be confusing. Packages with different options, model year changes in which some options became standard. I knew what car and options I wanted, so my Zen Guide researched the vehicles to make sure I got exactly that. I highly recommend Zen Car Buying!",
-      "image": "bart-zen-car-buying.jpeg",
-      "rating": "⭐⭐⭐⭐⭐",
-      "note": "Such an awesome car!"
-    }
-
-  ]
-  
+  {
+    "name": "Allan --2024 Hyundai Ioniq 6",
+    "quote": "My Zen Guide helped me navigate the confusing EV marketplace with ease. I couldn’t be happier with my new Ioniq 6.",
+    "image": "Allan-A.jpeg",
+    "rating": "⭐⭐⭐⭐⭐",
+    "note": "I saved more than 20% off of the MSRP"
+  },
+  {
+    "name": "Andrew --2019 Audi eTron Presitge",
+    "quote": "I was shopping for the new Cadillac Lyriq electric SUV. The lease payments were crazy high! I reached out to Zen Car Buying to see if they could help and they turned me onto the idea of purchasing a slightly used luxury SUV EV. My Zen Guide educated me on the EV market and why buying used is a smart move. I couldn't be happier with my eTron, it even has massaging seats!",
+    "image": "andy-zen-car-buying.jpeg",
+    "rating": "⭐⭐⭐⭐⭐",
+    "note": "I love this SUV"
+  },
+  {
+    "name": "Bart --2021 BMW 330xi",
+    "quote": "As a first time buyer of a BMW, I found the options to be confusing. Packages with different options, model year changes in which some options became standard. I knew what car and options I wanted, so my Zen Guide researched the vehicles to make sure I got exactly that. I highly recommend Zen Car Buying!",
+    "image": "bart-zen-car-buying.jpeg",
+    "rating": "⭐⭐⭐⭐⭐",
+    "note": "Such an awesome car!"
+  }
+]

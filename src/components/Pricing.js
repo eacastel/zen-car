@@ -1,9 +1,6 @@
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import { getImage } from "gatsby-plugin-image";
 import Layout from "../components/Layout";
 import Seo from "../components/Seo";
-import HeroSection from "../components/pricing-page/HeroSection";
 import ZenExperienceSection from "../components/pricing-page/ZenExperienceSection";
 import CustomizeWizard from "../components/pricing-page/CustomizeWizard";
 import { loadStripe } from "@stripe/stripe-js";
