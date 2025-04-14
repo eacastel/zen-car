@@ -130,7 +130,7 @@ const CustomizeWizard = () => {
 
 
           <div className=" mx-1 md:mx-2  lg:mx-6 lg:max-w-[1280px] rounded-2xl shadow-lg relative border-2 border-primary">
-            <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
+            <div className="bg-white p-4 md:p-8 lg:p-12 rounded-2xl shadow-lg text-center">
 
 
               <h2 className="text-3xl font-medium text-primary mt-4 mb-4 uppercase tracking-wider font-pirulen">

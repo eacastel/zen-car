@@ -97,10 +97,18 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  to="/terms-of-use"
+                  className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  Terms of Use
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/terms-and-conditions"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
-                  Website Terms and Conditions
+                  Terms and Conditions
                 </Link>
               </li>
             </ul>
