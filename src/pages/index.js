@@ -103,8 +103,8 @@ export default HomePage
 // ✅ SEO Metadata
 export const Head = () => (
   <Seo
-    title="Zen Car Buying | Stress-Free Used Car Concierge"
-    description="Save thousands on your next used car with expert guidance. Get personalized recommendations, sourcing, and negotiation help."
+    title="Zen Car Buying | Stress-Free Concierge for New, Lightly Used & Luxury Cars"
+    description="Zen Car Buying is your trusted concierge for finding new cars, lightly used vehicles, and even luxury models at affordable prices nationwide. Our proven 4-step system ensures a stress-free car-buying experience."
     pathname="/"
   >
     <script type="application/ld+json">

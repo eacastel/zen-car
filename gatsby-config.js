@@ -4,8 +4,8 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Zen Car Buying | Expert Help for Lightly Used & Luxury Cars`,
-    description: `Zen Car Buying is your expert concierge for finding lightly used cars, luxury vehicles, and affordable deals nationwide. We simplify the process with a 4-step stress-free car buying system.`,
+    title: `Zen Car Buying | Stress-Free Concierge Service for New, Lightly Used & Luxury Cars`,
+    description: `Zen Car Buying is your trusted concierge service for finding new cars, lightly used vehicles, and even luxury models at affordable prices nationwide. Our proven 4-step system ensures a stress-free car-buying experience.`,
     author: `@zencarbuying`,
     siteUrl: `https://zencarbuying.com`
   },
