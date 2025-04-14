@@ -1,27 +1,9 @@
 import React, { useState } from "react";
 import { FaCheckCircle, FaRegCircle, FaCheckSquare, FaRegSquare } from "react-icons/fa";
 import Button from "../Button";
-import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+
 
 const CustomizeWizard = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      logo: file(relativePath: { eq: "zen-logo-lotus.png" }) {
-        childImageSharp {
-          gatsbyImageData(
-            width: 150
-            placeholder: BLURRED
-            formats: [AUTO, WEBP]
-            quality: 90
-          )
-        }
-      }
-    }
-  `)
-
-const logoImage = getImage(data.logo)
-  
   // Updated research options: 1 Car: $250, 2 Cars: $350, 3 Cars: $450.
   const researchOptions = [
     {
@@ -149,20 +131,15 @@ const logoImage = getImage(data.logo)
 
           <div className=" mx-1 md:mx-2  lg:mx-6 lg:max-w-[1280px] rounded-2xl shadow-lg relative border-2 border-primary">
             <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
-              <GatsbyImage
-              image={logoImage}
-              alt="Zen Car Buying Logo"
-              className="w-auto mx-auto"
-              imgStyle={{ objectFit: 'contain', maxWidth: '150px' }}
-            />
 
-            <h2 className="text-3xl font-medium text-primary mt-4 mb-4 uppercase tracking-wider font-pirulen">
+
+              <h2 className="text-3xl font-medium text-primary mt-4 mb-4 uppercase tracking-wider font-pirulen">
                 Customize Your Package
               </h2>
 
               <p className="text-lg md:text-xl mx-auto max-w-4xl pb-8 mt-2 text-center text-primary">
-              Choose all services to unlock the full Zen Experience — and enjoy a special $200 discount on our most complete, all‑in‑one solution for a truly stress‑free car buying journey. 
-            </p>
+                Choose all services to unlock the full Zen Experience — and enjoy a special $200 discount on our most complete, all‑in‑one solution for a truly stress‑free car buying journey.
+              </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* Column 1: Research Recommendation */}
@@ -388,27 +365,39 @@ const logoImage = getImage(data.logo)
                         </Button>
                       </div>
                       {/* Terms and Conditions Checkbox */}
-                      <div className="flex items-center justify-center m-4">
-                        <input
-                          type="checkbox"
-                          id="terms2"
-                          checked={termsAccepted2}
-                          aria-checked={termsAccepted2}
-                          onChange={(e) => setTermsAccepted2(e.target.checked)}
-                          className="mr-2 cursor-pointer"
-                        />
-                        <label htmlFor="terms2" className="text-sm text-primary">
-                          I agree to the{" "}
-                          <a
-                            href="/terms"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-accent underline"
-                          >
-                            Terms and Conditions
-                          </a>
+                      <div className="my-4">
+                        <label className="flex items-start space-x-2">
+                          <input
+                            type="checkbox"
+                            id="termsAccepted2"
+                            checked={termsAccepted2}
+                            onChange={(e) => setTermsAccepted2(e.target.checked)}
+                            required
+                            className="mt-1"
+                          />
+                          <span className="text-sm text-gray-700">
+                            I agree to the{" "}
+                            <a
+                              href="/terms-of-service"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-primary underline hover:text-accent"
+                            >
+                              Terms and Conditions
+                            </a>{" "}
+                            and acknowledge the{" "}
+                            <a
+                              href="/privacy-policy"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-primary underline hover:text-accent"
+                            >
+                              Privacy Policy
+                            </a>.
+                          </span>
                         </label>
                       </div>
+
 
 
                     </div>

@@ -67,5 +67,6 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
       crossOrigin="anonymous"
       key="HelveticaFont"
     />,
+
   ])
 }

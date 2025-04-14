@@ -69,6 +69,7 @@ module.exports = {
         theme_color: `#F99F1B`, 
         display: `minimal-ui`,
         icon: `src/images/zen-car-buying-logo.png`, 
+        include_favicon: false,
       },
     },
     {
@@ -95,8 +96,6 @@ module.exports = {
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
     {
       resolve: `gatsby-plugin-offline`,
       options: {
@@ -105,6 +104,51 @@ module.exports = {
           clientsClaim: false,
         },
         precachePages: [], 
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        output: `/`,  // <- puts sitemap.xml at root directly
+        entryLimit: 5000, // ensure a single sitemap.xml
+        createLinkInHead: true,
+
+        // Use built-in Gatsby page data, no custom query
+        resolveSiteUrl: () => `https://zencarbuying.com`,
+
+        serialize: ({ path }) => {
+          // Exclude any invalid or "undefined" paths explicitly
+          if (!path || path.includes('undefined')) return null;
+
+          // Set custom priorities per specific pages
+          let priority = 0.7;
+
+          switch (path) {
+            case '/':
+              priority = 1.0; break;         // Home page
+            case '/pricing/':
+              priority = 0.9; break;         // Pricing page
+            case '/about/':
+              priority = 0.9; break;         // About page
+            case '/faq/':
+              priority = 0.8; break;         // FAQ page
+            case '/contact/':
+              priority = 0.8; break;         // Contact page
+            case '/blog/':
+              priority = 0.8; break;         // Blog page
+            case '/privacy-policy/':
+            case '/terms/':
+              priority = 0.5; break;         // Legal pages lower priority
+            default:
+              priority = 0.7;                // Default priority for all others
+          }
+
+          return {
+            url: `https://zencarbuying.com${path}`,
+            changefreq: `weekly`,
+            priority,
+          };
+        },
       },
     },
   ],

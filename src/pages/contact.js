@@ -168,6 +168,7 @@ export const Head = () => (
             "@type": "ContactPoint",
             "telephone": "+1-888-651-6088",
             "contactType": "Customer Support",
+            "email": "info@zencarbuying.com",
             "areaServed": "US",
             "availableLanguage": "English"
           }

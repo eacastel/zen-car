@@ -6,34 +6,27 @@ import CalendlyButtonHeader from "../components/CalendlyButtonHeader";
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
-
   const [showHeader, setShowHeader] = useState(true);
-const lastScrollY = useRef(0);
+  const lastScrollY = useRef(0);
 
-useEffect(() => {
-  const handleScroll = () => {
-    const currentScrollY = window.scrollY;
-  
-    if (currentScrollY <= 10) {
-      // near the top of the page: always show
-      setShowHeader(true);
-    } else if (currentScrollY > lastScrollY.current) {
-      // scrolling down
-      setShowHeader(false);
-    } else if (currentScrollY < lastScrollY.current) {
-      // scrolling up
-      setShowHeader(true);
-    }
-  
-    lastScrollY.current = currentScrollY;
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
 
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
+      if (currentScrollY <= 10) {
+        setShowHeader(true);
+      } else if (currentScrollY > lastScrollY.current) {
+        setShowHeader(false);
+      } else if (currentScrollY < lastScrollY.current) {
+        setShowHeader(true);
+      }
 
+      lastScrollY.current = currentScrollY;
+    };
 
-
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const data = useStaticQuery(graphql`
     query {
@@ -53,7 +46,6 @@ useEffect(() => {
   const logoImage = getImage(data.logo);
 
   const navItems = [
-
     { name: "About", path: "/about" },
     { name: "FAQ", path: "/faq" },
     { name: "Pricing", path: "/pricing" },
@@ -62,68 +54,35 @@ useEffect(() => {
   ];
 
   return (
-<header
-  className={`bg-white backdrop-blur-md fixed top-0 left-0 w-full z-50 border-b border-primary transition-transform duration-300 ease-in-out transform ${
-    showHeader ? "translate-y-0" : "-translate-y-full"
-  }`}
->
+    <header
+      className={`bg-white backdrop-blur-md fixed top-0 left-0 w-full z-50 border-b border-primary transition-transform duration-300 ease-in-out transform ${
+        showHeader ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <nav
-        className="container mx-auto px-4 py-3 flex items-center justify-between"
+        className="container mx-auto px-4 py-3 flex items-center justify-between flex-wrap"
         role="navigation"
         aria-label="Main Navigation"
       >
-        {/* Logo (Left Side) */}
+        {/* Logo (fixed at 300px wide) */}
         <Link
           to="/"
-          className="z-50 flex-shrink-0 mr-6"
+          className="z-50 flex-shrink-0"
           style={{ width: "300px" }}
           aria-label="Go to Home Page"
         >
-          <GatsbyImage
-            image={logoImage}
-            alt="Zen Car Buying Logo"
-            className="w-auto"
-            imgStyle={{ objectFit: "contain", maxWidth: "300px" }}
-          />
+          <div className="h-[64px] flex items-center">
+            <GatsbyImage
+              image={logoImage}
+              alt="Zen Car Buying Logo"
+              className="h-[64px] w-auto"
+              imgStyle={{ objectFit: "contain" }}
+            />
+          </div>
         </Link>
 
-        {/* Flexible Spacer for Spacing */}
-        <div className="flex-1"></div>
-
-        {/* Desktop Navigation (Right Side) */}
-        <div className="hidden lg:flex items-center gap-x-6 xl:gap-x-8">
-          {/* Phone Number */}
-          <a
-            href="tel:+18886516088"
-            className="flex items-center text-sm xl:text-base font-bold text-primary hover:text-accent transition-colors whitespace-nowrap mr-2"
-            aria-label="Call Zen Car Buying at (888) 651-6088"
-          >
-
-            (888) 651-6088
-          </a>
-
-          {/* Menu Links */}
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className="text-primary hover:text-accent transition-colors font-bold text-sm xl:text-base whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-              activeClassName="text-accent"
-              aria-label={`Go to ${item.name} page`}
-            >
-              {item.name}
-            </Link>
-          ))}
-
-          {/* Button */}
-          <div className="ml-4">
-            <CalendlyButtonHeader size="lg" color="accent">
-              Get Started
-            </CalendlyButtonHeader>
-          </div>
-        </div>
-        <div className="flex items-center lg:hidden">
-          {/* Mobile Hamburger Menu */}
+        {/* Hamburger – wraps under at <365px, right aligned otherwise */}
+        <div className="flex lg:hidden w-full justify-center min-[365px]:w-auto min-[365px]:justify-end mt-2 min-[365px]:mt-0">
           <button
             aria-label={isOpen ? "Close menu" : "Open menu"}
             className="focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
@@ -138,24 +97,49 @@ useEffect(() => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-x-6 xl:gap-x-8 ml-auto">
+          <a
+            href="tel:+18886516088"
+            className="flex items-center text-sm xl:text-base font-bold text-primary hover:text-accent transition-colors whitespace-nowrap mr-2"
+            aria-label="Call Zen Car Buying at (888) 651-6088"
+          >
+            (888) 651-6088
+          </a>
+
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className="text-primary hover:text-accent transition-colors font-bold text-sm xl:text-base whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+              activeClassName="text-accent"
+              aria-label={`Go to ${item.name} page`}
+            >
+              {item.name}
+            </Link>
+          ))}
+
+          <div className="ml-4">
+            <CalendlyButtonHeader size="lg" color="accent">
+              Get Started
+            </CalendlyButtonHeader>
+          </div>
+        </div>
+
+        {/* Mobile Navigation Menu */}
         <div
-          className={`${isOpen ? "block" : "hidden"
-            } lg:hidden absolute top-full left-0 right-0 bg-primary z-40 shadow-lg`}
+          className={`${
+            isOpen ? "block" : "hidden"
+          } lg:hidden absolute top-full left-0 right-0 bg-primary z-40 shadow-lg`}
           aria-hidden={!isOpen}
         >
           <ul className="flex flex-col items-center py-4 space-y-4">
-
-            {/* Mobile "Get Started" Button - First for CTA Priority */}
             <li className="mt-4 w-full text-center">
               <CalendlyButtonHeader size="lg" color="accent">
                 Get Started
               </CalendlyButtonHeader>
             </li>
 
-
-
-            {/* Navigation Links */}
             {navItems.map((item) => (
               <li key={item.path}>
                 <Link
