@@ -43,6 +43,9 @@ const TermsPage = () => {
           By providing your phone number and clicking "SCHEDULE EVENT," you consent to receive text messages (SMS) from the Company regarding appointment scheduling, updates regarding the Services, appointment reminders, etc. at the phone number you have provided. Message and data rates may apply. You understand that consent to receive SMS messages is not a condition of using the Company’s Services. You can opt out at any time by replying "STOP" to any text message received from the Company.
         </p>
 
+        <p>By texting Zen Car Buying LLC at 888-651-6088, you agree to receive Conversations (external) messages from Zen Car Buying LLC. Reply STOP to opt-out; Reply HELP for support; Message & data rates may apply; Messaging frequency may vary. Visit https://zencarbuying.com/privacy-policy/ to see our privacy policy and https://zencarbuying.com/terms-and-conditions/ for our Terms of Service.</p>
+
+
         <h2 className="text-2xl font-semibold">3. Services Provided and Liability Limitations</h2>
         <h3 className="text-xl font-semibold">3.1 Scope</h3>
         <p>
