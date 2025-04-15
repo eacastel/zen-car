@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useLocation } from "@reach/router"
 import Header from "./Header";
 import Footer from "./Footer";
-// import FloatingTextButton from "./FloatingTextButton"; 
+import FloatingTextButton from "./FloatingTextButton"; 
 
 export default function Layout({ children }) {
   const location = useLocation()
@@ -17,7 +17,7 @@ export default function Layout({ children }) {
       <Header />
       <main className="flex-grow">{children}</main>
       <Footer />
-      {/* <FloatingTextButton />  */}
+      <FloatingTextButton /> 
       </div>
     </>
   );

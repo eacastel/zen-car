@@ -20,7 +20,7 @@ const FloatingTextButton = () => {
 
         {/* Text Us Button */}
         <motion.a
-          href="sms:+18886516088"
+          href="sms:+13108803755"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           transition={{ duration: 0.2 }}
