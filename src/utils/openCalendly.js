@@ -1,14 +1,42 @@
 // src/utils/openCalendly.js
-export const openCalendlyPopup = () => {
-  if (typeof window !== "undefined" && window.Calendly) {
-    if (window.__CALENDLY_POPUP_OPEN__) {
-      return; // Prevent reopening if already open
-    }
+export const openCalendlyPopup = async () => {
+  if (typeof window === "undefined") return;
 
-    window.Calendly.initPopupWidget({
-      url: "https://calendly.com/zencarbuying/15-minute-consultation-with-a-zen-guide?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=f99f1b&text_color=6b8385&background_color=eaf3f3",
+    // Load Calendly CSS if it's not already present
+    if (!document.querySelector('link[href*="widget.css"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://assets.calendly.com/assets/external/widget.css";
+      link.type = "text/css";
+      link.media = "all";
+      document.head.appendChild(link);
+    }
+  // Load Calendly script if not already loaded
+  if (!window.Calendly) {
+    // Dynamically inject Calendly script
+    await new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://assets.calendly.com/assets/external/widget.js";
+      script.async = true;
+      script.onload = () => {
+        console.log("✅ Calendly script loaded.");
+        resolve();
+      };
+      script.onerror = () => {
+        console.error("❌ Failed to load Calendly script.");
+        reject();
+      };
+      document.head.appendChild(script);
     });
-    window.__CALENDLY_POPUP_OPEN__ = true;
+  }
+
+  if (window.__CALENDLY_POPUP_OPEN__) return;
+
+  window.Calendly.initPopupWidget({
+    url: "https://calendly.com/zencarbuying/15-minute-consultation-with-a-zen-guide?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=f99f1b&text_color=6b8385&background_color=eaf3f3",
+  });
+
+  window.__CALENDLY_POPUP_OPEN__ = true;
 
     // Adjust styles for improved mobile UX
     setTimeout(() => {
@@ -18,13 +46,9 @@ export const openCalendlyPopup = () => {
         calendlyPopup.style.height = "100vh";
         calendlyPopup.style.maxHeight = "100vh";
         calendlyPopup.style.overflow = "auto";  // Enable scrolling
-
-
         calendlyPopup.setAttribute("role", "dialog");
         calendlyPopup.setAttribute("aria-modal", "true");
         calendlyPopup.setAttribute("aria-label", "Schedule a Consultation");
-
-        // Ensure focus remains on the Calendly popup for accessibility
         calendlyPopup.focus();
       }
 
@@ -56,7 +80,4 @@ export const openCalendlyPopup = () => {
 
       observer.observe(document.body, { childList: true });
     }, 500);
-  } else {
-    console.error("Calendly is not loaded.");
-  }
 };
