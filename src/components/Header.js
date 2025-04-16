@@ -83,20 +83,19 @@ export default function Header() {
 
         {/* Hamburger – wraps under at <365px, right aligned otherwise */}
         <div className="flex lg:hidden w-full justify-center min-[365px]:w-auto min-[365px]:justify-end mt-2 min-[365px]:mt-0">
-          <button
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-            className="focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-            aria-expanded={isOpen}
-            aria-controls="mobile-menu"
-          >
+
             <Hamburger
               toggled={isOpen}
               toggle={setOpen}
               size={28}
               color="#6B8385"
               rounded
+              as="button" 
+              label={isOpen ? "Close menu" : "Open menu"} 
+              aria-controls="mobile-menu"
+              aria-expanded={isOpen}
             />
-          </button>
+
         </div>
 
         {/* Desktop Navigation */}

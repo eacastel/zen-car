@@ -59,12 +59,13 @@ export default function Testimonials() {
         autoplay: true,
         autoplaySpeed: 12000,
         arrows: true,
-        adaptiveHeight: true,
+        // adaptiveHeight: true,
         prevArrow: <PrevArrow />, 
         nextArrow: <NextArrow />,
         responsive: [
-            { breakpoint: 1024, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-            { breakpoint: 768, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+            { breakpoint: 1100, settings: { slidesToShow: 2, slidesToScroll: 1, adaptiveHeight: false, } },
+            { breakpoint: 1020, settings: { slidesToShow: 1, slidesToScroll: 1, adaptiveHeight: true
+             } },
         ],
     }
 
@@ -97,7 +98,7 @@ export default function Testimonials() {
                                                 <GatsbyImage
                                                     image={image}
                                                     alt={`Photo of ${testimonial.name}`}
-                                                    className="rounded-md mb-4 w-full max-w-[400px] h-auto object-cover"
+                                                    className="rounded-md mb-4 w-full max-w-[600px] h-auto object-cover"
                                                 />
                                             </div>
                                         ) : (
