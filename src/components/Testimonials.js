@@ -128,6 +128,10 @@ export default function Testimonials() {
                             "@type": "Person",
                             "name": testimonialsData[0].name
                         },
+                        "itemReviewed": {
+                            "@type": "Service",
+                            "name": "Car Buying Concierge Service"
+                          },
                         "reviewRating": {
                             "@type": "Rating",
                             "ratingValue": "5",
