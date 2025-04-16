@@ -20,7 +20,7 @@ const BlogPost = ({ data }) => {
                 <article className="prose mx-auto lg:col-span-2 px-4 md:px-8 py-8  border border-secondary bg-secondary rounded-lg shadow-md">
 
                     <header className="border-b border-primary/20 pb-2 mb-4">
-                        <h1 className="text-4xl md:text-5xl font-poppins mb-2 leading-8 text-primary">
+                        <h1 className="text-4xl md:text-5xl font-poppins mb-2 leading-8 text-primary" style={{ fontFamily: 'Poppins, sans-serif' }}>
                             {title}
                         </h1>
                         </header>
