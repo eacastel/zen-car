@@ -36,6 +36,7 @@ export default function TestimonialsPricing() {
     slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
+    adaptiveHeight: true,
     autoplaySpeed: 10000,
     arrows: false,
     responsive: [
