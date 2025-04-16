@@ -161,7 +161,7 @@ const CustomizeWizard = () => {
                   </p>
                   <fieldset>
                     <legend className="sr-only">Research Recommendations</legend>
-                    <div className="flex flex-col gap-3">
+                    <div role="radiogroup" aria-label="Research Recommendation Options" className="flex flex-col gap-3">
                       {researchOptions.map((option, idx) => {
                         const isSelected =
                           researchSelection &&
@@ -172,8 +172,8 @@ const CustomizeWizard = () => {
                             key={idx}
                             role="radio"
                             aria-checked={isSelected}
-                            tabIndex={0}
-                            aria-label={`${option.label} option, costs $${option.price || 0}`}
+                            tabIndex={isSelected ? 0 : -1}
+                            aria-label={`${option.label} — ${option.description}. Price: $${option.price || 0}`}
                             onClick={() => setResearchSelection(option)}
                             onKeyDown={(e) =>
                               handleKeyDown(e, () => setResearchSelection(option))
@@ -234,7 +234,7 @@ const CustomizeWizard = () => {
                       role="checkbox"
                       aria-checked={inventorySourcing}
                       tabIndex={0}
-                      aria-label="Add Inventory Sourcing for $250"
+                      aria-label="Add Inventory Sourcing — We find top vehicles from our network. Price: $250"
                       onClick={() => setInventorySourcing(!inventorySourcing)}
                       onKeyDown={(e) =>
                         handleKeyDown(e, () => setInventorySourcing(!inventorySourcing))
@@ -285,7 +285,7 @@ const CustomizeWizard = () => {
                       role="checkbox"
                       aria-checked={purchaseAssistance}
                       tabIndex={0}
-                      aria-label="Add Purchase Assistance for $500"
+                      aria-label="Add Purchase Assistance — We coordinate the transaction. Price: $500"
                       onClick={() => setPurchaseAssistance(!purchaseAssistance)}
                       onKeyDown={(e) =>
                         handleKeyDown(e, () => setPurchaseAssistance(!purchaseAssistance))
