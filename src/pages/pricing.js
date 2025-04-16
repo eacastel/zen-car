@@ -1,19 +1,50 @@
-import React from "react";
+import React, { lazy, Suspense, useState, useEffect, useRef } from 'react'
 import Layout from "../components/Layout";
 import Seo from "../components/Seo";
 import CustomizeWizard from "../components/pricing-page/CustomizeWizard";
-import TestimonialsPricing from '../components/TestimonialsPricing'
+
 
 // Cached Stripe client using your publishable key
 
+const TestimonialsPricing = lazy(() => import('../components/TestimonialsPricing'))
+
+function useOnScreen(ref, rootMargin = "0px") {
+  const [isIntersecting, setIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIntersecting(entry.isIntersecting),
+      { rootMargin }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [ref, rootMargin]);
+
+  return isIntersecting;
+}
+
 
 const Pricing = () => {
+  const testimonialsRef = useRef();
+  const showTestimonials = useOnScreen(testimonialsRef, "100px");
 
   return (
     <Layout>
       <CustomizeWizard />
-      <TestimonialsPricing />
-    </Layout>
+
+      <div ref={testimonialsRef}>
+        {showTestimonials && (
+          <Suspense fallback={<div className="py-20 text-center text-primary">Loading testimonials…</div>}>
+            <TestimonialsPricing />
+          </Suspense>
+        )}
+      </div>
+      
+    </Layout >
   );
 };
 
@@ -58,7 +89,7 @@ export const Head = () => {
       ]
     }
   }
-  
+
 
   return (
     <>

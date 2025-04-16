@@ -1,10 +1,32 @@
-import React from 'react'
+import React, { lazy, Suspense, useState, useEffect, useRef } from 'react'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import { Hero } from '../components/Hero'
 import { motion } from "framer-motion"
-import Testimonials from '../components/Testimonials'
+
 import CallToAction from '../components/CallToAction'
+
+const Testimonials = lazy(() => import('../components/Testimonials'))
+
+
+function useOnScreen(ref, rootMargin = "0px") {
+  const [isIntersecting, setIntersecting] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIntersecting(entry.isIntersecting),
+      { rootMargin }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [ref, rootMargin]);
+
+  return isIntersecting;
+}
 
 
 const icons = {
@@ -32,66 +54,75 @@ const icons = {
 
 
 const HomePage = () => {
+  const testimonialsRef = useRef();
+  const showTestimonials = useOnScreen(testimonialsRef, '100px');
+
   return (
     <Layout>
       {/* ✅ Hero Section */}
       <Hero />
 
 
-{/* ✅ Key Benefits Section */}
-<section className="py-16 bg-secondary" aria-labelledby="benefits-heading">
-  <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
-    <h2 id="benefits-heading" className="text-4xl font-medium text-accent text-center mb-12">
-      Why Choose <span className="text-accent">Zen Car Buying?</span>
-    </h2>
-    <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
-      {[
-        { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'Tailored suggestions based on your needs & budget.' },
-        { title: 'Nationwide Vehicle Sourcing & Shipping', key: 'sourcing', desc: 'Find the best deals, no matter where you live.' },
-        { title: 'Time Saving, Stress Free Buying', key: 'negotiation', desc: 'Let us do the work for you!' },
-      ].map((benefit, index) => (
-        <div key={index} className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-          <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}
-          <h3 className="text-xl font-medium text-primary">{benefit.title}</h3>
-          <p className="text-gray-500">{benefit.desc}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-{/* ✅ How It Works Section */}
-<section className="bg-primary text-white py-20" aria-labelledby="how-it-works">
-  <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
-    <h2 id="how-it-works" className="text-4xl font-medium text-center text-white mb-12">
-      Our <span className="text-white">Proven 4-Step Process</span>
-    </h2>
-    <div className="grid md:grid-cols-1 lg:grid-cols-4 gap-12">
-      {[
-        { title: 'Schedule Consultation', desc: 'Book your free 15-minute call to go over your budget and preferences.', step: '1' },
-        { title: 'Get Recommendations', desc: 'Receive a customized proposal with your recommendation.', step: '2' },
-        { title: 'Review Inventory', desc: 'We locate and provide the best vehicles matching your recommendation.', step: '3' },
-        { title: 'Purchase Assistance', desc: 'Let your Zen Guides do the work so you don’t have to.', step: '4' },
-      ].map((step, index) => (
-        <motion.div 
-          key={index} 
-          className="text-center p-6 bg-white/10 rounded-lg shadow-lg border-primary border-2 hover:shadow-xl transition-shadow duration-300"
-          whileHover={{ scale: 1.05 }}
-        >
-          <div className="text-4xl font-bold text-accent bg-primary px-5 py-2 inline-block rounded-full mb-3">
-            {step.step}
+      {/* ✅ Key Benefits Section */}
+      <section className="py-16 bg-secondary" aria-labelledby="benefits-heading">
+        <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
+          <h2 id="benefits-heading" className="text-4xl font-medium text-accent text-center mb-12">
+            Why Choose <span className="text-accent">Zen Car Buying?</span>
+          </h2>
+          <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
+            {[
+              { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'Tailored suggestions based on your needs & budget.' },
+              { title: 'Nationwide Vehicle Sourcing & Shipping', key: 'sourcing', desc: 'Find the best deals, no matter where you live.' },
+              { title: 'Time Saving, Stress Free Buying', key: 'negotiation', desc: 'Let us do the work for you!' },
+            ].map((benefit, index) => (
+              <div key={index} className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}
+                <h3 className="text-xl font-medium text-primary">{benefit.title}</h3>
+                <p className="text-gray-500">{benefit.desc}</p>
+              </div>
+            ))}
           </div>
-          <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-          <p className="text-gray-200">{step.desc}</p>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
+
+      {/* ✅ How It Works Section */}
+      <section className="bg-primary text-white py-20" aria-labelledby="how-it-works">
+        <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
+          <h2 id="how-it-works" className="text-4xl font-medium text-center text-white mb-12">
+            Our <span className="text-white">Proven 4-Step Process</span>
+          </h2>
+          <div className="grid md:grid-cols-1 lg:grid-cols-4 gap-12">
+            {[
+              { title: 'Schedule Consultation', desc: 'Book your free 15-minute call to go over your budget and preferences.', step: '1' },
+              { title: 'Get Recommendations', desc: 'Receive a customized proposal with your recommendation.', step: '2' },
+              { title: 'Review Inventory', desc: 'We locate and provide the best vehicles matching your recommendation.', step: '3' },
+              { title: 'Purchase Assistance', desc: 'Let your Zen Guides do the work so you don’t have to.', step: '4' },
+            ].map((step, index) => (
+              <motion.div
+                key={index}
+                className="text-center p-6 bg-white/10 rounded-lg shadow-lg border-primary border-2 hover:shadow-xl transition-shadow duration-300"
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="text-4xl font-bold text-accent bg-primary px-5 py-2 inline-block rounded-full mb-3">
+                  {step.step}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                <p className="text-gray-200">{step.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
 
-      
-      <Testimonials />
+
+      <div ref={testimonialsRef}>
+        {showTestimonials && (
+          <Suspense fallback={<div className="py-20 text-center text-primary">Loading testimonials…</div>}>
+            <Testimonials />
+          </Suspense>
+        )}
+      </div>
 
       <CallToAction />
     </Layout>
