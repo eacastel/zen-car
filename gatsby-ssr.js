@@ -14,11 +14,13 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
       key="calendly-css"
       rel="stylesheet"
       href="https://assets.calendly.com/assets/external/widget.css"
+      media="print"
+      onLoad="this.media='all'"
     />,
     <script
       key="calendly-js"
       src="https://assets.calendly.com/assets/external/widget.js"
-      async
+      strategy="idle"
     />,
     <link
       rel="preload"
