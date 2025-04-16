@@ -33,6 +33,7 @@ export default function Header() {
       logo: file(relativePath: { eq: "zen-car-buying-logo-full-color.png" }) {
         childImageSharp {
           gatsbyImageData(
+            layout: FIXED
             width: 300
             placeholder: BLURRED
             formats: [AUTO, WEBP]
