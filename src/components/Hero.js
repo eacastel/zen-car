@@ -36,14 +36,9 @@ export function Hero() {
         <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px] text-center text-white">
           <p className="text-lg uppercase tracking-wider mb-4 font-pirulen" >THE MODERN APPROACH TO CAR BUYING</p>
 
-          <h1 className="text-4xl md:text-5xl font-poppins mb-4" style={{
-    fontFamily:
-      '"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-  }}>
-            Stress-Free, Data-Driven Car Buying Assistance
+          <h1 className="text-4xl md:text-5xl mb-4" style={{
+    fontFamily:'"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif', }}>Stress-Free, Data-Driven Car Buying Assistance
           </h1>
-
- 
 
           <p className="text-xl font-poppins tracking-widest uppercase mb-8">
             Let our Zen Guides find you a lightly used car at up to 30-50% off new car prices.

@@ -56,9 +56,8 @@ export default function Header() {
 
   return (
     <header
-      className={`bg-white backdrop-blur-md fixed top-0 left-0 w-full z-50 border-b border-primary transition-transform duration-300 ease-in-out transform ${
-        showHeader ? "translate-y-0" : "-translate-y-full"
-      }`}
+      className={`bg-white backdrop-blur-md fixed top-0 left-0 w-full z-50 border-b border-primary transition-transform duration-300 ease-in-out transform ${showHeader ? "translate-y-0" : "-translate-y-full"
+        }`}
     >
       <nav
         className="container mx-auto px-4 py-3 flex items-center justify-between flex-wrap"
@@ -87,6 +86,8 @@ export default function Header() {
           <button
             aria-label={isOpen ? "Close menu" : "Open menu"}
             className="focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             <Hamburger
               toggled={isOpen}
@@ -99,39 +100,40 @@ export default function Header() {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-x-6 xl:gap-x-8 ml-auto">
-          <a
-            href="tel:+18886516088"
-            className="flex items-center text-sm xl:text-base font-bold text-primary hover:text-accent transition-colors whitespace-nowrap mr-2"
-            aria-label="Call Zen Car Buying at (888) 651-6088"
-          >
-            (888) 651-6088
-          </a>
-
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className="text-primary hover:text-accent transition-colors font-bold text-sm xl:text-base whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-              activeClassName="text-accent"
-              aria-label={`Go to ${item.name} page`}
+        <ul className="hidden lg:flex items-center gap-x-6 xl:gap-x-8 ml-auto">
+          <li>
+            <a
+              href="tel:+18886516088"
+              className="flex items-center text-sm xl:text-base font-bold text-primary hover:text-accent transition-colors whitespace-nowrap mr-2"
+              aria-label="Call Zen Car Buying at (888) 651-6088"
             >
-              {item.name}
-            </Link>
+              (888) 651-6088
+            </a>
+          </li>
+          {navItems.map((item) => (
+            <li key={item.path}>
+              <Link
+                to={item.path}
+                className="text-primary hover:text-accent transition-colors font-bold text-sm xl:text-base whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                activeClassName="text-accent"
+                aria-label={`Go to ${item.name} page`}
+              >
+                {item.name}
+              </Link>
+            </li>
           ))}
 
-          <div className="ml-4">
+          <li className="ml-4">
             <CalendlyButtonHeader size="lg" color="accent">
               Get Started
             </CalendlyButtonHeader>
-          </div>
-        </div>
+          </li>
+        </ul>
 
         {/* Mobile Navigation Menu */}
         <div
-          className={`${
-            isOpen ? "block" : "hidden"
-          } lg:hidden absolute top-full left-0 right-0 bg-primary z-40 shadow-lg`}
+          className={`${isOpen ? "block" : "hidden"
+            } lg:hidden absolute top-full left-0 right-0 bg-primary z-40 shadow-lg`}
           aria-hidden={!isOpen}
         >
           <ul className="flex flex-col items-center py-4 space-y-4">
