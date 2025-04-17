@@ -24,20 +24,46 @@ exports.handler = async (event) => {
 
     let lineItems = [];
 
-    if (amount === 1250) {
-      // Zen Experience package: apply discount, charge $1,000 instead.
+    if (amount === 1000) {
+      // 1 recommendation  → charge $800
       lineItems.push({
         price_data: {
           currency: "usd",
           product_data: {
-            name: "Zen Experience Package",
-            description: "All services combined with a special discount – only $1,000 instead of $1,250.",
+            name: "Zen Experience – 1 Car Recommendation, Inventory Sourcing and Purchase Assistance",
+            description: "Special bundle: only $800 instead of $1,000.",
+          },
+          unit_amount: 800 * 100,
+        },
+        quantity: 1,
+      });
+    } else if (amount === 1100) {
+      // 2 recommendations → charge $900
+      lineItems.push({
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: "Zen Experience – 2 Car Recommendations, Inventory Sourcing and Purchase Assistance",
+            description: "Special bundle: only $800 instead of $1,100.",
+          },
+          unit_amount: 900 * 100,
+        },
+        quantity: 1,
+      });
+    } else if (amount === 1200) {
+      // 3 recommendations → charge $1,000
+      lineItems.push({
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: "Zen Experience – 3 Car Recommendations, Inventory Sourcing and Purchase Assistance",
+            description: "Special bundle: only $1,000 instead of $1,200.",
           },
           unit_amount: 1000 * 100,
         },
         quantity: 1,
       });
-    } else {
+      } else {
       if (selections.research && selections.research.price > 0) {
         lineItems.push({
           price_data: {
