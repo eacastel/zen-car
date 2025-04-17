@@ -80,7 +80,7 @@ exports.handler = async (event) => {
     }
 
     const sessionParams = {
-      payment_method_types: ["card"],
+      payment_method_types: ["card", "link"],
       line_items: lineItems,
       mode: "payment",
       success_url: `${process.env.GATSBY_SITE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
