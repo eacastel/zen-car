@@ -111,6 +111,14 @@ export default function Footer() {
                   Terms and Conditions
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/sms-terms-and-conditions"
+                  className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  SMS Terms and Conditions
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
