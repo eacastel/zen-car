@@ -16,7 +16,7 @@ export default function SmsTerms() {
           {/* 1 — SMS Consent Communication */}
           <h2 className="text-2xl font-semibold">1. SMS Consent Communication</h2>
           <p>
-            The phone numbers obtained as part of the SMS‑consent process will <strong>not</strong> be shared with third parties for marketing purposes.
+            The phone numbers obtained as part of the client onboarding or SMS‑consent process will <strong>not</strong> be shared with third parties for marketing purposes.
           </p>
 
           {/* 2 — Types of communications */}
@@ -24,13 +24,10 @@ export default function SmsTerms() {
           <p>
             If you have consented to receive text messages from <strong>ZCB</strong>, you may receive messages related to the following:
           </p>
-          <ul>
+          <ul className="list-disc pl-5 space-y-2 text-base text-primary mb-8">
             <li>Appointment reminders</li>
             <li>Follow‑up messages</li>
             <li>Billing inquiries</li>
-            <li>
-              Promotions or offers (if applicable). <em>If the customer selected a conversational use‑case, remove this reference or update to match the approved use‑cases.</em>
-            </li>
           </ul>
           <p className="italic">
             Example: “Hello, this is a friendly reminder of your upcoming appointment with our Zen Gude [Name] at [Location] on [Date] at [Time]. You can reply STOP to opt out of SMS messaging from Zen Car Buying at any time.”
@@ -40,9 +37,6 @@ export default function SmsTerms() {
           <h2 className="text-2xl font-semibold">3. Message Frequency</h2>
           <p>
             Message frequency may vary depending on the type of communication. For example, you may receive up to <strong>4</strong> SMS messages per week related to your appointments, billing, or account status.
-          </p>
-          <p className="italic">
-            Example: “Message frequency may vary. You may receive up to 4 SMS messages per week regarding your appointments or account status.”
           </p>
 
           {/* 4 — Potential fees */}
@@ -56,7 +50,7 @@ export default function SmsTerms() {
           <p>
             You may opt‑in to receive SMS messages from <strong>ZCB</strong> in the following ways:
           </p>
-          <ul>
+          <ul className="list-disc pl-5 space-y-2 text-base text-primary mb-8">
             <li>By texting our SMS number through the website or through your mobile phone</li>
             <li>By submitting an online form that includes your mobile phone number</li>
             <li>By purchasing our services and providing a mobile phone number</li>
@@ -73,16 +67,13 @@ export default function SmsTerms() {
           <p>
             If you are experiencing any issues, reply with the keyword <strong>HELP</strong>, or contact us directly at <em>help@zencarbuying.com</em>.
           </p>
-
-          {/* Additional Options */}
-          <h2 className="text-2xl font-semibold">Additional Options</h2>
-          <ul>
+          <ul className="list-disc pl-5 space-y-2 text-base text-primary mb-8">
             <li>If you do not wish to receive SMS messages, simply do not text or SMS our phone number or check the SMS‑consent box on our forms.</li>
           </ul>
 
           {/* 8 — Standard disclosures */}
           <h2 className="text-2xl font-semibold">8. Standard Messaging Disclosures</h2>
-          <ul>
+          <ul className="list-disc pl-5 space-y-2 text-base text-primary mb-8">
             <li>Message and data rates may apply.</li>
             <li>You can opt out at any time by texting “STOP.”</li>
             <li>For assistance, text “HELP” or visit our <a href="https://zencarbuying.com/privacy-policy/" className="text-accent hover:underline">https://zencarbuying.com/privacy-policy/</a> and <a href="https://zencarbuying.com/terms-and-conditions/" className="text-accent hover:underline">https://zencarbuying.com/terms-and-conditions/</a> for our Terms of Service. pages.</li>
