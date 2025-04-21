@@ -60,8 +60,8 @@ export default function FloatingTextButton() {
             </h2>
 
             <p className="text-sm">
-              By texting our phone number via SMS you consent to receive text
-              messages related to Zen Car Buying, LLC. You can text “STOP” at
+              By texting our phone number you consent to receive text
+              messages from Zen Car Buying, LLC. You can text “STOP” at
               any time to opt out. Message and data rates may apply. Message
               frequency may vary; text “HELP” for assistance. For more
               information please visit our{" "}
