@@ -150,27 +150,28 @@ export default function ContactPage() {
           <div className="bg-white rounded-lg max-w-md w-full p-6 space-y-4 shadow-xl">
             <h2 className="text-lg font-semibold text-primary">SMS Consent</h2>
 
-            <p className="text-sm">
-            By texting (888) 651-6088 you consent to receive SMS messages from Zen Car Buying, LLC for communication regarding your vehicle search and buying experience. Message and data rates may apply. Message frequency may vary. Reply STOP to unsubscribe or HELP for help. See our{" "}
+            <p className="text-sm text-primary">
+              By texting Zen Car Buying LLC (888) 651-6088 you agree to receive Conversations (external) SMS messages from Zen Car Buying LLC for communication regarding your vehicle search and buying experience. Message and data rates may apply. Message frequency may vary. Reply STOP to opt-out or HELP for support. Visit{" "}
               <a
-                href="/privacy-policy"
+                href="https://zencarbuying.com/privacy-policy/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline text-accent"
               >
-                Privacy Policy
+                https://zencarbuying.com/privacy-policy/
               </a>{" "}
-              and{" "}
+              to see our Privacy Policy and{" "}
               <a
-                href="/sms-terms-and-conditions"
+                href="https://zencarbuying.com/sms-terms-and-conditions/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline text-accent"
               >
-                SMS Terms & Conditions
-              </a>
-              .
+                https://zencarbuying.com/sms-terms-and-conditions/
+              </a>{" "}
+              for our Terms of Service.
             </p>
+
 
             <label className="flex items-start gap-2 text-sm">
               <input
