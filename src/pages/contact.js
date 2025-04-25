@@ -151,7 +151,7 @@ export default function ContactPage() {
             <h2 className="text-lg font-semibold text-primary">SMS Consent</h2>
 
             <p className="text-sm text-primary">
-              By texting Zen Car Buying LLC (888) 651-6088 you agree to receive Conversations (external) SMS messages from Zen Car Buying LLC for communication regarding your vehicle search and buying experience. Message and data rates may apply. Message frequency may vary. Reply STOP to opt-out or HELP for support. Visit{" "}
+              By texting Zen Car Buying LLC (888) 651-6088 you agree to receive Conversations (external) messages from Zen Car Buying LLC for communication regarding your vehicle search and buying experience. Message and data rates may apply. Message frequency may vary. Reply STOP to opt-out or HELP for support. Visit{" "}
               <a
                 href="https://zencarbuying.com/privacy-policy/"
                 target="_blank"
