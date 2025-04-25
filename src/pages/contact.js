@@ -191,11 +191,10 @@ export default function ContactPage() {
                 Cancel
               </button>
 
+              {/* Always enabled */}
               <a
-                href={isSmsChecked ? "sms:+18886516088" : undefined}
-                className={`px-4 py-2 rounded-md text-sm text-white ${isSmsChecked ? "bg-primary hover:bg-primary-dark" : "bg-gray-400 cursor-not-allowed"
-                  }`}
-                onClick={!isSmsChecked ? e => e.preventDefault() : undefined}
+                href="sms:+13108803755"
+                className="px-4 py-2 rounded-md text-sm text-white bg-primary hover:bg-primary-dark"
               >
                 Send SMS
               </a>

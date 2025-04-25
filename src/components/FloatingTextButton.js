@@ -100,12 +100,10 @@ export default function FloatingTextButton() {
                 Cancel
               </button>
 
-              {/* Enabled only when the box is ticked */}
+              {/* Always enabled */}
               <a
-                href={isChecked ? 'sms:+13108803755' : undefined}
-                className={`px-4 py-2 rounded-md text-sm text-white ${isChecked ? 'bg-primary hover:bg-primary-dark' : 'bg-gray-400 cursor-not-allowed'
-                  }`}
-                onClick={!isChecked ? e => e.preventDefault() : undefined}
+                href="sms:+13108803755"
+                className="px-4 py-2 rounded-md text-sm text-white bg-primary hover:bg-primary-dark"
               >
                 Send SMS
               </a>

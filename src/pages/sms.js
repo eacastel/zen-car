@@ -14,11 +14,7 @@ export default function SmsPage() {
 
         <p className="text-lg text-primary mb-6">
         By texting Zen Car Buying LLC (888) 651-6088 you agree to receive Conversations (external) messages from Zen Car Buying LLC for communication regarding your vehicle search and buying experience. Message and data rates may apply. Message frequency may vary. Reply STOP to opt-out or HELP for support.
-        </p>
-
-        <p className="text-sm text-gray-600 mb-8">
-
-        Visit <a href="/privacy-policy" className="underline text-accent">https://zencarbuying.com/privacy-policy/</a> to see our Privacy Policy and <a href="/sms-terms-and-conditions" className="underline text-accent">https://zencarbuying.com/sms-terms-and-conditions/</a> for our Terms of Service.
+                Visit <a href="/privacy-policy" className="underline text-accent">https://zencarbuying.com/privacy-policy/</a> to see our Privacy Policy and <a href="/sms-terms-and-conditions" className="underline text-accent">https://zencarbuying.com/sms-terms-and-conditions/</a> for our Terms of Service.
         </p>
 
         {/* Checkbox */}
@@ -30,27 +26,20 @@ export default function SmsPage() {
             onChange={(e) => setIsChecked(e.target.checked)}
             className="mt-1"
           />
-          <label htmlFor="sms-consent" className="text-sm text-primary">
+          <label htmlFor="sms-consent" >
             I agree to the SMS Terms above.
           </label>
         </div>
 
         {/* Start Texting Button */}
-        <a
-          href={isChecked ? "sms:+18886516088?body=Hi%20Zen%20Car%20Buying%2C%20I'm%20interested%20in%20your%20services." : undefined}
-          onClick={(e) => {
-            if (!isChecked) e.preventDefault();
-          }}
-          className={`inline-block px-8 py-4 rounded-lg text-lg font-semibold shadow-lg transition ${
-            isChecked
-              ? "bg-primary text-white hover:bg-primary-dark"
-              : "bg-gray-400 text-white cursor-not-allowed"
-          }`}
-          aria-disabled={!isChecked}
-          aria-label="Start texting Zen Car Buying"
-        >
-          Start Texting
-        </a>
+
+<a
+  href="sms:+18886516088?body=Hi%20Zen%20Car%20Buying%2C%20I'm%20interested%20in%20your%20services."
+  className="inline-block px-8 py-4 rounded-lg text-lg font-semibold shadow-lg transition bg-primary text-white hover:bg-primary-dark"
+  aria-label="Start texting Zen Car Buying"
+>
+  Start Texting
+</a>
       </section>
     </Layout>
   );
