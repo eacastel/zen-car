@@ -1,10 +1,12 @@
-import * as React from 'react'
+import React, { useState } from "react";
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import CalendlyButton from '../components/CalendlyButton'
-import Button from '../components/Button' 
+import Button from '../components/Button'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { useStaticQuery, graphql } from 'gatsby'
+
+
 
 
 // SVG Icons
@@ -50,6 +52,9 @@ const EmailIcon = () => (
 
 
 export default function ContactPage() {
+  const [showSmsModal, setShowSmsModal] = useState(false);
+  const [isSmsChecked, setIsSmsChecked] = useState(false);
+
   const { bmwMountain } = useStaticQuery(graphql`
     query {
       bmwMountain: file(relativePath: { eq: "bmw-mountain.png" }) {
@@ -82,13 +87,14 @@ export default function ContactPage() {
           </a>
 
           {/* Text Us Button */}
-          <a
-            href="sms:+18886516088"
+          <button
+            type="button"
+            onClick={() => setShowSmsModal(true)}
             className="bg-secondary text-primary px-6 py-3 rounded-lg text-lg font-bold border-2 border-primary hover:border-black hover:scale-105 transition-transform duration-200 text-center w-full md:w-auto"
-            aria-label="Text Zen Car Buying"
+            aria-label="Open SMS Consent Modal"
           >
             <MessageIcon /> Text Us
-          </a>
+          </button>
 
           {/* Email Button */}
           <a
@@ -126,15 +132,77 @@ export default function ContactPage() {
           </Button>
         </div>
         {bmwImage && (
-  <div className="mt-6 flex justify-center">
-    <GatsbyImage
-      image={bmwImage}
-      alt="BMW parked with a scenic mountain background"
-      className="rounded-lg shadow-md max-w-3xl w-full"
-    />
-  </div>
-)}
+          <div className="mt-6 flex justify-center">
+            <GatsbyImage
+              image={bmwImage}
+              alt="BMW parked with a scenic mountain background"
+              className="rounded-lg shadow-md max-w-3xl w-full"
+            />
+          </div>
+        )}
       </section>
+      {showSmsModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
+        >
+          <div className="bg-white rounded-lg max-w-md w-full p-6 space-y-4 shadow-xl">
+            <h2 className="text-lg font-semibold text-primary">SMS Consent</h2>
+
+            <p className="text-sm">
+            By texting (888) 651-6088 you consent to receive SMS messages from Zen Car Buying, LLC for communication regarding your vehicle search and buying experience. Message and data rates may apply. Message frequency may vary. Reply STOP to unsubscribe or HELP for help. See our{" "}
+              <a
+                href="/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline text-accent"
+              >
+                Privacy Policy
+              </a>{" "}
+              and{" "}
+              <a
+                href="/sms-terms-and-conditions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline text-accent"
+              >
+                SMS Terms & Conditions
+              </a>
+              .
+            </p>
+
+            <label className="flex items-start gap-2 text-sm">
+              <input
+                type="checkbox"
+                className="mt-1"
+                checked={isSmsChecked}
+                onChange={e => setIsSmsChecked(e.target.checked)}
+              />
+              <span>I agree to the SMS Terms above.</span>
+            </label>
+
+            <div className="flex justify-end gap-2 pt-2">
+              <button
+                onClick={() => setShowSmsModal(false)}
+                className="px-4 py-2 rounded-md text-sm focus:outline-none hover:bg-gray-100"
+              >
+                Cancel
+              </button>
+
+              <a
+                href={isSmsChecked ? "sms:+18886516088" : undefined}
+                className={`px-4 py-2 rounded-md text-sm text-white ${isSmsChecked ? "bg-primary hover:bg-primary-dark" : "bg-gray-400 cursor-not-allowed"
+                  }`}
+                onClick={!isSmsChecked ? e => e.preventDefault() : undefined}
+              >
+                Send SMS
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
     </Layout>
   )
 }

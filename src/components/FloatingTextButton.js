@@ -60,11 +60,7 @@ export default function FloatingTextButton() {
             </h2>
 
             <p className="text-sm">
-              By texting our phone number you consent to receive text
-              messages from Zen Car Buying, LLC. You can text “STOP” at
-              any time to opt out. Message and data rates may apply. Message
-              frequency may vary; text “HELP” for assistance. For more
-              information please visit our{" "}
+            By texting (888) 651-6088 you consent to receive SMS messages from Zen Car Buying, LLC for communication regarding your vehicle search and buying experience. Message and data rates may apply. Message frequency may vary. Reply STOP to unsubscribe or HELP for help. See our{" "}
               <a
                 href="/privacy-policy"
                 target="_blank"
