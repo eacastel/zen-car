@@ -39,13 +39,13 @@ const FAQPage = () => {
 
   return (
     <Layout>
-      <Seo 
+      <Seo
         title="Frequently Asked Questions (FAQ) - Zen Car Buying"
         description="Get expert guidance on buying a used car. Discover how our car buying concierge service can help you find the best deals, source inventory nationwide, and avoid costly mistakes."
       />
-      
-      <section 
-        id="faq" 
+
+      <section
+        id="faq"
         className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 pt-8 pb-16 max-w-[900px]"
         aria-labelledby="page-title"
       >
@@ -71,9 +71,8 @@ const FAQPage = () => {
             >
               <motion.button
                 itemprop="name"
-                className={`w-full text-left text-lg font-semibold cursor-pointer text-primary transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-                  openIndex === index ? "text-accent" : ""
-                }`}
+                className={`w-full text-left text-lg font-semibold cursor-pointer text-primary transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${openIndex === index ? "text-accent" : ""
+                  }`}
                 onClick={() => toggleFAQ(index)}
                 aria-expanded={openIndex === index}
               >
@@ -118,8 +117,8 @@ const FAQPage = () => {
 
                       if (block.type === "ordered-list") {
                         return (
-                          <ol 
-                            key={idx} 
+                          <ol
+                            key={idx}
                             className="list-decimal pl-6 space-y-2 marker:text-primary font-bold"
                           >
                             {block.content.map((item, listIdx) => (
@@ -162,15 +161,23 @@ export const Head = ({ location }) => (
         "name": question,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": answer.map(block =>
-            block.type === "text"
-              ? block.content
-              : block.type === "list" || block.type === "ordered-list"
-              ? block.content.map(item =>
-                  typeof item === "string" ? item : `${item.label}: ${item.description}`
-                ).join(" ")
-              : ""
-          ).join(" ")
+          "text": answer
+            .map(block => {
+              if (block.type === "text") return block.content;
+              if (block.type === "list" || block.type === "ordered-list") {
+                return block.content
+                  .map(item => {
+                    if (typeof item === "string") return item;
+                    if (item.label && item.description) {
+                      return `${item.label}: ${item.description}`;
+                    }
+                    return "";
+                  })
+                  .join(" ");
+              }
+              return "";
+            })
+            .join(" ")
         }
       }))
     }}
