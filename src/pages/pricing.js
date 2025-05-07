@@ -13,7 +13,18 @@ function useOnScreen(ref, rootMargin = "0px") {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => setIntersecting(entry.isIntersecting),
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIntersecting(true);
+
+          // ✅ Fire the Meta Pixel "ViewContent" event
+          if (window.fbq) {
+            window.fbq('track', 'ViewContent', {
+              content_name: 'Pricing Page',
+            });
+          }
+        }
+      },
       { rootMargin }
     );
 
@@ -54,7 +65,7 @@ export const Head = () => {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Nationwide Car Buying Consultation and Assistance",
+    "serviceType": "Nationwide Car Buying Concierge, Consultation and Assistance",
     "serviceOutput": "Concierge-style used car buying support, including price negotiation, vehicle sourcing, and shipping coordination.",
     "provider": {
       "@type": "Organization",

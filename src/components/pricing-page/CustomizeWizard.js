@@ -57,6 +57,16 @@ const CustomizeWizard = () => {
       alert("Please accept the Terms and Conditions before proceeding.");
       return;
     }
+
+      // Meta Pixel tracking
+  if (typeof window !== "undefined" && window.fbq) {
+    window.fbq("track", "InitiateCheckout", {
+      value: finalAmount, 
+      currency: "USD",
+      content_name: "Zen Car Buying Package"
+    });
+  }
+
     setLoading(true);
     let descriptionLines = [];
     let selectedProducts = [];
