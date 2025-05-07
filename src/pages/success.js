@@ -13,6 +13,15 @@ const SuccessPage = () => {
     }
   }, [])
 
+  React.useEffect(() => {
+    if (typeof window !== "undefined" && window.fbq && sessionId) {
+      window.fbq("track", "Purchase", {
+        currency: "USD",
+        content_name: "Zen Car Buying Package"
+      });
+    }
+  }, [sessionId])
+
   return (
     <Layout>
       <Seo 
