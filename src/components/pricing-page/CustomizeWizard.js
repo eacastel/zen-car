@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { navigate } from "gatsby";
 import { FaCheckCircle, FaRegCircle, FaCheckSquare, FaRegSquare } from "react-icons/fa";
 import Button from "../Button";
 
@@ -58,14 +59,14 @@ const CustomizeWizard = () => {
       return;
     }
 
-      // Meta Pixel tracking
-  if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "InitiateCheckout", {
-      value: finalAmount, 
-      currency: "USD",
-      content_name: "Zen Car Buying Package"
-    });
-  }
+    // Meta Pixel tracking
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("track", "InitiateCheckout", {
+        value: finalAmount,
+        currency: "USD",
+        content_name: "Zen Car Buying Package"
+      });
+    }
 
     setLoading(true);
     let descriptionLines = [];
@@ -121,7 +122,16 @@ const CustomizeWizard = () => {
       });
       const data = await response.json();
       if (data.url) {
-        window.location.href = data.url;
+        navigate("/checkout", {
+          state: {
+            selections: {
+              research: researchSelection,
+              inventory: inventorySourcing,
+              purchase: purchaseAssistance,
+            },
+            total: finalAmount * 100, // Convert to cents
+          },
+        });
       } else {
         console.error("Checkout error:", data.error);
         setLoading(false);

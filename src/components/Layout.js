@@ -13,7 +13,7 @@ export default function Layout({ children }) {
 
   return (
     <>
-    <div className="flex flex-col min-h-screen pt-[88px] max-[364px]:pt-[136px]">
+    <div className="min-h-screen flex flex-col  pt-[88px] max-[364px]:pt-[136px]">
       <Header />
       <main className="flex-grow">{children}</main>
       <Footer />
