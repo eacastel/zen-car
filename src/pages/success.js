@@ -2,6 +2,20 @@ import React from 'react'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import Button from '../components/Button'
+import { useEffect } from "react";
+
+export default function SuccessPage() {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "checkout_success",
+        value: 327.07, // use actual amount if dynamic
+        currency: "USD",
+        transaction_id: "", // optional
+      });
+    }
+  }, []);
 
 const SuccessPage = () => {
   const [sessionId, setSessionId] = React.useState("")
