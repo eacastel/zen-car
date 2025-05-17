@@ -34,28 +34,30 @@ const CheckoutForm = ({ selections, total }) => {
         <div className="mx-1 md:mx-2 lg:mx-6 lg:max-w-[1280px] rounded-2xl shadow-lg relative border-2 border-primary">
           <div className="bg-white p-4 md:p-8 lg:p-12 rounded-2xl shadow-lg text-center">
             <h2 className="text-3xl font-medium text-primary md:mt-4 mb-4 uppercase tracking-wider font-pirulen">
-              Confirm Your Package
+              Complete Your Purchase
             </h2>
             <p className="text-lg md:text-xl mx-auto max-w-4xl pb-8 mt-2 text-center text-primary">
-              Please review your selections and complete payment to get started with Zen Car Buying.
+                Review your selected services and finalize your purchase to begin your Zen Experience.
             </p>
 
             <div className="max-w-2xl mx-auto text-left bg-gray-50 rounded-lg border p-6 shadow-sm mb-6">
               {selections.research && selections.research.label !== "Know which car you want?" && (
-                <p className="text-base text-gray-700 mb-2">
+                <p className="text-lg text-gray-700 mb-2 text-center">
                   <span className="font-semibold">Research:</span> {selections.research.label} (${selections.research.price})
                 </p>
               )}
               {selections.inventory && (
-                <p className="text-base text-gray-700 mb-2">
+                <p className="text-lg text-gray-700 mb-2 text-center">
                   <span className="font-semibold">Inventory Sourcing:</span> $250
                 </p>
               )}
               {selections.purchase && (
-                <p className="text-base text-gray-700 mb-2">
+                <p className="text-lg text-gray-700 mb-2 text-center">
                   <span className="font-semibold">Purchase Assistance:</span> $500
                 </p>
               )}
+              <hr className="my-4 border-t border-gray-300" />
+
               <p className="mt-4 text-lg font-bold text-center text-primary">
                 Total: ${total / 100}
               </p>
