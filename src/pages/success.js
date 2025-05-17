@@ -1,40 +1,35 @@
-import React from 'react'
-import Layout from '../components/Layout'
-import Seo from '../components/Seo'
-import Button from '../components/Button'
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Layout from "../components/Layout";
+import Seo from "../components/Seo";
+import Button from "../components/Button";
 
-export default function SuccessPage() {
+const SuccessPage = () => {
+  const [sessionId, setSessionId] = useState("");
+
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("session_id") || "";
+      setSessionId(id);
+
+      // ✅ Fire Google Ads conversion via GTM
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: "checkout_success",
-        value: 327.07, // use actual amount if dynamic
+        value: 327.07, // TODO: replace with dynamic amount if needed
         currency: "USD",
-        transaction_id: "", // optional
+        transaction_id: id, // optional
       });
+
+      // ✅ Fire Meta Pixel Purchase
+      if (window.fbq && id) {
+        window.fbq("track", "Purchase", {
+          currency: "USD",
+          content_name: "Zen Car Buying Package"
+        });
+      }
     }
   }, []);
-
-const SuccessPage = () => {
-  const [sessionId, setSessionId] = React.useState("")
-
-  React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search)
-      setSessionId(params.get("session_id") || "")
-    }
-  }, [])
-
-  React.useEffect(() => {
-    if (typeof window !== "undefined" && window.fbq && sessionId) {
-      window.fbq("track", "Purchase", {
-        currency: "USD",
-        content_name: "Zen Car Buying Package"
-      });
-    }
-  }, [sessionId])
 
   return (
     <Layout>
@@ -58,7 +53,7 @@ const SuccessPage = () => {
         </div>
       </section>
     </Layout>
-  )
-}
+  );
+};
 
-export default SuccessPage
+export default SuccessPage;
