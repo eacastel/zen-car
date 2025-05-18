@@ -95,7 +95,16 @@ module.exports = {
       options: {
         host: "https://zencarbuying.com",
         sitemap: "https://zencarbuying.com/sitemap-0.xml",
-        policy: [{ userAgent: "*", allow: "/" }],
+        policy: [
+          {
+            userAgent: "*",
+            allow: "/",
+            disallow: [
+              '/0356516065660-tag-me',
+              '/0356516065660-untag-me'
+            ], 
+          }
+        ],
       },
     },
     {
