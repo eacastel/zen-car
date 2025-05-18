@@ -1,4 +1,17 @@
-// src/utils/openCalendly.js
+// Only attach the Calendly booking listener once
+if (typeof window !== "undefined" && !window.__CALENDLY_BOOKED_LISTENER__) {
+  window.addEventListener("message", function (e) {
+    if (e?.data?.event === "calendly.event_scheduled") {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "calendly_booked",
+        calendly_url: e.data.payload?.event?.uri || "",
+      });
+    }
+  });
+  window.__CALENDLY_BOOKED_LISTENER__ = true;
+}
+
 export const openCalendlyPopup = async () => {
   if (typeof window === "undefined") return;
 
@@ -11,9 +24,9 @@ export const openCalendlyPopup = async () => {
     link.media = "all";
     document.head.appendChild(link);
   }
+
   // Load Calendly script if not already loaded
   if (!window.Calendly) {
-    // Dynamically inject Calendly script
     await new Promise((resolve, reject) => {
       const script = document.createElement("script");
       script.src = "https://assets.calendly.com/assets/external/widget.js";
@@ -34,23 +47,23 @@ export const openCalendlyPopup = async () => {
 
   window.Calendly.initPopupWidget({
     url: "https://calendly.com/zencarbuying/15-minute-consultation-with-a-zen-guide?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=f99f1b&text_color=6b8385&background_color=eaf3f3",
+    parentDomain: window.location.hostname,
   });
 
-  // Track the Calendly open as a Meta "Schedule" event
   if (typeof window.fbq === "function") {
-    window.fbq('track', 'Schedule');
+    window.fbq("track", "Schedule");
   }
 
   window.__CALENDLY_POPUP_OPEN__ = true;
 
-  // Adjust styles for improved mobile UX
+  // UX adjustments
   setTimeout(() => {
     const calendlyPopup = document.querySelector(".calendly-popup");
     if (calendlyPopup) {
       calendlyPopup.style.width = "100vw";
       calendlyPopup.style.height = "100vh";
       calendlyPopup.style.maxHeight = "100vh";
-      calendlyPopup.style.overflow = "auto";  // Enable scrolling
+      calendlyPopup.style.overflow = "auto";
       calendlyPopup.setAttribute("role", "dialog");
       calendlyPopup.setAttribute("aria-modal", "true");
       calendlyPopup.setAttribute("aria-label", "Schedule a Consultation");
@@ -65,10 +78,8 @@ export const openCalendlyPopup = async () => {
       });
     }
 
-    // Prevent body scrolling while Calendly is open
     document.body.style.overflow = "hidden";
 
-    // Restore scrolling when Calendly closes
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (
@@ -77,7 +88,7 @@ export const openCalendlyPopup = async () => {
             node.classList?.contains("calendly-popup")
           )
         ) {
-          document.body.style.overflow = ""; // Restore scrolling
+          document.body.style.overflow = "";
           window.__CALENDLY_POPUP_OPEN__ = false;
         }
       });
