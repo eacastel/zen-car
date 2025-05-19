@@ -15,7 +15,7 @@ module.exports = {
       resolve: `gatsby-plugin-sharp`,
       options: {
         defaults: {
-          formats: ["webp", "png"], 
+          formats: ["webp", "png"],
           placeholder: "blurred",
           quality: 90,
           breakpoints: [1080, 1366, 1920],
@@ -23,7 +23,7 @@ module.exports = {
         failOn: "none",
         base64Width: 20,
         forceBase64Format: "png",
-        useMozJpeg: false, 
+        useMozJpeg: false,
         stripMetadata: true,
       },
     },
@@ -52,12 +52,12 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-postcss`,
-        options: {
-          postCssPlugins: [
-            require(`tailwindcss`),
-            require(`autoprefixer`),
-          ],
-        },
+      options: {
+        postCssPlugins: [
+          require(`tailwindcss`),
+          require(`autoprefixer`),
+        ],
+      },
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -65,10 +65,10 @@ module.exports = {
         name: `Zen Car Buying`,
         short_name: `ZenCar`,
         start_url: `/`,
-        background_color: `#6B8385`, 
-        theme_color: `#F99F1B`, 
+        background_color: `#6B8385`,
+        theme_color: `#F99F1B`,
         display: `minimal-ui`,
-        icon: `src/images/zen-car-buying-logo.png`, 
+        icon: `src/images/zen-car-buying-logo.png`,
         include_favicon: true,
       },
     },
@@ -94,16 +94,31 @@ module.exports = {
       options: {
         host: "https://zencarbuying.com",
         sitemap: "https://zencarbuying.com/sitemap-0.xml",
-        policy: [
-          {
-            userAgent: "*",
-            allow: "/",
-            disallow: [
-              '/0356516065660-tag-me',
-              '/0356516065660-untag-me'
-            ], 
-          }
-        ],
+        resolveEnv: () => process.env.NETLIFY_ENV || process.env.NODE_ENV,
+        env: {
+          'production': {
+            policy: [
+              {
+                userAgent: "*",
+                allow: "/",
+                disallow: [
+                  '/0356516065660-tag-me',
+                  '/0356516065660-untag-me'
+                ]
+              }
+            ],
+          },
+          'branch-deploy': {
+            policy: [{ userAgent: "*", disallow: "/" }],
+            sitemap: null,
+            host: null,
+          },
+          'deploy-preview': {
+            policy: [{ userAgent: "*", disallow: "/" }],
+            sitemap: null,
+            host: null,
+          },
+        },
       },
     },
     {
@@ -113,7 +128,7 @@ module.exports = {
           skipWaiting: false,
           clientsClaim: false,
         },
-        precachePages: [], 
+        precachePages: [],
       },
     },
     {
