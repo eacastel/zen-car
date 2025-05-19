@@ -83,10 +83,9 @@ module.exports = {
           cookie_expires: 0,
         },
         pluginConfig: {
-          head: false,
-          respectDNT: true,
+          head: true,
           exclude: [],
-          delayOnRouteUpdate: 2000,
+          delayOnRouteUpdate: 0,
         },
       },
     },
