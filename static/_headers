@@ -1,0 +1,17 @@
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+  Content-Security-Policy: 
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com *.facebook.net *.calendly.com *.stripe.com;
+    style-src 'self' 'unsafe-inline' *.calendly.com;
+    frame-src *.calendly.com *.facebook.com *.stripe.com;
+    connect-src 'self' *.google-analytics.com *.analytics.google.com *.calendly.com *.stripe.com;
+    img-src 'self' data: *.facebook.com *.google-analytics.com *.calendly.com;
+    font-src 'self' https://zencarbuying.com;
+
+  Cache-Control: public, max-age=3600
