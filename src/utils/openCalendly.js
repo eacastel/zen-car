@@ -1,12 +1,20 @@
 // Only attach the Calendly booking listener once
 if (typeof window !== "undefined" && !window.__CALENDLY_BOOKED_LISTENER__) {
   window.addEventListener("message", function (e) {
-    if (e?.data?.event === "calendly.event_scheduled") {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "calendly_booked",
-        calendly_url: e.data.payload?.event?.uri || "",
-      });
+    try {
+      const eventName = e?.data?.event;
+      if (eventName === "calendly.event_scheduled") {
+        console.log("✅ Calendly booking confirmed!", e.data);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "calendly_booked",
+          calendly_url: e?.data?.payload?.event?.uri || "",
+        });
+      } else {
+        console.log("📭 Ignored message:", e.data);
+      }
+    } catch (err) {
+      console.warn("📛 Error parsing Calendly event:", err);
     }
   });
   window.__CALENDLY_BOOKED_LISTENER__ = true;
