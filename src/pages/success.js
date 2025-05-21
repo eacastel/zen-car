@@ -11,7 +11,7 @@ const SuccessPage = () => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const intentId = params.get("payment_intent");
-      if (!intentId) return;
+      if (!intentId || window.__CONVERSION_FIRED__) return;
 
       setPaymentIntentId(intentId);
 
