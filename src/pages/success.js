@@ -4,30 +4,48 @@ import Seo from "../components/Seo";
 import Button from "../components/Button";
 
 const SuccessPage = () => {
-  const [sessionId, setSessionId] = useState("");
+  const [amount, setAmount] = useState(null);
+  const [paymentIntentId, setPaymentIntentId] = useState("");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
-      const id = params.get("session_id") || "";
-      setSessionId(id);
+      const intentId = params.get("payment_intent");
+      if (!intentId) return;
 
-      // ✅ Fire Google Ads conversion via GTM
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "checkout_success",
-        value: 327.07, // TODO: replace with dynamic amount if needed
-        currency: "USD",
-        transaction_id: id, // optional
-      });
+      setPaymentIntentId(intentId);
 
-      // ✅ Fire Meta Pixel Purchase
-      if (window.fbq && id) {
-        window.fbq("track", "Purchase", {
-          currency: "USD",
-          content_name: "Zen Car Buying Package"
+      fetch("/.netlify/functions/get-payment-intent", {
+        method: "POST",
+        body: JSON.stringify({ id: intentId }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.amount) {
+            const amountInDollars = data.amount / 100;
+            setAmount(amountInDollars);
+
+            // ✅ Fire Google Ads conversion
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: "checkout_success",
+              value: amountInDollars,
+              currency: "USD",
+              transaction_id: intentId,
+            });
+
+            // ✅ Fire Meta Purchase Pixel
+            if (window.fbq) {
+              window.fbq("track", "Purchase", {
+                currency: "USD",
+                content_name: "Zen Car Buying Package",
+              });
+            }
+          }
+        })
+        .catch(err => {
+          console.error("❌ Failed to retrieve payment intent", err);
         });
-      }
     }
   }, []);
 
@@ -44,8 +62,11 @@ const SuccessPage = () => {
           <p className="text-lg mb-6">
             Your checkout session has been successfully completed.
           </p>
-          {sessionId && (
-            <p className="text-sm text-gray-600 mb-6">Session ID: {sessionId}</p>
+          {paymentIntentId && (
+            <p className="text-sm text-gray-600 mb-2">PI-ID: {paymentIntentId}</p>
+          )}
+          {amount && (
+            <p className="text-sm text-gray-600 mb-6">Amount: ${amount.toFixed(2)}</p>
           )}
           <Button to="/" color="accent" size="lg">
             Return Home
