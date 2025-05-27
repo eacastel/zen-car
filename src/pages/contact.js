@@ -193,7 +193,7 @@ export default function ContactPage() {
 
               {/* Always enabled */}
               <a
-                href="sms:+13108803755"
+                href="sms:+18886516088"
                 className="px-4 py-2 rounded-md text-sm text-white bg-primary hover:bg-primary-dark"
               >
                 Send SMS
