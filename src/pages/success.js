@@ -25,21 +25,25 @@ const SuccessPage = () => {
             const amountInDollars = data.amount / 100;
             setAmount(amountInDollars);
 
-            // ✅ Fire Google Ads conversion
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-              event: "checkout_success",
-              value: amountInDollars,
-              currency: "USD",
-              transaction_id: intentId,
-            });
+            if (!window.__CONVERSION_FIRED__) {
+              window.__CONVERSION_FIRED__ = true;
 
-            // ✅ Fire Meta Purchase Pixel
-            if (window.fbq) {
-              window.fbq("track", "Purchase", {
+              // ✅ Fire Google Ads conversion
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: "checkout_success",
+                value: amountInDollars,
                 currency: "USD",
-                content_name: "Zen Car Buying Package",
+                transaction_id: intentId,
               });
+
+              // ✅ Fire Meta Purchase Pixel
+              if (window.fbq) {
+                window.fbq("track", "Purchase", {
+                  currency: "USD",
+                  content_name: "Zen Car Buying Package",
+                });
+              }
             }
           }
         })
@@ -51,10 +55,10 @@ const SuccessPage = () => {
 
   return (
     <Layout>
-      <Seo 
-        title="Order Success | Zen Car Buying" 
-        description="Your order has been successfully processed. Thank you for choosing Zen Car Buying for your car buying experience across the USA." 
-        pathname="/success" 
+      <Seo
+        title="Order Success | Zen Car Buying"
+        description="Your order has been successfully processed. Thank you for choosing Zen Car Buying for your car buying experience across the USA."
+        pathname="/success"
       />
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px] text-center">

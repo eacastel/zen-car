@@ -32,7 +32,7 @@ export function Hero() {
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50 flex items-center">
+      <div className="absolute inset-0 bg-[#1A1A1A]/80 md:bg-black/50 flex items-center">
         <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px] text-center text-white">
           <p className="text-lg uppercase tracking-wider mb-4 font-pirulen" >THE MODERN APPROACH TO CAR BUYING</p>
 
