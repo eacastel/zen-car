@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { openCalendlyPopup } from "../utils/openCalendly"; // ✅ Import your Calendly popup utility
+import { openCalendlyPopup } from "../../utils/openCalendly"; // ✅ Import your Calendly popup utility
 
 export default function HowItWorks() {
     const steps = [
@@ -22,24 +22,24 @@ export default function HowItWorks() {
                     >
                         Book your free 15-minute call
                     </button>{" "}
-                    to go over your budget and preferences.
+                    with a licensed car broker to discuss your goals, budget, and preferences.
                 </>
             )
         },
         {
             step: '2',
             title: 'Get Recommendations',
-            desc: 'Receive a customized proposal with your recommendation.',
+            desc: 'Receive a personalized proposal from your dedicated broker, outlining the best make/model/year options for you.',
         },
         {
             step: '3',
             title: 'Review Inventory',
-            desc: 'We locate and provide the best vehicles matching your recommendation.',
+            desc: 'We source and verify vehicles nationwide that match your recommendation — often at significant savings.',
         },
         {
             step: '4',
-            title: 'Purchase Assistance',
-            desc: 'Let your Zen Guides do the work so you don’t have to.',
+            title: 'Brokered Purchase Assistance',
+            desc: 'Your Zen Car Broker handles all dealer communication, negotiation, paperwork, and delivery coordination.',
         },
     ];
 

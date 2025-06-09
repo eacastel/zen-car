@@ -1,3 +1,5 @@
+//src/components/Seo.js
+
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import testimonialsData from "../data/testimonials.json";

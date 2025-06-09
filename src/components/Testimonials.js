@@ -1,3 +1,5 @@
+//src/components/Testimonials.js
+
 import React from 'react'
 import Slider from 'react-slick'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'

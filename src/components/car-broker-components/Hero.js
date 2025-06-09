@@ -3,13 +3,13 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import CalendlyButton from "../components/CalendlyButton";
+import CalendlyButton from "../../components/CalendlyButton";
 
 
 export function Hero() {
   const data = useStaticQuery(graphql`
     query {
-      heroBg: file(relativePath: { eq: "hero-bg.png" }) {
+      heroBg: file(relativePath: { eq: "car-broker-purchase-zen-car-concierge-2.png" }) {
         childImageSharp {
           gatsbyImageData(
             layout: FULL_WIDTH
@@ -39,11 +39,11 @@ export function Hero() {
           <p className="text-lg uppercase tracking-wider mb-4 font-pirulen" >THE MODERN APPROACH TO CAR BUYING</p>
 
           <h1 className="text-4xl md:text-5xl mb-4" style={{
-    fontFamily:'"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif', }}>Stress-Free, Data-Driven Car Buying Assistance
+    fontFamily:'"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif', }}>Your Trusted Nationwide Car Broker
           </h1>
 
           <p className="text-xl font-poppins tracking-widest uppercase mb-8">
-            Let our Zen Guides find you a lightly used car at up to 30-50% off new car prices.
+            Skip dealership stress. Our licensed brokers help you find the best cars at unbeatable prices.
           </p>
 
           {/* Buttons - Styled using the existing Button component */}

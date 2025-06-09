@@ -1,11 +1,11 @@
-//src/components/Layout.js
+
 
 import React, { useEffect } from "react"
 import { useLocation } from "@reach/router"
-import Header from "./Header";
+import Header from "../Header";
 import Footer from "./Footer";
-import FloatingTextButton from "./FloatingTextButton"; 
-import ExitIntentPopup from "./ExitIntentPopup";
+import FloatingTextButton from "../FloatingTextButton"; 
+import ExitIntentPopup from "../ExitIntentPopup";
 
 export default function Layout({ children }) {
   const location = useLocation()

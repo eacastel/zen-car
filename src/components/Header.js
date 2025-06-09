@@ -1,3 +1,5 @@
+//src/components/Header.js
+
 import React, { useState, useEffect, useRef } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";

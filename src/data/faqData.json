@@ -9,7 +9,20 @@
         ]
     },
     {
-        "question": "How does Zen Car Buying’s concierge service work?",
+        "question": "What is a car broker, and how is it different from a dealer?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "A car broker is a licensed professional who works on your behalf—not the dealer’s—to help you find and negotiate the best deal on a vehicle. Unlike traditional dealers, we don't have inventory to sell, so our only goal is to save you time, money, and stress."
+            },
+            {
+                "type": "text",
+                "content": "At Zen Car Buying, our brokers guide you through the entire process—from research and sourcing to negotiation and delivery—offering expert, unbiased advice every step of the way."
+            }
+        ]
+    },
+    {
+        "question": "How does Zen Car Buying’s Concierge Service work?",
         "answer": [
             {
                 "type": "text",
@@ -39,7 +52,7 @@
         ]
     },
     {
-        "question": "What are the benefits of using a car-buying concierge?",
+        "question": "What are the benefits of using a car-buying concierge / Car Broker?",
         "answer": [
             {
                 "type": "text",
@@ -58,6 +71,32 @@
             {
                 "type": "text",
                 "content": "With these benefits, you can enjoy a hassle-free car-buying experience."
+            }
+        ]
+    },
+    {
+        "question": "Do you work with customers across the continental US?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "Yes! Zen Car Buying serves clients across the entire continental United States. Whether you're in a major metro area or a smaller town, our team can source vehicles from a nationwide network of dealerships and private sellers."
+            },
+            {
+                "type": "text",
+                "content": "We also coordinate delivery and remote paperwork, so you can complete your car purchase without ever stepping into a dealership."
+            }
+        ]
+    },
+    {
+        "question": "Do you service my city? Can you deliver the car to me?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "Yes, Zen Car Buying services clients in all major cities and smaller towns across the continental United States. No matter where you're located, we can help you find and purchase the right vehicle."
+            },
+            {
+                "type": "text",
+                "content": "We also coordinate vehicle delivery directly to your home or preferred location, so you never have to visit a dealership in person. Our goal is to make car buying 100% stress-free, no matter where you live."
             }
         ]
     },
