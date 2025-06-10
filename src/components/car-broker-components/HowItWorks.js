@@ -22,7 +22,7 @@ export default function HowItWorks() {
                     >
                         Book your free 15-minute call
                     </button>{" "}
-                    with a licensed car broker to discuss your goals, budget, and preferences.
+                    with a your Zen Guide to discuss your goals, budget, and preferences.
                 </>
             )
         },

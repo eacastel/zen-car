@@ -27,7 +27,7 @@ export default function AboutPage({ data }) {
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-primary mb-4">Who We Are</h2>
           <p className="text-base md:text-lg text-primary mb-4">
-            At <strong>Zen Car Buying</strong>, we simplify the car-buying experience. As a <strong>licensed car broker</strong> and concierge service, we leverage years of expertise and modern tools to ensure you secure lightly used, luxury vehicles—stress-free.
+            At <strong>Zen Car Buying</strong>, we simplify the car-buying experience. As a <strong>car brokering</strong> and concierge service, we leverage years of expertise and modern tools to ensure you secure lightly used, luxury vehicles—stress-free.
           </p>
           <p className="text-base md:text-lg text-primary mb-4">
             Our Zen Guides exclusively represent your interests, providing personalized service to locate, negotiate, and deliver your ideal vehicle, often at <strong>50–70% below original MSRP</strong>.
@@ -153,7 +153,7 @@ export const query = graphql`
 export const Head = () => (
   <Seo
     title="About Zen Car Buying | Nationwide Car Broker & Concierge"
-    description="Zen Car Buying provides nationwide licensed car broker and concierge services, delivering exceptional deals on lightly used and luxury vehicles."
+    description="Zen Car Buying provides local and nationwide car brokering and concierge services to source, negotiate, and deliver the best new and used vehicles—saving you time, money, and stress."
     pathname="/about"
   />
 )

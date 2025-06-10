@@ -66,9 +66,9 @@ const CarBroker = () => {
           </h2>
           <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
             {[
-              { title: 'Expert Broker Recommendations', key: 'recommendations', desc: 'Personalized picks from professional car brokers based on your needs & budget.' },
-              { title: 'Nationwide Inventory & Broker Access', key: 'sourcing', desc: 'Top vehicles sourced nationwide by your dedicated brokers.' },
-              { title: 'Negotiation by Professional Brokers', key: 'negotiation', desc: 'Our licensed brokers negotiate deals so you don\'t have to.' },
+              { title: 'Expert Recommendations', key: 'recommendations', desc: 'Personalized picks from our professional car brokers based on your needs & budget.' },
+              { title: 'Nationwide and Local Inventory', key: 'sourcing', desc: 'Top vehicles sourced locally and nationwide by your dedicated Zen Guide.' },
+              { title: 'Time Saving, Stress Free Buying', key: 'negotiation', desc: 'Zen Car Buying’s experienced car brokers deal and negotiate directly with the dealership  so you don\'t have to.' },
             ].map((benefit, index) => (
               <div key={index} className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                 <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}

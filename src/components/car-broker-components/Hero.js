@@ -39,11 +39,11 @@ export function Hero() {
           <p className="text-lg uppercase tracking-wider mb-4 font-pirulen" >THE MODERN APPROACH TO CAR BUYING</p>
 
           <h1 className="text-4xl md:text-5xl mb-4" style={{
-    fontFamily:'"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif', }}>Your Trusted Nationwide Car Broker
+    fontFamily:'"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif', }}>Your Trusted Nationwide Car Brokers
           </h1>
 
           <p className="text-xl font-poppins tracking-widest uppercase mb-8">
-            Skip dealership stress. Our licensed brokers help you find the best cars at unbeatable prices.
+            Skip the dealership. Our brokers help you find the best new and used cars without the stress.
           </p>
 
           {/* Buttons - Styled using the existing Button component */}
