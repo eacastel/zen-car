@@ -107,7 +107,7 @@ export const query = graphql`
         excerpt
         date(formatString: "YYYY-MM-DD")
         featureImage {
-          gatsbyImageData(layout: CONSTRAINED, width: 400, height: 200, placeholder: BLURRED)
+          gatsbyImageData(layout: CONSTRAINED, width: 600, height: 300, placeholder: BLURRED)
           title
         }
       }
