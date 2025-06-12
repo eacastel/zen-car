@@ -5,7 +5,26 @@ if (typeof window !== "undefined" && !window.__CALENDLY_BOOKED_LISTENER__) {
       const eventName = e?.data?.event;
       if (eventName === "calendly.event_scheduled") {
         console.log("✅ Calendly booking confirmed!", e.data);
+
+        const email = e?.data?.payload?.invitee?.email;
+        const firstName = e?.data?.payload?.invitee?.first_name;
+        const lastName = e?.data?.payload?.invitee?.last_name;
+
         window.dataLayer = window.dataLayer || [];
+
+        // Push enhanced conversion data for Google Ads
+        if (email) {
+          window.dataLayer.push({
+            event: "enhanced_conversion_data",
+            user_data: {
+              email,
+              first_name: firstName || undefined,
+              last_name: lastName || undefined,
+            }
+          });
+        }
+
+        // Standard Calendly booking event
         window.dataLayer.push({
           event: "calendly_booked",
           calendly_url: e?.data?.payload?.event?.uri || "",

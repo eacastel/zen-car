@@ -35,7 +35,7 @@ export default function AboutPage({ data }) {
             <strong>used car buying concierge</strong> service that solves for that using years of experience buying used cars. Our Zen Guides ensure you get the best value without the stress of traditional car buying. And with our modern approach we take advantage of systems and tools so you don’t have to step into a single dealership!
           </p>
           <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
-            We specialize in sourcing <strong>lightly used cars</strong> and <strong>luxury used cars</strong> at incredible savings — often at <strong>50-70% less</strong> than their original new car sticker price.  
+            We specialize in sourcing <strong>lightly used cars</strong> and <strong>luxury used cars</strong> at incredible savings — often at <strong>30-50% less</strong> than their original new car sticker price.  
             Imagine owning a lightly used <strong>$50,000 BMW 3 series</strong> for only $30,000 or a <strong>$90,000 Audi e-tron electric SUV</strong> for just $40,000.
           </p>
           <p className="text-base md:text-lg text-primary leading-relaxed mb-4">

@@ -125,7 +125,7 @@ export const Head = () => (
           "https://www.instagram.com/zencarbuying"
         ],
         "description":
-          "Zen Car Buying helps you find luxury and lightly used cars at 50–70% off with expert concierge help."
+          "Zen Car Buying helps you find luxury and lightly used cars at 30–50% off with expert concierge help."
       })}
     </script>
   </Seo>

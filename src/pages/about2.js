@@ -30,7 +30,7 @@ export default function AboutPage({ data }) {
             At <strong>Zen Car Buying</strong>, we simplify the car-buying experience. As a <strong>car brokering</strong> and concierge service, we leverage years of expertise and modern tools to ensure you secure lightly used, luxury vehicles—stress-free.
           </p>
           <p className="text-base md:text-lg text-primary mb-4">
-            Our Zen Guides exclusively represent your interests, providing personalized service to locate, negotiate, and deliver your ideal vehicle, often at <strong>50–70% below original MSRP</strong>.
+            Our Zen Guides exclusively represent your interests, providing personalized service to locate, negotiate, and deliver your ideal vehicle, often at <strong>30–50% below original MSRP</strong>.
           </p>
         </section>
 
