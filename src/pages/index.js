@@ -5,6 +5,8 @@ import Seo from '../components/Seo'
 import { Hero } from '../components/Hero'
 import CallToAction from '../components/CallToAction'
 
+
+
 const HowItWorks = lazy(() => import('../components/HowItWorks'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
 
@@ -56,6 +58,21 @@ const icons = {
 const HomePage = () => {
   const testimonialsRef = useRef();
   const showTestimonials = useOnScreen(testimonialsRef, '100px');
+
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    const localPref = localStorage.getItem("preferredHome");
+
+    const cookieMatch = document.cookie.match(/(?:^|;\s*)preferredHome=([^;]+)/);
+    const cookiePref = cookieMatch?.[1];
+
+    const preferredHome = localPref || cookiePref;
+
+    if (preferredHome && preferredHome !== "/") {
+      navigate(preferredHome, { replace: true });
+    }
+  }
+}, []);
 
   return (
     <Layout>
