@@ -20,8 +20,16 @@ if (typeof window !== "undefined" && !window.__CALENDLY_BOOKED_LISTENER__) {
               email,
               first_name: firstName || undefined,
               last_name: lastName || undefined,
-            }
+            },
           });
+
+          if (typeof gtag === "function") {
+            gtag("set", "user_data", {
+              email: email,
+              first_name: firstName || undefined,
+              last_name: lastName || undefined,
+            });
+          }
         }
 
         // Standard Calendly booking event
