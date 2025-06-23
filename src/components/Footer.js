@@ -12,7 +12,7 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Zen Car Buying</h3>
             <p className="text-secondary leading-relaxed">
-              Your trusted concierge for stress-free car purchases. Let our Zen Guides guide you to the best deals with personalized advice and expert strategies.
+              Zen Car Buying is a nationwide car brokerage providing concierge service for stress-free purchases. Our Zen Guides research, source and negotiate to deliver you the best new and used vehicles saving you time, money, and stress.
             </p>
             <p className="leading-relaxed mt-2">
               Call Us:

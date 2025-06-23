@@ -18,18 +18,18 @@ export default function HowItWorks() {
                             openCalendlyPopup();
                         }}
                         className="text-gray-200 underline focus:outline-none focus:ring-2 focus:ring-accent"
-                        aria-label="Schedule a free 15-minute consultation"
+                        aria-label="Schedule a free 15-minute consultation. Talk with a Zen Guide to define your ideal used car and budget"
                     >
                         Book your free 15-minute call
                     </button>{" "}
-                    to go over your budget and preferences.
+                    to define your ideal used car and budget.
                 </>
             )
         },
         {
             step: '2',
             title: 'Get Recommendations',
-            desc: 'Receive a customized recommendation tailored to your needs.',
+            desc: 'Receive a tailored proposal with ideal vehicles, trims, and years.',
         },
         {
             step: '3',
@@ -49,7 +49,7 @@ export default function HowItWorks() {
                 <h2 id="how-it-works" className="text-4xl font-medium text-center text-white mb-12">
                     Our <span className="text-white">Proven 4-Step Process</span>
                 </h2>
-                <p className="text-base md:text-lg text-primary mb-4">At Zen Car Buying we remove the stress and simplify the complex world of car buying. It all starts with a free 15-minute consultation.</p>
+                <p className="text-base md:text-lg text-primary mb-4">At Zen Car Buying we remove the stress and simplify the complex world of used car buying. It all starts with a free 15-minute consultation.</p>
                 <div className="grid md:grid-cols-1 lg:grid-cols-4 gap-12">
                     {steps.map((step, index) => (
                         <motion.div

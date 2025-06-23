@@ -1,10 +1,9 @@
-//src/components/Hero.js
+// src/components/Hero.js
 
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import CalendlyButton from "../../components/CalendlyButton";
-
+import CalendlyButton from '../../components/CalendlyButton';
 
 export function Hero() {
   const data = useStaticQuery(graphql`
@@ -25,7 +24,10 @@ export function Hero() {
   const heroImage = getImage(data.heroBg);
 
   return (
-    <section className="relative w-full h-[600px]">
+    <section
+      className="relative w-full h-[600px]"
+      aria-labelledby="hero-title"
+    >
       {/* Background Image */}
       <GatsbyImage
         image={heroImage}
@@ -36,23 +38,30 @@ export function Hero() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#1A1A1A]/80 md:bg-black/50 flex items-center">
         <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px] text-center text-white">
-          <p className="text-lg uppercase tracking-wider mb-4 font-pirulen" >THE MODERN APPROACH TO CAR BUYING</p>
+          <p className="text-lg uppercase tracking-wider mb-4 font-pirulen">
+            THE MODERN APPROACH TO CAR BUYING
+          </p>
 
-          <h1 className="text-4xl md:text-5xl mb-4" style={{
-    fontFamily:'"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif', }}>Your Trusted Nationwide Car Brokers
+          <h1
+            id="hero-title"
+            className="text-4xl md:text-5xl mb-4"
+            style={{
+              fontFamily:
+                '"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+            }}
+          >
+            Your Trusted Used Car Broker – Nationwide
           </h1>
 
           <h2 className="text-xl font-poppins tracking-widest uppercase mb-8">
-            Skip the dealership. Our brokers help you find the best new and used cars without the stress.
+            Skip the dealership hassle. Zen Car Buying connects you with top used cars — located, negotiated, and delivered by expert used car brokers.
           </h2>
 
-          {/* Buttons - Styled using the existing Button component */}
+          {/* Call to Action Button */}
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <CalendlyButton size="lg" color="accent">
               Schedule Your Free Consultation
             </CalendlyButton>
-
-
           </div>
         </div>
       </div>

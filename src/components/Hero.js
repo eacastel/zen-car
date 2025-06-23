@@ -42,9 +42,9 @@ export function Hero() {
     fontFamily:'"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif', }}>Stress-Free, Data-Driven Car Buying Assistance
           </h1>
 
-          <p className="text-xl font-poppins tracking-widest uppercase mb-8">
+          <h2 className="text-xl font-poppins tracking-widest uppercase mb-8">
             Let our Zen Guides find you a lightly used car at up to 30-50% off new car prices.
-          </p>
+          </h2>
 
           {/* Buttons - Styled using the existing Button component */}
           <div className="flex flex-col sm:flex-row justify-center gap-4">

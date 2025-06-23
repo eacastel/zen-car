@@ -12,12 +12,12 @@ export default function CallToAction() {
           id="cta-heading"
           className="text-3xl !leading-snug md:text-4xl lg:text-5xl font-medium mb-6 "
         >
-          "Experience the confidence  {" "}
-          <span className="text-white">of a trusted car broker."</span>
+          "Experience the benefirs  {" "}
+          <span className="text-white">of a trusted used car broker."</span>
         </h2>
 
         <p className="text-lg md:text-xl mb-6">
-          Get expert broker guidance and stress-free car buying at the best possible price.
+          Get expert broker guidance and stress-free used car buying at the best possible price.
         </p>
 
         <div className="inline-block">
