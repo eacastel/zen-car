@@ -5,10 +5,6 @@ import Seo from '../components/Seo';
 import { Hero } from '../components/car-broker-components/Hero';
 import CallToAction from '../components/car-broker-components/CallToAction';
 
-import { useEffect } from "react";
-
-
-
 const HowItWorks = lazy(() => import('../components/car-broker-components/HowItWorks'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
 

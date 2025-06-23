@@ -5,8 +5,6 @@ import Seo from '../components/Seo';
 import { Hero } from '../components/used-car-broker-components/Hero';
 import CallToAction from '../components/used-car-broker-components/CallToAction';
 
-
-
 const HowItWorks = lazy(() => import('../components/used-car-broker-components/HowItWorks'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
 
