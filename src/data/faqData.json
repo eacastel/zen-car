@@ -52,6 +52,19 @@
         ]
     },
     {
+        "question": "Can you help me find new and used cars?",
+        "answer": [
+            {
+                "type": "text",
+                "content": "Yes — we help clients find both new and lightly used cars, depending on your needs, preferences, and budget. Many of our clients choose lightly used vehicles (2–4 years old) to save 30–50% off the original MSRP while still enjoying the reliability and features of a newer car."
+            },
+            {
+                "type": "text",
+                "content": "If you prefer a brand-new car, we can assist with that too — including personalized model recommendations, dealer communication, and negotiation. Whether you're after the best value on a used car or want the latest model with full factory warranty, our Zen Guides will make the process smooth and stress-free."
+            }
+        ]
+    }
+    {
         "question": "What are the benefits of using a car-buying concierge / Car Broker?",
         "answer": [
             {
