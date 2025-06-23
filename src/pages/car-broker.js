@@ -7,11 +7,7 @@ import CallToAction from '../components/car-broker-components/CallToAction';
 
 import { useEffect } from "react";
 
-useEffect(() => {
-  if (typeof window !== "undefined") {
-    localStorage.setItem("preferredHome", "/car-broker");
-  }
-}, []);
+
 
 const HowItWorks = lazy(() => import('../components/car-broker-components/HowItWorks'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
@@ -62,6 +58,12 @@ const icons = {
 const CarBroker = () => {
   const testimonialsRef = useRef();
   const showTestimonials = useOnScreen(testimonialsRef, '100px');
+
+  useEffect(() => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("preferredHome", "/car-broker");
+  }
+}, []);
 
   return (
     <Layout>

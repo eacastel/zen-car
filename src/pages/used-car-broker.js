@@ -5,11 +5,7 @@ import Seo from '../components/Seo';
 import { Hero } from '../components/used-car-broker-components/Hero';
 import CallToAction from '../components/used-car-broker-components/CallToAction';
 
-useEffect(() => {
-  if (typeof window !== "undefined") {
-    localStorage.setItem("preferredHome", "/used-car-broker");
-  }
-}, []);
+
 
 const HowItWorks = lazy(() => import('../components/used-car-broker-components/HowItWorks'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
@@ -60,6 +56,12 @@ const icons = {
 const CarBroker = () => {
   const testimonialsRef = useRef();
   const showTestimonials = useOnScreen(testimonialsRef, '100px');
+
+  useEffect(() => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("preferredHome", "/used-car-broker");
+  }
+}, []);
 
   return (
     <Layout>
