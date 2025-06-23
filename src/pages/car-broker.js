@@ -57,8 +57,9 @@ const CarBroker = () => {
 
   useEffect(() => {
   if (typeof window !== "undefined") {
-    localStorage.setItem("preferredHome", "/car-broker");
-    document.cookie = "preferredHome=/car-broker; path=/; max-age=2592000";
+    const path = "/car-broker";
+    localStorage.setItem("preferredHome", path);
+    document.cookie = `preferredHome=${path}; path=/; max-age=2592000`;
   }
 }, []);
 
