@@ -1,3 +1,4 @@
+/* global gtag */
 // Only attach the Calendly booking listener once
 if (typeof window !== "undefined" && !window.__CALENDLY_BOOKED_LISTENER__) {
   window.addEventListener("message", function (e) {

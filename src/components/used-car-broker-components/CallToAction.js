@@ -12,8 +12,8 @@ export default function CallToAction() {
           id="cta-heading"
           className="text-3xl !leading-snug md:text-4xl lg:text-5xl font-medium mb-6 "
         >
-          "Experience the benefirs  {" "}
-          <span className="text-white">of a trusted used car broker."</span>
+          "Experience the joy   {" "}
+          <span className="text-white">of compassionate care buying."</span>
         </h2>
 
         <p className="text-lg md:text-xl mb-6">

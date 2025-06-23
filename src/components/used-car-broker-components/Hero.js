@@ -50,11 +50,11 @@ export function Hero() {
                 '"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
             }}
           >
-            Your Trusted Used Car Broker – Nationwide
+            Your Trusted Nationwide Used Car Brokerage
           </h1>
 
           <h2 className="text-xl font-poppins tracking-widest uppercase mb-8">
-            Skip the dealership hassle. Zen Car Buying connects you with top used cars — located, negotiated, and delivered by expert used car brokers.
+            Zen Car Buying connects you with top used cars by expert used car brokers often at 30-50% original MSRP!
           </h2>
 
           {/* Call to Action Button */}

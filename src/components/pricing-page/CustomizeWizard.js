@@ -12,21 +12,11 @@ const CustomizeWizard = () => {
       price: 0,
       description: "Skip expert recommendations and proceed with your own choices."
     },
-    {
-      label: "1 Car",
-      price: 250,
-      description: "Includes recommendation for 1 make, model, year and trim level."
-    },
-    {
-      label: "2 Cars",
-      price: 350,
-      description: "Includes recommendation for 2 makes, models, years and trim levels."
-    },
-    {
-      label: "3 Cars",
-      price: 450,
-      description: "Includes recommendation for 3 makes, models, years and trim levels."
-    }
+  {
+    label: "Research",
+    price: 250,
+    description: "We research the best year, make and model based on your needs."
+  }
   ];
 
   const [researchSelection, setResearchSelection] = useState(null);
