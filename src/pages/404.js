@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Layout from "../components/Layout";
 import Seo from "../components/Seo";
+import { getHomePath } from "../utils/getHomePath";
 
 export default function NotFoundPage({ data }) {
   const raceCarImage = getImage(data.raceCar);
@@ -29,7 +30,7 @@ export default function NotFoundPage({ data }) {
 
             <div className="flex flex-wrap justify-center gap-4">
               <Link
-                to="/"
+                to={getHomePath()}
                 className="px-6 py-3 bg-primary text-white rounded-lg shadow-md hover:bg-primary-dark transition"
               >
                 Back to Home

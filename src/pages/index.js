@@ -1,3 +1,4 @@
+import { navigate } from "gatsby";
 import React, { lazy, Suspense, useState, useEffect, useRef } from 'react'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'

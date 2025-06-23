@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import Seo from "../components/Seo";
 import Button from "../components/Button";
+import { getHomePath } from "../utils/getHomePath";
 
 const SuccessPage = () => {
   const [amount, setAmount] = useState(null);
@@ -72,7 +73,7 @@ const SuccessPage = () => {
           {amount && (
             <p className="text-sm text-gray-600 mb-6">Amount: ${amount.toFixed(2)}</p>
           )}
-          <Button to="/" color="accent" size="lg">
+          <Button to={getHomePath()} color="accent" size="lg">
             Return Home
           </Button>
         </div>

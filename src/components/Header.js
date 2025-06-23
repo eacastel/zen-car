@@ -5,6 +5,7 @@ import { Link, graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Squash as Hamburger } from "hamburger-react";
 import CalendlyButtonHeader from "../components/CalendlyButtonHeader";
+import { getHomePath } from "../utils/getHomePath";
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
@@ -68,7 +69,7 @@ export default function Header() {
       >
         {/* Logo (fixed at 300px wide) */}
         <Link
-          to="/"
+          to={getHomePath()}
           className="z-50 flex-shrink-0"
           style={{ width: "300px" }}
           aria-label="Go to Home Page"
