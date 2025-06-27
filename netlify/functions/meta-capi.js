@@ -4,7 +4,7 @@ const fetch = (...args) =>
 
 
 exports.handler = async function (event) {
-  const { eventName, userData, eventId, eventSourceUrl, value, currency, testEventCode } = JSON.parse(event.body);
+  const { eventName, userData, eventId, eventSourceUrl, value, currency, testEventCode, } = JSON.parse(event.body);
 
   const pixelId = process.env.META_PIXEL_ID;
   const accessToken = process.env.META_CAPI_TOKEN;
@@ -22,9 +22,9 @@ exports.handler = async function (event) {
           value: value || 0,
           currency: currency || "USD",
         },
-        ...(testEventCode && { test_event_code: testEventCode }),
       },
     ],
+    test_event_code: testEventCode,
   };
 
   try {
