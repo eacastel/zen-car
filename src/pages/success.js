@@ -10,6 +10,16 @@ const SuccessPage = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+
+      const sha256 = async (input) => {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(input.toLowerCase().trim());
+        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+        return Array.from(new Uint8Array(hashBuffer))
+          .map((b) => b.toString(16).padStart(2, "0"))
+          .join("");
+      };
+
       const params = new URLSearchParams(window.location.search);
       const intentId = params.get("payment_intent");
       if (!intentId || window.__CONVERSION_FIRED__) return;
@@ -22,6 +32,7 @@ const SuccessPage = () => {
       })
         .then(res => res.json())
         .then(data => {
+
           if (data && data.amount) {
             const amountInDollars = data.amount / 100;
             setAmount(amountInDollars);
@@ -29,7 +40,37 @@ const SuccessPage = () => {
             if (!window.__CONVERSION_FIRED__) {
               window.__CONVERSION_FIRED__ = true;
 
-              // ✅ Fire Google Ads conversion
+              // 🔁 Meta Conversions API via Netlify function
+              (async () => {
+                try {
+                  const email = data.receipt_email || data.customer_email || ""; 
+                  const nameParts = (data?.customer_name ?? "").split(" ");
+                  const firstName = nameParts[0] || "";
+                  const lastName = nameParts.slice(1).join(" ") || "";
+
+                  await fetch("/.netlify/functions/meta-capi", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      eventName: "Purchase",
+                      eventId: `stripe_${intentId}`,
+                      eventSourceUrl: window.location.href,
+                      value: amountInDollars,
+                      currency: "USD",
+                      testEventCode: "TEST98035",
+                      userData: {
+                        em: email ? await sha256(email) : undefined,
+                        fn: firstName ? await sha256(firstName) : undefined,
+                        ln: lastName ? await sha256(lastName) : undefined,
+                      },
+                    }),
+                  });
+                } catch (err) {
+                  console.error("❌ Meta CAPI error (Purchase):", err);
+                }
+              })();
+
+              // 🟩 Google Ads
               window.dataLayer = window.dataLayer || [];
               window.dataLayer.push({
                 event: "checkout_success",
@@ -38,15 +79,17 @@ const SuccessPage = () => {
                 transaction_id: intentId,
               });
 
-              // ✅ Fire Meta Purchase Pixel
+              // 🟦 Meta Pixel
               if (window.fbq) {
                 window.fbq("track", "Purchase", {
                   currency: "USD",
+                  value: amountInDollars,
                   content_name: "Zen Car Buying Package",
                 });
               }
             }
           }
+
         })
         .catch(err => {
           console.error("❌ Failed to retrieve payment intent", err);

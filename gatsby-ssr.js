@@ -5,9 +5,20 @@
  */
 
 // You can delete this file if you're not using it
+
+
+
+
 import * as React from "react"
 
+const isDev = process.env.NODE_ENV !== "production";
+
 export const onRenderBody = ({ setHeadComponents, setHtmlAttributes, setPreBodyComponents, setPostBodyComponents }) => {
+
+  const pixelId = process.env.META_PIXEL_ID;
+  const testCode = "TEST98035";
+
+
   setHtmlAttributes({ lang: 'en' });
   setHeadComponents([
     <link
@@ -63,7 +74,7 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes, setPreBodyC
           t.src=v;s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '1211874510591693');
+          fbq('init', '${pixelId}', ${isDev ? `{ external_id: '${testCode}' }` : "{}"});
           fbq('track', 'PageView');
         `,
       }}
