@@ -1,23 +1,8 @@
-/**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/ssr-apis/
- */
-
-// You can delete this file if you're not using it
-
-
-
-
 import * as React from "react"
-
-const isDev = process.env.NODE_ENV !== "production";
 
 export const onRenderBody = ({ setHeadComponents, setHtmlAttributes, setPreBodyComponents, setPostBodyComponents }) => {
 
   const pixelId = process.env.META_PIXEL_ID;
-  const testCode = "TEST98035";
-
 
   setHtmlAttributes({ lang: 'en' });
   setHeadComponents([
@@ -74,7 +59,7 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes, setPreBodyC
           t.src=v;s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '${pixelId}', ${isDev ? `{ external_id: '${testCode}' }` : "{}"});
+          fbq('init', '${pixelId}');
           fbq('track', 'PageView');
         `,
       }}

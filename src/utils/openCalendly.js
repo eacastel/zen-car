@@ -49,7 +49,6 @@ if (typeof window !== "undefined" && !window.__CALENDLY_BOOKED_LISTENER__) {
                 eventSourceUrl: window.location.href,
                 value: 0,
                 currency: "USD",
-                testEventCode: "TEST98035",
                 userData: {
                   em: email ? await sha256(email) : undefined,
                   fn: firstName ? await sha256(firstName) : undefined,

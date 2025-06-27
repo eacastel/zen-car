@@ -57,7 +57,6 @@ const SuccessPage = () => {
                       eventSourceUrl: window.location.href,
                       value: amountInDollars,
                       currency: "USD",
-                      testEventCode: "TEST98035",
                       userData: {
                         em: email ? await sha256(email) : undefined,
                         fn: firstName ? await sha256(firstName) : undefined,
