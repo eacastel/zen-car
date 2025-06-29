@@ -129,6 +129,8 @@ export const Head = ({ data, location }) => {
   featureImage?.gatsbyImageData?.images?.fallback?.src ??
   "/images/og-zencarbuying.jpg";
 
+  console.log("👀 Head image value:", image);
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
