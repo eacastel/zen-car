@@ -9,7 +9,7 @@ import Seo from "../components/Seo"
 const BlogPost = ({ data }) => {
   const { title, body, metadata, featureImage } = data.contentfulBlogPost
   const tags = metadata?.tags || []
-  const featureImageData = getImage(featureImage)
+  const blogDisplayImage = getImage(featureImage?.displayImage);
   const relatedPosts = data.allContentfulBlogPost.nodes
 
   return (
@@ -27,9 +27,9 @@ const BlogPost = ({ data }) => {
           </header>
 
           {/* Feature Image */}
-          {featureImageData && (
+          {blogDisplayImage && (
             <GatsbyImage
-              image={featureImageData}
+              image={blogDisplayImage}
               alt={featureImage?.title || "Blog post image"}
               className="rounded-lg mb-6 shadow-md"
             />
@@ -94,7 +94,8 @@ export const query = graphql`
         }
       }
       featureImage {
-        gatsbyImageData(
+        title
+        displayImage: gatsbyImageData(
           layout: CONSTRAINED
           width: 800
           placeholder: BLURRED
@@ -103,12 +104,10 @@ export const query = graphql`
           layout: FIXED
           width: 1200
           height: 630
-          formats: [AUTO, JPG]
+          formats: [JPG]
           placeholder: NONE
-    )
-        title
+        )
       }
-    }
     allContentfulBlogPost(limit: 5) {
       nodes {
         title
@@ -123,13 +122,10 @@ export default BlogPost
 
 export const Head = ({ data, location }) => {
   const { title, excerpt, featureImage } = data.contentfulBlogPost
-
-const ogImageSrc = featureImage?.ogImage?.images?.fallback?.src;
-
-const image = ogImageSrc?.startsWith("http")
-  ? ogImageSrc
-  : `https://zencarbuying.com${ogImageSrc || "/images/og-zencarbuying.jpg"}`;
-
+  const ogImageSrc = featureImage?.ogImage?.images?.fallback?.src;
+  const image = ogImageSrc?.startsWith("http")
+    ? ogImageSrc
+    : `https://zencarbuying.com${ogImageSrc || "/images/og-zencarbuying.jpg"}`
   const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
