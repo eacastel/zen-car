@@ -124,13 +124,11 @@ export default BlogPost
 export const Head = ({ data, location }) => {
   const { title, excerpt, featureImage } = data.contentfulBlogPost
 
-const imagePath =
-  featureImage?.ogImage?.images?.fallback?.src ??
-  "/images/og-zencarbuying.jpg";
+const ogImageSrc = featureImage?.ogImage?.images?.fallback?.src;
 
-const image = imagePath.startsWith("http")
-  ? imagePath
-  : `https://zencarbuying.com${imagePath}`;
+const image = ogImageSrc
+  ? `https://zencarbuying.com${ogImageSrc}`
+  : "https://zencarbuying.com/images/og-zencarbuying.jpg";
 
   const schema = {
     "@context": "https://schema.org",
