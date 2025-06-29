@@ -23,7 +23,7 @@ const Seo = ({ title, description, image, pathname, children }) => {
   const siteUrl = siteMetadata.siteUrl;
   const defaultTitle = siteMetadata.title;
   const defaultDescription = siteMetadata.description;
-  const defaultImage = "/images/og-zencarbuying.png";
+  const defaultImage = "/images/og-zencarbuying.jpg";
 
   const metaTitle = title || defaultTitle;
   const metaDescription = description || defaultDescription;
