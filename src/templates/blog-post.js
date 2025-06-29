@@ -103,7 +103,7 @@ export const query = graphql`
           layout: FIXED
           width: 1200
           height: 630
-          formats: [PNG]
+          formats: [AUTO, JPG]
           placeholder: NONE
     )
         title
@@ -124,8 +124,10 @@ export default BlogPost
 export const Head = ({ data, location }) => {
   const { title, excerpt, featureImage } = data.contentfulBlogPost
 
-  const imageSrc = featureImage?.ogImage?.images?.fallback?.src;
-  const image = imageSrc || "/images/og-zencarbuying.jpg";
+  const image =
+  featureImage?.ogImage?.images?.fallback?.src ??
+  featureImage?.gatsbyImageData?.images?.fallback?.src ??
+  "/images/og-zencarbuying.jpg";
 
   const schema = {
     "@context": "https://schema.org",
