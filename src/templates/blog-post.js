@@ -136,7 +136,7 @@ export const Head = ({ data, location }) => {
     },
     headline: title,
     description: excerpt,
-    ...(imageUrl && { image }),
+    ...(image && { image }),
     publisher: {
       "@type": "Organization",
       name: "Zen Car Buying",
