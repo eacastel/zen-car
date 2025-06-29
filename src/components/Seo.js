@@ -27,7 +27,8 @@ const Seo = ({ title, description, image, pathname, children }) => {
 
   const metaTitle = title || defaultTitle;
   const metaDescription = description || defaultDescription;
-  const metaImage = image ? `${siteUrl}${image}` : `${siteUrl}${defaultImage}`;
+  const isAbsoluteUrl = image?.startsWith("http");
+  const metaImage = isAbsoluteUrl ? image : `${siteUrl}${image || defaultImage}`;
   const url = `${siteUrl}${pathname || "/"}`;
 
   const globalSchema = {
