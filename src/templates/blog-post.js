@@ -1,4 +1,5 @@
 import React from "react"
+import { getSrc } from "gatsby-plugin-image";
 import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
@@ -123,11 +124,9 @@ export default BlogPost
 
 export const Head = ({ data, location }) => {
   const { title, excerpt, featureImage } = data.contentfulBlogPost
-  const ogImageSrc = featureImage?.ogImage?.images?.fallback?.src;
 
-   const image = ogImageSrc
-    ? `https://zencarbuying.com${ogImageSrc}`
-    : "https://zencarbuying.com/images/og-zencarbuying.jpg"
+  const ogImageSrc = getSrc(featureImage?.ogImage)
+  const image = ogImageSrc || "https://zencarbuying.com/images/og-zencarbuying.jpg"
 
 
   const schema = {

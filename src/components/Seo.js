@@ -28,10 +28,10 @@ const Seo = ({ title, description, image, pathname, children }) => {
   const metaTitle = title || defaultTitle;
   const metaDescription = description || defaultDescription;
 
-  const isAbsoluteUrl = image?.startsWith("http");
-  const metaImage = isAbsoluteUrl 
-    ? image 
-    : `${siteUrl}${image || defaultImage}`;
+  const metaImage =
+    image?.startsWith("http") || image?.startsWith("//")
+      ? image
+      : `${siteUrl}${image || defaultImage}`;
 
   const url = `${siteUrl}${pathname || "/"}`;
 
