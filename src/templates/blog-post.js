@@ -126,9 +126,9 @@ export const Head = ({ data, location }) => {
 
 const ogImageSrc = featureImage?.ogImage?.images?.fallback?.src;
 
-const image = ogImageSrc
-  ? `https://zencarbuying.com${ogImageSrc}`
-  : "https://zencarbuying.com/images/og-zencarbuying.jpg";
+const image = ogImageSrc?.startsWith("http")
+  ? ogImageSrc
+  : `https://zencarbuying.com${ogImageSrc || "/images/og-zencarbuying.jpg"}`;
 
   const schema = {
     "@context": "https://schema.org",
