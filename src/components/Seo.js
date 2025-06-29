@@ -83,6 +83,7 @@ const Seo = ({ title, description, image, pathname, children }) => {
       <meta property="og:description" content={metaDescription} />
       <meta property="og:url" content={url} />
       <meta property="og:type" content="website" />
+      <meta property="og:image" content={metaImage} />
       <meta
         property="og:image:alt"
         content="Zen Car Buying | Stress-Free Nationwide Concierge Service for New, Lightly Used & Luxury Cars"
