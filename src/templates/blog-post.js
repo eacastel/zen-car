@@ -108,6 +108,7 @@ export const query = graphql`
           placeholder: NONE
         )
       }
+    }
     allContentfulBlogPost(limit: 5) {
       nodes {
         title
