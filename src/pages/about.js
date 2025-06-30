@@ -27,10 +27,10 @@ export default function AboutPage({ data }) {
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-primary mb-4">Who We Are</h2>
           <p className="text-base md:text-lg text-primary mb-4">
-            At <strong>Zen Car Buying</strong>, we simplify the car-buying experience. As a <strong>car broker concierge service</strong> we leverage years of expertise and modern tools to ensure you purchase a high quality, lightly used vehicle, without the time and stress and at the best cost.
+            At <strong>Zen Car Buying</strong>, we simplify the car-buying experience—whether you're shopping for a <strong>brand-new</strong> vehicle or a <strong>lightly used car</strong>. As a <strong>nationwide car broker concierge service</strong>, we leverage years of expertise and modern tools to ensure you get the right car without the time, stress, or dealership pressure.
           </p>
           <p className="text-base md:text-lg text-primary mb-4">
-            Our Zen Guides exclusively represent your interests and are fully transparent; we don’t accept payments from dealers like other ‘free’ car brokers do. We provide personalized service to research, locate, negotiate and deliver your new or used vehicle at the best price! 
+            Our <strong>Zen Guides</strong> exclusively represent your interests.Unlike traditional or “free” car brokers who take kickbacks from dealers, we work only for you. From research to negotiation and delivery, we help you purchase the best <strong>new or used vehicle</strong>—at the best possible price. 
           </p>
         </section>
 
@@ -39,7 +39,7 @@ export default function AboutPage({ data }) {
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <p className="text-base md:text-lg text-primary mb-4">
-                Zen Car Buying serves customers across the <strong>entire continental U.S.</strong>, sourcing vehicles from regions offering the car you want at the best price. Many times, this is thousands less than what your local dealer offers. Wherever you are, we coordinate the entire process including seamless delivery directly to you!
+                Zen Car Buying serves customers across the <strong>continental U.S.</strong>, sourcing both new and used vehicles from markets that offer the best value. This often means thousands in savings over your local dealership. Wherever you're located, we coordinate every detail—from search to <strong>seamless home delivery</strong>.
               </p>
             </div>
             <div>
@@ -57,11 +57,11 @@ export default function AboutPage({ data }) {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <ul className="list-disc pl-5 space-y-2 text-base md:text-lg text-primary">
-                <li>Personalized vehicle recommendations tailored to your needs.</li>
+                <li>Personalized new and used vehicle recommendations tailored to your lifestyle and budget.</li>
                 <li>Expert negotiation for optimal pricing.</li>
                 <li>Vehicle evaluations and history checks.</li>
-                <li>Remote paperwork processing.</li>
-                <li>Home delivery of your selected vehicle.</li>
+                <li>Remote paperwork processing for convenience.</li>
+                <li>Continental U.S. vehicle delivery.</li>
               </ul>
             </div>
             <div>
@@ -111,18 +111,18 @@ export default function AboutPage({ data }) {
               },
               {
                 step: '2',
-                title: 'Get Recommendations',
-                desc: 'Receive a customized recommendation tailored to your needs.',
+                title: 'Get Custom Recommendations',
+                desc: 'We provide personalized, data-backed vehicle suggestions.',
               },
               {
                 step: '3',
                 title: 'Review Inventory',
-                desc: 'We locate and provide the best vehicles matching your recommendation.',
+                desc: 'We source top listings from across the country that match your criteria.',
               },
               {
                 step: '4',
                 title: 'Purchase Assistance',
-                desc: 'Let your Zen Guides do the work so you don’t have to including negotiating the best price and coordinating the transaction with the dealer.',
+                desc: 'Your Zen Guide handles everything—from price negotiation to paperwork and final delivery.',
               },
             ].map((item, index) => (
               <motion.div
@@ -141,13 +141,15 @@ export default function AboutPage({ data }) {
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-primary mb-4">Warranty & Peace of Mind</h2>
           <p className="text-base md:text-lg text-primary">
-            Most recommended vehicles are still under the original manufacturer warranty and qualify for comprehensive extended warranties, ensuring your purchase is worry-free.
+            Most recommended used vehicles are still under the <strong>original manufacturer warranty</strong> and many new cars qualify for <strong>extended coverage</strong>. We help ensure your purchase is as worry-free as it is cost-effective.
           </p>
         </section>
 
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-primary mb-4">Get Started Today</h2>
-          <p className="text-base md:text-lg text-primary">
+          <p className="text-base md:text-lg text-primary mb-4">
+          Whether you're seeking a dependable used car or a brand-new luxury vehicle, Zen Car Buying is your trusted partner for <strong>stress-free car broker services</strong>.</p>
+          <p className="text-base md:text-lg text-primary mb-4">
             Ready to experience stress-free car buying? Click <button
               type="button"
               onClick={(e) => {
