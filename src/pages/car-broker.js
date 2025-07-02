@@ -110,7 +110,7 @@ export default CarBroker
 
 export const Head = () => (
   <Seo
-    title="Car Broker | Zen Car Buying"
+    title="Car Broker for New & Used Cars Nationwide - Zen Car Buying"
     description="Looking for a trusted car broker? Zen Car Buying provides nationwide car broker services to help you find, negotiate, and buy your ideal car without dealership stress."
     pathname="/car-broker"
   >
