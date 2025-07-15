@@ -6,23 +6,6 @@ import { FaCheckCircle } from "react-icons/fa";
 
 const ZenExperienceSection = ({ siteUrl, getStripe }) => {
 
-  const data = useStaticQuery(graphql`
-      query {
-        logo: file(relativePath: { eq: "zen-logo-lotus.png" }) {
-          childImageSharp {
-            gatsbyImageData(
-              width: 150
-              placeholder: BLURRED
-              formats: [AUTO, WEBP]
-              quality: 90
-            )
-          }
-        }
-      }
-    `)
-
-  const logoImage = getImage(data.logo)
-
   const [loading, setLoading] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
 
@@ -81,7 +64,7 @@ const ZenExperienceSection = ({ siteUrl, getStripe }) => {
           Ready to get started?
         </h2>
         <p className="text-lg md:text-xl mx-auto max-w-3xl pb-8 mt-2 text-center text-primary">
-          Our Zen Experience package is the most complete, all‑in‑one solution for a stress‑free car buying journey. Enjoy premium support, expert guidance, and unbeatable value.
+          Choose below our full Zen Experience or customize your package.
         </p>
 
         <div
@@ -95,26 +78,16 @@ const ZenExperienceSection = ({ siteUrl, getStripe }) => {
               className="absolute -top-5 right-0  bg-accent text-white text-sm uppercase px-6 py-2 rounded-tl-lg rounded-br-lg shadow-md font-bold"
               aria-label="Best value offer"
             >
-              Best Value
+              Most Popular
             </span>
+<h2 className="text-3xl font-medium text-primary md:mt-4 mb-4 uppercase tracking-wider font-pirulen">
+                Zen Experience
+              </h2>
 
-            <GatsbyImage
-              image={logoImage}
-              alt="Zen Car Buying Logo"
-              className="w-auto mx-auto"
-              imgStyle={{ objectFit: 'contain', maxWidth: '150px' }}
-            />
+              <p className="text-lg md:text-xl mx-auto max-w-4xl pb-8 mt-2 text-center text-primary">
+                Choose the full Zen Car Buying experience and enjoy a special $200 discount on our most complete, all‑in‑one solution for a truly stress‑free car buying journey.
+              </p>
 
-            <h3
-              id="zen-package-title"
-              className="text-xl font-medium text-primary mb-4 uppercase tracking-wider font-pirulen"
-            >
-              Full Zen Experience
-            </h3>
-
-            <p className="text-primary text-lg mb-4 text-center">
-              Our full Zen experience offers the most complete, stress free car buying experience.
-            </p>
             <p className="text-xl text-accent font-semibold mb-4">
               $1,000 <span className="text-gray-400 ml-1 line-through text-lg">$1,250</span>
             </p>

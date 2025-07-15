@@ -1,3 +1,5 @@
+// CheckoutForm.js
+
 import React, { useState } from "react";
 import { useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
 
@@ -13,20 +15,54 @@ const CheckoutForm = ({ selections, total }) => {
     e.preventDefault();
     if (!stripe || !elements) return;
     setLoading(true);
+    setMessage(null);
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${window.location.origin}/success`,
-        receipt_email: email,
-      },
-    });
+    try {
+      // 🚨 Must submit elements BEFORE any async logic
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        setMessage(submitError.message);
+        setLoading(false);
+        return;
+      }
 
-    if (error) {
-      setMessage(error.message);
+      // ✅ Then create PaymentIntent
+      const response = await fetch("/.netlify/functions/create-payment-intent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: total,
+          name,
+          email,
+          metadata: {
+            selections: JSON.stringify(selections),
+          },
+        }),
+      });
+
+      const { clientSecret } = await response.json();
+
+      // ✅ Now confirm payment
+      const { error } = await stripe.confirmPayment({
+        elements,
+        clientSecret,
+        confirmParams: {
+          return_url: `${window.location.origin}/success`,
+        },
+      });
+
+      if (error) {
+        setMessage(error.message);
+      }
+    } catch (err) {
+      console.error("Payment error:", err);
+      setMessage("Something went wrong.");
     }
+
     setLoading(false);
   };
+
+
 
   return (
     <section className="bg-secondary py-2 md:py-4">
@@ -37,7 +73,7 @@ const CheckoutForm = ({ selections, total }) => {
               Complete Your Purchase
             </h2>
             <p className="text-lg md:text-xl mx-auto max-w-4xl pb-8 mt-2 text-center text-primary">
-                Review your selected services and finalize your purchase to begin your Zen Experience.
+              Review your selected services and finalize your purchase to begin your Zen Experience.
             </p>
 
             <div className="max-w-2xl mx-auto text-left bg-gray-50 rounded-lg border p-6 shadow-sm mb-6">

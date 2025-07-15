@@ -1,3 +1,4 @@
+// CustomizeWizzard.js
 import React, { useState } from "react";
 import { navigate } from "gatsby";
 import { FaCheckCircle, FaRegCircle, FaCheckSquare, FaRegSquare } from "react-icons/fa";

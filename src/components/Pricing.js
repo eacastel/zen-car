@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Seo from "../components/Seo";
-import ZenExperienceSection from "../components/pricing-page/ZenExperienceSection";
 import CustomizeWizard from "../components/pricing-page/CustomizeWizard";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -20,7 +19,6 @@ const Pricing = () => {
   
   return (
     <Layout>
-      <ZenExperienceSection siteUrl={siteUrl} getStripe={getStripe} />
       <CustomizeWizard />
     </Layout>
   );
