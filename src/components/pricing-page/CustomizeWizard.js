@@ -13,11 +13,11 @@ const CustomizeWizard = () => {
       price: 0,
       description: "Skip expert recommendations and proceed with your own choices."
     },
-  {
-    label: "Research",
-    price: 250,
-    description: "We research the best year, make and model based on your needs."
-  }
+    {
+      label: "Research",
+      price: 250,
+      description: "We research the best year, make and model based on your needs."
+    }
   ];
 
   const [researchSelection, setResearchSelection] = useState(null);
@@ -50,88 +50,62 @@ const CustomizeWizard = () => {
       return;
     }
 
-    // Meta Pixel tracking
     if (typeof window !== "undefined" && window.fbq) {
       window.fbq("track", "InitiateCheckout", {
         value: finalAmount,
         currency: "USD",
-        content_name: "Zen Car Buying Package"
+        content_name: "Zen Car Buying Package",
       });
     }
 
     setLoading(true);
-    let descriptionLines = [];
-    let selectedProducts = [];
 
-    if (researchSelection) {
-      descriptionLines.push(`Research: ${researchSelection.label} Option – $${researchSelection.price}`);
-      if (researchSelection.price > 0) {
-        selectedProducts.push({
-          name: `Research Recommendation: ${researchSelection.label}`,
-          price: researchSelection.price,
-          description: researchSelection.description
-        });
-      }
-    }
-    if (inventorySourcing) {
-      descriptionLines.push(`Inventory Sourcing: $250`);
-      selectedProducts.push({
-        name: "Inventory Sourcing",
-        price: 250,
-        description: "Find vehicles that match your criteria"
-      });
-    }
-    if (purchaseAssistance) {
-      descriptionLines.push(`Purchase Assistance: $500`);
-      selectedProducts.push({
-        name: "Purchase Assistance",
-        price: 500,
-        description: "We coordinate the transaction."
-      });
-    }
-    const description = descriptionLines.join("\n");
+    const metadata = {
+      termsAccepted: termsAccepted2,
+      research: researchSelection?.label || "None",
+      inventory: inventorySourcing ? "true" : "false",
+      purchase: purchaseAssistance ? "true" : "false",
+    };
 
     const payload = {
-      amount: totalPrice, // Sending original total; backend can apply discount logic if needed
+      amount: finalAmount * 100,
       selections: {
         research: researchSelection,
         inventory: inventorySourcing,
-        purchase: purchaseAssistance
+        purchase: purchaseAssistance,
       },
-      products: selectedProducts, // New field with selected product details
-      description,
-      metadata: {
-        termsAccepted: termsAccepted2
-      }
+      metadata,
     };
 
     try {
-      const response = await fetch("/.netlify/functions/checkout", {
+      const response = await fetch("/.netlify/functions/create-payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
-      const data = await response.json();
-      if (data.url) {
-        navigate("/checkout", {
-          state: {
-            selections: {
-              research: researchSelection,
-              inventory: inventorySourcing,
-              purchase: purchaseAssistance,
-            },
-            total: finalAmount * 100, // Convert to cents
+
+      const { clientSecret } = await response.json();
+
+      if (!clientSecret) throw new Error("Missing client secret");
+
+      navigate("/checkout", {
+        state: {
+          clientSecret,
+          selections: {
+            research: researchSelection,
+            inventory: inventorySourcing,
+            purchase: purchaseAssistance,
           },
-        });
-      } else {
-        console.error("Checkout error:", data.error);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error("Error creating checkout session:", error);
+          total: finalAmount * 100, // cents
+        },
+      });
+    } catch (err) {
+      console.error("Error starting payment:", err);
+      alert("Something went wrong while starting checkout. Please try again.");
       setLoading(false);
     }
   };
+
 
   return (
     <main>

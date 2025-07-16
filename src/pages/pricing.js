@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useState, useEffect, useRef } from 'react'
 import Layout from "../components/Layout";
 import Seo from "../components/Seo";
 import CustomizeWizard from "../components/pricing-page/CustomizeWizard";
+import ZenExperienceSection from '../components/pricing-page/ZenExperienceSection';
 
 
 // Cached Stripe client using your publishable key
@@ -45,7 +46,11 @@ const Pricing = () => {
 
   return (
     <Layout>
-      <CustomizeWizard />
+      <main>
+        <ZenExperienceSection />
+        <CustomizeWizard />
+      </main>
+
 
       <div ref={testimonialsRef}>
         {showTestimonials && (
@@ -54,7 +59,7 @@ const Pricing = () => {
           </Suspense>
         )}
       </div>
-      
+
     </Layout >
   );
 };
