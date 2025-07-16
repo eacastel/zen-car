@@ -1,8 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 export default function ExitIntentPopup() {
   const [visible, setVisible] = useState(false);
   const modalRef = useRef(null);
+
+  const data = useStaticQuery(graphql`
+    query {
+      starbucksCard: file(relativePath: { eq: "starbucks-giftcard.png" }) {
+        childImageSharp {
+          gatsbyImageData(width: 200, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+        }
+      }
+    }
+  `);
+  const starbucksImage = getImage(data.starbucksCard);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -68,12 +81,22 @@ export default function ExitIntentPopup() {
   const handleClose = () => setVisible(false);
 
   const handleClick = () => {
-    if (typeof window !== "undefined" && window.openCalendlyPopup) {
-      window.openCalendlyPopup();
-    } else {
-      window.location.href = "/15min";
+    if (typeof window !== "undefined") {
+      // GTM tracking
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "exit_intent_call_click",
+        label: "Exit Intent Popup",
+      });
+
+      // Call scheduling logic
+      if (window.openCalendlyPopup) {
+        window.openCalendlyPopup();
+      } else {
+        window.location.href = "/15min";
+      }
+      setVisible(false);
     }
-    setVisible(false);
   };
 
   if (!visible) return null;
@@ -100,13 +123,20 @@ export default function ExitIntentPopup() {
           </svg>
         </button>
 
-        {/* Main content box */}
+        {/* Main content */}
         <div className="bg-white mx-0 mt-0 mb-2 p-6 rounded-xl text-center">
-          <h2 className="text-2xl font-medium text-accent mb-3">
-            Find the Right Car For You!
+          {starbucksImage && (
+            <GatsbyImage
+              image={starbucksImage}
+              alt="Free $5 Starbucks Gift Card"
+              className="mx-auto mb-6 w-40 rounded-lg shadow-xl -rotate-2 opacity-80"
+            />
+          )}
+          <h2 className="text-2xl font-medium text-accent mb-3 font-poppins">
+            Get a $5 Starbucks Gift Card
           </h2>
-          <p className="text-md text-primary mb-5">
-            Get your free 15 minute call with one of our Zen Guides. Your perfect car might already be out there—we’ll help you find it with ease, insight, and zero pressure.
+          <p className="text-md text-primary mb-3">
+            Complete a free 15-minute call with one of our Zen Guides and we'll send you a $5 Starbucks card — on us!
           </p>
           <button
             onClick={handleClick}
@@ -118,7 +148,7 @@ export default function ExitIntentPopup() {
 
         {/* Bottom footer */}
         <div className="text-primary text-xs text-center pt-1 pb-3 px-4">
-          *No stress. No obligations. Just friendly expert advice.
+          *Gift card delivered after completed call. No stress. No obligations. Just friendly expert advice.
         </div>
       </div>
     </div>
