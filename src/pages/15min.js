@@ -21,7 +21,7 @@ export default function CalendlyPopupPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            click here to open Calendly directly
+            click here to open the calendar directly
           </a>.
         </p>
       </div>
