@@ -10,7 +10,7 @@ export default function ExitIntentPopup() {
     query {
       starbucksCard: file(relativePath: { eq: "starbucks-giftcard.png" }) {
         childImageSharp {
-          gatsbyImageData(width: 200, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+          gatsbyImageData(width: 200, placeholder: BLURRED, formats: [AUTO, WEBP])
         }
       }
     }
