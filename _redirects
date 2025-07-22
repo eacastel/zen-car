@@ -7,3 +7,5 @@
 # gatsby-adapter-netlify start
 
 # gatsby-adapter-netlify end
+/pricing     /purchase     301!
+/pricing/    /purchase    301!

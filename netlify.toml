@@ -13,3 +13,9 @@ package = "@netlify/plugin-gatsby"
     "public/page-data/**",
     "public/blog/**"
   ]
+
+[[redirects]]
+  from = "/pricing"
+  to = "/purchase"
+  status = 301
+  force = true

@@ -2,44 +2,29 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { openCalendlyPopup } from "../utils/openCalendly"; // ✅ Import your Calendly popup utility
+
 
 export default function HowItWorks() {
     const steps = [
         {
             step: '1',
-            title: 'Schedule Consultation',
-            desc: (
-                <>
-                    <button
-                        type="button"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            openCalendlyPopup();
-                        }}
-                        className="text-gray-200 underline focus:outline-none focus:ring-2 focus:ring-accent"
-                        aria-label="Schedule a free 15-minute consultation"
-                    >
-                        Book your free 15-minute call
-                    </button>{" "}
-                    to go over your budget and preferences.
-                </>
-            )
+            title: 'Start Your Zen Experience',
+            desc: 'Choose a service package and schedule your onboarding call. We’ll get to know your preferences, goals, and budget.',
         },
         {
             step: '2',
-            title: 'Get Recommendations',
-            desc: 'Receive a customized proposal with your recommendation.',
+            title: 'Receive Expert Recommendations',
+            desc: 'We hand-select 2–4 ideal vehicles based on your lifestyle, reliability needs, and long-term goals.',
         },
         {
             step: '3',
-            title: 'Review Inventory',
-            desc: 'We locate and provide the best vehicles matching your recommendation.',
+            title: 'Get Matched with Live Inventory',
+            desc: 'We source the best available listings nationwide, verify them, and present them to you with key details.',
         },
         {
             step: '4',
-            title: 'Purchase Assistance',
-            desc: 'Let your Zen Guides do the work so you don’t have to.',
+            title: 'Enjoy Purchase & Delivery Support',
+            desc: 'We negotiate, manage paperwork, and coordinate delivery so you can buy with confidence and ease.',
         },
     ];
 
@@ -47,8 +32,9 @@ export default function HowItWorks() {
         <section className="bg-primary text-white py-20" aria-labelledby="how-it-works">
             <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
                 <h2 id="how-it-works" className="text-4xl font-medium text-center text-white mb-12">
-                    Our <span className="text-white">Proven 4-Step Process</span>
+                    How We Save You Time, Money, and Stress<span className="text-white"></span>
                 </h2>
+
                 <div className="grid md:grid-cols-1 lg:grid-cols-4 gap-12">
                     {steps.map((step, index) => (
                         <motion.div

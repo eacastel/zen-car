@@ -40,7 +40,7 @@ function useOnScreen(ref, rootMargin = "0px") {
 }
 
 
-const Pricing = () => {
+const Purchase = () => {
   const testimonialsRef = useRef();
   const showTestimonials = useOnScreen(testimonialsRef, "100px");
 
@@ -64,7 +64,7 @@ const Pricing = () => {
   );
 };
 
-export default Pricing;
+export default Purchase;
 
 export const Head = () => {
   const schemaData = {

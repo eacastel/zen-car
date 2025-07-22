@@ -3,9 +3,9 @@ import { Link } from "gatsby";
 import { motion } from "framer-motion";
 
 const ButtonHeader = ({
-  to = "/pricing",  // Default link to /pricing
+  to = "/purchase",  // Default link to /purchase
   onClick,          // Added onClick prop handling
-  children = "Getting Started",
+  children = "Start Now",
   color = "accent",
   size = "base",
   className = "",

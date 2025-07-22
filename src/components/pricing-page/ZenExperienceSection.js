@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "../Button";
-import { FaCheckCircle } from "react-icons/fa";
 import { navigate } from "gatsby";
 
 const ZenExperienceSection = () => {
@@ -76,37 +75,7 @@ const ZenExperienceSection = () => {
           Select the full Zen Experience for the most comprehensive support, or customize your package to fit your exact needs.
         </p>
 
-        <div className="mb-6 grid gap-6 md:grid-cols-1 text-left md:text-center">
-              {[
-                {
-                  title: "Onboarding with a Zen Guide",
-                  desc: "Begin with a 1-on-1 consultation to understand your needs, preferences, and budget—so we can build your perfect match.",
-                },
-                {
-                  title: "Expert Car Recommendations",
-                  desc: "We filter thousands of options and deliver 2–4 personalized picks based on your lifestyle, reliability needs, and goals.",
-                },
-                {
-                  title: "Nationwide Inventory Sourcing",
-                  desc: "We locate the best listings—even out of state—and verify availability and accuracy before you waste time.",
-                },
-                {
-                  title: "Full Purchase Support & Delivery",
-                  desc: "We handle negotiations, paperwork, and dealer communication—so you skip the stress and save time and money.",
-                },
-              ].map((service, idx) => (
-                <div
-                  key={idx}
-                  className="bg-gray-50 border border-gray-200 p-6 rounded-xl shadow-sm max-w-xl mx-auto"
-                >
-                  <div className="flex items-start justify-start md:justify-center mb-2">
-                    <FaCheckCircle className="text-accent mt-1 mr-2" />
-                    <h4 className="text-lg font-semibold text-primary">{service.title}</h4>
-                  </div>
-                  <p className="text-gray-700 text-base md:text-center">{service.desc}</p>
-                </div>
-              ))}
-            </div>
+       
 
         <div className="mx-1 md:mx-2 lg:mx-6 lg:max-w-[1280px] rounded-2xl shadow-lg relative border-2 border-primary">
           <span className="absolute -top-5 right-0 bg-accent text-white text-sm uppercase px-6 py-2 rounded-tl-lg rounded-br-lg shadow-md font-bold">
