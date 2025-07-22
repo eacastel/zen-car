@@ -59,10 +59,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/pricing"
+                  to="/services"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
-                  Pricing
+                  Services
                 </Link>
               </li>
               <li>

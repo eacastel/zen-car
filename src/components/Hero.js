@@ -49,7 +49,7 @@ export function Hero() {
           {/* Buttons - Styled using the existing Button component */}
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <CalendlyButton size="lg" color="accent">
-              Schedule Your Free Consultation
+              Schedule a Free Consultation
             </CalendlyButton>
 
 

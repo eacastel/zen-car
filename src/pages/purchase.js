@@ -47,9 +47,29 @@ const Purchase = () => {
   return (
     <Layout>
       <main>
-        <ZenExperienceSection />
-        <CustomizeWizard />
-      </main>
+        <section className="pt-16 pb-4 bg-secondary" aria-labelledby="pricing-page-heading">
+  <div className="container mx-auto px-4 md:px-6 max-w-[1280px]">
+    <h1
+      id="pricing-page-heading"
+      className="text-3xl md:text-4xl font-medium text-accent mb-4 text-center"
+    >
+      Skip the Hassle. Save Time & Money.
+    </h1>
+    <p className="mx-auto max-w-4xl text-lg md:text-xl text-center text-primary mb-12">
+      Get our full-service concierge package—expert research, inventory sourcing, and purchase help—all in one seamless, cost-effective experience.
+    </p>
+
+        <div className="flex flex-col lg:flex-row gap-6">
+          <div className="lg:w-1/2">
+            <ZenExperienceSection />
+          </div>
+          <div className="lg:w-1/2">
+            <CustomizeWizard />
+          </div>
+        </div>
+          </div>
+</section>
+      </main >
 
 
       <div ref={testimonialsRef}>

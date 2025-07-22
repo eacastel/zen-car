@@ -63,38 +63,37 @@ const ZenExperienceSection = () => {
   };
 
   return (
-    <section className="pt-16 pb-8 bg-secondary" aria-labelledby="zen-experience-heading">
-      <div className="container mx-auto px-0 md:px-2 md:max-w-[1280px] lg:px-6 lg:max-w-[1280px]">
-        <h2
-          id="zen-experience-heading"
-          className="text-xl sm:text-4xl font-medium text-accent mb-4 text-center"
-        >
-          Start your Zen Car Buying journey
-        </h2>
-        <p className="text-lg md:text-xl text-center text-primary mb-12">
-          Select the full Zen Experience for the most comprehensive support, or customize your package to fit your exact needs.
-        </p>
-
-       
-
-        <div className="mx-1 md:mx-2 lg:mx-6 lg:max-w-[1280px] rounded-2xl shadow-lg relative border-2 border-primary">
+    <section className="pb-8 bg-secondary" aria-labelledby="zen-experience-card">
+      <div className="container mx-auto  md:px-4 md:max-w-4xl lg:px-6">
+        <div className="rounded-2xl shadow-lg relative border-2 border-primary">
           <span className="absolute -top-5 right-0 bg-accent text-white text-sm uppercase px-6 py-2 rounded-tl-lg rounded-br-lg shadow-md font-bold">
             Most Popular
           </span>
-          <div className="bg-white p-4 md:p-8 lg:p-12 rounded-2xl shadow-lg text-center">
-
-
-
+          <div className="bg-white p-4 md:pt-8 md:pb-4 lg:pt-12 lg:pb-4 rounded-2xl shadow-lg text-center" id="zen-experience-card">
+            <span className="text-sm font-bold uppercase text-accent tracking-wider mb-2 block text-center">
+              Best Value
+            </span>
             <h3 className="text-3xl font-medium text-primary mb-4 uppercase tracking-wider font-pirulen">
               Zen Experience
             </h3>
-            <p className="text-lg text-primary mb-6">
-              The complete Zen Car Buying solution with expert research, inventory sourcing, and purchase help.
+            <p className="text-lg text-primary mb-6 mx-auto max-w-2xl px-4">
+              <strong>Pay once, we handle the rest:</strong>
+              <br />
+              From the car to the paperwork— we save you time, money and stress.
             </p>
 
-            <p className="text-xl text-accent font-semibold mb-4">
-              $800 <span className="text-gray-400 line-through text-lg ml-1">$1,000</span>
-            </p>
+            <ul className="text-lg text-primary mb-6 mx-auto max-w-md text-left pl-6 list-disc list-inside">
+              <li>Personalized vehicle recommendations</li>
+              <li>Nationwide inventory sourcing</li>
+              <li>Dealer negotiation & paperwork handled for you</li>
+            </ul>
+
+            <div className="text-center mb-4">
+              <p className="text-xl font-semibold">
+                Total: <span className="text-accent">$850</span>
+              </p>
+              <p className="text-md text-green-600">Zen Experience Discount Applied – Save $100!</p>
+            </div>
 
             <Button
               onClick={handleZenPurchase}
@@ -121,16 +120,9 @@ const ZenExperienceSection = () => {
                 </a>
               </label>
             </div>
-
-            
-
-
-            
           </div>
         </div>
       </div>
-
-
     </section>
   );
 };
