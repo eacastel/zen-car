@@ -72,8 +72,8 @@ const CustomizeWizard = () => {
 
   return (
     <main>
-      <section className="bg-secondary pb-12">
-        <div className="container mx-auto max-w-4xl px-4">
+      <section className="bg-secondary pb-6">
+        <div className="container mx-auto  md:px-4 md:max-w-4xl lg:px-6">
           <div className="bg-white border-2 border-primary rounded-2xl shadow-lg p-8">
             <span className="text-sm font-bold uppercase text-accent tracking-wider mb-2 block text-center">
               Build Your Own
