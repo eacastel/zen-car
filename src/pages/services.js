@@ -32,7 +32,7 @@ const Services = () => {
                     
 
                     <div className="bg-gray-50 border border-gray-200 p-6 rounded-xl shadow-sm">
-                        <h3 className="text-xl font-bold text-primary mb-2">Full Zen Experience – $900</h3>
+                        <h3 className="text-xl font-bold text-primary mb-2">Full Zen Experience – $850</h3>
                         <ul className="list-disc pl-5 text-gray-700">
                             <li>Everything in the Starter Package</li>
                             <li>Full purchase negotiation & support</li>

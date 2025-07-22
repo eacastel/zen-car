@@ -79,7 +79,7 @@ const CustomizeWizard = () => {
               Build Your Own
             </span>
             <h2 className="text-3xl font-pirulen text-primary text-center mb-4 uppercase tracking-wider">
-              Customize Your Package
+              Starter Package
             </h2>
             <p className="text-lg text-primary text-center mb-8">
               Select one or both services below. Get both to unlock the Zen Experience and save $100.
