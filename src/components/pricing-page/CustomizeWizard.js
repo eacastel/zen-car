@@ -75,7 +75,7 @@ const CustomizeWizard = () => {
       <section className="bg-secondary pb-12">
         <div className="container mx-auto max-w-4xl px-4">
           <div className="bg-white border-2 border-primary rounded-2xl shadow-lg p-8">
-            <span className="text-sm font-bold uppercase text-primary tracking-wider mb-2 block text-center">
+            <span className="text-sm font-bold uppercase text-accent tracking-wider mb-2 block text-center">
               Build Your Own
             </span>
             <h2 className="text-3xl font-pirulen text-primary text-center mb-4 uppercase tracking-wider">
@@ -89,6 +89,7 @@ const CustomizeWizard = () => {
               <div
                 role="checkbox"
                 aria-checked={includeResearchInventory}
+                aria-label="Include Research and Inventory Sourcing – $450"
                 tabIndex={0}
                 onClick={() => setIncludeResearchInventory(!includeResearchInventory)}
                 onKeyDown={(e) => e.key === "Enter" && setIncludeResearchInventory(!includeResearchInventory)}
@@ -116,6 +117,7 @@ const CustomizeWizard = () => {
               <div
                 role="checkbox"
                 aria-checked={includePurchaseHelp}
+                aria-label="Include Research and Inventory Sourcing – $500"
                 tabIndex={0}
                 onClick={() => setIncludePurchaseHelp(!includePurchaseHelp)}
                 onKeyDown={(e) => e.key === "Enter" && setIncludePurchaseHelp(!includePurchaseHelp)}

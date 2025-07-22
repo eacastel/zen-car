@@ -29,7 +29,16 @@ const Services = () => {
                     Choose Your Package
                 </h2>
                 <div className="grid gap-6 md:grid-cols-2 text-left text-base mb-12">
-                    
+                    <div className="bg-white border border-gray-200 p-6 rounded-xl shadow-sm">
+                        <h3 className="text-xl font-bold text-primary mb-2">Starter Package – $450</h3>
+                        <ul className="list-disc pl-5 text-gray-700">
+                            <li>1-on-1 onboarding with your Zen Guide</li>
+                            <li>Personalized car recommendations (2–4 picks)</li>
+                            <li>Nationwide inventory sourcing</li>
+                            <li>Verified vehicle listings</li>
+                        </ul>
+                        <p className="mt-4 text-sm text-gray-500">Purchase assistance available later for $500.</p>
+                    </div>
 
                     <div className="bg-gray-50 border border-gray-200 p-6 rounded-xl shadow-sm">
                         <h3 className="text-xl font-bold text-primary mb-2">Full Zen Experience – $850</h3>
@@ -41,16 +50,7 @@ const Services = () => {
                         </ul>
                         <p className="mt-4 text-sm text-gray-500">Best for those ready to buy and delegate the hard parts.</p>
                     </div>
-                    <div className="bg-white border border-gray-200 p-6 rounded-xl shadow-sm">
-                        <h3 className="text-xl font-bold text-primary mb-2">Starter Package – $450</h3>
-                        <ul className="list-disc pl-5 text-gray-700">
-                            <li>1-on-1 onboarding with your Zen Guide</li>
-                            <li>Personalized car recommendations (2–4 picks)</li>
-                            <li>Nationwide inventory sourcing</li>
-                            <li>Verified vehicle listings</li>
-                        </ul>
-                        <p className="mt-4 text-sm text-gray-500">Purchase assistance available later for $500.</p>
-                    </div>
+
                 </div>
 
                 {/* What's Included */}

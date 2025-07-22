@@ -1,8 +1,22 @@
 import React, { useState } from "react";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { useStaticQuery, graphql } from "gatsby";
 import Button from "../Button";
 import { navigate } from "gatsby";
 
 const ZenExperienceSection = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      zenLogo: file(relativePath: { eq: "zen-car-logo.png" }) {
+        childImageSharp {
+          gatsbyImageData(width: 150, quality: 90, placeholder: TRACED_SVG, layout: CONSTRAINED)
+        }
+      }
+    }
+  `);
+
+  const logoImage = getImage(data.zenLogo);
+
   const [loading, setLoading] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
 
@@ -69,15 +83,20 @@ const ZenExperienceSection = () => {
           <span className="absolute -top-5 right-0 bg-accent text-white text-sm uppercase px-6 py-2 rounded-tl-lg rounded-br-lg shadow-md font-bold">
             Most Popular
           </span>
-          <div className="bg-white p-4 md:pt-8 md:pb-4 lg:pt-12 lg:pb-4 rounded-2xl shadow-lg text-center" id="zen-experience-card">
+
+          <div className="bg-white p-4 md:pt-8 md:pb-4 lg:pb-4 rounded-2xl shadow-lg text-center" id="zen-experience-card">
+
             <span className="text-sm font-bold uppercase text-accent tracking-wider mb-2 block text-center">
               Best Value
             </span>
+
             <h3 className="text-3xl font-medium text-primary mb-4 uppercase tracking-wider font-pirulen">
               Zen Experience
             </h3>
+
+
             <p className="text-lg text-primary mb-6 mx-auto max-w-2xl px-4">
-              <strong>Pay once, we handle the rest:</strong>
+              <strong>Pay once, we handle the rest</strong>
               <br />
               From the car to the paperwork— we save you time, money and stress.
             </p>
@@ -94,7 +113,9 @@ const ZenExperienceSection = () => {
               </p>
               <p className="text-md text-green-600">Zen Experience Discount Applied – Save $100!</p>
             </div>
-
+<div className="flex justify-center">
+              <GatsbyImage image={logoImage} alt="Zen Experience Logo" className="max-w-[200px] md:max-w-[300px]" />
+            </div>
             <Button
               onClick={handleZenPurchase}
               color="accent"
@@ -120,6 +141,7 @@ const ZenExperienceSection = () => {
                 </a>
               </label>
             </div>
+                                    
           </div>
         </div>
       </div>
