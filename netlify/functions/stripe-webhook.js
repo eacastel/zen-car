@@ -32,7 +32,7 @@ exports.handler = async (event) => {
       intent.metadata?.email ||
       intent.receipt_email ||
       charge?.billing_details?.email ||
-      "unknown@zencarbuying.com";
+      "unknown2@zencarbuying.com";
 
     const name =
       intent.metadata?.name ||
