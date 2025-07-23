@@ -19,8 +19,19 @@ exports.handler = async (event) => {
 
   if (stripeEvent.type === "payment_intent.succeeded") {
     const intent = stripeEvent.data.object;
-    const email = intent.metadata?.email || intent.receipt_email;
-    const name = intent.metadata?.name || "Customer";
+    const charge = intent.charges?.data?.[0]; // 🟢 Grab first charge
+    
+    const email =
+    intent.metadata?.email ||
+    intent.receipt_email ||
+    charge?.billing_details?.email ||
+    "unknown@zencarbuying.com";
+
+    const name =
+    intent.metadata?.name ||
+    charge?.billing_details?.name ||
+    "Customer";
+
     const amount = (intent.amount / 100).toFixed(2);
     const currency = intent.currency.toUpperCase();
     const services = intent.metadata?.selections || "N/A";

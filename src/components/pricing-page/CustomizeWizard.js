@@ -13,10 +13,10 @@ const CustomizeWizard = () => {
     includeResearchInventory && includePurchaseHelp
       ? 850
       : includeResearchInventory
-        ? 450
-        : includePurchaseHelp
-          ? 500
-          : 0;
+      ? 450
+      : includePurchaseHelp
+      ? 500
+      : 0;
 
   const handleCheckout = async () => {
     if (!termsAccepted) {
