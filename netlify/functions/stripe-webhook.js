@@ -19,13 +19,14 @@ exports.handler = async (event) => {
 
   if (stripeEvent.type === "payment_intent.succeeded") {
     const intentId = stripeEvent.data.object.id;
+
     const intent = await stripe.paymentIntents.retrieve(intentId, {
-      expand: ["charges.data.balance_transaction"],
+      expand: ["charges"],
     });
 
     console.log("Charges array:", JSON.stringify(intent.charges?.data, null, 2));
 
-    const charge = intent.charges?.data?.[0]; // 🟢 Grab first charge
+    const charge = intent.charges?.data?.[0];
 
     const email =
       intent.metadata?.email ||
