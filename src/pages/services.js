@@ -20,14 +20,20 @@ const Services = () => {
                 <h1 className="text-4xl font-bold text-primary mb-8">
                     Stress-Free Car Buying, Done For You
                 </h1>
-                <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-10">
-                    Zen Car Buying offers two flexible service options designed to save you time, money, and hassle—whether you need full support or just expert guidance.
+
+
+                <p className="text-xl md:text-2xl text-primary font-medium mb-8">
+                    We learn your needs, find the best matches, negotiate the right deal, and get the car to your door — saving you time, money, and stress.
                 </p>
 
                 {/* Services Offered */}
                 <h2 className="text-2xl font-semibold text-center text-accent mb-6">
-                    Choose Your Package
+                    Just Choose Your Package
                 </h2>
+                <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-10">
+                    Zen Car Buying offers two flexible service options designed to save you time, money, and hassle—whether you need full support or just expert guidance.
+                </p>
+
                 <div className="grid gap-6 md:grid-cols-2 text-left text-base mb-12">
                     <div className="bg-white border border-gray-200 p-6 rounded-xl shadow-sm">
                         <h3 className="text-xl font-bold text-primary mb-2">Starter Package – $450</h3>
