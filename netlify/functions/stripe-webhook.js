@@ -1,7 +1,7 @@
 require("dotenv").config();
 const Stripe = require("stripe");
 const { Resend } = require("resend");
-const { buildCustomerEmail } = require("../utils/customerEmailTemplate");
+const { buildCustomerEmail } = require("../../src/utils/customerEmailTemplate");
 
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-08-16" });
