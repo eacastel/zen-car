@@ -1,8 +1,15 @@
 [[plugins]]
-package = "@netlify/plugin-gatsby"
+  package = "@netlify/plugin-gatsby"
+
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
 
 [functions]
   directory = "netlify/functions"
+  included_files = ["*"]
+  node_bundler = "esbuild"
+  external_node_modules = ["stripe", "resend"]
+  json = false
 
 [build]
   command = "gatsby build"

@@ -27,12 +27,13 @@ const CustomizeWizard = () => {
     const selections = {
       research_inventory: includeResearchInventory,
       purchase: includePurchaseHelp,
+      zenExperience: includeResearchInventory && includePurchaseHelp,
     };
 
     const metadata = {
       termsAccepted: "true",
       package:
-        includeResearchInventory && includePurchaseHelp
+        selections.zenExperience
           ? "Zen Experience"
           : includeResearchInventory
             ? "Research + Inventory"

@@ -29,18 +29,18 @@ const ZenExperienceSection = () => {
     setLoading(true);
 
     const payload = {
-      amount: 1000, // bundle price in dollars
+      amount: 85000, // Stripe expects cents
       selections: {
         research: {
           label: "Zen Experience",
-          price: 800,
-          description: "Includes Research + Inventory + Purchase (value $1,000 – you save $200).",
+          price: 850,
+          description: "Includes Research + Inventory + Purchase.",
         },
         inventory: true,
         purchase: true,
       },
       description:
-        "Zen Experience Package: All services combined with a special discount – pay only $800 instead of $1,000.",
+        "Zen Experience Package: All services combined with a special discount – pay only $850.",
       metadata: {
         termsAccepted: "true",
         package: "Zen Experience",
@@ -58,11 +58,10 @@ const ZenExperienceSection = () => {
 
       const data = await response.json();
       if (data.clientSecret) {
-        // Redirect to internal checkout flow (Stripe Elements UI)
         navigate("/checkout", {
           state: {
             selections: payload.selections,
-            total: 80000, // in cents
+            total: 85000,
             clientSecret: data.clientSecret,
           },
         });
@@ -75,6 +74,7 @@ const ZenExperienceSection = () => {
       setLoading(false);
     }
   };
+
 
   return (
     <section className="pb-8 bg-secondary" aria-labelledby="zen-experience-card">
@@ -102,8 +102,8 @@ const ZenExperienceSection = () => {
             </p>
 
             <p className="text-lg text-primary font-semibold mb-4 max-w-2xl px-8">
-  Includes Research + Inventory Sourcing + Purchase Assistance
-</p>
+              Includes Research + Inventory Sourcing + Purchase Assistance
+            </p>
 
             <ul className="text-lg text-primary mb-6 mx-auto max-w-md text-left pl-6 list-disc list-inside">
               <li>Personalized vehicle recommendations</li>
@@ -117,7 +117,7 @@ const ZenExperienceSection = () => {
               </p>
               <p className="text-md text-green-600">Zen Experience Discount Applied – Save $100!</p>
             </div>
-<div className="flex justify-center">
+            <div className="flex justify-center">
               <GatsbyImage image={logoImage} alt="Zen Experience Logo" className="max-w-[200px] md:max-w-[300px]" />
             </div>
             <Button
@@ -145,7 +145,7 @@ const ZenExperienceSection = () => {
                 </a>
               </label>
             </div>
-                                    
+
           </div>
         </div>
       </div>

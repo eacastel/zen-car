@@ -77,28 +77,23 @@ const CheckoutForm = ({ selections, total }) => {
             </p>
 
             <div className="max-w-2xl mx-auto text-left bg-gray-50 rounded-lg border p-6 shadow-sm mb-6">
-              {selections?.research?.label === "Zen Experience" ? (
+              {(selections?.zenExperience || (selections.includeResearchInventory && selections.includePurchaseHelp)) ? (
                 <>
                   <p className="text-lg text-gray-700 mb-2 text-center">
-                    <span className="font-semibold">Zen Experience:</span> Includes Research, Inventory, and Purchase
+                    <span className="font-semibold">Zen Experience:</span> Includes Research + Inventory + Purchase Assistance
                   </p>
                   <p className="text-center text-gray-600 text-sm mb-2">
-                    <span className="line-through text-gray-400">$1,000</span> → <span className="text-accent font-semibold">$800 special bundle</span>
+                    <span className="line-through text-gray-400">$950</span> → <span className="text-accent font-semibold">$850 special bundle</span>
                   </p>
                 </>
               ) : (
                 <>
-                  {selections.research && selections.research.label !== "Know which car you want?" && (
+                  {selections.includeResearchInventory && (
                     <p className="text-lg text-gray-700 mb-2 text-center">
-                      <span className="font-semibold">Research:</span> {selections.research.label} (${selections.research.price})
+                      <span className="font-semibold">Research + Inventory Sourcing:</span> $450
                     </p>
                   )}
-                  {selections.inventory && (
-                    <p className="text-lg text-gray-700 mb-2 text-center">
-                      <span className="font-semibold">Inventory Sourcing:</span> $250
-                    </p>
-                  )}
-                  {selections.purchase && (
+                  {selections.includePurchaseHelp && (
                     <p className="text-lg text-gray-700 mb-2 text-center">
                       <span className="font-semibold">Purchase Assistance:</span> $500
                     </p>

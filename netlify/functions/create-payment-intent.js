@@ -21,36 +21,30 @@ exports.handler = async (event) => {
       };
     }
 
-    // Generate metadata similar to line item breakdown
-    let breakdown = [];
-    let finalAmount = amount;
+    let finalAmount = 0;
+    const breakdown = [];
 
-    if (
-      selections?.research?.label === "Zen Experience" &&
-      amount === 1000
-    ) {
-      breakdown = [
-        "Zen Experience $1,000 – Includes Research + Inventory + Purchase (you pay $800 – $200 off)",
-      ];
-      finalAmount = 800 * 100; // Customer is charged $800
-    } else if (amount === 1100) {
-      breakdown.push("Zen Experience – 2 Cars + Inventory + Purchase ($900 special bundle)");
-      finalAmount = 900 * 100;
-    } else if (amount === 1200) {
-      breakdown.push("Zen Experience – 3 Cars + Inventory + Purchase ($1000 special bundle)");
-      finalAmount = 1000 * 100;
+    const isZenPackage = selections?.package === "Zen Experience";
+    const includeResearchInventory = selections.includeResearchInventory === true;
+    const includePurchaseHelp = selections.includePurchaseHelp === true;
+
+    if (isZenPackage) {
+      // Purchased via Zen Experience CTA
+      finalAmount = 850 * 100;
+      breakdown.push("Zen Experience – Includes Research + Inventory + Purchase Assistance ($850 with $100 discount)");
+    } else if (includeResearchInventory && includePurchaseHelp) {
+      // Selected both manually via Customize flow
+      finalAmount = 850 * 100;
+      breakdown.push("Custom Bundle – Research + Inventory + Purchase Assistance ($850 with $100 discount)");
     } else {
-      // Standard selections
-      if (selections.research && selections.research.price > 0) {
-        breakdown.push(`Research: ${selections.research.label} – $${selections.research.price}`);
+      if (includeResearchInventory) {
+        finalAmount += 450 * 100;
+        breakdown.push("Research + Inventory Sourcing – $450");
       }
-      if (selections.inventory) {
-        breakdown.push("Inventory Sourcing – $250");
-      }
-      if (selections.purchase) {
+      if (includePurchaseHelp) {
+        finalAmount += 500 * 100;
         breakdown.push("Purchase Assistance – $500");
       }
-      finalAmount = amount;
     }
 
     const fullMetadata = {
