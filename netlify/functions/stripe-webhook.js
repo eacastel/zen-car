@@ -18,19 +18,25 @@ exports.handler = async (event) => {
   }
 
   if (stripeEvent.type === "payment_intent.succeeded") {
-    const intent = stripeEvent.data.object;
+    const intentId = stripeEvent.data.object.id;
+    const intent = await stripe.paymentIntents.retrieve(intentId, {
+      expand: ["charges.data.balance_transaction"],
+    });
+
+    console.log("Charges array:", JSON.stringify(intent.charges?.data, null, 2));
+
     const charge = intent.charges?.data?.[0]; // 🟢 Grab first charge
-    
+
     const email =
-    intent.metadata?.email ||
-    intent.receipt_email ||
-    charge?.billing_details?.email ||
-    "unknown@zencarbuying.com";
+      intent.metadata?.email ||
+      intent.receipt_email ||
+      charge?.billing_details?.email ||
+      "unknown@zencarbuying.com";
 
     const name =
-    intent.metadata?.name ||
-    charge?.billing_details?.name ||
-    "Customer";
+      intent.metadata?.name ||
+      charge?.billing_details?.name ||
+      "Customer";
 
     const amount = (intent.amount / 100).toFixed(2);
     const currency = intent.currency.toUpperCase();
