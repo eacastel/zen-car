@@ -29,11 +29,9 @@ exports.handler = async (event) => {
     const includePurchaseHelp = selections.includePurchaseHelp === true;
 
     if (isZenPackage) {
-      // Purchased via Zen Experience CTA
       finalAmount = 850 * 100;
       breakdown.push("Zen Experience – Includes Research + Inventory + Purchase Assistance ($850 with $100 discount)");
     } else if (includeResearchInventory && includePurchaseHelp) {
-      // Selected both manually via Customize flow
       finalAmount = 850 * 100;
       breakdown.push("Custom Bundle – Research + Inventory + Purchase Assistance ($850 with $100 discount)");
     } else {
@@ -49,9 +47,8 @@ exports.handler = async (event) => {
 
     const fullMetadata = {
       ...metadata,
-      name,
-      email,
-      intentId: "TBD", // placeholder
+      name: name || "Pending",
+      email: email || "unknown@zencarbuying.com",
       breakdown: breakdown.join(" | "),
       selections: JSON.stringify(selections),
       agreedToTerms: metadata.termsAccepted === true || metadata.termsAccepted2 === true ? "true" : "false",
@@ -62,15 +59,13 @@ exports.handler = async (event) => {
       currency: "usd",
       receipt_email: email,
       automatic_payment_methods: { enabled: true },
-      metadata: {
-        ...fullMetadata,
-        intentId: "temp", // gets overwritten below
-      },
+      metadata: fullMetadata, // ✅ all metadata here
     });
 
-    // Now safely patch it in without overwriting everything
+    // ✅ Re-save with correct intentId without wiping metadata
     await stripe.paymentIntents.update(paymentIntent.id, {
       metadata: {
+        ...fullMetadata,
         intentId: paymentIntent.id,
       },
     });
