@@ -1,6 +1,8 @@
 require("dotenv").config();
 const Stripe = require("stripe");
 const { Resend } = require("resend");
+const { buildCustomerEmail } = require("../utils/customerEmailTemplate");
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-08-16" });
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -64,18 +66,13 @@ exports.handler = async (event) => {
     const breakdown = intent.metadata?.breakdown || null;
 
     // Format for customer
-    const customerHtml = `
-      <h2>Thank You for Your Purchase!</h2>
-      <p>Hi ${name},</p>
-      <p>We’ve received your payment of <strong>$${amount} ${currency}</strong>.</p>
-      ${breakdown ? `<p><strong>Package:</strong><br />${breakdown}</p>` : ""}
-      <p>We’ll begin work on your Zen Car Buying package shortly.</p>
-      <hr />
-      <p><strong>Selections:</strong></p>
-      <pre>${services}</pre>
-      <p><strong>Transaction ID:</strong> ${id}</p>
-      <p>Thanks again,<br />Zen Car Buying Team</p>
-    `;
+    const customerHtml = buildCustomerEmail({
+      name,
+      amount: intent.amount,
+      currency: intent.currency,
+      breakdown,
+      paymentIntentId: intent.id,
+    });
 
     // Format for admin
     const adminHtml = `
