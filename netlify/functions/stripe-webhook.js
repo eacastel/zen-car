@@ -39,7 +39,20 @@ exports.handler = async (event) => {
 
     const amount = (intent.amount / 100).toFixed(2);
     const currency = intent.currency.toUpperCase();
-    const services = intent.metadata?.selections || "N/A";
+
+    let services = "N/A";
+    try {
+      const raw = intent.metadata?.selections;
+      if (raw) {
+        const parsed = typeof raw === "string" ? JSON.parse(raw) : raw;
+        services = Object.entries(parsed)
+          .map(([key, val]) => `${key}: ${val}`)
+          .join("\n");
+      }
+    } catch {
+      services = intent.metadata?.selections || "N/A";
+    }
+
     const id = intent.id;
 
     // ✅ DEBUG: You can check this in Netlify Logs
@@ -48,14 +61,17 @@ exports.handler = async (event) => {
     console.log("📨 Final Email Used:", email);
     console.log("🙋 Final Name Used:", name);
 
+    const breakdown = intent.metadata?.breakdown || null;
+
     // Format for customer
     const customerHtml = `
       <h2>Thank You for Your Purchase!</h2>
       <p>Hi ${name},</p>
       <p>We’ve received your payment of <strong>$${amount} ${currency}</strong>.</p>
+      ${breakdown ? `<p><strong>Package:</strong><br />${breakdown}</p>` : ""}
       <p>We’ll begin work on your Zen Car Buying package shortly.</p>
       <hr />
-      <p><strong>Services Selected:</strong></p>
+      <p><strong>Selections:</strong></p>
       <pre>${services}</pre>
       <p><strong>Transaction ID:</strong> ${id}</p>
       <p>Thanks again,<br />Zen Car Buying Team</p>

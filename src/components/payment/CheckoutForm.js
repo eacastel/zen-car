@@ -12,67 +12,57 @@ const CheckoutForm = ({ selections, total }) => {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!stripe || !elements) return;
-  setLoading(true);
-  setMessage(null);
+    e.preventDefault();
+    if (!stripe || !elements) return;
+    setLoading(true);
+    setMessage(null);
 
-  try {
-    // Submit elements first
-    const { error: submitError } = await elements.submit();
-    if (submitError) {
-      setMessage(submitError.message);
-      setLoading(false);
-      return;
-    }
+    try {
+      // 🚨 Must submit elements BEFORE any async logic
+      const { error: submitError } = await elements.submit();
+      if (submitError) {
+        setMessage(submitError.message);
+        setLoading(false);
+        return;
+      }
 
-    // 1️⃣ Create the PaymentIntent
-    const response = await fetch("/.netlify/functions/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: total,
-        name: "Pending", // or empty
-        email: "unknown@zencarbuying.com", // placeholder
-        metadata: {
-          selections: JSON.stringify(selections),
+      // ✅ Then create PaymentIntent
+      const response = await fetch("/.netlify/functions/create-payment-intent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: total,
+          name,
+          email,
+          metadata: {
+            selections: JSON.stringify(selections),
+          },
+        }),
+      });
+
+      const { clientSecret } = await response.json();
+
+      // ✅ Now confirm payment
+      const { error } = await stripe.confirmPayment({
+        elements,
+        clientSecret,
+        confirmParams: {
+          return_url: `${window.location.origin}/success`,
         },
-      }),
-    });
+      });
 
-    const { clientSecret } = await response.json();
-    const intentId = clientSecret.split("_secret")[0];
-
-    // 2️⃣ Immediately PATCH the PaymentIntent with real name/email
-    await fetch("/.netlify/functions/update-payment-metadata", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: intentId,
-        name,
-        email,
-      }),
-    });
-
-    // 3️⃣ Now confirm payment
-    const { error } = await stripe.confirmPayment({
-      elements,
-      clientSecret,
-      confirmParams: {
-        return_url: `${window.location.origin}/success`,
-      },
-    });
-
-    if (error) {
-      setMessage(error.message);
+      if (error) {
+        setMessage(error.message);
+      }
+    } catch (err) {
+      console.error("Payment error:", err);
+      setMessage("Something went wrong.");
     }
-  } catch (err) {
-    console.error("Payment error:", err);
-    setMessage("Something went wrong.");
-  }
 
-  setLoading(false);
-};
+    setLoading(false);
+  };
+
+
 
   return (
     <section className="bg-secondary py-2 md:py-4">
@@ -88,34 +78,34 @@ const CheckoutForm = ({ selections, total }) => {
 
             <div className="max-w-2xl mx-auto text-left bg-gray-50 rounded-lg border p-6 shadow-sm mb-6">
               {(selections?.zenExperience || (selections.includeResearchInventory && selections.includePurchaseHelp)) ? (
-                <>
-                  <p className="text-lg text-gray-700 mb-2 text-center">
-                    <span className="font-semibold">Zen Experience:</span> Includes Research + Inventory + Purchase Assistance
-                  </p>
-                  <p className="text-center text-gray-600 text-sm mb-2">
-                    <span className="line-through text-gray-400">$950</span> → <span className="text-accent font-semibold">$850 special bundle</span>
-                  </p>
-                </>
-              ) : (
-                <>
-                  {selections.includeResearchInventory && (
-                    <p className="text-lg text-gray-700 mb-2 text-center">
-                      <span className="font-semibold">Research + Inventory Sourcing:</span> $450
-                    </p>
-                  )}
-                  {selections.includePurchaseHelp && (
-                    <p className="text-lg text-gray-700 mb-2 text-center">
-                      <span className="font-semibold">Purchase Assistance:</span> $500
-                    </p>
-                  )}
-                </>
-              )}
+    <>
+      <p className="text-lg text-gray-700 mb-2 text-center">
+        <span className="font-semibold">Zen Experience:</span> Includes Research + Inventory + Purchase Assistance
+      </p>
+      <p className="text-center text-gray-600 text-sm mb-2">
+        <span className="line-through text-gray-400">$950</span> → <span className="text-accent font-semibold">$850 special bundle</span>
+      </p>
+    </>
+  ) : (
+    <>
+      {selections.includeResearchInventory && (
+        <p className="text-lg text-gray-700 mb-2 text-center">
+          <span className="font-semibold">Research + Inventory Sourcing:</span> $450
+        </p>
+      )}
+      {selections.includePurchaseHelp && (
+        <p className="text-lg text-gray-700 mb-2 text-center">
+          <span className="font-semibold">Purchase Assistance:</span> $500
+        </p>
+      )}
+    </>
+  )}
 
-              <hr className="my-4 border-t border-gray-300" />
+  <hr className="my-4 border-t border-gray-300" />
 
-              <p className="mt-4 text-lg font-bold text-center text-primary">
-                Total: ${total / 100}
-              </p>
+  <p className="mt-4 text-lg font-bold text-center text-primary">
+    Total: ${total / 100}
+  </p>
             </div>
 
 

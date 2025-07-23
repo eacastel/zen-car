@@ -51,6 +51,7 @@ exports.handler = async (event) => {
       ...metadata,
       name,
       email,
+      intentId: "TBD", // placeholder
       breakdown: breakdown.join(" | "),
       selections: JSON.stringify(selections),
       agreedToTerms: metadata.termsAccepted === true || metadata.termsAccepted2 === true ? "true" : "false",
@@ -61,7 +62,17 @@ exports.handler = async (event) => {
       currency: "usd",
       receipt_email: email,
       automatic_payment_methods: { enabled: true },
-      metadata: fullMetadata,
+      metadata: {
+        ...fullMetadata,
+        intentId: "temp", // gets overwritten below
+      },
+    });
+
+    // Now safely patch it in without overwriting everything
+    await stripe.paymentIntents.update(paymentIntent.id, {
+      metadata: {
+        intentId: paymentIntent.id,
+      },
     });
 
     return {
