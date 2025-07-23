@@ -9,7 +9,6 @@
   included_files = ["*"]
   node_bundler = "esbuild"
   external_node_modules = ["stripe", "resend"]
-  json = false
 
 [build]
   command = "gatsby build"
