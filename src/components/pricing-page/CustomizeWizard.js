@@ -25,19 +25,14 @@ const CustomizeWizard = () => {
     }
 
     const selections = {
-      research_inventory: includeResearchInventory,
-      purchase: includePurchaseHelp,
-      zenExperience: includeResearchInventory && includePurchaseHelp,
+      includeResearchInventory,
+      includePurchaseHelp,
+      package: includeResearchInventory && includePurchaseHelp ? "Zen Experience" : null,
     };
 
     const metadata = {
       termsAccepted: "true",
-      package:
-        selections.zenExperience
-          ? "Zen Experience"
-          : includeResearchInventory
-            ? "Research + Inventory"
-            : "Purchase Assistance",
+      package: selections.package || (includeResearchInventory ? "Research + Inventory" : "Purchase Assistance"),
     };
 
     setLoading(true);
@@ -47,9 +42,10 @@ const CustomizeWizard = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: total * 100,
           selections,
           metadata,
+          name: "Pending", // You’ll overwrite this via webhook
+          email: "unknown@zencarbuying.com", // Overwritten later too
         }),
       });
 
@@ -61,7 +57,7 @@ const CustomizeWizard = () => {
         state: {
           clientSecret,
           selections,
-          total: total * 100,
+          total: total * 100, // used just for display, not Stripe
         },
       });
     } catch (err) {
@@ -70,6 +66,7 @@ const CustomizeWizard = () => {
       setLoading(false);
     }
   };
+
 
   return (
     <main>

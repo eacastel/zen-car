@@ -12,12 +12,12 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { amount, selections, description, metadata = {}, email, name } = JSON.parse(event.body);
+    const { selections, metadata = {}, email, name } = JSON.parse(event.body);
 
-    if (!amount || !selections) {
+    if (!selections || typeof selections !== "object") {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: "Missing amount or selections" }),
+        body: JSON.stringify({ error: "Missing or invalid selections object" }),
       };
     }
 

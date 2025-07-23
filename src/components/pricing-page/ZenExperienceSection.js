@@ -21,59 +21,55 @@ const ZenExperienceSection = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
 
   const handleZenPurchase = async () => {
-    if (!termsAccepted) {
-      alert("Please accept the Terms and Conditions before proceeding.");
-      return;
-    }
+  if (!termsAccepted) {
+    alert("Please accept the Terms and Conditions before proceeding.");
+    return;
+  }
 
-    setLoading(true);
+  setLoading(true);
 
-    const payload = {
-      amount: 85000, // Stripe expects cents
-      selections: {
-        research: {
-          label: "Zen Experience",
-          price: 850,
-          description: "Includes Research + Inventory + Purchase.",
+  const selections = {
+    includeResearchInventory: true,
+    includePurchaseHelp: true,
+    package: "Zen Experience",
+  };
+
+  const metadata = {
+    termsAccepted: "true",
+    package: "Zen Experience",
+  };
+
+  try {
+    const response = await fetch("/.netlify/functions/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        selections,
+        metadata,
+        name: "Pending",
+        email: "unknown@zencarbuying.com",
+      }),
+    });
+
+    const data = await response.json();
+    if (data.clientSecret) {
+      navigate("/checkout", {
+        state: {
+          selections,
+          total: 85000, // purely for UI display, not used by Stripe
+          clientSecret: data.clientSecret,
         },
-        inventory: true,
-        purchase: true,
-      },
-      description:
-        "Zen Experience Package: All services combined with a special discount – pay only $850.",
-      metadata: {
-        termsAccepted: "true",
-        package: "Zen Experience",
-      },
-      name: "Pending",
-      email: "unknown@zencarbuying.com",
-    };
-
-    try {
-      const response = await fetch("/.netlify/functions/create-payment-intent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
       });
-
-      const data = await response.json();
-      if (data.clientSecret) {
-        navigate("/checkout", {
-          state: {
-            selections: payload.selections,
-            total: 85000,
-            clientSecret: data.clientSecret,
-          },
-        });
-      } else {
-        console.error("Checkout error:", data.error);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error("Error creating payment intent:", error);
+    } else {
+      console.error("Checkout error:", data.error);
       setLoading(false);
     }
-  };
+  } catch (error) {
+    console.error("Error creating payment intent:", error);
+    setLoading(false);
+  }
+};
+
 
 
   return (
