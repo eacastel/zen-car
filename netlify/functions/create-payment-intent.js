@@ -1,6 +1,13 @@
 require("dotenv").config();
 const Stripe = require("stripe");
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+const stripeSecret = process.env.STRIPE_SECRET_KEY;
+if (!stripeSecret) {
+  console.error("❌ STRIPE_SECRET_KEY is missing.");
+  throw new Error("Stripe secret key not set in environment variables.");
+}
+
+const stripe = new Stripe(stripeSecret, { apiVersion: "2023-08-16" });
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
@@ -54,6 +61,7 @@ exports.handler = async (event) => {
       agreedToTerms: metadata.termsAccepted === true || metadata.termsAccepted2 === true ? "true" : "false",
     };
 
+    // Create intent with full metadata (including placeholder intentId)
     const paymentIntent = await stripe.paymentIntents.create({
       amount: finalAmount,
       currency: "usd",
@@ -61,23 +69,30 @@ exports.handler = async (event) => {
       automatic_payment_methods: { enabled: true },
       metadata: {
         ...fullMetadata,
-        intentId: "will_set_below", // temporary
+        intentId: "will_update", // placeholder
       },
     });
 
-    // Then only update `intentId` itself without overwriting:
+    // 🔁 Log what was just created
+    console.log("✅ Created PaymentIntent:", paymentIntent.id);
+    console.log("📦 Metadata at creation:", fullMetadata);
+
+    // Update only the `intentId` (preserve all original metadata)
     await stripe.paymentIntents.update(paymentIntent.id, {
       metadata: {
+        ...fullMetadata,
         intentId: paymentIntent.id,
       },
     });
+
+    console.log("🔁 Updated metadata with intentId:", paymentIntent.id);
 
     return {
       statusCode: 200,
       body: JSON.stringify({ clientSecret: paymentIntent.client_secret }),
     };
   } catch (err) {
-    console.error("Payment intent error:", err);
+    console.error("❌ Payment intent error:", err);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: "Internal Server Error" }),
