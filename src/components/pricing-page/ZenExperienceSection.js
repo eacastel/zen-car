@@ -81,7 +81,7 @@ const ZenExperienceSection = () => {
       <div className="container mx-auto  md:px-4 md:max-w-4xl lg:px-6">
         <div className="rounded-2xl shadow-lg relative border-2 border-primary">
           <span className="absolute -top-5 right-0 bg-accent text-white text-sm uppercase px-6 py-2 rounded-tl-lg rounded-br-lg shadow-md font-bold">
-            Most Popular
+            Recommended
           </span>
 
           <div className="bg-white p-4 md:pt-8 md:pb-4 lg:pb-4 rounded-2xl shadow-lg text-center" id="zen-experience-card">
@@ -100,6 +100,10 @@ const ZenExperienceSection = () => {
               <br />
               From the car to the paperwork— we save you time, money and stress.
             </p>
+
+            <p className="text-lg text-primary font-semibold mb-4 max-w-2xl px-8">
+  Includes Research + Inventory Sourcing + Purchase Assistance
+</p>
 
             <ul className="text-lg text-primary mb-6 mx-auto max-w-md text-left pl-6 list-disc list-inside">
               <li>Personalized vehicle recommendations</li>

@@ -93,15 +93,15 @@ const CustomizeWizard = () => {
                 tabIndex={0}
                 onClick={() => setIncludeResearchInventory(!includeResearchInventory)}
                 onKeyDown={(e) => e.key === "Enter" && setIncludeResearchInventory(!includeResearchInventory)}
-                className={`cursor-pointer border rounded-lg p-6 shadow-sm transition hover:bg-gray-50 ${includeResearchInventory ? "border-accent" : "border-gray-300"
+                className={`cursor-pointer border-2 rounded-lg p-6 shadow-sm transition hover:bg-gray-50 hover:border-accent ${includeResearchInventory ? "border-accent bg-accent/5" : "border-gray-300"
                   }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     {includeResearchInventory ? (
-                      <FaCheckSquare className="text-accent text-2xl" />
+                      <FaCheckSquare className="text-accent text-2xl w-7 h-7" />
                     ) : (
-                      <FaRegSquare className="text-gray-400 text-2xl" />
+                      <FaRegSquare className="text-gray-400 text-2xl w-7 h-7" />
                     )}
                     <div>
                       <h3 className="text-lg font-semibold text-primary">Research + Inventory Sourcing</h3>
@@ -121,15 +121,15 @@ const CustomizeWizard = () => {
                 tabIndex={0}
                 onClick={() => setIncludePurchaseHelp(!includePurchaseHelp)}
                 onKeyDown={(e) => e.key === "Enter" && setIncludePurchaseHelp(!includePurchaseHelp)}
-                className={`cursor-pointer border rounded-lg p-6 shadow-sm transition hover:bg-gray-50 ${includePurchaseHelp ? "border-accent" : "border-gray-300"
+                className={`cursor-pointer border-2 rounded-lg p-6 shadow-sm transition hover:bg-gray-50 hover:border-accent ${includePurchaseHelp ? "border-accent bg-accent/5" : "border-gray-300"
                   }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     {includePurchaseHelp ? (
-                      <FaCheckSquare className="text-accent text-2xl" />
+                      <FaCheckSquare className="text-accent text-2xl w-7 h-7" />
                     ) : (
-                      <FaRegSquare className="text-gray-400 text-2xl" />
+                      <FaRegSquare className="text-gray-400 text-2xl w-7 h-7" />
                     )}
                     <div>
                       <h3 className="text-lg font-semibold text-primary">Purchase Assistance</h3>
