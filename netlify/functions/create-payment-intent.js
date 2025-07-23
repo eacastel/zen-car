@@ -59,13 +59,15 @@ exports.handler = async (event) => {
       currency: "usd",
       receipt_email: email,
       automatic_payment_methods: { enabled: true },
-      metadata: fullMetadata, // ✅ all metadata here
-    });
-
-    // ✅ Re-save with correct intentId without wiping metadata
-    await stripe.paymentIntents.update(paymentIntent.id, {
       metadata: {
         ...fullMetadata,
+        intentId: "will_set_below", // temporary
+      },
+    });
+
+    // Then only update `intentId` itself without overwriting:
+    await stripe.paymentIntents.update(paymentIntent.id, {
+      metadata: {
         intentId: paymentIntent.id,
       },
     });
