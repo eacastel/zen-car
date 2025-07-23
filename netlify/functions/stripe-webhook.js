@@ -20,31 +20,26 @@ exports.handler = async (event) => {
   if (stripeEvent.type === "payment_intent.succeeded") {
     const intentId = stripeEvent.data.object.id;
 
-    const intent = await stripe.paymentIntents.retrieve(intentId, {
-      expand: ["charges"],
-    });
-
-    console.log("Charges array:", JSON.stringify(intent.charges?.data, null, 2));
+    let intent;
+    try {
+      intent = await stripe.paymentIntents.retrieve(intentId, {
+        expand: ["charges"],
+      });
+    } catch (err) {
+      console.error("❌ Failed to retrieve PaymentIntent:", err.message);
+      return { statusCode: 500, body: "Error retrieving PaymentIntent" };
+    }
 
     const charge = intent.charges?.data?.[0];
 
-    const email =
-      intent.metadata?.email ||
-      intent.receipt_email ||
-      charge?.billing_details?.email ||
-      "unknown2@zencarbuying.com";
-
-    const name =
-      intent.metadata?.name ||
-      charge?.billing_details?.name ||
-      "Customer";
+    const email = charge?.billing_details?.email || "unknown@zencarbuying.com";
+    const name = charge?.billing_details?.name || "Customer";
 
     const amount = (intent.amount / 100).toFixed(2);
     const currency = intent.currency.toUpperCase();
-    const services = intent.metadata?.selections || "N/A";
+    const services = intent.metadata?.selections || intent.metadata?.package || "N/A";
     const id = intent.id;
 
-    // Format for customer
     const customerHtml = `
       <h2>Thank You for Your Purchase!</h2>
       <p>Hi ${name},</p>
@@ -57,7 +52,6 @@ exports.handler = async (event) => {
       <p>Thanks again,<br />Zen Car Buying Team</p>
     `;
 
-    // Format for admin
     const adminHtml = `
       <h2>New Purchase Alert</h2>
       <p><strong>Name:</strong> ${name}</p>
@@ -69,6 +63,14 @@ exports.handler = async (event) => {
     `;
 
     try {
+      // 🟢 Optional: debug email showing billing details
+      await resend.emails.send({
+        from: "Zen Debug <debug@zencarbuying.com>",
+        to: "manager@zencarbuying.com",
+        subject: "DEBUG: Stripe Billing Details",
+        html: `<pre>${JSON.stringify(charge?.billing_details, null, 2)}</pre>`,
+      });
+
       // 📤 Email to customer
       await resend.emails.send({
         from: "Zen Car Buying <guide@zencarbuying.com>",
@@ -85,10 +87,7 @@ exports.handler = async (event) => {
         html: adminHtml,
       });
 
-      console.log("🔥 Webhook received:", stripeEvent.type);
-      console.log("📧 Attempting to email:", email);
-      console.log("📨 Email body preview:", customerHtml);
-
+      console.log("✅ Emails sent to customer and admin for:", email);
       return { statusCode: 200, body: "Emails sent" };
     } catch (err) {
       console.error("❌ Email send error:", err.message);
