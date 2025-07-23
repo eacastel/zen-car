@@ -12,57 +12,67 @@ const CheckoutForm = ({ selections, total }) => {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!stripe || !elements) return;
-    setLoading(true);
-    setMessage(null);
+  e.preventDefault();
+  if (!stripe || !elements) return;
+  setLoading(true);
+  setMessage(null);
 
-    try {
-      // 🚨 Must submit elements BEFORE any async logic
-      const { error: submitError } = await elements.submit();
-      if (submitError) {
-        setMessage(submitError.message);
-        setLoading(false);
-        return;
-      }
-
-      // ✅ Then create PaymentIntent
-      const response = await fetch("/.netlify/functions/create-payment-intent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: total,
-          name,
-          email,
-          metadata: {
-            selections: JSON.stringify(selections),
-          },
-        }),
-      });
-
-      const { clientSecret } = await response.json();
-
-      // ✅ Now confirm payment
-      const { error } = await stripe.confirmPayment({
-        elements,
-        clientSecret,
-        confirmParams: {
-          return_url: `${window.location.origin}/success`,
-        },
-      });
-
-      if (error) {
-        setMessage(error.message);
-      }
-    } catch (err) {
-      console.error("Payment error:", err);
-      setMessage("Something went wrong.");
+  try {
+    // Submit elements first
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      setMessage(submitError.message);
+      setLoading(false);
+      return;
     }
 
-    setLoading(false);
-  };
+    // 1️⃣ Create the PaymentIntent
+    const response = await fetch("/.netlify/functions/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: total,
+        name: "Pending", // or empty
+        email: "unknown@zencarbuying.com", // placeholder
+        metadata: {
+          selections: JSON.stringify(selections),
+        },
+      }),
+    });
 
+    const { clientSecret } = await response.json();
+    const intentId = clientSecret.split("_secret")[0];
 
+    // 2️⃣ Immediately PATCH the PaymentIntent with real name/email
+    await fetch("/.netlify/functions/update-payment-metadata", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: intentId,
+        name,
+        email,
+      }),
+    });
+
+    // 3️⃣ Now confirm payment
+    const { error } = await stripe.confirmPayment({
+      elements,
+      clientSecret,
+      confirmParams: {
+        return_url: `${window.location.origin}/success`,
+      },
+    });
+
+    if (error) {
+      setMessage(error.message);
+    }
+  } catch (err) {
+    console.error("Payment error:", err);
+    setMessage("Something went wrong.");
+  }
+
+  setLoading(false);
+};
 
   return (
     <section className="bg-secondary py-2 md:py-4">
