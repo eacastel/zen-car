@@ -31,12 +31,9 @@ const CheckoutForm = ({ selections, total }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          amount: total,
           name,
           email,
-          metadata: {
-            selections: JSON.stringify(selections),
-          },
+          selections,
         }),
       });
 
@@ -78,34 +75,34 @@ const CheckoutForm = ({ selections, total }) => {
 
             <div className="max-w-2xl mx-auto text-left bg-gray-50 rounded-lg border p-6 shadow-sm mb-6">
               {(selections?.zenExperience || (selections.includeResearchInventory && selections.includePurchaseHelp)) ? (
-    <>
-      <p className="text-lg text-gray-700 mb-2 text-center">
-        <span className="font-semibold">Zen Experience:</span> Includes Research + Inventory + Purchase Assistance
-      </p>
-      <p className="text-center text-gray-600 text-sm mb-2">
-        <span className="line-through text-gray-400">$950</span> → <span className="text-accent font-semibold">$850 special bundle</span>
-      </p>
-    </>
-  ) : (
-    <>
-      {selections.includeResearchInventory && (
-        <p className="text-lg text-gray-700 mb-2 text-center">
-          <span className="font-semibold">Research + Inventory Sourcing:</span> $450
-        </p>
-      )}
-      {selections.includePurchaseHelp && (
-        <p className="text-lg text-gray-700 mb-2 text-center">
-          <span className="font-semibold">Purchase Assistance:</span> $500
-        </p>
-      )}
-    </>
-  )}
+                <>
+                  <p className="text-lg text-gray-700 mb-2 text-center">
+                    <span className="font-semibold">Zen Experience:</span> Includes Research + Inventory + Purchase Assistance
+                  </p>
+                  <p className="text-center text-gray-600 text-sm mb-2">
+                    <span className="line-through text-gray-400">$950</span> → <span className="text-accent font-semibold">$850 special bundle</span>
+                  </p>
+                </>
+              ) : (
+                <>
+                  {selections.includeResearchInventory && (
+                    <p className="text-lg text-gray-700 mb-2 text-center">
+                      <span className="font-semibold">Research + Inventory Sourcing:</span> $450
+                    </p>
+                  )}
+                  {selections.includePurchaseHelp && (
+                    <p className="text-lg text-gray-700 mb-2 text-center">
+                      <span className="font-semibold">Purchase Assistance:</span> $500
+                    </p>
+                  )}
+                </>
+              )}
 
-  <hr className="my-4 border-t border-gray-300" />
+              <hr className="my-4 border-t border-gray-300" />
 
-  <p className="mt-4 text-lg font-bold text-center text-primary">
-    Total: ${total / 100}
-  </p>
+              <p className="mt-4 text-lg font-bold text-center text-primary">
+                Total: ${total / 100}
+              </p>
             </div>
 
 
