@@ -52,8 +52,6 @@ const EmailIcon = () => (
 
 
 export default function ContactPage() {
-  const [showSmsModal, setShowSmsModal] = useState(false);
-  const [isSmsChecked, setIsSmsChecked] = useState(false);
 
   const { bmwMountain } = useStaticQuery(graphql`
     query {
@@ -87,23 +85,15 @@ export default function ContactPage() {
           </a>
 
           {/* Text Us Button */}
-          <button
-            type="button"
-            onClick={() => setShowSmsModal(true)}
-            className="bg-secondary text-primary px-6 py-3 rounded-lg text-lg font-bold border-2 border-primary hover:border-black hover:scale-105 transition-transform duration-200 text-center w-full md:w-auto"
-            aria-label="Open SMS Consent Modal"
-          >
-            <MessageIcon /> Text Us
-          </button>
+<a
+  href="sms:+18886516088"
+  className="bg-secondary text-primary px-6 py-3 rounded-lg text-lg font-bold border-2 border-primary hover:border-black hover:scale-105 transition-transform duration-200 text-center w-full md:w-auto"
+  aria-label="Text Zen Car Buying"
+>
+  <MessageIcon /> Text Us
+</a>
 
-          {/* Email Button */}
-          <a
-            href="mailto:info@zencarbuying.com"
-            className="bg-accent text-white px-6 py-3 rounded-lg text-lg font-bold hover:bg-accent-dark hover:scale-105 transition-transform duration-200 text-center w-full md:w-auto"
-            aria-label="Email Zen Car Buying"
-          >
-            <EmailIcon /> Email Us
-          </a>
+
         </div>
 
         {/* Heading Section */}
@@ -141,68 +131,6 @@ export default function ContactPage() {
           </div>
         )}
       </section>
-      {showSmsModal && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
-        >
-          <div className="bg-white rounded-lg max-w-md w-full p-6 space-y-4 shadow-xl">
-            <h2 className="text-lg font-semibold text-primary">SMS Consent</h2>
-
-            <p className="text-sm text-primary">
-              By texting Zen Car Buying LLC (888) 651-6088 you agree to receive Conversations (external) messages from Zen Car Buying LLC for communication regarding your vehicle search and buying experience. Message and data rates may apply. Message frequency may vary. Reply STOP to opt-out or HELP for support. Visit{" "}
-              <a
-                href="https://zencarbuying.com/privacy-policy/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline text-accent"
-              >
-                https://zencarbuying.com/privacy-policy/
-              </a>{" "}
-              to see our Privacy Policy and{" "}
-              <a
-                href="https://zencarbuying.com/sms-terms-and-conditions/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline text-accent"
-              >
-                https://zencarbuying.com/sms-terms-and-conditions/
-              </a>{" "}
-              for our Terms of Service.
-            </p>
-
-
-            <label className="flex items-start gap-2 text-sm">
-              <input
-                type="checkbox"
-                className="mt-1"
-                checked={isSmsChecked}
-                onChange={e => setIsSmsChecked(e.target.checked)}
-              />
-              <span>I agree to the SMS Terms above.</span>
-            </label>
-
-            <div className="flex justify-end gap-2 pt-2">
-              <button
-                onClick={() => setShowSmsModal(false)}
-                className="px-4 py-2 rounded-md text-sm focus:outline-none hover:bg-gray-100"
-              >
-                Cancel
-              </button>
-
-              {/* Always enabled */}
-              <a
-                href="sms:+18886516088"
-                className="px-4 py-2 rounded-md text-sm text-white bg-primary hover:bg-primary-dark"
-              >
-                Send SMS
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-
     </Layout>
   )
 }

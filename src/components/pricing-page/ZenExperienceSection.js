@@ -136,7 +136,7 @@ const ZenExperienceSection = () => {
               />
               <label htmlFor="terms" className="text-sm text-primary">
                 I agree to the{" "}
-                <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-accent underline">
+                <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-accent underline">
                   Terms and Conditions
                 </a>
               </label>
