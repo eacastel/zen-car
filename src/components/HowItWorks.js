@@ -9,16 +9,16 @@ export default function HowItWorks() {
         {
             step: '1',
             title: 'Start Your Zen Experience',
-            desc: 'Choose a service package and schedule your onboarding call. We’ll get to know your preferences, goals, and budget.',
+            desc: 'Choose a service package and schedule your onboarding call. We’ll get to know your preferences, goals and budget.',
         },
         {
             step: '2',
             title: 'Receive Expert Recommendations',
-            desc: 'We hand-select 2–4 ideal vehicles based on your lifestyle, reliability needs, and long-term goals.',
+            desc: 'We hand-select your ideal vehicle based on your lifestyle, reliability needs, and long-term goals.',
         },
         {
             step: '3',
-            title: 'Get Matched with Live Inventory',
+            title: 'Get Matched with Available Inventory',
             desc: 'We source the best available listings nationwide, verify them, and present them to you with key details.',
         },
         {

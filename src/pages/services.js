@@ -23,31 +23,33 @@ const Services = () => {
 
 
                 <p className="text-xl md:text-2xl text-primary font-medium mb-8">
-                    We learn your needs, find the best matches, negotiate the right deal, and get the car to your door — saving you time, money, and stress.
+                    We identify your needs, find the best matches, negotiate the best deal, and get the car to your door — saving you time, money, and stress.
+                </p>
+
+                 <p className="text-xl md:text-2xl text-primary font-medium mb-8">
+                    Zen Car Buying offers two flexible service options designed to save you time, money, and hassle—whether you need full support or just expert guidance.
                 </p>
 
                 {/* Services Offered */}
                 <h2 className="text-2xl font-semibold text-center text-accent mb-6">
-                    Just Choose Your Package
+                    Prices start at $450
                 </h2>
-                <p className="text-lg text-gray-700 max-w-2xl mx-auto mb-10">
-                    Zen Car Buying offers two flexible service options designed to save you time, money, and hassle—whether you need full support or just expert guidance.
-                </p>
+
 
                 <div className="grid gap-6 md:grid-cols-2 text-left text-base mb-12">
                     <div className="bg-white border border-gray-200 p-6 rounded-xl shadow-sm">
-                        <h3 className="text-xl font-bold text-primary mb-2">Starter Package – $450</h3>
+                        <h3 className="text-xl font-bold text-primary mb-2">Starter Package</h3>
                         <ul className="list-disc pl-5 text-gray-700">
                             <li>1-on-1 onboarding with your Zen Guide</li>
                             <li>Personalized car recommendations (2–4 picks)</li>
                             <li>Nationwide inventory sourcing</li>
                             <li>Verified vehicle listings</li>
                         </ul>
-                        <p className="mt-4 text-sm text-gray-500">Purchase assistance available later for $500.</p>
+                        <p className="mt-4 text-sm text-gray-500">Purchase assistance available.</p>
                     </div>
 
                     <div className="bg-gray-50 border border-gray-200 p-6 rounded-xl shadow-sm">
-                        <h3 className="text-xl font-bold text-primary mb-2">Full Zen Experience – $850</h3>
+                        <h3 className="text-xl font-bold text-primary mb-2">Full Zen Experience</h3>
                         <ul className="list-disc pl-5 text-gray-700">
                             <li>Everything in the Starter Package</li>
                             <li>Full purchase negotiation & support</li>
@@ -71,15 +73,15 @@ const Services = () => {
                         },
                         {
                             title: "Personalized Car Picks",
-                            desc: "You get 2–4 data-backed vehicle recommendations matched to your lifestyle.",
+                            desc: "You get data-backed vehicle recommendations matched to your requirements.",
                         },
                         {
                             title: "Verified Listings, Delivered",
-                            desc: "We search nationwide, verify availability, and bring you the best options—no scrolling needed.",
+                            desc: "We bring you the best options locally and nationally, vehicle condition and availability—no scrolling needed.",
                         },
                         {
                             title: "Seamless Purchase Support",
-                            desc: "We handle the back-and-forth with dealers, paperwork, and delivery so you don’t have to.",
+                            desc: "We handle the back-and-forth with dealers, paperwork, and delivery saving you time and stress.",
                         },
                     ].map((service, idx) => (
                         <div
