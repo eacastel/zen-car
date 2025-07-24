@@ -26,14 +26,16 @@ const Services = () => {
                     We identify your needs, find the best matches, negotiate the best deal, and get the car to your door — saving you time, money, and stress.
                 </p>
 
-                 <p className="text-xl md:text-2xl text-primary font-medium mb-8">
-                    Zen Car Buying offers two flexible service options designed to save you time, money, and hassle—whether you need full support or just expert guidance.
-                </p>
-
                 {/* Services Offered */}
                 <h2 className="text-2xl font-semibold text-center text-accent mb-6">
                     Prices start at $450
                 </h2>
+
+                <p className="text-xl text-gray-700  mb-8">
+                    Zen Car Buying offers two flexible service options designed to save you time, money, and hassle—whether you need full support or just expert guidance.
+                </p>
+
+
 
 
                 <div className="grid gap-6 md:grid-cols-2 text-left text-base mb-12">
@@ -60,6 +62,7 @@ const Services = () => {
                     </div>
 
                 </div>
+
 
                 {/* What's Included */}
                 <h2 className="text-2xl font-semibold text-center text-accent mb-6">
@@ -96,7 +99,6 @@ const Services = () => {
                         </div>
                     ))}
                 </div>
-
                 {/* CTA */}
                 <div className="text-center">
                     <p className="text-lg text-gray-700 mb-4">
@@ -106,6 +108,7 @@ const Services = () => {
                         Start Your Zen Journey
                     </Button>
                 </div>
+
             </section>
             <div ref={testimonialsRef}>
                 {showTestimonials && (

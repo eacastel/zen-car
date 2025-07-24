@@ -59,7 +59,7 @@ const Purchase = () => {
               Get our full-service concierge package—expert research, inventory sourcing, and purchase help—all in one seamless, cost-effective experience.
             </p>
 
-            <div className="flex flex-col lg:flex-row gap-6">
+            <div className="flex flex-col lg:flex-row gap-0">
               <div className="lg:w-1/2">
                 <CustomizeWizard />
               </div>

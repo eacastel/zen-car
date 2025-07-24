@@ -125,8 +125,8 @@ export default function Header() {
             </li>
           ))}
 
-          <li className="ml-4">
-            <ButtonHeader size="lg" color="accent">
+          <li className="ml-2">
+            <ButtonHeader size="lg" color="accent" > 
               Start Now
             </ButtonHeader>
           </li>
