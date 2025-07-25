@@ -85,23 +85,39 @@ export default function AboutPage({ data }) {
               {
                 step: '1',
                 title: 'Start Your Zen Experience',
-                desc: 'Choose your service package and schedule a quick onboarding call to share your goals, preferences, and budget.',
-              },
-              {
+                desc: (
+                    <>
+                        Choose a service package and book your onboarding call to get started —or book a{" "}
+                        <button
+                            type="button"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                openCalendlyPopup();
+                            }}
+                            className="text-accent underline focus:outline-none focus:ring-2 focus:ring-accent"
+                            aria-label="Schedule your onboarding call"
+                        >
+                             quick intro call
+                        </button>
+                        {" "}if you’d like to learn more first.
+                    </>
+                )
+            },
+            {
                 step: '2',
-                title: 'Get Expert Recommendations',
-                desc: 'We research the best used cars for your needs and send 2–4 curated picks with data-backed insights.',
-              },
-              {
+                title: 'Receive Expert Recommendations',
+                desc: 'We hand-select your ideal vehicle based on your lifestyle, reliability needs, and long-term goals.',
+            },
+            {
                 step: '3',
-                title: 'Review Verified Listings',
-                desc: 'We locate and vet top inventory nationwide—no scams, dead listings, or wasted dealership visits.',
-              },
-              {
+                title: 'Get Matched with Available Inventory',
+                desc: 'We source the best available listings nationwide, verify them, and present them to you with key details.',
+            },
+            {
                 step: '4',
-                title: 'Buy Smart, Skip the Stress',
-                desc: 'We handle negotiations, paperwork, and delivery support—so you save money and skip the hassle.',
-              },
+                title: 'Enjoy Purchase & Delivery Support',
+                desc: 'We negotiate, manage paperwork, and coordinate delivery so you can buy with confidence and ease.',
+            },
             ].map((item, index) => (
               <motion.div
                 key={index}
