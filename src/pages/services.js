@@ -36,8 +36,6 @@ const Services = () => {
                 </p>
 
 
-
-
                 <div className="grid gap-6 md:grid-cols-2 text-left text-base mb-12">
                     <div className="bg-white border border-gray-200 p-6 rounded-xl shadow-sm">
                         <h3 className="text-xl font-bold text-primary mb-2">Starter Package</h3>
@@ -174,9 +172,9 @@ export const Head = () => {
     return (
         <>
             <Seo
-                title="Zen Car Buying Pricing | Nationwide Car Buying Packages"
-                description="Discover Zen Car Buying's comprehensive, nationwide car buying experience. Get a free 15‑minute consultation, expert recommendations, inventory sourcing, and purchase assistance across the USA."
-                pathname="/pricing"
+                title="Zen Car Buying Services | Nationwide Car Buying Packages"
+                description="Explore Zen Car Buying's nationwide car buying services. Choose a package to get started, or book a free 15-minute onboarding call to learn how we save you time, money, and stress."
+                pathname="/services"
             />
             <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
         </>

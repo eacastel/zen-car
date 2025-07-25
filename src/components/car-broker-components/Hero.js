@@ -39,7 +39,7 @@ export function Hero() {
           <p className="text-lg uppercase tracking-wider mb-4 font-pirulen" >THE MODERN APPROACH TO CAR BUYING</p>
 
           <h1 className="text-4xl md:text-5xl mb-4" style={{
-    fontFamily:'"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif', }}>Your Trusted Nationwide Car Brokerage
+    fontFamily:'"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif', }}>Your Trusted Nationwide Car Broker
           </h1>
 
           <h2 className="text-xl font-poppins tracking-widest uppercase mb-8">

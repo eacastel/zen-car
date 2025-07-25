@@ -43,7 +43,7 @@ export function Hero() {
           </h1>
 
           <h2 className="text-xl font-poppins tracking-widest uppercase mb-8">
-            Let our Zen Guides find you a lightly used car at up to 30-50% off new car prices.
+            Our Zen Guides find your perfect lightly used car — at up to 30–50% off new car prices.
           </h2>
 
           {/* Buttons - Styled using the existing Button component */}

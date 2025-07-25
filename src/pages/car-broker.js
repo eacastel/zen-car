@@ -3,9 +3,10 @@ import React, { lazy, Suspense, useState, useEffect, useRef } from 'react'
 import Layout from '../components/car-broker-components/Layout';
 import Seo from '../components/Seo';
 import { Hero } from '../components/car-broker-components/Hero';
+import { Link } from 'gatsby'
 import CallToAction from '../components/car-broker-components/CallToAction';
 
-const HowItWorks = lazy(() => import('../components/car-broker-components/HowItWorks'));
+const HowItWorks = lazy(() => import('../components/HowItWorks'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
 
 function useOnScreen(ref, rootMargin = "0px") {
@@ -56,12 +57,12 @@ const CarBroker = () => {
   const showTestimonials = useOnScreen(testimonialsRef, '100px');
 
   useEffect(() => {
-  if (typeof window !== "undefined") {
-    const path = "/car-broker";
-    localStorage.setItem("preferredHome", path);
-    document.cookie = `preferredHome=${path}; path=/; max-age=2592000`;
-  }
-}, []);
+    if (typeof window !== "undefined") {
+      const path = "/car-broker";
+      localStorage.setItem("preferredHome", path);
+      document.cookie = `preferredHome=${path}; path=/; max-age=2592000`;
+    }
+  }, []);
 
   return (
     <Layout>
@@ -69,20 +70,28 @@ const CarBroker = () => {
 
       <section className="py-16 bg-secondary" aria-labelledby="car-broker-benefits">
         <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
-          <h2 id="car-broker-benefits" className="text-4xl font-medium text-accent text-center mb-12">
-            Why Choose Our <span className="text-accent">Car Broker Services?</span>
+          <h2 id="car-broker-benefits" className="text-4xl font-medium text-accent text-center mb-6">
+            Car Broker Services <span className="text-accent">That Work for You</span>
           </h2>
+          <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">Skip the dealer hassle. We help you buy smarter—with expert guidance, zero pressure, and one flat fee.</p>
           <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
             {[
-              { title: 'Expert Recommendations', key: 'recommendations', desc: 'Personalized picks from our professional car brokers based on your needs & budget.' },
-              { title: 'Nationwide and Local Inventory', key: 'sourcing', desc: 'Top vehicles sourced locally and nationwide by your dedicated Zen Guide.' },
-              { title: 'Time Saving, Stress Free Buying', key: 'negotiation', desc: 'Zen Car Buying’s experienced car brokers deal and negotiate directly with the dealership  so you don\'t have to.' },
+              { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'We provide tailored suggestions based on your needs & budget.' },
+              { title: 'Nationwide Vehicle Sourcing & Shipping', key: 'sourcing', desc: 'We find you the best deals, no matter where you live.' },
+              { title: 'Time Saving, Stress Free Buying', key: 'negotiation', desc: 'Let us do the work for you!' },
             ].map((benefit, index) => (
-              <div key={index} className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}
-                <h3 className="text-xl font-medium text-primary">{benefit.title}</h3>
-                <p className="text-gray-500">{benefit.desc}</p>
-              </div>
+              <Link
+                key={index}
+                to="/services"
+                aria-label={`Learn more about ${benefit.title}`}
+                style={{ cursor: "auto", textDecoration: "none", color: "inherit" }}
+              >
+                <div className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}
+                  <h3 className="text-xl font-medium text-primary">{benefit.title}</h3>
+                  <p className="text-gray-500">{benefit.desc}</p>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
