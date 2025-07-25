@@ -3,9 +3,9 @@ import { Link } from "gatsby";
 import { motion } from "framer-motion";
 
 const ButtonHeader = ({
-  to = "/pricing",  // Default link to /pricing
+  to = "/purchase",  // Default link to /purchase
   onClick,          // Added onClick prop handling
-  children = "Getting Started",
+  children = "Start Now",
   color = "accent",
   size = "base",
   className = "",
@@ -13,7 +13,7 @@ const ButtonHeader = ({
   ...rest
 }) => {
   const finalClassName = `bg-accent hover:bg-accent-dark text-white 
-    px-5 py-2 rounded-md font-bold text-sm xl:text-base whitespace-nowrap 
+    px-6 py-3 rounded-md font-bold text-sm xl:text-base whitespace-nowrap 
     transition-all duration-200 ease-in-out hover:shadow-md 
     focus:outline-none ${disabled ? "opacity-50 cursor-not-allowed" : ""}
     ${className}

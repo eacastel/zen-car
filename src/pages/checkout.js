@@ -11,32 +11,24 @@ const CheckoutPage = ({ location }) => {
   const selections = state?.selections;
   const total = state?.total;
 
-  useEffect(() => {
-    if (!selections || !total) {
-      navigate("/pricing");
-      return;
-    }
+useEffect(() => {
+  console.log("CheckoutPage mounted", { selections, total, clientSecret: state?.clientSecret });
 
-    fetch("/.netlify/functions/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: total,
-        name: "Pending", // Placeholder; actual entered by user
-        email: "unknown@zencarbuying.com", // Placeholder; actual entered by user
-        metadata: {
-          selections: JSON.stringify(selections),
-        },
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setClientSecret(data.clientSecret);
-        setLoading(false);
-      });
-  }, [selections, total]);
+  if (!selections || !total || !state?.clientSecret) {
+    navigate("/pricing");
+    return;
+  }
 
-  return (
+  setClientSecret(state.clientSecret);
+  setLoading(false);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []); // Intentionally run only once on mount
+
+
+
+
+return (
   <Layout>
     <main className="flex-grow bg-secondary py-8">
       {!loading && clientSecret ? (

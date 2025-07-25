@@ -1,13 +1,15 @@
 require("dotenv").config();
 const Stripe = require("stripe");
 const { Resend } = require("resend");
+const { buildCustomerEmail } = require("../../src/utils/customerEmailTemplate");
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-08-16" });
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 exports.handler = async (event) => {
   const sig = event.headers["stripe-signature"];
-  const rawBody = event.body;
+  const rawBody = Buffer.from(event.body, "utf8");
 
   let stripeEvent;
   try {
@@ -18,26 +20,59 @@ exports.handler = async (event) => {
   }
 
   if (stripeEvent.type === "payment_intent.succeeded") {
-    const intent = stripeEvent.data.object;
-    const email = intent.metadata?.email || intent.receipt_email;
-    const name = intent.metadata?.name || "Customer";
+    const intentId = stripeEvent.data.object.id;
+
+    const intent = await stripe.paymentIntents.retrieve(intentId, {
+      expand: ["charges.data.billing_details"],
+    });
+
+    const charge = intent.charges?.data?.[0] || {};
+
+    const email =
+      intent.metadata?.email ||
+      intent.receipt_email ||
+      charge.billing_details?.email ||
+      "unknown@zencarbuying.com";
+
+    const name =
+      intent.metadata?.name ||
+      charge.billing_details?.name ||
+      "Customer";
+
     const amount = (intent.amount / 100).toFixed(2);
     const currency = intent.currency.toUpperCase();
-    const services = intent.metadata?.selections || "N/A";
+
+    let services = "N/A";
+    try {
+      const raw = intent.metadata?.selections;
+      if (raw) {
+        const parsed = typeof raw === "string" ? JSON.parse(raw) : raw;
+        services = Object.entries(parsed)
+          .map(([key, val]) => `${key}: ${val}`)
+          .join("\n");
+      }
+    } catch {
+      services = intent.metadata?.selections || "N/A";
+    }
+
     const id = intent.id;
 
+    // ✅ DEBUG: You can check this in Netlify Logs
+    console.log("📧 Billing Email:", charge.billing_details?.email);
+    console.log("👤 Billing Name:", charge.billing_details?.name);
+    console.log("📨 Final Email Used:", email);
+    console.log("🙋 Final Name Used:", name);
+
+    const breakdown = intent.metadata?.breakdown || null;
+
     // Format for customer
-    const customerHtml = `
-      <h2>Thank You for Your Purchase!</h2>
-      <p>Hi ${name},</p>
-      <p>We’ve received your payment of <strong>$${amount} ${currency}</strong>.</p>
-      <p>We’ll begin work on your Zen Car Buying package shortly.</p>
-      <hr />
-      <p><strong>Services Selected:</strong></p>
-      <pre>${services}</pre>
-      <p><strong>Transaction ID:</strong> ${id}</p>
-      <p>Thanks again,<br />Zen Car Buying Team</p>
-    `;
+    const customerHtml = buildCustomerEmail({
+      name,
+      amount: intent.amount,
+      currency: intent.currency,
+      breakdown,
+      paymentIntentId: intent.id,
+    });
 
     // Format for admin
     const adminHtml = `
@@ -67,10 +102,7 @@ exports.handler = async (event) => {
         html: adminHtml,
       });
 
-      console.log("🔥 Webhook received:", stripeEvent.type);
-      console.log("📧 Attempting to email:", email);
-      console.log("📨 Email body preview:", customerHtml);
-
+      console.log("🔥 Webhook processed and emails sent.");
       return { statusCode: 200, body: "Emails sent" };
     } catch (err) {
       console.error("❌ Email send error:", err.message);

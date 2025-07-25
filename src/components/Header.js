@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Squash as Hamburger } from "hamburger-react";
-import CalendlyButtonHeader from "../components/CalendlyButtonHeader";
+import ButtonHeader from "../components/ButtonHeader";
 import { getHomePath } from "../utils/getHomePath";
 
 export default function Header() {
@@ -52,7 +52,7 @@ export default function Header() {
   const navItems = [
     { name: "About", path: "/about" },
     { name: "FAQ", path: "/faq" },
-    { name: "Pricing", path: "/pricing" },
+    { name: "Services", path: "/services" },
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },
   ];
@@ -125,10 +125,10 @@ export default function Header() {
             </li>
           ))}
 
-          <li className="ml-4">
-            <CalendlyButtonHeader size="lg" color="accent">
-              Get Started
-            </CalendlyButtonHeader>
+          <li className="ml-2">
+            <ButtonHeader size="lg" color="accent" > 
+              Start Now
+            </ButtonHeader>
           </li>
         </ul>
 
@@ -140,9 +140,9 @@ export default function Header() {
         >
           <ul className="flex flex-col items-center py-4 space-y-4">
             <li className="mt-4 w-full text-center">
-              <CalendlyButtonHeader size="lg" color="accent">
-                Get Started
-              </CalendlyButtonHeader>
+              <ButtonHeader size="lg" color="accent">
+                Start Now
+              </ButtonHeader>
             </li>
 
             {navItems.map((item) => (

@@ -162,7 +162,7 @@ module.exports = {
             case '/blog/':
               priority = 0.8; break;         // Blog page
             case '/privacy-policy/':
-            case '/terms/':
+            case '/terms-and-conditions/':
               priority = 0.5; break;         // Legal pages lower priority
             default:
               priority = 0.7;                // Default priority for all others
@@ -175,6 +175,9 @@ module.exports = {
           };
         },
       },
+    },
+    {
+      resolve: `gatsby-plugin-netlify`,
     },
   ],
 }

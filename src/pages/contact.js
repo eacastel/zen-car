@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import CalendlyButton from '../components/CalendlyButton'
@@ -36,24 +36,7 @@ const MessageIcon = () => (
   </svg>
 )
 
-const EmailIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg"
-    className="w-5 h-5 mr-2 inline-block"
-    fill="currentColor"
-    viewBox="0 0 24 24"
-    stroke="none"
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-      d="M3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM20 7.23792L12.0718 14.338L4 7.21594V19H20V7.23792ZM4.51146 5L12.0619 11.662L19.501 5H4.51146Z"
-    />
-  </svg>
-)
-
-
-
 export default function ContactPage() {
-  const [showSmsModal, setShowSmsModal] = useState(false);
-  const [isSmsChecked, setIsSmsChecked] = useState(false);
 
   const { bmwMountain } = useStaticQuery(graphql`
     query {
@@ -87,23 +70,15 @@ export default function ContactPage() {
           </a>
 
           {/* Text Us Button */}
-          <button
-            type="button"
-            onClick={() => setShowSmsModal(true)}
+          <a
+            href="sms:+18886516088"
             className="bg-secondary text-primary px-6 py-3 rounded-lg text-lg font-bold border-2 border-primary hover:border-black hover:scale-105 transition-transform duration-200 text-center w-full md:w-auto"
-            aria-label="Open SMS Consent Modal"
+            aria-label="Text Zen Car Buying"
           >
             <MessageIcon /> Text Us
-          </button>
-
-          {/* Email Button */}
-          <a
-            href="mailto:info@zencarbuying.com"
-            className="bg-accent text-white px-6 py-3 rounded-lg text-lg font-bold hover:bg-accent-dark hover:scale-105 transition-transform duration-200 text-center w-full md:w-auto"
-            aria-label="Email Zen Car Buying"
-          >
-            <EmailIcon /> Email Us
           </a>
+
+
         </div>
 
         {/* Heading Section */}
@@ -141,68 +116,6 @@ export default function ContactPage() {
           </div>
         )}
       </section>
-      {showSmsModal && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
-        >
-          <div className="bg-white rounded-lg max-w-md w-full p-6 space-y-4 shadow-xl">
-            <h2 className="text-lg font-semibold text-primary">SMS Consent</h2>
-
-            <p className="text-sm text-primary">
-              By texting Zen Car Buying LLC (888) 651-6088 you agree to receive Conversations (external) messages from Zen Car Buying LLC for communication regarding your vehicle search and buying experience. Message and data rates may apply. Message frequency may vary. Reply STOP to opt-out or HELP for support. Visit{" "}
-              <a
-                href="https://zencarbuying.com/privacy-policy/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline text-accent"
-              >
-                https://zencarbuying.com/privacy-policy/
-              </a>{" "}
-              to see our Privacy Policy and{" "}
-              <a
-                href="https://zencarbuying.com/sms-terms-and-conditions/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline text-accent"
-              >
-                https://zencarbuying.com/sms-terms-and-conditions/
-              </a>{" "}
-              for our Terms of Service.
-            </p>
-
-
-            <label className="flex items-start gap-2 text-sm">
-              <input
-                type="checkbox"
-                className="mt-1"
-                checked={isSmsChecked}
-                onChange={e => setIsSmsChecked(e.target.checked)}
-              />
-              <span>I agree to the SMS Terms above.</span>
-            </label>
-
-            <div className="flex justify-end gap-2 pt-2">
-              <button
-                onClick={() => setShowSmsModal(false)}
-                className="px-4 py-2 rounded-md text-sm focus:outline-none hover:bg-gray-100"
-              >
-                Cancel
-              </button>
-
-              {/* Always enabled */}
-              <a
-                href="sms:+18886516088"
-                className="px-4 py-2 rounded-md text-sm text-white bg-primary hover:bg-primary-dark"
-              >
-                Send SMS
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-
     </Layout>
   )
 }

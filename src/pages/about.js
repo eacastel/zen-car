@@ -30,7 +30,7 @@ export default function AboutPage({ data }) {
             At <strong>Zen Car Buying</strong>, we simplify the car-buying experience—whether you're shopping for a <strong>brand-new</strong> vehicle or a <strong>lightly used car</strong>. As a <strong>nationwide car broker concierge service</strong>, we leverage years of expertise and modern tools to ensure you get the right car without the time, stress, or dealership pressure.
           </p>
           <p className="text-base md:text-lg text-primary mb-4">
-            Our <strong>Zen Guides</strong> exclusively represent your interests.Unlike traditional or “free” car brokers who take kickbacks from dealers, we work only for you. From research to negotiation and delivery, we help you purchase the best <strong>new or used vehicle</strong>—at the best possible price. 
+            Our <strong>Zen Guides</strong> exclusively represent your interests.Unlike traditional or “free” car brokers who take kickbacks from dealers, we work only for you. From research to negotiation and delivery, we help you purchase the best <strong>new or used vehicle</strong>—at the best possible price.
           </p>
         </section>
 
@@ -75,54 +75,32 @@ export default function AboutPage({ data }) {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-semibold text-primary mb-4">Our Proven 4-Step Process</h2>
-          <p className="text-base md:text-lg text-primary leading-relaxed mb-4">
-            At <strong>Zen Car Buying</strong>we remove the stress and simplify the complex world of car buying. It all starts with a <button
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                openCalendlyPopup();
-              }}
-              className="text-accent underline cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent mb-4"
-              aria-label="Schedule a free 15-minute consultation"
-            > free 15-minute consultation</button>.
+          <h2 className="text-2xl font-semibold text-primary mb-4">How We Save You Time, Money, and Stress</h2>
+          <p className="text-base md:text-lg text-primary leading-relaxed mb-6 max-w-3xl">
+            We make car buying simple and stress-free—no dealer games, no wasted time. Just expert help and one flat fee, with your best deal as our only goal.
           </p>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 step: '1',
-                title: 'Schedule Consultation',
-                desc: (
-                  <>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        openCalendlyPopup();
-                      }}
-                      className="text-accent underline cursor-pointer"
-                      aria-label="Schedule a free 15-minute consultation"
-                    >
-                      Book your free 15-minute call
-                    </button>{" "}
-                    to go over your budget and preferences.
-                  </>
-                )
+                title: 'Start Your Zen Experience',
+                desc: 'Choose your service package and schedule a quick onboarding call to share your goals, preferences, and budget.',
               },
               {
                 step: '2',
-                title: 'Get Custom Recommendations',
-                desc: 'We provide personalized, data-backed vehicle suggestions.',
+                title: 'Get Expert Recommendations',
+                desc: 'We research the best used cars for your needs and send 2–4 curated picks with data-backed insights.',
               },
               {
                 step: '3',
-                title: 'Review Inventory',
-                desc: 'We source top listings from across the country that match your criteria.',
+                title: 'Review Verified Listings',
+                desc: 'We locate and vet top inventory nationwide—no scams, dead listings, or wasted dealership visits.',
               },
               {
                 step: '4',
-                title: 'Purchase Assistance',
-                desc: 'Your Zen Guide handles everything—from price negotiation to paperwork and final delivery.',
+                title: 'Buy Smart, Skip the Stress',
+                desc: 'We handle negotiations, paperwork, and delivery support—so you save money and skip the hassle.',
               },
             ].map((item, index) => (
               <motion.div
@@ -138,6 +116,27 @@ export default function AboutPage({ data }) {
           </div>
         </section>
 
+
+
+
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold text-primary mb-4">Not Sure Where to Start?</h2>
+          <p className="text-base md:text-lg text-primary leading-relaxed max-w-2xl mb-6">
+            Your free 15-minute call is pressure-free and designed to help you understand how we work, what you'll get,
+            and whether a full-service or à la carte option makes the most sense for your situation. Click <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                openCalendlyPopup();
+              }}
+              className="text-accent underline cursor-pointer"
+              aria-label="Schedule a consultation"
+            >here</button> for your free consultation.
+          </p>
+
+        </section>
+
+
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-primary mb-4">Warranty & Peace of Mind</h2>
           <p className="text-base md:text-lg text-primary">
@@ -148,17 +147,17 @@ export default function AboutPage({ data }) {
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-primary mb-4">Get Started Today</h2>
           <p className="text-base md:text-lg text-primary mb-4">
-          Whether you're seeking a dependable used car or a brand-new luxury vehicle, Zen Car Buying is your trusted partner for <strong>stress-free car broker services</strong>.</p>
+            Whether you're seeking a dependable used car or a brand-new luxury vehicle, Zen Car Buying is your trusted partner for <strong>stress-free car broker services</strong>.</p>
           <p className="text-base md:text-lg text-primary mb-4">
-            Ready to experience stress-free car buying? Click <button
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                openCalendlyPopup();
-              }}
-              className="text-accent underline cursor-pointer"
-              aria-label="Schedule a consultation"
-            >here</button> for your free consultation.
+            Ready to experience stress-free car buying?{" "}
+            <a
+              href="/purchase"
+              className="text-accent underline cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent"
+              aria-label="Start your Zen Car Buying journey"
+            >
+              Start your Zen journey now
+            </a>
+            .
           </p>
         </section>
 

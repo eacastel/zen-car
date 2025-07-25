@@ -1,8 +1,14 @@
 [[plugins]]
-package = "@netlify/plugin-gatsby"
+  package = "@netlify/plugin-gatsby"
+
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
 
 [functions]
   directory = "netlify/functions"
+  included_files = ["*"]
+  node_bundler = "esbuild"
+  external_node_modules = ["stripe", "resend"]
 
 [build]
   command = "gatsby build"
@@ -13,3 +19,9 @@ package = "@netlify/plugin-gatsby"
     "public/page-data/**",
     "public/blog/**"
   ]
+
+[[redirects]]
+  from = "/pricing"
+  to = "/purchase"
+  status = 301
+  force = true

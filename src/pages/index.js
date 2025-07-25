@@ -1,5 +1,6 @@
 import { navigate } from "gatsby";
-import React, { lazy, Suspense, useState, useEffect, useRef } from 'react'
+import React, { lazy, Suspense, useState, useEffect, useRef} from 'react'
+import { Link }  from 'gatsby'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import { Hero } from '../components/Hero'
@@ -59,20 +60,20 @@ const HomePage = () => {
   const testimonialsRef = useRef();
   const showTestimonials = useOnScreen(testimonialsRef, '100px');
 
-useEffect(() => {
-  if (typeof window !== "undefined") {
-    const localPref = localStorage.getItem("preferredHome");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const localPref = localStorage.getItem("preferredHome");
 
-    const cookieMatch = document.cookie.match(/(?:^|;\s*)preferredHome=([^;]+)/);
-    const cookiePref = cookieMatch?.[1];
+      const cookieMatch = document.cookie.match(/(?:^|;\s*)preferredHome=([^;]+)/);
+      const cookiePref = cookieMatch?.[1];
 
-    const preferredHome = localPref || cookiePref;
+      const preferredHome = localPref || cookiePref;
 
-    if (preferredHome && preferredHome !== "/") {
-      navigate(preferredHome, { replace: true });
+      if (preferredHome && preferredHome !== "/") {
+        navigate(preferredHome, { replace: true });
+      }
     }
-  }
-}, []);
+  }, []);
 
   return (
     <Layout>
@@ -83,20 +84,29 @@ useEffect(() => {
       {/* ✅ Key Benefits Section */}
       <section className="py-16 bg-secondary" aria-labelledby="benefits-heading">
         <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
-          <h2 id="benefits-heading" className="text-4xl font-medium text-accent text-center mb-12">
+          <h2 id="benefits-heading" className="text-4xl font-medium text-accent text-center mb-6">
             Why Choose <span className="text-accent">Zen Car Buying?</span>
           </h2>
+          <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">Skip the dealer hassle. We help you buy smarter—with expert guidance, zero pressure, and one flat fee.</p>
           <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
             {[
-              { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'Tailored suggestions based on your needs & budget.' },
-              { title: 'Nationwide Vehicle Sourcing & Shipping', key: 'sourcing', desc: 'Find the best deals, no matter where you live.' },
+              { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'We provide tailored suggestions based on your needs & budget.' },
+              { title: 'Nationwide Vehicle Sourcing & Shipping', key: 'sourcing', desc: 'We find you the best deals, no matter where you live.' },
               { title: 'Time Saving, Stress Free Buying', key: 'negotiation', desc: 'Let us do the work for you!' },
             ].map((benefit, index) => (
-              <div key={index} className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}
-                <h3 className="text-xl font-medium text-primary">{benefit.title}</h3>
-                <p className="text-gray-500">{benefit.desc}</p>
-              </div>
+              <Link
+                key={index}
+                to="/services"
+                aria-label={`Learn more about ${benefit.title}`}
+                style={{ cursor: "auto", textDecoration: "none", color: "inherit" }}
+              >
+                <div
+                  className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}
+                  <h3 className="text-xl font-medium text-primary">{benefit.title}</h3>
+                  <p className="text-gray-500">{benefit.desc}</p>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

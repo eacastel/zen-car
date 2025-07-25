@@ -1,431 +1,185 @@
-// CustomizeWizzard.js
 import React, { useState } from "react";
 import { navigate } from "gatsby";
-import { FaCheckCircle, FaRegCircle, FaCheckSquare, FaRegSquare } from "react-icons/fa";
 import Button from "../Button";
-
+import { FaCheckSquare, FaRegSquare } from "react-icons/fa";
 
 const CustomizeWizard = () => {
-  // Updated research options: 1 Car: $250, 2 Cars: $350, 3 Cars: $450.
-  const researchOptions = [
-    {
-      label: "Know which car you want?",
-      price: 0,
-      description: "Skip expert recommendations and proceed with your own choices."
-    },
-  {
-    label: "Research",
-    price: 250,
-    description: "We research the best year, make and model based on your needs."
-  }
-  ];
-
-  const [researchSelection, setResearchSelection] = useState(null);
-  const [inventorySourcing, setInventorySourcing] = useState(false);
-  const [purchaseAssistance, setPurchaseAssistance] = useState(false);
+  const [includeResearchInventory, setIncludeResearchInventory] = useState(false);
+  const [includePurchaseHelp, setIncludePurchaseHelp] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [termsAccepted2, setTermsAccepted2] = useState(false);
+  const total =
+    includeResearchInventory && includePurchaseHelp
+      ? 850
+      : includeResearchInventory
+      ? 450
+      : includePurchaseHelp
+      ? 500
+      : 0;
 
-  // Calculate total without discount
-  const totalPrice =
-    (researchSelection ? researchSelection.price : 0) +
-    (inventorySourcing ? 250 : 0) +
-    (purchaseAssistance ? 500 : 0);
-
-  // Discount applies if research (with cost) AND both inventory and purchase are selected.
-  const discountApplicable = researchSelection && researchSelection.price > 0 && inventorySourcing && purchaseAssistance;
-  const finalAmount = discountApplicable ? totalPrice - 200 : totalPrice;
-
-  const handleKeyDown = (e, action) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      action();
-    }
-  };
-
-  const handleCustomPurchase = async () => {
-    if (!termsAccepted2) {
+  const handleCheckout = async () => {
+    if (!termsAccepted) {
       alert("Please accept the Terms and Conditions before proceeding.");
       return;
     }
 
-    // Meta Pixel tracking
-    if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("track", "InitiateCheckout", {
-        value: finalAmount,
-        currency: "USD",
-        content_name: "Zen Car Buying Package"
-      });
-    }
-
-    setLoading(true);
-    let descriptionLines = [];
-    let selectedProducts = [];
-
-    if (researchSelection) {
-      descriptionLines.push(`Research: ${researchSelection.label} Option – $${researchSelection.price}`);
-      if (researchSelection.price > 0) {
-        selectedProducts.push({
-          name: `Research Recommendation: ${researchSelection.label}`,
-          price: researchSelection.price,
-          description: researchSelection.description
-        });
-      }
-    }
-    if (inventorySourcing) {
-      descriptionLines.push(`Inventory Sourcing: $250`);
-      selectedProducts.push({
-        name: "Inventory Sourcing",
-        price: 250,
-        description: "Find vehicles that match your criteria"
-      });
-    }
-    if (purchaseAssistance) {
-      descriptionLines.push(`Purchase Assistance: $500`);
-      selectedProducts.push({
-        name: "Purchase Assistance",
-        price: 500,
-        description: "We coordinate the transaction."
-      });
-    }
-    const description = descriptionLines.join("\n");
-
-    const payload = {
-      amount: totalPrice, // Sending original total; backend can apply discount logic if needed
-      selections: {
-        research: researchSelection,
-        inventory: inventorySourcing,
-        purchase: purchaseAssistance
-      },
-      products: selectedProducts, // New field with selected product details
-      description,
-      metadata: {
-        termsAccepted: termsAccepted2
-      }
+    const selections = {
+      includeResearchInventory,
+      includePurchaseHelp,
+      package: includeResearchInventory && includePurchaseHelp ? "Zen Experience" : null,
     };
 
+    const metadata = {
+      termsAccepted: "true",
+      package: selections.package || (includeResearchInventory ? "Research + Inventory" : "Purchase Assistance"),
+    };
+
+    setLoading(true);
+
     try {
-      const response = await fetch("/.netlify/functions/checkout", {
+      const res = await fetch("/.netlify/functions/create-payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({
+          selections,
+          metadata,
+          name: "Pending", // You’ll overwrite this via webhook
+          email: "unknown@zencarbuying.com", // Overwritten later too
+        }),
       });
-      const data = await response.json();
-      if (data.url) {
-        navigate("/checkout", {
-          state: {
-            selections: {
-              research: researchSelection,
-              inventory: inventorySourcing,
-              purchase: purchaseAssistance,
-            },
-            total: finalAmount * 100, // Convert to cents
-          },
-        });
-      } else {
-        console.error("Checkout error:", data.error);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error("Error creating checkout session:", error);
+
+      const { clientSecret } = await res.json();
+
+      if (!clientSecret) throw new Error("No clientSecret returned.");
+
+      navigate("/checkout", {
+        state: {
+          clientSecret,
+          selections,
+          total: total * 100, // used just for display, not Stripe
+        },
+      });
+    } catch (err) {
+      console.error("Checkout error:", err);
+      alert("There was a problem starting your checkout.");
       setLoading(false);
     }
   };
 
+
   return (
     <main>
-      <section className="bg-secondary py-6 md:py-12">
-        <div className="container mx-auto px-0 md:px-2 md:max-w-[1280px] lg:px-6 lg:max-w-[1280px]">
+      <section className="bg-secondary pb-6">
+        <div className="container mx-auto  md:px-4 md:max-w-4xl lg:px-6">
+          <div className="bg-white border-2 border-primary rounded-2xl shadow-lg p-8">
+            <span className="text-sm font-bold uppercase text-accent tracking-wider mb-2 block text-center">
+              Build Your Own
+            </span>
+            <h2 className="text-3xl font-pirulen text-primary text-center mb-4 uppercase tracking-wider">
+              Starter Package
+            </h2>
+            <p className="text-lg text-primary text-center mb-8">
+              Select one or both services below. Get both to unlock the Zen Experience and save $100.
+            </p>
 
-
-
-          <div className="mx-1 md:mx-2 lg:mx-6 lg:max-w-[1280px] rounded-2xl shadow-lg relative border-2 border-primary">
-            <div className="bg-white p-4 md:p-8 lg:p-12 rounded-2xl shadow-lg text-center">
-
-
-              <h2 className="text-3xl font-medium text-primary md:mt-4 mb-4 uppercase tracking-wider font-pirulen">
-                Customize Your Package
-              </h2>
-
-              <p className="text-lg md:text-xl mx-auto max-w-4xl pb-8 mt-2 text-center text-primary">
-                Choose all services to unlock the full Zen Experience — and enjoy a special $200 discount on our most complete, all‑in‑one solution for a truly stress‑free car buying journey.
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* Column 1: Research Recommendation */}
-                <div
-                  className="border p-4 rounded-lg bg-gray-50 shadow-sm text-left"
-                  aria-labelledby="research-rec-header"
-                  role="group"
-                >
-                  <div className="flex items-center mb-2">
-                    <div className="bg-accent text-white rounded-full min-w-8 h-8 flex items-center justify-center mr-2 font-bold">
-                      1
-                    </div>
-                    <h4 className="text-lg font-semibold text-black" id="research-rec-header">
-                      Research Recommendation
-                    </h4>
-                  </div>
-                  <p className="mb-2 text-gray-700 text-sm">
-                    Choose your expert recommendation option.
-                  </p>
-                  <fieldset>
-                    <legend className="sr-only">Research Recommendations</legend>
-                    <div role="radiogroup" aria-label="Research Recommendation Options" className="flex flex-col gap-3">
-                      {researchOptions.map((option, idx) => {
-                        const isSelected =
-                          researchSelection &&
-                          researchSelection.label === option.label;
-
-                        return (
-                          <div
-                            key={idx}
-                            role="radio"
-                            aria-checked={isSelected}
-                            tabIndex={isSelected ? 0 : -1}
-                            aria-label={`${option.label} — ${option.description}. Price: $${option.price || 0}`}
-                            onClick={() => setResearchSelection(option)}
-                            onKeyDown={(e) =>
-                              handleKeyDown(e, () => setResearchSelection(option))
-                            }
-                            className="flex flex-col border p-3 rounded-lg cursor-pointer transition-colors hover:bg-gray-100"
-                            style={{
-                              border: isSelected ? "2px solid #F59E0B" : "1px solid #D1D5DB"
-                            }}
-                          >
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center">
-                                <span className="mr-4">
-                                  {isSelected ? (
-                                    <FaCheckCircle className="text-accent text-2xl" />
-                                  ) : (
-                                    <FaRegCircle className="text-gray-400 text-2xl" />
-                                  )}
-                                </span>
-                                <div className="text-base font-semibold text-black">
-                                  {option.label}
-                                </div>
-                              </div>
-                              {option.label !== "Don't Need A Recommendation" && (
-                                <div className="text-xl font-bold text-accent">
-                                  ${option.price}
-                                </div>
-                              )}
-                            </div>
-                            <div className="text-sm text-gray-600 mt-1">
-                              {option.description}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </fieldset>
-                </div>
-
-                {/* Column 2: Inventory Sourcing & Purchase Assistance */}
-                <div className="flex flex-col gap-4">
-                  {/* Inventory Sourcing Card */}
-                  <div
-                    className="border p-4 rounded-lg bg-gray-50 shadow-sm text-left"
-                    aria-labelledby="inventory-header"
-                  >
-                    <div className="flex items-center mb-2">
-                      <div className="bg-accent text-white rounded-full min-w-8 h-8 flex items-center justify-center mr-2 font-bold">
-                        2
-                      </div>
-                      <h4 className="text-lg font-semibold text-black" id="inventory-header">
-                        Inventory Sourcing
-                      </h4>
-                    </div>
-                    <p className="mb-2 text-gray-700 text-sm">
-                      Find top vehicles from our network.
-                    </p>
-                    <div
-                      role="checkbox"
-                      aria-checked={inventorySourcing}
-                      tabIndex={0}
-                      aria-label="Add Inventory Sourcing — We find top vehicles from our network. Price: $250"
-                      onClick={() => setInventorySourcing(!inventorySourcing)}
-                      onKeyDown={(e) =>
-                        handleKeyDown(e, () => setInventorySourcing(!inventorySourcing))
-                      }
-                      className="flex flex-col border p-3 rounded-lg cursor-pointer transition-colors hover:bg-gray-100"
-                      style={{
-                        border: inventorySourcing ? "2px solid #F59E0B" : "1px solid #D1D5DB"
-                      }}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <span className="mr-4">
-                            {inventorySourcing ? (
-                              <FaCheckSquare className="text-accent text-2xl" />
-                            ) : (
-                              <FaRegSquare className="text-gray-400 text-2xl" />
-                            )}
-                          </span>
-                          <div className="text-base font-semibold text-black">
-                            Add Inventory Sourcing
-                          </div>
-                        </div>
-                        <div className="text-xl font-bold text-accent">$250</div>
-                      </div>
-                      <p className="mt-2 text-gray-600 text-sm">
-                        Find vehicles that match your criteria.
+            <div className="grid gap-6 mb-8">
+              <div
+                role="checkbox"
+                aria-checked={includeResearchInventory}
+                aria-label="Include Research and Inventory Sourcing – $450"
+                tabIndex={0}
+                onClick={() => setIncludeResearchInventory(!includeResearchInventory)}
+                onKeyDown={(e) => e.key === "Enter" && setIncludeResearchInventory(!includeResearchInventory)}
+                className={`cursor-pointer border-2 rounded-lg p-6 shadow-sm transition hover:bg-gray-50 hover:border-accent ${includeResearchInventory ? "border-accent bg-accent/5" : "border-gray-300"
+                  }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    {includeResearchInventory ? (
+                      <FaCheckSquare className="text-accent text-2xl w-7 h-7" />
+                    ) : (
+                      <FaRegSquare className="text-gray-400 text-2xl w-7 h-7" />
+                    )}
+                    <div>
+                      <h3 className="text-lg font-semibold text-primary">Research + Inventory Sourcing</h3>
+                      <p className="text-sm text-gray-600 mt-1">
+                        We'll help you choose the best make, model, and year — and locate ideal matches in your area.
                       </p>
                     </div>
                   </div>
-
-                  {/* Purchase Assistance Card */}
-                  <div
-                    className="border p-4 rounded-lg bg-gray-50 shadow-sm text-left"
-                    aria-labelledby="purchase-header"
-                  >
-                    <div className="flex items-center mb-2">
-                      <div className="bg-accent text-white rounded-full min-w-8 h-8 flex items-center justify-center mr-2 font-bold">
-                        3
-                      </div>
-                      <h4 className="text-lg font-semibold text-black" id="purchase-header">
-                        Purchase Assistance
-                      </h4>
-                    </div>
-                    <p className="mb-2 text-gray-700 text-sm">
-                      We coordinate the transaction.
-                    </p>
-                    <div
-                      role="checkbox"
-                      aria-checked={purchaseAssistance}
-                      tabIndex={0}
-                      aria-label="Add Purchase Assistance — We coordinate the transaction. Price: $500"
-                      onClick={() => setPurchaseAssistance(!purchaseAssistance)}
-                      onKeyDown={(e) =>
-                        handleKeyDown(e, () => setPurchaseAssistance(!purchaseAssistance))
-                      }
-                      className="flex flex-col border p-3 rounded-lg cursor-pointer transition-colors hover:bg-gray-100"
-                      style={{
-                        border: purchaseAssistance ? "2px solid #F59E0B" : "1px solid #D1D5DB"
-                      }}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <span className="mr-4">
-                            {purchaseAssistance ? (
-                              <FaCheckSquare className="text-accent text-2xl" />
-                            ) : (
-                              <FaRegSquare className="text-gray-400 text-2xl" />
-                            )}
-                          </span>
-                          <div className="text-base font-semibold text-black">
-                            Add Purchase Assistance
-                          </div>
-                        </div>
-                        <div className="text-xl font-bold text-accent">$500</div>
-                      </div>
-                      <p className="mt-2 text-gray-600 text-sm">
-                        We contact the dealer, set up a video walk through, confirm the exact options on the car, send you the Car Fax report, assist in negotiation and evaluate any add ons and coordinate delivery. The credit check and transaction papers are sent to you for completion.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Column 3: Package Summary */}
-                <div className="w-full">
-                  {researchSelection || inventorySourcing || purchaseAssistance ? (
-                    <div
-                      className="border p-4 rounded-lg bg-gray-50 shadow-sm text-left"
-                      aria-labelledby="package-summary-header"
-                    >
-                      <h3 className="text-xl font-bold text-primary mb-4" id="package-summary-header">
-                        Package Summary
-                      </h3>
-                      <div className="mb-4">
-                        {researchSelection && (
-                          <div className="mb-2">
-                            <p className="font-semibold">Research Recommendation:</p>
-                            <p>
-                              {researchSelection.label} Option
-                              {researchSelection.price > 0 &&
-                                ` – $${researchSelection.price}`}
-                            </p>
-                          </div>
-                        )}
-                        {inventorySourcing && (
-                          <div className="mb-2">
-                            <p className="font-semibold">Inventory Sourcing:</p>
-                            <p>$250</p>
-                          </div>
-                        )}
-                        {purchaseAssistance && (
-                          <div className="mb-2">
-                            <p className="font-semibold">Purchase Assistance:</p>
-                            <p>$500</p>
-                          </div>
-                        )}
-                      </div>
-                      <div className="border-t pt-4">
-                        <p className="font-bold text-lg text-center">Total Price: ${finalAmount}</p>
-                        {discountApplicable && (
-                          <p className="text-sm text-green-600 text-center">
-                            Zen Experience Discount Applied – Save $200!
-                          </p>
-                        )}
-                      </div>
-                      <div className="mt-4 text-center">
-                        <Button onClick={handleCustomPurchase} color="accent" size="base" className="bg-clementine hover:bg-orange-500">
-                          {loading ? "Processing..." : "Proceed to Checkout"}
-                        </Button>
-                      </div>
-                      {/* Terms and Conditions Checkbox */}
-                      <div className="my-4">
-                        <label className="flex items-start space-x-2">
-                          <input
-                            type="checkbox"
-                            id="termsAccepted2"
-                            checked={termsAccepted2}
-                            onChange={(e) => setTermsAccepted2(e.target.checked)}
-                            required
-                            className="mt-1"
-                          />
-                          <span className="text-sm text-gray-700">
-                            I agree to the{" "}
-                            <a
-                              href="/terms-and-conditions"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-primary underline hover:text-accent"
-                            >
-                              Terms and Conditions
-                            </a>{" "}
-                            and acknowledge the{" "}
-                            <a
-                              href="/privacy-policy"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-primary underline hover:text-accent"
-                            >
-                              Privacy Policy
-                            </a>.
-                          </span>
-                        </label>
-                      </div>
-
-
-
-                    </div>
-                  ) : (
-                    <div className="border p-4 rounded-lg bg-gray-50 shadow-sm text-center">
-                      <p className="text-gray-500">
-                        Your package summary will appear here once you make a selection.
-                      </p>
-                    </div>
-                  )}
+                  <span className="text-xl font-bold text-accent">$450</span>
                 </div>
               </div>
+
+              <div
+                role="checkbox"
+                aria-checked={includePurchaseHelp}
+                aria-label="Include Research and Inventory Sourcing – $500"
+                tabIndex={0}
+                onClick={() => setIncludePurchaseHelp(!includePurchaseHelp)}
+                onKeyDown={(e) => e.key === "Enter" && setIncludePurchaseHelp(!includePurchaseHelp)}
+                className={`cursor-pointer border-2 rounded-lg p-6 shadow-sm transition hover:bg-gray-50 hover:border-accent ${includePurchaseHelp ? "border-accent bg-accent/5" : "border-gray-300"
+                  }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    {includePurchaseHelp ? (
+                      <FaCheckSquare className="text-accent text-2xl w-7 h-7" />
+                    ) : (
+                      <FaRegSquare className="text-gray-400 text-2xl w-7 h-7" />
+                    )}
+                    <div>
+                      <h3 className="text-lg font-semibold text-primary">Purchase Assistance</h3>
+                      <p className="text-sm text-gray-600 mt-1">
+                        We negotiate, confirm options, coordinate delivery, and ensure everything’s right before you sign.
+                      </p>
+                    </div>
+                  </div>
+                  <span className="text-xl font-bold text-accent">$500</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center mb-4">
+              <p className="text-xl font-semibold">
+                Total: <span className="text-accent">${total}</span>
+              </p>
+              {includeResearchInventory && includePurchaseHelp && (
+                <p className="text-md text-green-600">Zen Experience Discount Applied – Save $100!</p>
+              )}
+            </div>
+
+            <div className="text-center mt-6">
+              <Button
+                onClick={handleCheckout}
+                color="accent"
+                size="lg"
+                disabled={!includeResearchInventory && !includePurchaseHelp}
+              >
+                {loading ? "Processing..." : "Proceed to Checkout"}
+              </Button>
+            </div>
+
+            <div className="flex items-start mt-4 justify-center">
+              <input
+                type="checkbox"
+                id="termsAccepted"
+                checked={termsAccepted}
+                onChange={(e) => setTermsAccepted(e.target.checked)}
+                className="mr-2 mt-1"
+              />
+              <label htmlFor="termsAccepted" className="text-sm text-primary">
+                I agree to the{" "}
+                <a href="/terms" className="underline text-accent" target="_blank" rel="noopener noreferrer">
+                  Terms and Conditions
+                </a>
+                .
+              </label>
             </div>
           </div>
         </div>
       </section>
-
     </main>
   );
 };
