@@ -2,9 +2,11 @@ import * as React from "react"
 
 export const onRenderBody = ({ setHeadComponents, setHtmlAttributes, setPreBodyComponents, setPostBodyComponents }) => {
 
+  const isInternal = "(document.cookie || '').includes('zen_internal=true')";
   const pixelId = process.env.META_PIXEL_ID;
 
   setHtmlAttributes({ lang: 'en' });
+
   setHeadComponents([
     <link
       rel="preload"
@@ -51,6 +53,7 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes, setPreBodyC
       defer
       dangerouslySetInnerHTML={{
         __html: `
+        if (!${isInternal}) {
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
           n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -61,20 +64,26 @@ export const onRenderBody = ({ setHeadComponents, setHtmlAttributes, setPreBodyC
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('init', '${pixelId}');
           fbq('track', 'PageView');
+        }
         `,
       }}
     />,
     <script
       key="gtm-script"
       dangerouslySetInnerHTML={{
-        __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        __html: `
+        if (!${isInternal}) {
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-W2LQ7S42');`,
+          })(window,document,'script','dataLayer','GTM-W2LQ7S42');
+        }
+        `,
       }}
     />,
   ]);
+  
   setPreBodyComponents([
     <noscript
       key="gtm-noscript"
