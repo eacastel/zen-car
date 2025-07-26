@@ -3,7 +3,14 @@ import React, { useEffect } from "react";
 const TagMePage = () => {
   useEffect(() => {
     document.cookie = "zen_internal=true; path=/; max-age=31536000";
-    window.location.reload(); // optional: force reload to apply exclusion logic
+    
+    if (!sessionStorage.getItem("justTagged")) {
+      sessionStorage.setItem("justTagged", "true");
+      window.location.reload();
+    } else {
+      sessionStorage.removeItem("justTagged");
+    }
+    
   }, []);
 
   return (

@@ -4,7 +4,14 @@ import React, { useEffect } from "react";
 const UnTagMePage = () => {
   useEffect(() => {
     document.cookie = "zen_internal=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    window.location.reload(); // optional: force reload to apply exclusion logic
+
+    if (!sessionStorage.getItem("justUntagged")) {
+      sessionStorage.setItem("justUntagged", "true");
+      window.location.reload();
+    } else {
+      sessionStorage.removeItem("justUntagged");
+    }
+    
   }, []);
 
   return (
