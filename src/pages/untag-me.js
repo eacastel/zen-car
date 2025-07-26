@@ -3,13 +3,13 @@ import React, { useEffect } from "react";
 
 const UnTagMePage = () => {
   useEffect(() => {
-    document.cookie = "zen_internal=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "zen_internal=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.reload(); // optional: force reload to apply exclusion logic
   }, []);
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 text-center text-primary">
-      <h1 className="text-3xl font-semibold mb-4">You're Tagged as Internal</h1>
+      <h1 className="text-3xl font-semibold mb-4">Tracking Re-enabled</h1>
       <p className="text-lg">
         We’ve removed a cookie so you’ll be <strong>included in analytics</strong><br />
         (Google Tag Manager, Clarity, Meta Pixel).
