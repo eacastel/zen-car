@@ -151,7 +151,9 @@ module.exports = {
           switch (path) {
             case '/':
               priority = 1.0; break;         // Home page
-            case '/pricing/':
+            case '/services/':
+              priority = 0.9; break;         // Services page
+            case '/purchase/':
               priority = 0.9; break;         // Pricing page
             case '/about/':
               priority = 0.9; break;         // About page

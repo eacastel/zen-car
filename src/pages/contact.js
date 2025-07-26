@@ -102,7 +102,7 @@ export default function ContactPage() {
 
         {/* 'Get Started' Button */}
         <div className="text-center mb-12">
-          <Button to="/pricing" size="lg" color="primary">
+          <Button to="/purchase" size="lg" color="primary">
             Ready To Buy
           </Button>
         </div>

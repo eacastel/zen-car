@@ -17,8 +17,8 @@ const CancelPage = () => {
           <p className="text-lg mb-6">
             Your checkout session was cancelled. If you believe this was an error, please try again or contact our support team.
           </p>
-          <Button to="/pricing" color="accent" size="lg">
-            Return to Pricing
+          <Button to="/purchase" color="accent" size="lg">
+            Return to Purchase
           </Button>
         </div>
       </section>

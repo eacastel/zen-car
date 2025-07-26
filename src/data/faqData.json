@@ -127,7 +127,7 @@
         "answer": [
             {
                 "type": "text",
-                "content": "Our pricing varies based on the level of assistance you need. We offer different packages ranging from consultation-only services to full concierge support. <a href='/pricing' class='text-primary font-bold underline hover:text-accent'>View our pricing here</a>."
+                "content": "Our pricing varies based on the level of assistance you need. We offer different packages ranging from consultation-only services to full concierge support. <a href='/services' class='text-primary font-bold underline hover:text-accent'>View our pricing here</a>."
             }
         ]
     },

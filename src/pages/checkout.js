@@ -15,7 +15,7 @@ useEffect(() => {
   console.log("CheckoutPage mounted", { selections, total, clientSecret: state?.clientSecret });
 
   if (!selections || !total || !state?.clientSecret) {
-    navigate("/pricing");
+    navigate("/purchase");
     return;
   }
 
