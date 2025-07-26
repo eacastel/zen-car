@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Button from "../components/Button";
 
 const TagMePage = () => {
   useEffect(() => {
@@ -10,7 +11,7 @@ const TagMePage = () => {
     } else {
       sessionStorage.removeItem("justTagged");
     }
-    
+
   }, []);
 
   return (
@@ -23,6 +24,12 @@ const TagMePage = () => {
       <p className="mt-4 text-sm text-gray-500">
         You can remove the tag at any time by visiting <a href="/untag-me" className="underline text-accent">/untag-me</a>.
       </p>
+      <div className="text-center my-12">
+        <Button to="/" size="lg" color="accent">
+            Go to Homepage
+        </Button>
+      </div>
+
     </main>
   );
 };

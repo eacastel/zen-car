@@ -1,5 +1,6 @@
 
 import React, { useEffect } from "react";
+import Button from "../components/Button";
 
 const UnTagMePage = () => {
   useEffect(() => {
@@ -11,7 +12,7 @@ const UnTagMePage = () => {
     } else {
       sessionStorage.removeItem("justUntagged");
     }
-    
+
   }, []);
 
   return (
@@ -24,6 +25,11 @@ const UnTagMePage = () => {
       <p className="mt-4 text-sm text-gray-500">
         You can exclude yourself anytime by visiting <a href="/tag-me" className="underline text-accent">/tag-me</a>.
       </p>
+      <div className="text-center my-12">
+        <Button to="/" size="lg" color="accent">
+            Go to Homepage
+        </Button>
+      </div>
     </main>
   );
 };
