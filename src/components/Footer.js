@@ -118,7 +118,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-secondary mt-8 pt-4 text-center text-secondary">
-          © {new Date().getFullYear()} Zen Car Buying. All rights reserved.
+          © {new Date().getFullYear()} Zen Car Buying, LLC. All rights reserved.
         </div>
       </div>
     </footer>
