@@ -103,8 +103,8 @@ module.exports = {
                 userAgent: "*",
                 allow: "/",
                 disallow: [
-                  '/0356516065660-tag-me',
-                  '/0356516065660-untag-me'
+                  '/tag-me',
+                  '/untag-me'
                 ]
               }
             ],
