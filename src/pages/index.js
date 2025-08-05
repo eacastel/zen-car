@@ -96,7 +96,7 @@ const HomePage = () => {
             ].map((benefit, index) => (
               <Link
                 key={index}
-                to="/services"
+                to="/services/"
                 aria-label={`Learn more about ${benefit.title}`}
                 style={{ cursor: "auto", textDecoration: "none", color: "inherit" }}
               >

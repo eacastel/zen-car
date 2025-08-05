@@ -43,7 +43,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/about"
+                  to="/about/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   About
@@ -51,7 +51,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/faq"
+                  to="/faq/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   FAQ
@@ -59,7 +59,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/services"
+                  to="/services/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   Services
@@ -67,7 +67,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/blog"
+                  to="/blog/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   Blog
@@ -75,7 +75,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/contact"
+                  to="/contact/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   Contact
@@ -89,7 +89,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  to="/privacy-policy"
+                  to="/privacy-policy/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   Privacy Policy
@@ -97,7 +97,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/terms-of-use"
+                  to="/terms-of-use/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   Terms of Use
@@ -105,7 +105,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/terms-and-conditions"
+                  to="/terms-and-conditions/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   Terms and Conditions
@@ -113,7 +113,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/sms-terms-and-conditions"
+                  to="/sms-terms-and-conditions/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   SMS Terms and Conditions

@@ -88,7 +88,7 @@ export const Head = ({ location }) => (
       "name": "Zen Car Buying Blog",
       "description":
          "Used car buying strategies, cost-saving guides, and expert advice from Zen Car Buying.",
-      "url": "https://zencarbuying.com/blog",
+      "url": "https://zencarbuying.com/blog/",
       "publisher": {
         "@type": "Organization",
         "name": "Zen Car Buying",

@@ -125,7 +125,7 @@ export const Head = () => (
     <Seo
       title="Contact Zen Car Buying | Free 15-Minute Consultation"
       description="Get in touch with Zen Car Buying. Call, text, or email us for expert car-buying advice, or schedule your free 15-minute consultation today."
-      pathname="/contact"
+      pathname="/contact/"
       image="https://zencarbuying.com/images/contact-hero.jpg" // adjust to your actual image path
     />
     <script type="application/ld+json">
@@ -133,8 +133,8 @@ export const Head = () => (
         "@context": "https://schema.org",
         "@type": "ContactPage",
         "name": "Contact Zen Car Buying",
-        "url": "https://zencarbuying.com/contact",
-        "mainEntityOfPage": "https://zencarbuying.com/contact",
+        "url": "https://zencarbuying.com/contact/",
+        "mainEntityOfPage": "https://zencarbuying.com/contact/",
         "publisher": {
           "@type": "Organization",
           "name": "Zen Car Buying",

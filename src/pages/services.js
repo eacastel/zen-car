@@ -179,7 +179,7 @@ export const Head = () => {
             <Seo
                 title="Zen Car Buying Services | Nationwide Car Buying Packages"
                 description="Explore Zen Car Buying's nationwide car buying services. Choose a package to get started, or book a free 15-minute onboarding call to learn how we save you time, money, and stress."
-                pathname="/services"
+                pathname="/services/"
             />
             <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
         </>

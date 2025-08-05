@@ -203,6 +203,6 @@ export const Head = () => (
   <Seo
     title="About Zen Car Buying | Nationwide Car Broker & Concierge"
     description="Zen Car Buying provides local and nationwide car brokering and concierge services to source, negotiate, and deliver the best new and used vehicles—saving you time, money, and stress."
-    pathname="/about"
+    pathname="/about/"
   />
 )

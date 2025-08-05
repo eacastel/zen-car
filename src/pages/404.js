@@ -37,7 +37,7 @@ export default function NotFoundPage({ data }) {
               </Link>
 
               <Link
-                to="/blog"
+                to="/blog/"
                 className="px-6 py-3 bg-accent text-white rounded-lg shadow-md hover:bg-accent-dark transition"
               >
                 Read Our Blog

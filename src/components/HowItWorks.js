@@ -56,7 +56,7 @@ export default function HowItWorks() {
                 <div className="grid md:grid-cols-1 lg:grid-cols-4 gap-12">
                     {steps.map((step, index) => (
                         <Link
-                            to="/services"
+                            to="/services/"
                             style={{ cursor: "auto", textDecoration: "none", color: "inherit" }}
                             aria-label={`Learn more about step ${step.step}`}
                         >
