@@ -29,7 +29,7 @@ export default function Footer() {
             <ul className="space-y-2">
             <li>
                 <Link
-                  to="/purchase"
+                  to="/purchase/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   Start Now
@@ -37,7 +37,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/about"
+                  to="/about/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   About
@@ -45,7 +45,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/faq"
+                  to="/faq/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   FAQ
@@ -53,7 +53,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/services"
+                  to="/services/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   Services
@@ -61,7 +61,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/blog"
+                  to="/blog/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   Blog
@@ -69,7 +69,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/contact"
+                  to="/contact/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
                   Contact

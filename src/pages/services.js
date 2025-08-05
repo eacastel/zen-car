@@ -31,7 +31,7 @@ const Services = () => {
                 <h2 className="text-2xl font-semibold text-center text-accent mb-2">
                     Prices start at $450
                 </h2>
-  <Button to="/purchase" size="base" color="accent">
+  <Button to="/purchase/" size="base" color="accent">
     View Packages & Get Started
   </Button>
 </div>
@@ -107,7 +107,7 @@ const Services = () => {
                     <p className="text-lg text-gray-700 mb-4">
                         Ready to skip the stress and find your perfect car?
                     </p>
-                    <Button to="/purchase" size="lg" color="accent">
+                    <Button to="/purchase/" size="lg" color="accent">
                         Start Your Zen Journey
                     </Button>
                 </div>

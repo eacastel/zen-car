@@ -167,7 +167,7 @@ export default function AboutPage({ data }) {
           <p className="text-base md:text-lg text-primary mb-4">
             Ready to experience stress-free car buying?{" "}
             <a
-              href="/purchase"
+              href="/purchase/"
               className="text-accent underline cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent"
               aria-label="Start your Zen Car Buying journey"
             >

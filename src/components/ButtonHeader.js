@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import { motion } from "framer-motion";
 
 const ButtonHeader = ({
-  to = "/purchase",  // Default link to /purchase
+  to = "/purchase/",  // Default link to /purchase
   onClick,          // Added onClick prop handling
   children = "Start Now",
   color = "accent",

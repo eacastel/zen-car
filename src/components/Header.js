@@ -50,11 +50,11 @@ export default function Header() {
   const logoImage = getImage(data.logo);
 
   const navItems = [
-    { name: "About", path: "/about" },
-    { name: "FAQ", path: "/faq" },
-    { name: "Services", path: "/services" },
-    { name: "Blog", path: "/blog" },
-    { name: "Contact", path: "/contact" },
+    { name: "About", path: "/about/" },
+    { name: "FAQ", path: "/faq/" },
+    { name: "Services", path: "/services/" },
+    { name: "Blog", path: "/blog/" },
+    { name: "Contact", path: "/contact/" },
   ];
 
   return (

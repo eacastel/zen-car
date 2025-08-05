@@ -104,7 +104,7 @@ const CustomizeWizard = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-primary">Research + Inventory Sourcing</h3>
                       <p className="text-sm text-gray-600 mt-1">
-                        We'll help you choose the best make, model, and year — and locate ideal matches in your area.
+                        We'll help you choose the best make, model, and year — and locate ideal matches.
                       </p>
                     </div>
                   </div>
