@@ -58,7 +58,7 @@ const CarBroker = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const path = "/car-broker";
+      const path = "/car-broker/";
       localStorage.setItem("preferredHome", path);
       document.cookie = `preferredHome=${path}; path=/; max-age=2592000`;
     }
@@ -121,7 +121,7 @@ export const Head = () => (
   <Seo
     title="Car Broker for New & Used Cars Nationwide - Zen Car Buying"
     description="Looking for a trusted car broker? Zen Car Buying provides nationwide car broker services to help you find, negotiate, and buy your ideal car without dealership stress."
-    pathname="/car-broker"
+    pathname="/car-broker/"
   >
     <script type="application/ld+json">
       {JSON.stringify({
@@ -131,7 +131,7 @@ export const Head = () => (
         "provider": {
           "@type": "Organization",
           "name": "Zen Car Buying",
-          "url": "https://zencarbuying.com/car-broker",
+          "url": "https://zencarbuying.com/car-broker/",
           "logo": "https://zencarbuying.com/logo.png",
           "contactPoint": {
             "@type": "ContactPoint",
@@ -145,7 +145,7 @@ export const Head = () => (
         },
         "description": "Looking for a trusted car broker? Zen Car Buying provides nationwide car broker services to help you find, negotiate, and buy your ideal car without dealership stress.",
         "serviceType": "Car Broker",
-        "url": "https://zencarbuying.com/car-broker"
+        "url": "https://zencarbuying.com/car-broker/"
       })}
     </script>
   </Seo>

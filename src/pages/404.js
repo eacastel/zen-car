@@ -59,7 +59,7 @@ export const Head = () => (
   <Seo
     title="404 - Page Not Found"
     description="The road ends here! Navigate back to our homepage or check out our latest blog posts."
-    pathname="/404"
+    pathname="/404/"
   />
 );
 

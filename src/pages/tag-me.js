@@ -22,7 +22,7 @@ const TagMePage = () => {
         (Google Tag Manager, Clarity, Meta Pixel).
       </p>
       <p className="mt-4 text-sm text-gray-500">
-        You can remove the tag at any time by visiting <a href="/untag-me" className="underline text-accent">/untag-me</a>.
+        You can remove the tag at any time by visiting <a href="/untag-me/" className="underline text-accent">/untag-me</a>.
       </p>
       <div className="text-center my-12">
         <Button to="/" size="lg" color="accent">

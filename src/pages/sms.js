@@ -14,7 +14,7 @@ export default function SmsPage() {
 
         <p className="text-lg text-primary mb-6">
         By texting Zen Car Buying LLC (888) 651-6088 you agree to receive Conversations (external) messages from Zen Car Buying LLC for communication regarding your vehicle search and buying experience. Message and data rates may apply. Message frequency may vary. Reply STOP to opt-out or HELP for support.
-        Visit <a href="/privacy-policy" className="underline text-accent">https://zencarbuying.com/privacy-policy/</a> to see our Privacy Policy and <a href="/sms-terms-and-conditions" className="underline text-accent">https://zencarbuying.com/sms-terms-and-conditions/</a> for our Terms of Service.
+        Visit <a href="/privacy-policy/" className="underline text-accent">https://zencarbuying.com/privacy-policy/</a> to see our Privacy Policy and <a href="/sms-terms-and-conditions/" className="underline text-accent">https://zencarbuying.com/sms-terms-and-conditions/</a> for our Terms of Service.
         </p>
 
         {/* Checkbox */}
@@ -49,6 +49,6 @@ export const Head = () => (
   <Seo
     title="Text Us | Zen Car Buying"
     description="Contact Zen Car Buying via text message. Consent to receive SMS messages and learn more about our privacy and SMS terms."
-    pathname="/sms"
+    pathname="/sms/"
   />
 );

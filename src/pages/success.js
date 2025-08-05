@@ -101,7 +101,7 @@ const SuccessPage = () => {
       <Seo
         title="Order Success | Zen Car Buying"
         description="Your order has been successfully processed. Thank you for choosing Zen Car Buying for your car buying experience across the USA."
-        pathname="/success"
+        pathname="/success/"
       />
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px] text-center">

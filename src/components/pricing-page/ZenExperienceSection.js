@@ -53,7 +53,7 @@ const ZenExperienceSection = () => {
 
     const data = await response.json();
     if (data.clientSecret) {
-      navigate("/checkout", {
+      navigate("/checkout/", {
         state: {
           selections,
           total: 85000, // purely for UI display, not used by Stripe
@@ -136,7 +136,7 @@ const ZenExperienceSection = () => {
               />
               <label htmlFor="terms" className="text-sm text-primary">
                 I agree to the{" "}
-                <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer" className="text-accent underline">
+                <a href="/terms-and-conditions/" target="_blank" rel="noopener noreferrer" className="text-accent underline">
                   Terms and Conditions
                 </a>
               </label>

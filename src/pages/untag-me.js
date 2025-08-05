@@ -23,7 +23,7 @@ const UnTagMePage = () => {
         (Google Tag Manager, Clarity, Meta Pixel).
       </p>
       <p className="mt-4 text-sm text-gray-500">
-        You can exclude yourself anytime by visiting <a href="/tag-me" className="underline text-accent">/tag-me</a>.
+        You can exclude yourself anytime by visiting <a href="/tag-me/" className="underline text-accent">/tag-me</a>.
       </p>
       <div className="text-center my-12">
         <Button to="/" size="lg" color="accent">

@@ -53,7 +53,7 @@ const CustomizeWizard = () => {
 
       if (!clientSecret) throw new Error("No clientSecret returned.");
 
-      navigate("/checkout", {
+      navigate("/checkout/", {
         state: {
           clientSecret,
           selections,
@@ -171,7 +171,7 @@ const CustomizeWizard = () => {
               />
               <label htmlFor="termsAccepted" className="text-sm text-primary">
                 I agree to the{" "}
-                <a href="/terms" className="underline text-accent" target="_blank" rel="noopener noreferrer">
+                <a href="/terms/" className="underline text-accent" target="_blank" rel="noopener noreferrer">
                   Terms and Conditions
                 </a>
                 .

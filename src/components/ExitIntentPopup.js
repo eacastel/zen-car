@@ -20,7 +20,7 @@ export default function ExitIntentPopup() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const excludedPaths = ["/15min", "/thank-you"];
+    const excludedPaths = ["/15min/", "/thank-you/"];
     const currentPath = window.location.pathname;
     if (excludedPaths.includes(currentPath)) return;
 
@@ -93,7 +93,7 @@ export default function ExitIntentPopup() {
       if (window.openCalendlyPopup) {
         window.openCalendlyPopup();
       } else {
-        window.location.href = "/15min";
+        window.location.href = "/15min/";
       }
       setVisible(false);
     }

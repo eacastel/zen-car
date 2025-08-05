@@ -33,6 +33,6 @@ export const Head = () => (
   <Seo
     title="Book Your Free 15-Minute Consultation"
     description="Schedule your free 15-minute consultation with a Zen Guide. We'll help you find the perfect used car without the stress."
-    pathname="/15min"
+    pathname="/15min/"
   />
 );

@@ -9,7 +9,7 @@ const CancelPage = () => {
       <Seo 
         title="Checkout Cancelled | Zen Car Buying" 
         description="Your checkout session was cancelled. Please try again or contact support for assistance with your car buying journey." 
-        pathname="/cancel" 
+        pathname="/cancel/" 
       />
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px] text-center">
