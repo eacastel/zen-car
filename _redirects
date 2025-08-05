@@ -7,5 +7,6 @@
 # gatsby-adapter-netlify start
 
 # gatsby-adapter-netlify end
-/pricing     /purchase     301!
-/pricing/    /purchase    301!
+/pricing      /purchase/     301!
+/pricing/     /purchase/     301!
+https://www.zencarbuying.com/* https://zencarbuying.com/:splat 301!

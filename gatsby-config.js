@@ -9,6 +9,7 @@ module.exports = {
     author: `@zencarbuying`,
     siteUrl: `https://zencarbuying.com`
   },
+  trailingSlash: 'always', // or 'never',
   plugins: [
     `gatsby-plugin-image`,
     {

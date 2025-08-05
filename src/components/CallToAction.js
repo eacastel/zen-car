@@ -21,7 +21,7 @@ export default function CallToAction() {
         </p>
 
         <div className="inline-block">
-          <CalendlyButton  to="/pricing" size="lg" color="primary">
+          <CalendlyButton  to="/pricing/" size="lg" color="primary">
             Schedule a Free Consultation
           </CalendlyButton>
         </div>
