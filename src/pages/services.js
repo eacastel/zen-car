@@ -9,7 +9,7 @@ import Button from "../components/Button";
 
 
 
-const TestimonialsPricing = lazy(() => import('../components/TestimonialsPricing'))
+const Testimonials = lazy(() => import('../components/Testimonials'))
 const Services = () => {
     const testimonialsRef = useRef();
     const showTestimonials = useOnScreen(testimonialsRef, "100px");
@@ -27,9 +27,14 @@ const Services = () => {
                 </p>
 
                 {/* Services Offered */}
-                <h2 className="text-2xl font-semibold text-center text-accent mb-6">
+         <div className="text-center mb-6">
+                <h2 className="text-2xl font-semibold text-center text-accent mb-2">
                     Prices start at $450
                 </h2>
+  <Button to="/purchase" size="base" color="accent">
+    View Packages & Get Started
+  </Button>
+</div>
 
                 <p className="text-xl text-gray-700  mb-8">
                     Zen Car Buying offers two flexible service options designed to save you time, money, and hassle—whether you need full support or just expert guidance.
@@ -111,7 +116,7 @@ const Services = () => {
             <div ref={testimonialsRef}>
                 {showTestimonials && (
                     <Suspense fallback={<div className="py-20 text-center text-primary">Loading testimonials…</div>}>
-                        <TestimonialsPricing />
+                        <Testimonials />
                     </Suspense>
                 )}
             </div>
