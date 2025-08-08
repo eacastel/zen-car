@@ -120,6 +120,23 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
+            {/* BBB Accreditation Column */}
+            <div className="flex flex-col items-start md:items-start">
+              <h4 className="font-bold mt-10 mb-4">Accreditation</h4>
+              <a
+                href="https://www.bbb.org/us/wa/spokane/profile/car-buying/zen-car-buying-llc-1296-1000183307/#sealclick"
+                target="_blank"
+                rel="noreferrer nofollow"
+                className="block"
+              >
+                <img
+                  src="https://seal-alaskaoregonwesternwashington.bbb.org/seals/blue-seal-120-61-bbb-1000183307.png"
+                  alt="Zen Car Buying LLC BBB Business Review"
+                  style={{ border: 0 }}
+                  className="opacity-80 hover:opacity-100 transition-opacity duration-300"
+                />
+              </a>
+            </div>
           </div>
         </div>
 

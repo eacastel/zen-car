@@ -63,7 +63,40 @@ export function Hero() {
               Schedule Your Free Consultation
             </CalendlyButton>
           </div>
+        {/* BBB Seal for mobile - directly under button */}
+          <div className="sm:hidden flex justify-center mt-8">
+            <a
+              href="https://www.bbb.org/us/wa/spokane/profile/car-buying/zen-car-buying-llc-1296-1000183307/#sealclick"
+              target="_blank"
+              rel="noreferrer nofollow"
+              className="block"
+            >
+              <img
+                src="https://seal-alaskaoregonwesternwashington.bbb.org/seals/blue-seal-120-61-bbb-1000183307.png"
+                alt="Zen Car Buying LLC BBB Business Review"
+                className="opacity-80 hover:opacity-100 transition-opacity duration-300 w-[100px] h-auto"
+                style={{ border: 0 }}
+              />
+            </a>
+          </div>
         </div>
+      </div>
+
+      {/* BBB Seal for desktop - absolute bottom-right */}
+      <div className="hidden sm:flex absolute bottom-4 right-4 md:right-16 z-10 flex-col items-end text-xs text-white">
+        <a
+          href="https://www.bbb.org/us/wa/spokane/profile/car-buying/zen-car-buying-llc-1296-1000183307/#sealclick"
+          target="_blank"
+          rel="noreferrer nofollow"
+          className="block"
+        >
+          <img
+            src="https://seal-alaskaoregonwesternwashington.bbb.org/seals/blue-seal-120-61-bbb-1000183307.png"
+            alt="Zen Car Buying LLC BBB Business Review"
+            className="opacity-80 hover:opacity-100 transition-opacity duration-300 w-[120px] h-auto"
+            style={{ border: 0 }}
+          />
+        </a>
       </div>
     </section>
   );
