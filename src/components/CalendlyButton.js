@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { openCalendlyPopup } from "../utils/openCalendly";
+import { Link } from "gatsby";
 
 const CalendlyButton = ({
   children = "Book a Consultation",
@@ -8,6 +8,7 @@ const CalendlyButton = ({
   size = "base",
   className = "",
   disabled = false,
+  to = "/15min", // default target
   ...rest
 }) => {
   // Tailwind styles
@@ -25,16 +26,20 @@ const CalendlyButton = ({
 
   const finalClassName = `inline-flex items-center justify-center ${colors[color]} ${sizes[size]} appearance-none border-0 focus:outline-none focus:ring-0 rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg ${disabled ? "opacity-50 cursor-not-allowed" : ""} ${className}`;
 
-
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ duration: 0.2 }}
     >
-      <button onClick={openCalendlyPopup} disabled={disabled} className={finalClassName} {...rest}>
+      <Link
+        to={to}
+        className={finalClassName}
+        aria-label="Go to scheduling page"
+        {...rest}
+      >
         {children}
-      </button>
+      </Link>
     </motion.div>
   );
 };

@@ -1,7 +1,6 @@
 //src/components/HowItWorks.js
 import React from "react";
 import { Link } from "gatsby"
-import { openCalendlyPopup } from "../utils/openCalendly";
 import { motion } from "framer-motion";
 
 
@@ -13,18 +12,14 @@ export default function HowItWorks() {
             desc: (
                 <>
                     Choose a service package and book your onboarding call to get started —or book a{" "}
-                    <button
-                        type="button"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            openCalendlyPopup();
-                        }}
+                    <Link
+                        to="/15min"
                         className="text-gray-200 underline focus:outline-none focus:ring-2 focus:ring-accent"
                         aria-label="Schedule your onboarding call"
                     >
-                         quick intro call
-                    </button>
-                    {" "}if you’d like to learn more first.
+                        quick intro call
+                    </Link>{" "}
+                    if you’d like to learn more first.
                 </>
             )
         },

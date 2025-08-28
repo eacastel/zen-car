@@ -1,14 +1,15 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "gatsby";
 import { openCalendlyPopup } from "../utils/openCalendly";
 
 const CalendlyButtonHeader = ({
+  to, // new
   children = "Book a Consultation",
   className = "",
   disabled = false,
   ...rest
 }) => {
-  // Header button styles matching your header "Get Started" style
   const finalClassName = `
     bg-accent hover:bg-accent-dark text-white 
     px-5 py-2 rounded-md font-bold text-sm xl:text-base whitespace-nowrap 
@@ -18,16 +19,30 @@ const CalendlyButtonHeader = ({
     ${className}
   `;
 
-  return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ duration: 0.2 }}
-    >
-      <button onClick={openCalendlyPopup} disabled={disabled} className={finalClassName} {...rest}>
-        {children}
-      </button>
+  const ButtonInner = (
+    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ duration: 0.2 }}>
+      <span className={finalClassName}>{children}</span>
     </motion.div>
+  );
+
+  if (to) {
+    return (
+      <Link to={to} aria-label="Open scheduling page" {...rest}>
+        {ButtonInner}
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      onClick={openCalendlyPopup}
+      disabled={disabled}
+      className="appearance-none bg-transparent p-0 border-0"
+      aria-label="Open scheduling popup"
+      {...rest}
+    >
+      {ButtonInner}
+    </button>
   );
 };
 
