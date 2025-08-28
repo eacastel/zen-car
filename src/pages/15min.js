@@ -84,7 +84,7 @@ export default function CalendlyInlinePage() {
     </Layout>
   );
 }
-
+ 
 export const Head = () => (
   <>
     <Seo
