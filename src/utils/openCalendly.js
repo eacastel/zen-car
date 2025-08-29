@@ -94,6 +94,13 @@ if (typeof window !== "undefined" && !window.__CALENDLY_BOOKED_LISTENER__) {
       window.dataLayer.push({
         event: "calendly_booked",
         calendly_url: e?.data?.payload?.event?.uri || "",
+        // Add EC object on the SAME event so the Ads tag (Data Layer mode) ingests it
+        enhanced_conversion_data: {
+          email,
+          first_name: firstName || undefined,
+          last_name: lastName || undefined,
+          phone_number: (invitee.sms_number || invitee.phone_number || "").trim() || undefined
+        }
       });
 
     } catch (err) {
