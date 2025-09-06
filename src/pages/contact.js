@@ -57,66 +57,79 @@ export default function ContactPage() {
   const bmwImage = getImage(bmwMountain)
   return (
     <Layout>
-      <section className="container mx-auto px-4 md:px-2 lg:px-6 py-16">
-        {/* Top Contact Buttons */}
-        <div className="flex flex-col md:flex-row gap-4 md:gap-8 justify-center mb-8">
-          {/* Call Button */}
-          <a
-            href="tel:+18886516088"
-            className="bg-primary text-white px-6 py-3 rounded-lg text-lg font-bold hover:bg-primary-dark hover:scale-105 transition-transform duration-200 text-center w-full md:w-auto"
-            aria-label="Call Zen Car Buying"
-          >
-            <PhoneIcon /> Call Us
-          </a>
+      <section className="container mx-auto px-4 md:px-6 pt-8 pb-16 max-w-4xl text-center">
 
-          {/* Text Us Button */}
-          <a
-            href="sms:+18886516088"
-            className="bg-secondary text-primary px-6 py-3 rounded-lg text-lg font-bold border-2 border-primary hover:border-black hover:scale-105 transition-transform duration-200 text-center w-full md:w-auto"
-            aria-label="Text Zen Car Buying"
-          >
-            <MessageIcon /> Text Us
-          </a>
-
-
-        </div>
-
-        {/* Heading Section */}
-        <h1
-          id="page-title"
-          className="text-3xl md:text-4xl lg:text-5xl text-center font-medium text-primary my-12"
+                {/* Heading Section */}
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium text-primary mb-6">
+        Contact Zen Car Buying
+      </h1>
+{/* Top Contact Buttons — Mobile Only */}
+      <div className="flex flex-col md:hidden gap-4 justify-center mb-6 mx-auto max-w-sm">
+        {/* Call Button */}
+        <a
+          href="tel:+18886516088"
+          className="bg-primary text-white px-6 py-3 rounded-lg text-lg font-bold hover:bg-primary-dark hover:scale-105 transition-transform duration-200 text-center w-full"
+          aria-label="Call Zen Car Buying"
         >
-          Contact Zen Car Buying
-        </h1>
+          <PhoneIcon /> Call Us
+        </a>
 
-        <p className="text-lg text-center text-primary max-w-2xl mx-auto mb-8">
-          We're here to help you find the perfect car without the hassle. Reach out via phone, text, or email for fast support, or schedule a free consultation below.
-        </p>
+        {/* Text Us Button */}
+        <a
+          href="sms:+18886516088"
+          className="bg-secondary text-primary px-6 py-3 rounded-lg text-lg font-bold border-2 border-primary hover:border-black hover:scale-105 transition-transform duration-200 text-center w-full"
+          aria-label="Text Zen Car Buying"
+        >
+          <MessageIcon /> Text Us
+        </a>
+      </div>
 
-        {/* Calendly Button Section */}
-        <div className="text-center mb-6">
-          <CalendlyButton size="lg" color="accent">
-            Schedule Free Consultation
-          </CalendlyButton>
+
+
+      <p className="text-lg text-center text-primary max-w-2xl mx-auto mb-8">
+        We're here to help you find the perfect car without the hassle. Reach out via phone, text, or email for fast support, or schedule a free consultation below.
+      </p>
+
+      {/* Desktop phone number under H1 */}
+<div className="hidden md:flex justify-center mt-6 mb-8">
+  <a
+    href="tel:+18886516088"
+    className="text-2xl font-semibold text-primary no-underline underline-offset-4 hover:underline"
+    aria-label="Call Zen Car Buying at 888-651-6088"
+  >
+    Call Us: +1 (888) 651-6088
+  </a>
+</div>
+
+      {/* Calendly Button Section */}
+      <div className="text-center mb-6">
+        <CalendlyButton size="lg" color="accent">
+          Schedule Free Consultation
+        </CalendlyButton>
+      </div>
+
+      {/* 'Get Started' Button */}
+      <div className="text-center mb-12">
+        <Button to="/purchase/" size="lg" color="primary">
+          Ready To Buy
+        </Button>
+      </div>
+
+
+      
+      {bmwImage && (
+        <div className="mt-6 flex justify-center">
+          <GatsbyImage
+            image={bmwImage}
+            alt="BMW parked with a scenic mountain background"
+            className="rounded-lg shadow-md max-w-3xl w-full"
+          />
         </div>
+      )}
 
-        {/* 'Get Started' Button */}
-        <div className="text-center mb-12">
-          <Button to="/purchase/" size="lg" color="primary">
-            Ready To Buy
-          </Button>
-        </div>
-        {bmwImage && (
-          <div className="mt-6 flex justify-center">
-            <GatsbyImage
-              image={bmwImage}
-              alt="BMW parked with a scenic mountain background"
-              className="rounded-lg shadow-md max-w-3xl w-full"
-            />
-          </div>
-        )}
-      </section>
-    </Layout>
+      
+    </section>
+    </Layout >
   )
 }
 

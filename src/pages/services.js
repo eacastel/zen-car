@@ -17,7 +17,7 @@ const Services = () => {
     return (
         <Layout>
             <section className="container mx-auto px-4 md:px-6 py-16 max-w-4xl text-center">
-                <h1 className="text-4xl font-bold text-primary mb-8">
+                <h1 id="page-title" className="text-4xl font-bold text-primary mb-8">
                     Stress-Free Car Buying, Done For You
                 </h1>
 
