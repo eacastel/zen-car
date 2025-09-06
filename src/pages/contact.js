@@ -7,8 +7,6 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { useStaticQuery, graphql } from 'gatsby'
 
 
-
-
 // SVG Icons
 const PhoneIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +55,7 @@ export default function ContactPage() {
   const bmwImage = getImage(bmwMountain)
   return (
     <Layout>
-      <section className="container mx-auto px-4 md:px-6 pt-8 pb-16 max-w-4xl text-center">
+      <section className="container mx-auto px-4 md:px-6 pt-8 pb-16 max-w-[900px] text-center">
 
                 {/* Heading Section */}
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium text-primary mb-6">
@@ -87,7 +85,7 @@ export default function ContactPage() {
 
 
       <p className="text-lg text-center text-primary max-w-2xl mx-auto mb-8">
-        We're here to help you find the perfect car without the hassle. Reach out via phone, text, or email for fast support, or schedule a free consultation below.
+        We're here to help you find the perfect car without the hassle. Reach out via phone or text for fast support, or schedule a free consultation below.
       </p>
 
       {/* Desktop phone number under H1 */}
@@ -97,7 +95,7 @@ export default function ContactPage() {
     className="text-2xl font-semibold text-primary no-underline underline-offset-4 hover:underline"
     aria-label="Call Zen Car Buying at 888-651-6088"
   >
-    Call Us: +1 (888) 651-6088
+    Call or Text: +1 (888) 651-6088
   </a>
 </div>
 
@@ -126,8 +124,6 @@ export default function ContactPage() {
           />
         </div>
       )}
-
-      
     </section>
     </Layout >
   )
