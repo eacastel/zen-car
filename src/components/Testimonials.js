@@ -11,24 +11,36 @@ import { FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa'
 
 // Custom arrow components
 const PrevArrow = ({ onClick }) => (
-    <button
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-200 z-10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-        onClick={onClick}
-        aria-label="Previous testimonials"
-    >
-        <FaChevronLeft className="text-primary" />
-    </button>
-)
+  <button
+    className="
+      absolute left-2
+      top-48 md:top-1/2
+      transform translate-y-0 md:-translate-y-1/2
+      bg-white p-3 rounded-full shadow-lg hover:bg-gray-200 z-10
+      focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
+    "
+    onClick={onClick}
+    aria-label="Previous testimonials"
+  >
+    <FaChevronLeft className="text-primary" />
+  </button>
+);
 
 const NextArrow = ({ onClick }) => (
-    <button
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-200 z-10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-        onClick={onClick}
-        aria-label="Next testimonials"
-    >
-        <FaChevronRight className="text-primary" />
-    </button>
-)
+  <button
+    className="
+      absolute right-2
+      top-48 md:top-1/2
+      transform translate-y-0 md:-translate-y-1/2
+      bg-white p-3 rounded-full shadow-lg hover:bg-gray-200 z-10
+      focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
+    "
+    onClick={onClick}
+    aria-label="Next testimonials"
+  >
+    <FaChevronRight className="text-primary" />
+  </button>
+);
 
 export default function Testimonials() {
     const data = useStaticQuery(graphql`
