@@ -13,10 +13,10 @@ const CustomizeWizard = () => {
     includeResearchInventory && includePurchaseHelp
       ? 850
       : includeResearchInventory
-      ? 450
-      : includePurchaseHelp
-      ? 500
-      : 0;
+        ? 450
+        : includePurchaseHelp
+          ? 500
+          : 0;
 
   const handleCheckout = async () => {
     if (!termsAccepted) {
@@ -96,11 +96,13 @@ const CustomizeWizard = () => {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    {includeResearchInventory ? (
-                      <FaCheckSquare className="text-accent text-2xl w-7 h-7" />
-                    ) : (
-                      <FaRegSquare className="text-gray-400 text-2xl w-7 h-7" />
-                    )}
+                    <span className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 grid place-items-center">
+                      {includeResearchInventory ? (
+                        <FaCheckSquare aria-hidden className="text-accent w-full h-full" />
+                      ) : (
+                        <FaRegSquare aria-hidden className="text-gray-400 w-full h-full" />
+                      )}
+                    </span>
                     <div>
                       <h3 className="text-lg font-semibold text-primary">Research + Inventory Sourcing</h3>
                       <p className="text-sm text-gray-600 mt-1">
@@ -124,11 +126,13 @@ const CustomizeWizard = () => {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    {includePurchaseHelp ? (
-                      <FaCheckSquare className="text-accent text-2xl w-7 h-7" />
-                    ) : (
-                      <FaRegSquare className="text-gray-400 text-2xl w-7 h-7" />
-                    )}
+                    <span className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 grid place-items-center">
+                      {includePurchaseHelp ? (
+                        <FaCheckSquare aria-hidden className="text-accent w-full h-full" />
+                      ) : (
+                        <FaRegSquare aria-hidden className="text-gray-400 w-full h-full" />
+                      )}
+                    </span>
                     <div>
                       <h3 className="text-lg font-semibold text-primary">Purchase Assistance</h3>
                       <p className="text-sm text-gray-600 mt-1">
