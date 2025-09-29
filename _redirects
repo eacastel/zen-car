@@ -7,6 +7,15 @@
 # gatsby-adapter-netlify start
 
 # gatsby-adapter-netlify end
+
+# Force WWW -> apex (scheme-agnostic)
+https://www.zencarbuying.com/*  https://zencarbuying.com/:splat  301!
+http://www.zencarbuying.com/*   https://zencarbuying.com/:splat  301!
+
+# Force HTTP -> HTTPS (any host that reaches Netlify)
+http://*  https://:splat  301!
+
+# Existing plugin lines
+/api/*  /.netlify/functions/__api  200
 /pricing      /purchase/     301!
 /pricing/     /purchase/     301!
-https://www.zencarbuying.com/* https://zencarbuying.com/:splat 301!
