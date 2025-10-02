@@ -1,6 +1,6 @@
 import { navigate } from "gatsby";
-import React, { lazy, Suspense, useState, useEffect, useRef} from 'react'
-import { Link }  from 'gatsby'
+import React, { lazy, Suspense, useState, useEffect, useRef } from 'react'
+import { Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import { Hero } from '../components/Hero'
@@ -62,11 +62,17 @@ const HomePage = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const localPref = localStorage.getItem("preferredHome");
+      const urlParams = new URLSearchParams(window.location.search);
+      const reset = urlParams.get("reset");
+      if (reset === "1") {
+        localStorage.removeItem("preferredHome");
+        document.cookie = "preferredHome=; path=/; max-age=0";
+        return;
+      }
 
+      const localPref = localStorage.getItem("preferredHome");
       const cookieMatch = document.cookie.match(/(?:^|;\s*)preferredHome=([^;]+)/);
       const cookiePref = cookieMatch?.[1];
-
       const preferredHome = localPref || cookiePref;
 
       if (preferredHome && preferredHome !== "/") {
