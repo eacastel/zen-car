@@ -31,6 +31,43 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+
+ // 👉 NEW: keep a live CSS variable with the header’s visible height
+ useEffect(() => {
+   const root = document.documentElement;
+   const headerEl = document.querySelector("header");
+   if (!headerEl) return;
+
+   const updateVar = () => {
+     // rect.height reflects visible height even while translateY hides/shows
+     const rect = headerEl.getBoundingClientRect();
+     const visible = Math.max(0, rect.height);
+     const pad = 8; // small breathing room below header
+     root.style.setProperty("--header-offset", `${visible + pad}px`);
+   };
+
+   updateVar();
+   const onScroll = () => updateVar();
+   const onResize = () => updateVar();
+   window.addEventListener("scroll", onScroll, { passive: true });
+   window.addEventListener("resize", onResize);
+   // track logo/menu reflows too
+   const ro = "ResizeObserver" in window ? new ResizeObserver(updateVar) : null;
+   if (ro) ro.observe(headerEl);
+   return () => {
+     window.removeEventListener("scroll", onScroll);
+     window.removeEventListener("resize", onResize);
+     if (ro) ro.disconnect();
+   };
+ }, []);
+
+
+
+
+
+
+
+
   const data = useStaticQuery(graphql`
     query {
       logo: file(relativePath: { eq: "zen-car-buying-logo-full-color.png" }) {

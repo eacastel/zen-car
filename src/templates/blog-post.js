@@ -4,6 +4,11 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/Layout"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import ShareBar from "../components/ShareBar";
+import InlineReviewCard from "../components/InlineReviewCard";
+import Button from "../components/Button";
+// import StickyLock from "../components/StickyLock"; // REMOVED
+import StickySidebarCta from "../components/StickySidebarCta";
 import CallToAction from "../components/CallToAction"
 import Seo from "../components/Seo"
 
@@ -15,9 +20,9 @@ const BlogPost = ({ data }) => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-6 md:px-12 lg:px-24 xl:px-32 py-8 grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="container mx-auto px-6 md:px-12 lg:px-24 xl:px-32 py-8 grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
         {/* Main Content */}
-        <article className="prose mx-auto lg:col-span-2 px-4 md:px-8 py-8  border border-secondary bg-secondary rounded-lg shadow-md">
+        <article className="prose mx-auto lg:col-span-2 px-4 md:px-8 py-8 border border-secondary bg-secondary rounded-lg shadow-md">
           <header className="border-b border-primary/20 pb-2 mb-4">
             <h1
               className="text-4xl md:text-5xl font-poppins mb-2 leading-8 text-primary"
@@ -27,7 +32,8 @@ const BlogPost = ({ data }) => {
             </h1>
           </header>
 
-          {/* Feature Image */}
+          <ShareBar url={typeof window !== 'undefined' ? window.location.href : ''} title={title} />
+
           {blogDisplayImage && (
             <GatsbyImage
               image={blogDisplayImage}
@@ -39,6 +45,20 @@ const BlogPost = ({ data }) => {
           <section className="text-lg text-primary space-y-6">
             {documentToReactComponents(JSON.parse(body.raw))}
           </section>
+
+          <InlineReviewCard index={0} />
+
+          {/* Mobile-only inline mini CTA */}
+          <div className="mt-6 mb-2 lg:hidden">
+            <div className="bg-white border border-secondary rounded-lg p-5 text-center">
+              <p className="text-base text-primary mb-3">
+                Want the numbers for <em>your</em> short-list? We’ll pull inventory and pricing.
+              </p>
+              <Button to="/purchase/" color="accent" size="base" aria-label="Get my car plan">
+                Get My Car Plan
+              </Button>
+            </div>
+          </div>
 
           {tags.length > 0 && (
             <footer className="mt-10 pt-4 border-t border-primary">
@@ -58,24 +78,46 @@ const BlogPost = ({ data }) => {
           )}
         </article>
 
-        {/* Right Sidebar */}
-        <aside className="space-y-6 border border-secondary bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold text-accent">Related Articles</h2>
-          <ul className="space-y-4">
-            {relatedPosts.map((post, index) => (
-              <li key={index} className="border-b border-secondary pb-4">
-                <Link
-                  to={`/blog/${post.slug}`}
-                  className="text-lg text-primary font-bold hover:text-accent"
-                >
-                  {post.title}
-                </Link>
-                <p className="text-sm text-primary mt-1">{post.excerpt}</p>
-              </li>
-            ))}
-          </ul>
+        {/* Right Sidebar — simple, non-sticky */}
+        <aside className="lg:col-span-1 self-start">
+          <div className="flex flex-col gap-6">
+            {/* Top CTA card */}
+            <StickySidebarCta />
+
+            {/* Related Articles */}
+            <div className="border border-secondary bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-2xl font-bold text-accent">Related Articles</h2>
+              <ul className="space-y-4 mt-4">
+                {relatedPosts.map((post, index) => (
+                  <li key={index} className="border-b border-secondary pb-4 last:border-b-0">
+                    <Link
+                      to={`/blog/${post.slug}`}
+                      className="text-lg text-primary font-bold hover:text-accent"
+                    >
+                      {post.title}
+                    </Link>
+                    {/* Optional: show the excerpt if desired */}
+                    {post.excerpt && (
+                      <p className="text-sm text-primary mt-1">{post.excerpt}</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Bottom mini-CTA */}
+            <div className="border border-secondary bg-white rounded-lg shadow-md p-6">
+              <p className="text-lg text-primary mb-3">
+                Want the numbers for <em>your</em> short-list? We’ll pull inventory and pricing.
+              </p>
+              <Button to="/purchase/" color="accent" size="base" aria-label="Get my car plan">
+                Get My Car Plan
+              </Button>
+            </div>
+          </div>
         </aside>
       </div>
+
       <CallToAction />
     </Layout>
   )
@@ -127,7 +169,6 @@ export const Head = ({ data, location }) => {
 
   const ogImageSrc = getSrc(featureImage?.ogImage)
   const image = ogImageSrc || "https://zencarbuying.com/images/og-zencarbuying.jpg"
-
 
   const schema = {
     "@context": "https://schema.org",
