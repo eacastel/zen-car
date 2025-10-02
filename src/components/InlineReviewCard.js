@@ -24,14 +24,16 @@ export default function InlineReviewCard({ index = 0 }) {
     >
       <p className="text-lg italic text-primary">“{t.quote}”</p>
       <div className="mt-3 text-sm text-gray-700 font-semibold">— {t.name}</div>
-      <div className="mt-4">
-        <a
-          href="/reviews/"
-          className="inline-block px-3 py-2 text-sm rounded-md bg-accent text-white hover:opacity-90"
-        >
-          Read more reviews
-        </a>
-      </div>
+      {/*
+        <div className="mt-4">
+          <a
+            href="/reviews/"
+            className="inline-block px-3 py-2 text-sm rounded-md bg-accent text-white hover:opacity-90"
+          >
+            Read more reviews
+          </a>
+        </div>
+      */}
       <script type="application/ld+json">
         {JSON.stringify(reviewLd)}
       </script>
