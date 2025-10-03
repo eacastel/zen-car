@@ -87,6 +87,7 @@ export default function ShareBar({ url, title }) {
           event: "share_copy",
           page_path: window.location.pathname,
           page_title: title || "",
+          copy_url: copyUrl
         });
       }
       alert("Link copied!");
