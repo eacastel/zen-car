@@ -82,7 +82,13 @@ export default function ShareBar({ url, title }) {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(copyUrl);
-      track("Copy");
+      if (typeof window !== "undefined" && window.dataLayer) {
+        window.dataLayer.push({
+          event: "share_copy",
+          page_path: window.location.pathname,
+          page_title: title || "",
+        });
+      }
       alert("Link copied!");
     } catch {
       // silent fail
@@ -94,7 +100,7 @@ export default function ShareBar({ url, title }) {
 
   return (
     <nav aria-label="Share this article"
-         className="mt-4 mb-6 flex flex-wrap gap-2 sticky top-20 z-10">
+      className="mt-4 mb-6 flex flex-wrap gap-2 sticky top-20 z-10">
       <a
         href={fb}
         target="_blank"
