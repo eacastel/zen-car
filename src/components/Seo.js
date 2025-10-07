@@ -80,11 +80,22 @@ const Seo = ({ title, description, image, pathname = "/", robots = "index, follo
     areaServed: "US",
     availableChannel: "Online",
     serviceType: "Car Buying Concierge",
+    telephone: "+1-888-651-6088",
     sameAs: [
       "https://www.facebook.com/zencarbuying",
       "https://www.linkedin.com/company/zencarbuying",
       "https://www.yelp.com/biz/zencarbuying"
     ],
+    contactPoint: [
+            {
+              "@type": "ContactPoint",
+              telephone: "+1-888-651-6088",
+              contactType: "Customer Support",
+              email: "info@zencarbuying.com",
+              areaServed: "US",
+              availableLanguage: "English",
+            },
+          ],
     ...(showReviews && {
       aggregateRating: {
         "@type": "AggregateRating",

@@ -54,7 +54,7 @@ export default function ReviewsPage({ data }) {
     ...(t.rating ? {
       "reviewRating": { "@type": "Rating", "ratingValue": String(t.rating), "bestRating": "5" }
     } : {}),
-    "itemReviewed": { "@type": "Service", "name": "Zen Car Buying – Car Buying Concierge Service" },
+    "itemReviewed": { "@type": "LocalBusiness", "@id": orgId },
     "position": idx + 1
   }));
 
@@ -66,7 +66,8 @@ export default function ReviewsPage({ data }) {
 
   if (aggregateRating) {
     schema.itemReviewed = {
-      "@type": "Service",
+      "@type": "LocalBusiness", 
+      "@id": orgId,
       "name": "Zen Car Buying – Car Buying Concierge Service",
       "aggregateRating": {
         "@type": "AggregateRating",
