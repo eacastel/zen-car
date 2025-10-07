@@ -132,35 +132,45 @@ module.exports = {
         precachePages: [],
       },
     },
-    {
+{
       resolve: `gatsby-plugin-sitemap`,
       options: {
-        output: `/`,  // <- puts sitemap.xml at root directly
-        entryLimit: 5000, // ensure a single sitemap.xml
+        output: `/`,
+        entryLimit: 5000,
         createLinkInHead: true,
         resolveSiteUrl: () => `https://zencarbuying.com`,
         excludes: [
-              `/checkout/*`,
-              `/success/*`,
-              `/cancel/*`,
-              `/tag/*`,
-              `/tag-me/`,
-              `/untag-me/`,
-              `/sms/`,
-            ],
+          `/checkout/*`,
+          `/success/*`,
+          `/cancel/*`,
+          `/tag/*`,
+          `/tag-me/`,
+          `/untag-me/`,
+          `/terms-of-use/`,
+          `/privacy-policy/`,
+          `/sms-terms-and-conditions/`,
+        ],
         serialize: ({ path }) => {
-          if (!path || path.includes('undefined')) return null;
+          if (!path || path.includes("undefined")) return null;
+          const withSlash = normalizeWithSlash(path);
+
           let priority = 0.7;
           switch (withSlash) {
-            case '/':
-              priority = 1.0; break;
-            case '/services/':       
-            case '/purchase/':
-            case '/about/': priority = 0.9; break; 
-            case '/reviews/':
-            case '/faq/':
-            case '/contact/':              
-            case '/blog/': priority = 0.8; break;
+            case "/":
+              priority = 1.0;
+              break;
+            case "/services/":
+            case "/purchase/":
+            case "/about/":
+              priority = 0.9;
+              break;
+            case "/faq/":
+            case "/contact/":
+            case "/blog/":
+              priority = 0.8;
+              break;
+            default:
+              priority = 0.7;
           }
 
           return {
