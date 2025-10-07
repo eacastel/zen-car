@@ -2,6 +2,11 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+const normalizeWithSlash = (p) => {
+  if (!p || p === "/") return "/";
+  return p.endsWith("/") ? p : `${p}/`;
+};
+
 module.exports = {
   siteMetadata: {
     title: `Zen Car Buying | Stress-Free Concierge Service for New, Lightly Used & Luxury Cars`,
