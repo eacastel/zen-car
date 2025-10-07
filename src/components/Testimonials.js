@@ -134,31 +134,6 @@ export default function Testimonials() {
                         })}
                     </Slider>
                 </div>
-
-                <script type="application/ld+json">
-                    {JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "Review",
-                        "name": "Zen Car Buying Testimonials",
-                        "author": {
-                            "@type": "Person",
-                            "name": testimonialsData[0].name
-                        },
-                        "itemReviewed": {
-                            "@type": "Service",
-                            "name": "Car Buying Concierge Service"
-                          },
-                        "reviewRating": {
-                            "@type": "Rating",
-                            "ratingValue": "5",
-                            "bestRating": "5"
-                        },
-                        "publisher": {
-                            "@type": "Organization",
-                            "name": "Zen Car Buying"
-                        }
-                    })}
-                </script>
             </div>
         </section>
     )
