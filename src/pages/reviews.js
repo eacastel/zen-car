@@ -45,6 +45,7 @@ export default function ReviewsPage({ data }) {
     ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1)
     : null;
 
+  const orgId = "https://zencarbuying.com/#organization";
 
   // JSON-LD: Review list + optional AggregateRating
   const reviewItemsLd = testimonialsData.slice(0, 20).map((t, idx) => ({
@@ -66,7 +67,7 @@ export default function ReviewsPage({ data }) {
 
   if (aggregateRating) {
     schema.itemReviewed = {
-      "@type": "LocalBusiness", 
+      "@type": "LocalBusiness",
       "@id": orgId,
       "name": "Zen Car Buying – Car Buying Concierge Service",
       "aggregateRating": {
@@ -98,12 +99,21 @@ export default function ReviewsPage({ data }) {
           )}
         </header>
 
+
         {/* CTA Bar */}
-{/* CTA Bar */}
-<div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-  <CalendlyButton size="lg" color="accent" to="/15min">
-    Schedule a Free Consultation
-  </CalendlyButton>
+        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+          {typeof window !== "undefined" ? (
+            <CalendlyButton size="lg" color="accent" to="/15min">
+              Schedule a Free Consultation
+            </CalendlyButton>
+          ) : (
+            <a
+              href="/15min"
+              className="bg-accent hover:bg-accent-dark text-white px-6 py-3 rounded-2xl font-semibold inline-block text-center"
+            >
+              Schedule a Free Consultation
+            </a>
+          )}
           <span className="text-sm text-primary/70">No pressure. We’ll give you options and real pricing.</span>
         </div>
 
@@ -149,9 +159,18 @@ export default function ReviewsPage({ data }) {
 
         {/* Bottom CTA */}
         <div className="mt-12 text-center">
-  <CalendlyButton size="lg" color="accent" to="/15min">
-    Schedule a Free Consultation
-  </CalendlyButton>
+          {typeof window !== "undefined" ? (
+            <CalendlyButton size="lg" color="accent" to="/15min">
+              Schedule a Free Consultation
+            </CalendlyButton>
+          ) : (
+            <a
+              href="/15min"
+              className="bg-accent hover:bg-accent-dark text-white px-6 py-3 rounded-2xl font-semibold inline-block text-center"
+            >
+              Schedule a Free Consultation
+            </a>
+          )}
           <p className="mt-2 text-sm text-primary/70">We’ll pull inventory and pricing for your short-list.</p>
         </div>
 
@@ -193,9 +212,9 @@ export const Head = ({ location }) => {
   const avg =
     testimonialsData.length > 0
       ? (
-          testimonialsData.reduce((sum, t) => sum + (t.rating ?? 5), 0) /
-          testimonialsData.length
-        ).toFixed(1)
+        testimonialsData.reduce((sum, t) => sum + (t.rating ?? 5), 0) /
+        testimonialsData.length
+      ).toFixed(1)
       : "5.0";
 
   const itemList = testimonialsData.map((t, i) => ({
