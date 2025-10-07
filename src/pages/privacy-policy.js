@@ -1,4 +1,5 @@
 import React from "react";
+import Seo from "../components/Seo";
 import Layout from "../components/Layout";
 
 const PrivacyPolicy = () => {
@@ -77,29 +78,11 @@ const PrivacyPolicy = () => {
 export default PrivacyPolicy;
 
 
-export const Head = () => {
-  const siteUrl = "https://zencarbuying.com";
-  return (
-    <>
-      <title>Privacy Policy | Zen Car Buying</title>
-      <meta name="description" content="Zen Car Buying's Privacy Policy covering data collection, SMS communication, cookies, and compliance." />
-      <link rel="canonical" href={`${siteUrl}/privacy-policy`} />
-      <meta property="og:title" content="Privacy Policy | Zen Car Buying" />
-      <meta property="og:description" content="Zen Car Buying's Privacy Policy covering data collection, SMS communication, cookies, and compliance." />
-      <meta property="og:url" content={`${siteUrl}/privacy-policy`} />
-      <meta property="og:type" content="website" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="Privacy Policy | Zen Car Buying" />
-      <meta name="twitter:description" content="Zen Car Buying's Privacy Policy covering data collection, SMS communication, cookies, and compliance." />
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          url: `${siteUrl}/privacy-policy`,
-          name: "Privacy Policy",
-          description: "Zen Car Buying's Privacy Policy covering data collection, SMS communication, cookies, and compliance."
-        })}
-      </script>
-    </>
-  );
-};
+export const Head = ({ location }) => (
+  <Seo
+    title="Privacy Policy | Zen Car Buying"
+    description="Zen Car Buying's Privacy Policy covering data collection, SMS communication, cookies, and compliance."
+    pathname={location.pathname}
+    robots="noindex, follow"
+  />
+);

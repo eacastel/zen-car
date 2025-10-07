@@ -182,16 +182,77 @@ export const query = graphql`
   }
 `;
 
-// SEO
-export const Head = () => {
+export const Head = ({ location }) => {
+  const siteUrl = "https://zencarbuying.com";
   const title = "Customer Reviews | Zen Car Buying";
-  const description = "Real reviews from drivers who used Zen Car Buying to find reliable, fairly-priced cars without dealership hassle.";
+  const description =
+    "Real reviews from drivers who used Zen Car Buying to find reliable, fairly-priced cars without dealership hassle.";
+
+  // Optional: compute real average rating
+  const avg =
+    testimonialsData.length > 0
+      ? (
+          testimonialsData.reduce((sum, t) => sum + (t.rating ?? 5), 0) /
+          testimonialsData.length
+        ).toFixed(1)
+      : "5.0";
+
+  const itemList = testimonialsData.map((t, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Review",
+      "@id": `${siteUrl}/reviews/#review-${i + 1}`,
+      reviewBody: t.quote,
+      author: { "@type": "Person", name: t.name },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: String(t.rating ?? 5),
+        bestRating: "5",
+        worstRating: "1",
+      },
+      itemReviewed: {
+        "@type": "Organization",
+        name: "Zen Car Buying",
+        url: siteUrl,
+      },
+    },
+  }));
+
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${siteUrl}/reviews/#webpage`,
+    name: title,
+    url: `${siteUrl}/reviews/`,
+    description,
+    mainEntity: {
+      "@type": "ItemList",
+      name: "Zen Car Buying Customer Reviews",
+      itemListElement: itemList,
+      numberOfItems: testimonialsData.length,
+    },
+    // Optional page-level aggregate (separate from LocalBusiness)
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: avg,
+      reviewCount: testimonialsData.length,
+      bestRating: "5",
+      worstRating: "1",
+    },
+  };
+
   return (
-    <Seo
-      title={title}
-      description={description}
-      pathname="/reviews/"
-      image="https://zencarbuying.com/images/og-zencarbuying.jpg"
-    />
+    <>
+      <Seo
+        title={title}
+        description={description}
+        pathname={location?.pathname || "/reviews/"}
+        image="https://zencarbuying.com/images/og-zencarbuying.jpg"
+      />
+      <script type="application/ld+json">
+        {JSON.stringify(collectionSchema)}
+      </script>
+    </>
   );
 };

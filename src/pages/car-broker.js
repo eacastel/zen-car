@@ -117,35 +117,37 @@ const CarBroker = () => {
 }
 export default CarBroker
 
-export const Head = () => (
+export const Head = ({ location }) => (
   <Seo
     title="Car Broker for New & Used Cars Nationwide - Zen Car Buying"
     description="Looking for a trusted car broker? Zen Car Buying provides nationwide car broker services to help you find, negotiate, and buy your ideal car without dealership stress."
-    pathname="/car-broker/"
+    pathname={location?.pathname || "/car-broker/"}
   >
     <script type="application/ld+json">
       {JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "Car Broker Services",
-        "provider": {
+        name: "Car Broker Services",
+        serviceType: "Car Broker",
+        description:
+          "Looking for a trusted car broker? Zen Car Buying provides nationwide car broker services to help you find, negotiate, and buy your ideal car without dealership stress.",
+        url: "https://zencarbuying.com/car-broker/",
+        provider: {
           "@type": "Organization",
-          "name": "Zen Car Buying",
-          "url": "https://zencarbuying.com/car-broker/",
-          "logo": "https://zencarbuying.com/logo.png",
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+1-888-651-6088",
-            "contactType": "Customer Service"
-          }
+          name: "Zen Car Buying",
+          url: "https://zencarbuying.com/",
+          logo: "https://zencarbuying.com/zen-car-buying-logo.png",
+          contactPoint: [
+            {
+              "@type": "ContactPoint",
+              telephone: "+1-888-651-6088",
+              contactType: "Customer Service",
+              areaServed: "US",
+              availableLanguage: "English"
+            }
+          ]
         },
-        "areaServed": {
-          "@type": "Country",
-          "name": "United States"
-        },
-        "description": "Looking for a trusted car broker? Zen Car Buying provides nationwide car broker services to help you find, negotiate, and buy your ideal car without dealership stress.",
-        "serviceType": "Car Broker",
-        "url": "https://zencarbuying.com/car-broker/"
+        areaServed: { "@type": "Country", name: "United States" }
       })}
     </script>
   </Seo>

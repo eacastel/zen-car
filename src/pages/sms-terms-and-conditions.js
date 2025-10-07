@@ -1,4 +1,5 @@
 import React from "react";
+import Seo from "../components/Seo";
 import Layout from "../components/Layout";
 
 export default function SmsTerms() {
@@ -84,3 +85,12 @@ export default function SmsTerms() {
     </Layout>
   );
 }
+
+export const Head = ({ location }) => (
+  <Seo
+    title="SMS Terms & Conditions | Zen Car Buying"
+    description="Review Zen Car Buying's SMS Terms & Conditions outlining consent, message frequency, data rates, opt-out instructions, and privacy practices related to text messaging."
+    pathname={location.pathname}
+    robots="noindex, follow"
+  />
+);

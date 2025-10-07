@@ -9,7 +9,7 @@ module.exports = {
     author: `@zencarbuying`,
     siteUrl: `https://zencarbuying.com`
   },
-  trailingSlash: 'always', // or 'never',
+  trailingSlash: 'always', 
   plugins: [
     `gatsby-plugin-image`,
     {
@@ -138,41 +138,33 @@ module.exports = {
         output: `/`,  // <- puts sitemap.xml at root directly
         entryLimit: 5000, // ensure a single sitemap.xml
         createLinkInHead: true,
-
-        // Use built-in Gatsby page data, no custom query
         resolveSiteUrl: () => `https://zencarbuying.com`,
-
+        excludes: [
+              `/checkout/*`,
+              `/success/*`,
+              `/cancel/*`,
+              `/tag/*`,
+              `/tag-me/`,
+              `/untag-me/`,
+              `/sms/`,
+            ],
         serialize: ({ path }) => {
-          // Exclude any invalid or "undefined" paths explicitly
           if (!path || path.includes('undefined')) return null;
-
-          // Set custom priorities per specific pages
           let priority = 0.7;
-
-          switch (path) {
+          switch (withSlash) {
             case '/':
-              priority = 1.0; break;         // Home page
-            case '/services/':
-              priority = 0.9; break;         // Services page
+              priority = 1.0; break;
+            case '/services/':       
             case '/purchase/':
-              priority = 0.9; break;         // Pricing page
-            case '/about/':
-              priority = 0.9; break;         // About page
+            case '/about/': priority = 0.9; break; 
+            case '/reviews/':
             case '/faq/':
-              priority = 0.8; break;         // FAQ page
-            case '/contact/':
-              priority = 0.8; break;         // Contact page
-            case '/blog/':
-              priority = 0.8; break;         // Blog page
-            case '/privacy-policy/':
-            case '/terms-and-conditions/':
-              priority = 0.5; break;         // Legal pages lower priority
-            default:
-              priority = 0.7;                // Default priority for all others
+            case '/contact/':              
+            case '/blog/': priority = 0.8; break;
           }
 
           return {
-            url: `https://zencarbuying.com${path}`,
+            url: `https://zencarbuying.com${withSlash}`,
             changefreq: `weekly`,
             priority,
           };

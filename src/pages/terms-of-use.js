@@ -1,4 +1,5 @@
 import React from "react";
+import Seo from "../components/Seo";
 import Layout from "../components/Layout";
 
 export default function WebsiteTerms() {
@@ -63,3 +64,12 @@ export default function WebsiteTerms() {
     </Layout>
   );
 }
+
+export const Head = ({ location }) => (
+  <Seo
+    title="Website Terms of Use | Zen Car Buying"
+    description="Review Zen Car Buying's Terms of Use for this website, covering user conduct, intellectual property, and limitations of liability when accessing our content or services online."
+    pathname={location.pathname}
+    robots="noindex, follow"
+  />
+);

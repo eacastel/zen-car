@@ -140,27 +140,29 @@ const HomePage = () => {
 
 export default HomePage
 
-// ✅ SEO Metadata
-export const Head = () => (
+
+export const Head = ({ location }) => (
   <Seo
     title="Zen Car Buying | Stress-Free Concierge Service for New, Lightly Used & Luxury Cars"
-    description="Zen Car Buying is your trusted concierge service for finding new cars, lightly used vehicles, and even luxury models at affordable prices nationwide. Our proven 4-step system ensures a stress-free car-buying experience."
-    pathname="/"
+    description="Zen Car Buying is your trusted concierge service for finding new cars, lightly used vehicles, and luxury models at affordable prices nationwide. Our proven 4-step system ensures a stress-free car-buying experience."
+    pathname={location?.pathname || "/"}
   >
     <script type="application/ld+json">
       {JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Zen Car Buying",
-        "url": "https://zencarbuying.com",
-        "logo": "https://zencarbuying.com/logo.png",
-        "sameAs": [
+        name: "Zen Car Buying",
+        url: "https://zencarbuying.com",
+        logo: "https://zencarbuying.com/zen-car-buying-logo.png",
+        sameAs: [
           "https://www.facebook.com/zencarbuying",
-          "https://www.instagram.com/zencarbuying"
+          "https://www.instagram.com/zencarbuying",
+          "https://www.linkedin.com/company/zencarbuying",
+          "https://www.yelp.com/biz/zencarbuying"
         ],
-        "description":
+        description:
           "Zen Car Buying helps you find luxury and lightly used cars at 30–50% off with expert concierge help."
       })}
     </script>
   </Seo>
-)
+);

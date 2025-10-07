@@ -1,10 +1,8 @@
-//src/components/Seo.js
-
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import testimonialsData from "../data/testimonials.json";
 
-const Seo = ({ title, description, image, pathname, children }) => {
+const Seo = ({ title, description, image, pathname = "/", robots = "index,  follow", schemaMarkup, children }) => {
   const {
     site: { siteMetadata },
   } = useStaticQuery(graphql`
@@ -20,7 +18,10 @@ const Seo = ({ title, description, image, pathname, children }) => {
     }
   `);
 
-  const siteUrl = siteMetadata.siteUrl;
+  // Ensure no trailing slash on siteUrl
+  const rawSiteUrl = siteMetadata.siteUrl || "";
+  const siteUrl = rawSiteUrl.endsWith("/") ? rawSiteUrl.slice(0, -1) : rawSiteUrl;
+
   const defaultTitle = siteMetadata.title;
   const defaultDescription = siteMetadata.description;
   const defaultImage = "/images/og-zencarbuying.jpg";
@@ -33,7 +34,9 @@ const Seo = ({ title, description, image, pathname, children }) => {
       ? image
       : `${siteUrl}${image || defaultImage}`;
 
-  const url = `${siteUrl}${pathname || "/"}`;
+  // Canonical with trailing slash normalization
+  const canonicalPath = pathname === "/" ? "/" : pathname.endsWith("/") ? pathname : `${pathname}/`;
+  const url = `${siteUrl}${canonicalPath}`;
 
   const globalSchema = {
     "@context": "https://schema.org",
@@ -47,7 +50,7 @@ const Seo = ({ title, description, image, pathname, children }) => {
     areaServed: "US",
     availableChannel: "Online",
     serviceType: "Car Buying Concierge",
-    "sameAs": [
+    sameAs: [
       "https://www.facebook.com/zencarbuying",
       "https://www.linkedin.com/company/zencarbuying",
       "https://www.yelp.com/biz/zencarbuying"
@@ -59,16 +62,13 @@ const Seo = ({ title, description, image, pathname, children }) => {
       bestRating: "5",
       worstRating: "1",
     },
-    review: testimonialsData.map((testimonial) => ({
+    review: testimonialsData.map((t) => ({
       "@type": "Review",
-      reviewBody: testimonial.quote,
-      author: {
-        "@type": "Person",
-        name: testimonial.name,
-      },
+      reviewBody: t.quote,
+      author: { "@type": "Person", name: t.name },
       reviewRating: {
         "@type": "Rating",
-        ratingValue: testimonial.rating.toString(),
+        ratingValue: (t.rating ?? 5).toString(),
         bestRating: "5",
         worstRating: "1",
       },
@@ -77,34 +77,34 @@ const Seo = ({ title, description, image, pathname, children }) => {
 
   return (
     <>
-      {/* Basic Meta Tags */}
       <title>{metaTitle}</title>
       <meta name="description" content={metaDescription} />
       <link rel="canonical" href={url} />
-      <meta name="robots" content="index, follow" />
+      <meta name="robots" content={robots} />
 
-      {/* Open Graph (Facebook, LinkedIn) */}
       <meta property="og:title" content={metaTitle} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:url" content={url} />
-      <meta property="og:type" content={pathname?.startsWith("/blog/") ? "article" : "website"} />
+      <meta property="og:type" content={canonicalPath.startsWith("/blog/") ? "article" : "website"} />
       <meta property="og:image" content={metaImage} />
       <meta
         property="og:image:alt"
         content="Zen Car Buying | Stress-Free Nationwide Concierge Service for New, Lightly Used & Luxury Cars"
       />
 
-      {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={metaTitle} />
       <meta name="twitter:description" content={metaDescription} />
       <meta name="twitter:image" content={metaImage} />
       <meta name="twitter:creator" content={siteMetadata.author} />
 
-      {/* JSON-LD Schema for structured data */}
-      <script type="application/ld+json">
-        {JSON.stringify(globalSchema)}
-      </script>
+      <script type="application/ld+json">{JSON.stringify(globalSchema)}</script>
+      
+      {schemaMarkup && (
+        <script type="application/ld+json">
+          {JSON.stringify(schemaMarkup)}
+          </script>
+      )}
 
       {children}
     </>

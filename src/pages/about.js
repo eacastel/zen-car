@@ -86,38 +86,38 @@ export default function AboutPage({ data }) {
                 step: '1',
                 title: 'Start Your Zen Experience',
                 desc: (
-                    <>
-                        Choose a service package and book your onboarding call to get started —or book a{" "}
-                        <button
-                            type="button"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                openCalendlyPopup();
-                            }}
-                            className="text-accent underline focus:outline-none focus:ring-2 focus:ring-accent"
-                            aria-label="Schedule your onboarding call"
-                        >
-                             quick intro call
-                        </button>
-                        {" "}if you’d like to learn more first.
-                    </>
+                  <>
+                    Choose a service package and book your onboarding call to get started —or book a{" "}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        openCalendlyPopup();
+                      }}
+                      className="text-accent underline focus:outline-none focus:ring-2 focus:ring-accent"
+                      aria-label="Schedule your onboarding call"
+                    >
+                      quick intro call
+                    </button>
+                    {" "}if you’d like to learn more first.
+                  </>
                 )
-            },
-            {
+              },
+              {
                 step: '2',
                 title: 'Receive Expert Recommendations',
                 desc: 'We hand-select your ideal vehicle based on your lifestyle, reliability needs, and long-term goals.',
-            },
-            {
+              },
+              {
                 step: '3',
                 title: 'Get Matched with Available Inventory',
                 desc: 'We source the best available listings nationwide, verify them, and present them to you with key details.',
-            },
-            {
+              },
+              {
                 step: '4',
                 title: 'Enjoy Purchase & Delivery Support',
                 desc: 'We negotiate, manage paperwork, and coordinate delivery so you can buy with confidence and ease.',
-            },
+              },
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -131,9 +131,6 @@ export default function AboutPage({ data }) {
             ))}
           </div>
         </section>
-
-
-
 
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-primary mb-4">Not Sure Where to Start?</h2>
@@ -149,9 +146,7 @@ export default function AboutPage({ data }) {
               aria-label="Schedule a consultation"
             >here</button> for your free consultation.
           </p>
-
         </section>
-
 
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-primary mb-4">Warranty & Peace of Mind</h2>
@@ -199,10 +194,56 @@ export const query = graphql`
   }
 `
 
-export const Head = () => (
-  <Seo
-    title="About Zen Car Buying | Nationwide Car Broker & Concierge"
-    description="Zen Car Buying provides local and nationwide car brokering and concierge services to source, negotiate, and deliver the best new and used vehicles—saving you time, money, and stress."
-    pathname="/about/"
-  />
-)
+export const Head = ({ location }) => {
+  const siteUrl = "https://zencarbuying.com";
+
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `${siteUrl}/about/#webpage`,
+    name: "About Zen Car Buying",
+    url: `${siteUrl}/about/`,
+    description:
+      "Learn about Zen Car Buying's nationwide car brokering and concierge service—our mission, process, and commitment to helping drivers buy the right vehicle stress-free.",
+    mainEntity: {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "Zen Car Buying",
+      url: siteUrl,
+      logo: `${siteUrl}/zen-car-buying-logo.png`,
+      description:
+        "Zen Car Buying provides local and nationwide car brokering and concierge services to source, negotiate, and deliver the best new and used vehicles.",
+      foundingDate: "2020",
+      founder: {
+        "@type": "Person",
+        name: "Brian Alexander"
+      },
+      sameAs: [
+        "https://www.facebook.com/zencarbuying",
+        "https://www.instagram.com/zencarbuying",
+        "https://www.linkedin.com/company/zencarbuying",
+        "https://www.yelp.com/biz/zencarbuying"
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+1-888-651-6088",
+        contactType: "Customer Support",
+        areaServed: "US",
+        availableLanguage: "English"
+      }
+    }
+  };
+
+  return (
+    <>
+      <Seo
+        title="About Zen Car Buying | Nationwide Car Broker & Concierge"
+        description="Zen Car Buying provides local and nationwide car brokering and concierge services to source, negotiate, and deliver the best new and used vehicles—saving you time, money, and stress."
+        pathname={location?.pathname || "/about/"}
+      />
+      <script type="application/ld+json">
+        {JSON.stringify(schemaData)}
+      </script>
+    </>
+  );
+};

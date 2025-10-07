@@ -86,55 +86,67 @@ const Purchase = () => {
 
 export default Purchase;
 
-export const Head = () => {
+
+export const Head = ({ location }) => {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Nationwide Car Buying Concierge, Consultation and Assistance",
-    "serviceOutput": "Concierge-style used car buying support, including price negotiation, vehicle sourcing, and shipping coordination.",
-    "provider": {
+    name: "Nationwide Car Buying Concierge",
+    serviceType:
+      "Nationwide Car Buying Concierge, Consultation, and Assistance",
+    serviceOutput:
+      "Concierge-style used car buying support, including price negotiation, vehicle sourcing, and shipping coordination.",
+    provider: {
       "@type": "Organization",
-      "name": "Zen Car Buying",
-      "url": "https://www.zencarbuying.com",
-      "logo": "https://www.zencarbuying.com/logo.png"
+      name: "Zen Car Buying",
+      url: "https://zencarbuying.com",
+      logo: "https://zencarbuying.com/zen-car-buying-logo.png",
     },
-    "areaServed": "US",
-    "description": "Zen Car Buying offers a comprehensive, nationwide car buying experience including a free 15‑minute consultation, expert recommendations, inventory sourcing, and purchase assistance.",
-    "offers": {
+    areaServed: {
+      "@type": "Country",
+      name: "United States",
+    },
+    description:
+      "Zen Car Buying offers a comprehensive nationwide car buying experience, including a free 15-minute consultation, expert recommendations, inventory sourcing, and purchase assistance.",
+    offers: {
       "@type": "Offer",
-      "priceCurrency": "USD",
-      "price": "Varies",
-      "availability": "https://schema.org/InStock"
+      priceCurrency: "USD",
+      price: "Varies",
+      availability: "https://schema.org/InStock",
+      url: "https://zencarbuying.com/purchase/",
     },
-    "hasOfferCatalog": {
+    hasOfferCatalog: {
       "@type": "OfferCatalog",
-      "name": "Car Buying Packages",
-      "itemListElement": [
+      name: "Car Buying Packages",
+      itemListElement: [
         {
           "@type": "Offer",
-          "name": "Free 15-Minute Consultation",
-          "price": "0",
-          "priceCurrency": "USD"
+          name: "Free 15-Minute Consultation",
+          price: "0",
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
         },
         {
           "@type": "Offer",
-          "name": "Complete Concierge Service",
-          "price": "Varies",
-          "priceCurrency": "USD"
-        }
-      ]
-    }
-  }
-
+          name: "Complete Concierge Service",
+          price: "Varies",
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+        },
+      ],
+    },
+  };
 
   return (
     <>
       <Seo
         title="Zen Car Buying Pricing | Nationwide Car Buying Packages"
-        description="Discover Zen Car Buying's comprehensive, nationwide car buying experience. Get a free 15‑minute consultation, expert recommendations, inventory sourcing, and purchase assistance across the USA."
-        pathname="/purchase/"
+        description="Explore Zen Car Buying's nationwide car buying services — from a free 15-minute consultation to complete concierge assistance covering sourcing, negotiation, and delivery."
+        pathname={location?.pathname || "/purchase/"}
       />
-      <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
+      <script type="application/ld+json">
+        {JSON.stringify(schemaData)}
+      </script>
     </>
   );
 };

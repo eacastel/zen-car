@@ -1,4 +1,5 @@
 import React from "react";
+import Seo from "../components/Seo";
 import Layout from "../components/Layout";
 
 const TermsPage = () => {
@@ -194,3 +195,12 @@ const TermsPage = () => {
 };
 
 export default TermsPage;
+
+export const Head = ({ location }) => (
+  <Seo
+    title="Service Terms & Conditions | Zen Car Buying"
+    description="Read Zen Car Buying's Terms & Conditions governing all concierge car-buying services, including pricing, deliverables, limitations, and refund policies."
+    pathname={location.pathname}
+    robots="noindex, follow"
+  />
+);

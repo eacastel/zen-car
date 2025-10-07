@@ -129,42 +129,50 @@ export default function ContactPage() {
   )
 }
 
-export const Head = () => (
+export const Head = ({ location }) => (
   <>
     <Seo
       title="Contact Zen Car Buying | Free 15-Minute Consultation"
       description="Get in touch with Zen Car Buying. Call, text, or email us for expert car-buying advice, or schedule your free 15-minute consultation today."
-      pathname="/contact/"
-      image="https://zencarbuying.com/images/contact-hero.jpg" // adjust to your actual image path
+      pathname={location?.pathname || "/contact/"}
+      image="https://zencarbuying.com/images/contact-hero.jpg"
     />
     <script type="application/ld+json">
       {JSON.stringify({
         "@context": "https://schema.org",
         "@type": "ContactPage",
-        "name": "Contact Zen Car Buying",
-        "url": "https://zencarbuying.com/contact/",
-        "mainEntityOfPage": "https://zencarbuying.com/contact/",
-        "publisher": {
+        "@id": "https://zencarbuying.com/contact/#contactpage",
+        name: "Contact Zen Car Buying",
+        url: "https://zencarbuying.com/contact/",
+        mainEntityOfPage: "https://zencarbuying.com/contact/",
+        publisher: {
           "@type": "Organization",
-          "name": "Zen Car Buying",
-          "url": "https://zencarbuying.com",
-          "logo": {
+          "@id": "https://zencarbuying.com/#organization",
+          name: "Zen Car Buying",
+          url: "https://zencarbuying.com/",
+          logo: {
             "@type": "ImageObject",
-            "url": "https://zencarbuying.com/logo.png"
-          }
+            url: "https://zencarbuying.com/zen-car-buying-logo.png",
+          },
+          sameAs: [
+            "https://www.facebook.com/zencarbuying",
+            "https://www.instagram.com/zencarbuying",
+            "https://www.linkedin.com/company/zencarbuying",
+            "https://www.yelp.com/biz/zencarbuying",
+          ],
+          contactPoint: [
+            {
+              "@type": "ContactPoint",
+              telephone: "+1-888-651-6088",
+              contactType: "Customer Support",
+              email: "info@zencarbuying.com",
+              areaServed: "US",
+              availableLanguage: "English",
+            },
+          ],
         },
-        "contactPoint": [
-          {
-            "@type": "ContactPoint",
-            "telephone": "+1-888-651-6088",
-            "contactType": "Customer Support",
-            "email": "info@zencarbuying.com",
-            "areaServed": "US",
-            "availableLanguage": "English"
-          }
-        ]
       })}
     </script>
   </>
-)
+);
 
