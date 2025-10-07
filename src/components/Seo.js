@@ -18,6 +18,19 @@ const Seo = ({ title, description, image, pathname = "/", robots = "index,  foll
     }
   `);
 
+  const coerceRating = (val) => {
+  if (typeof val === "number" && !isNaN(val)) return val;
+  if (typeof val === "string") {
+    // try digit first
+    const digits = val.match(/\d+(\.\d+)?/);
+    if (digits) return Number(digits[0]);
+    // then count stars
+    const stars = (val.match(/⭐/g) || []).length;
+    if (stars) return stars;
+  }
+  return 5; // default
+};
+
   // Ensure no trailing slash on siteUrl
   const rawSiteUrl = siteMetadata.siteUrl || "";
   const siteUrl = rawSiteUrl.endsWith("/") ? rawSiteUrl.slice(0, -1) : rawSiteUrl;
@@ -33,6 +46,7 @@ const Seo = ({ title, description, image, pathname = "/", robots = "index,  foll
     image?.startsWith("http") || image?.startsWith("//")
       ? image
       : `${siteUrl}${image || defaultImage}`;
+      
 
   // Canonical with trailing slash normalization
   const canonicalPath = pathname === "/" ? "/" : pathname.endsWith("/") ? pathname : `${pathname}/`;
@@ -68,7 +82,7 @@ const Seo = ({ title, description, image, pathname = "/", robots = "index,  foll
       author: { "@type": "Person", name: t.name },
       reviewRating: {
         "@type": "Rating",
-        ratingValue: (t.rating ?? 5).toString(),
+        ratingValue: String(coerceRating(t.rating)),
         bestRating: "5",
         worstRating: "1",
       },

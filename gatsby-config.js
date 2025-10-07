@@ -99,7 +99,7 @@ module.exports = {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
         host: "https://zencarbuying.com",
-        sitemap: "https://zencarbuying.com/sitemap-0.xml",
+        sitemap: "https://zencarbuying.com/sitemap-index.xml",
         resolveEnv: () => process.env.NETLIFY_ENV || process.env.NODE_ENV,
         env: {
           'production': {
