@@ -1,53 +1,54 @@
-import React, { lazy, Suspense, useState, useEffect, useRef } from 'react'
-import Layout from "../components/Layout";
-import Seo from "../components/Seo";
-import CustomizeWizard from "../components/pricing-page/CustomizeWizard";
-import ZenExperienceSection from '../components/pricing-page/ZenExperienceSection';
-
+import React, { lazy, Suspense, useState, useEffect, useRef } from "react"
+import Layout from "../components/Layout"
+import Seo from "../components/Seo"
+import CustomizeWizard from "../components/pricing-page/CustomizeWizard"
+import ZenExperienceSection from "../components/pricing-page/ZenExperienceSection"
+import ExitIntentPopup from "../components/ExitIntentPopup"
 
 // Cached Stripe client using your publishable key
 
-const TestimonialsPricing = lazy(() => import('../components/TestimonialsPricing'))
+const TestimonialsPricing = lazy(() =>
+  import("../components/TestimonialsPricing")
+)
 
 function useOnScreen(ref, rootMargin = "0px") {
-  const [isIntersecting, setIntersecting] = useState(false);
+  const [isIntersecting, setIntersecting] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIntersecting(true);
+          setIntersecting(true)
 
           // ✅ Fire the Meta Pixel "ViewContent" event
           if (window.fbq) {
-            window.fbq('track', 'ViewContent', {
-              content_name: 'Pricing Page',
-            });
+            window.fbq("track", "ViewContent", {
+              content_name: "Pricing Page",
+            })
           }
         }
       },
       { rootMargin }
-    );
+    )
 
     if (ref.current) {
-      observer.observe(ref.current);
+      observer.observe(ref.current)
     }
 
-    return () => observer.disconnect();
-  }, [ref, rootMargin]);
+    return () => observer.disconnect()
+  }, [ref, rootMargin])
 
-  return isIntersecting;
+  return isIntersecting
 }
 
-
 const Purchase = () => {
-  const testimonialsRef = useRef();
-  const showTestimonials = useOnScreen(testimonialsRef, "100px");
+  const testimonialsRef = useRef()
+  const showTestimonials = useOnScreen(testimonialsRef, "100px")
 
   return (
     <Layout>
       <main>
-        <section className="pt-16 pb-4 bg-secondary" aria-labelledby="pricing-page-heading">
+        <section id="purchase-start" className="pt-16 pb-4 bg-secondary" aria-labelledby="pricing-page-heading">
           <div className="container mx-auto px-4 md:px-6 max-w-[1280px]">
             <h1
               id="pricing-page-heading"
@@ -56,7 +57,9 @@ const Purchase = () => {
               Skip the Hassle. Save Time & Money.
             </h1>
             <p className="mx-auto max-w-4xl text-lg md:text-xl text-center text-primary mb-12">
-              Get our full-service concierge package—expert research, inventory sourcing, and purchase help—all in one seamless, cost-effective experience.
+              Get our full-service concierge package—expert research, inventory
+              sourcing, and purchase help—all in one seamless, cost-effective
+              experience.
             </p>
 
             <div className="flex flex-col lg:flex-row gap-0">
@@ -69,23 +72,29 @@ const Purchase = () => {
             </div>
           </div>
         </section>
-      </main >
+      </main>
 
+      {/* Exit Intent */}
+      <ExitIntentPopup />
 
       <div ref={testimonialsRef}>
         {showTestimonials && (
-          <Suspense fallback={<div className="py-20 text-center text-primary">Loading testimonials…</div>}>
+          <Suspense
+            fallback={
+              <div className="py-20 text-center text-primary">
+                Loading testimonials…
+              </div>
+            }
+          >
             <TestimonialsPricing />
           </Suspense>
         )}
       </div>
+    </Layout>
+  )
+}
 
-    </Layout >
-  );
-};
-
-export default Purchase;
-
+export default Purchase
 
 export const Head = ({ location }) => {
   const schemaData = {
@@ -135,7 +144,7 @@ export const Head = ({ location }) => {
         },
       ],
     },
-  };
+  }
 
   return (
     <>
@@ -144,9 +153,7 @@ export const Head = ({ location }) => {
         description="Explore Zen Car Buying's nationwide car buying services — from a free 15-minute consultation to complete concierge assistance covering sourcing, negotiation, and delivery."
         pathname={location?.pathname || "/purchase/"}
       />
-      <script type="application/ld+json">
-        {JSON.stringify(schemaData)}
-      </script>
+      <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
     </>
-  );
-};
+  )
+}

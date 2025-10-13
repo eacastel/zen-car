@@ -1,21 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 export default function ExitIntentPopup() {
   const [visible, setVisible] = useState(false);
   const modalRef = useRef(null);
-
-  const data = useStaticQuery(graphql`
-    query {
-      starbucksCard: file(relativePath: { eq: "starbucks-giftcard.png" }) {
-        childImageSharp {
-          gatsbyImageData(width: 200, placeholder: BLURRED, formats: [AUTO, WEBP])
-        }
-      }
-    }
-  `);
-  const starbucksImage = getImage(data.starbucksCard);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -26,7 +13,6 @@ export default function ExitIntentPopup() {
 
     const shownAt = localStorage.getItem("exitIntentShownAt");
     const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
-
     if (shownAt && Date.now() - parseInt(shownAt, 10) < SEVEN_DAYS) return;
 
     const isMobile = window.innerWidth < 768;
@@ -36,7 +22,6 @@ export default function ExitIntentPopup() {
       localStorage.setItem("exitIntentShownAt", Date.now().toString());
     };
 
-    // Exit intent for desktop
     if (!isMobile) {
       const handleMouseMove = (e) => {
         if (e.clientY < 10) {
@@ -52,22 +37,19 @@ export default function ExitIntentPopup() {
         clearTimeout(delay);
         document.removeEventListener("mousemove", handleMouseMove);
       };
+    } else {
+      const handleScroll = () => {
+        const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+        if (scrollPercent > 50) {
+          showPopup();
+          window.removeEventListener("scroll", handleScroll);
+        }
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
     }
-
-    // Scroll intent for mobile
-    const handleScroll = () => {
-      const scrollPercent = (window.scrollY / document.body.scrollHeight) * 100;
-      if (scrollPercent > 50) {
-        showPopup();
-        window.removeEventListener("scroll", handleScroll);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
@@ -80,22 +62,36 @@ export default function ExitIntentPopup() {
 
   const handleClose = () => setVisible(false);
 
-  const handleClick = () => {
+  const handleBookCall = () => {
     if (typeof window !== "undefined") {
-      // GTM tracking
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "exit_intent_call_click",
-        label: "Exit Intent Popup",
-      });
+      window.dataLayer.push({ event: "exit_intent_cta_click", label: "Exit Intent Popup" });
 
-      // Call scheduling logic
       if (window.openCalendlyPopup) {
         window.openCalendlyPopup();
       } else {
         window.location.href = "/15min/";
       }
       setVisible(false);
+    }
+  };
+
+  const handleContinuePurchase = () => {
+    if (typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "exit_intent_continue_purchase" });
+      setVisible(false);
+
+      // Smooth-scroll and focus back to purchase section
+      setTimeout(() => {
+        const target = document.querySelector("#purchase-start");
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          // make sure focusable, then focus (a11y)
+          if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+          target.focus({ preventScroll: true });
+        }
+      }, 50);
     }
   };
 
@@ -106,10 +102,13 @@ export default function ExitIntentPopup() {
       <div
         ref={modalRef}
         className="relative w-full max-w-md bg-secondary rounded-2xl shadow-2xl pt-0 pb-0 font-poppins animate-fade-in overflow-hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="exit-intent-title"
       >
         {/* Top bar */}
         <div className="bg-primary text-white text-md uppercase tracking-wider font-pirulen py-3 text-center">
-          Free 15-minute call!
+          Not ready to decide yet?
         </div>
 
         {/* Close X */}
@@ -125,30 +124,37 @@ export default function ExitIntentPopup() {
 
         {/* Main content */}
         <div className="bg-white mx-0 mt-0 mb-2 p-6 rounded-xl text-center">
-          {starbucksImage && (
-            <GatsbyImage
-              image={starbucksImage}
-              alt="Free $5 Starbucks Gift Card"
-              className="mx-auto mb-6 w-40 rounded-lg shadow-xl -rotate-2 opacity-80"
-            />
-          )}
-          <h2 className="text-2xl font-medium text-accent mb-3 font-poppins">
-            Get a $5 Starbucks Gift Card
+          <h2 id="exit-intent-title" className="text-2xl font-medium text-accent mb-3 font-poppins">
+            Make your next move with confidence.
           </h2>
-          <p className="text-md text-primary mb-3">
-            Complete a free 15-minute call with one of our Zen Guides and we'll send you a $5 Starbucks card — on us!
+          <p className="text-md text-primary mb-4">
+            A quick chat with a Zen Guide could save you thousands.
           </p>
+
           <button
-            onClick={handleClick}
+            onClick={handleBookCall}
             className="bg-accent text-white px-6 py-2 rounded-full shadow hover:bg-accent-dark transition font-medium"
           >
-            Book My Free Call
+            Schedule My Free Call
           </button>
+
+          {/* NEW: Continue with purchase link */}
+          <p className="mt-4 text-sm text-primary">
+            To continue with your purchase,&nbsp;
+            <button
+              onClick={handleContinuePurchase}
+              className="underline text-accent hover:text-accent-dark focus:outline-none focus:ring-2 focus:ring-accent rounded-sm"
+              aria-label="Continue with the purchase"
+            >
+              click here
+            </button>
+            .
+          </p>
         </div>
 
         {/* Bottom footer */}
         <div className="text-primary text-xs text-center pt-1 pb-3 px-4">
-          *Gift card delivered after completed call. No stress. No obligations. Just friendly expert advice.
+          No spam. No pushy sales talk. Just expert guidance.
         </div>
       </div>
     </div>
