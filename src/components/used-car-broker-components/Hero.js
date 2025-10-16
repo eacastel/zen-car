@@ -60,7 +60,7 @@ export function Hero() {
           {/* Call to Action Button */}
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <CalendlyButton size="lg" color="accent">
-              Find My Perfect Car
+              Find My Car
             </CalendlyButton>
           </div>
         {/* BBB Seal for mobile - directly under button */}
