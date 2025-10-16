@@ -8,7 +8,7 @@ export default function FloatingTextButton() {
 
   const handleSms = () => {
     // New CallRail mobile number (E.164)
-    const raw = "+15094040189";
+    const raw = "+9714656205";
     const number = raw.replace(/[^\d+]/g, "");
     const body = encodeURIComponent("Hi Zen Car Buying — I'm ready to chat about a car.");
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
