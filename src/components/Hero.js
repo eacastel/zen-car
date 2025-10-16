@@ -54,7 +54,7 @@ export function Hero() {
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <CalendlyButton size="lg" color="accent">
-              Schedule a Free Consultation
+              Find My Perfect Car
             </CalendlyButton>
           </div>
 
