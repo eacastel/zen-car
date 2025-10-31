@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import CalendlyButton from "../components/CalendlyButton";
+import ServiceButton from "../components/ServiceButton";
 
 export function Hero() {
   const data = useStaticQuery(graphql`
@@ -53,9 +53,9 @@ export function Hero() {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <CalendlyButton size="lg" color="accent">
+            <ServiceButton size="lg" color="accent">
               Find My Car
-            </CalendlyButton>
+            </ServiceButton>
           </div>
 
           {/* BBB Seal for mobile - directly under button */}

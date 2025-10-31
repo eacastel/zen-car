@@ -114,7 +114,7 @@ export default function ExitIntentPopup() {
         {/* Close X */}
         <button
           onClick={handleClose}
-          className="absolute top-2 right-2 bg-white/90 text-primary rounded-full w-8 h-8 flex items-center justify-center shadow-lg border border-primary hover:bg-white hover:scale-105 active:scale-95 transition-all duration-150"
+          className="absolute top-2 right-2 bg-white/90 text-primary rounded-full w-6 h-6 flex items-center justify-center shadow-lg border border-primary hover:bg-white hover:scale-105 active:scale-95 transition-all duration-150"
           aria-label="Close popup"
         >
           <svg
@@ -147,7 +147,7 @@ export default function ExitIntentPopup() {
 
           {/* NEW: Continue with purchase link */}
           <p className="mt-4 text-sm text-primary">
-            To continue with your purchase,&nbsp;
+            To close this window,&nbsp;
             <button
               onClick={handleContinuePurchase}
               className="underline text-accent hover:text-accent-dark focus:outline-none focus:ring-2 focus:ring-accent rounded-sm"
@@ -160,7 +160,7 @@ export default function ExitIntentPopup() {
         </div>
 
         {/* Bottom footer */}
-        <div className="text-primary text-xs text-center pt-1 pb-3 px-4">
+        <div className="text-primary text-s text-center pt-1 pb-3 px-4">
           No spam. No pushy sales talk. Just expert guidance.
         </div>
       </div>

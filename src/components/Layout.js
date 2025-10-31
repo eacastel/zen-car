@@ -5,6 +5,7 @@ import { useLocation } from "@reach/router"
 import Header from "./Header";
 import Footer from "./Footer";
 import FloatingTextButton from "./FloatingTextButton"; 
+import ExitIntentPopup from "../components/ExitIntentPopup"
 
 
 export default function Layout({ children }) {
@@ -21,7 +22,7 @@ export default function Layout({ children }) {
       <main className="flex-grow">{children}</main>
       <Footer />
       <FloatingTextButton /> 
-
+      <ExitIntentPopup />
       </div>
     </>
   );
