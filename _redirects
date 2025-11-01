@@ -21,5 +21,5 @@ http://*  https://:splat  301!
 /pricing/     /purchase/     301!
 
 # QR Codes
-/qr/review   https://g.page/r/Cb8gf5h0tb1MEBM/review   301
-/qr/review/  https://g.page/r/Cb8gf5h0tb1MEBM/review  301
+/qr/review   https://g.page/r/Cb8gf5h0tb1MEBM/review   301!
+/qr/review/  https://g.page/r/Cb8gf5h0tb1MEBM/review  301!
