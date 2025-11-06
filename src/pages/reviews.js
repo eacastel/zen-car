@@ -4,10 +4,22 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Layout from "../components/Layout";
 import Seo from "../components/Seo";
 import testimonialsData from "../data/testimonials.json";
-import CalendlyButton from "../components/CalendlyButton";
+import Button from "../components/Button";
 
+// Parse rating from number or "⭐⭐⭐⭐⭐"
+const toNumberRating = (r) => {
+  if (r == null) return null;
+  if (typeof r === "number") return r;
+  if (typeof r === "string") {
+    const stars = (r.match(/⭐/g) || []).length;
+    const num = Number(r);
+    if (!Number.isNaN(num) && num > 0) return num;
+    return stars || null;
+  }
+  return null;
+};
 
-// Small a11y-friendly star rating
+// Small a11y-friendly star rating (yellow stars)
 function StarRating({ value = 5, outOf = 5 }) {
   const stars = Array.from({ length: outOf }, (_, i) => i < value);
   return (
@@ -15,7 +27,7 @@ function StarRating({ value = 5, outOf = 5 }) {
       {stars.map((filled, i) => (
         <svg
           key={i}
-          className={`h-5 w-5 ${filled ? "text-accent" : "text-gray-300"}`}
+          className={`h-5 w-5 ${filled ? "text-yellow-400" : "text-gray-300"}`}
           fill="currentColor"
           viewBox="0 0 20 20"
           aria-hidden="true"
@@ -28,7 +40,7 @@ function StarRating({ value = 5, outOf = 5 }) {
 }
 
 export default function ReviewsPage({ data }) {
-  // Map testimonial.image substrings to GraphQL file images (same approach as your slider)
+  // Map testimonial.image substrings to GraphQL file images
   const imageMap = useMemo(() => {
     const map = new Map();
     data.allFile.edges.forEach(({ node }) => {
@@ -37,12 +49,12 @@ export default function ReviewsPage({ data }) {
     return map;
   }, [data]);
 
-  // Compute aggregate rating if ratings exist
-  const ratings = testimonialsData
-    .map(t => Number(t.rating))
-    .filter(n => !Number.isNaN(n) && n > 0);
-  const aggregateRating = ratings.length
-    ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1)
+  // Compute aggregate rating from mixed formats
+  const ratingNums = testimonialsData
+    .map((t) => toNumberRating(t.rating))
+    .filter((n) => typeof n === "number" && n > 0);
+  const aggregateRating = ratingNums.length
+    ? (ratingNums.reduce((a, b) => a + b, 0) / ratingNums.length).toFixed(1)
     : null;
 
   const orgId = "https://zencarbuying.com/#organization";
@@ -52,9 +64,9 @@ export default function ReviewsPage({ data }) {
     "@type": "Review",
     "author": { "@type": "Person", "name": t.name },
     "reviewBody": t.quote,
-    ...(t.rating ? {
-      "reviewRating": { "@type": "Rating", "ratingValue": String(t.rating), "bestRating": "5" }
-    } : {}),
+    ...(toNumberRating(t.rating)
+      ? { "reviewRating": { "@type": "Rating", "ratingValue": String(toNumberRating(t.rating)), "bestRating": "5" } }
+      : {}),
     "itemReviewed": { "@type": "LocalBusiness", "@id": orgId },
     "position": idx + 1
   }));
@@ -73,7 +85,7 @@ export default function ReviewsPage({ data }) {
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": String(aggregateRating),
-        "reviewCount": String(ratings.length),
+        "reviewCount": String(ratingNums.length),
         "bestRating": "5"
       }
     };
@@ -91,43 +103,36 @@ export default function ReviewsPage({ data }) {
           </p>
           {aggregateRating && (
             <div className="mt-4 flex items-center gap-3">
-              <StarRating value={Math.round(aggregateRating)} />
+              <StarRating value={Math.round(Number(aggregateRating))} />
               <span className="text-primary font-semibold">
-                {aggregateRating}/5 · {ratings.length} reviews
+                {aggregateRating}/5 · {ratingNums.length} reviews
               </span>
             </div>
           )}
         </header>
 
-
-        {/* CTA Bar */}
-        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-          {typeof window !== "undefined" ? (
-            <CalendlyButton size="lg" color="accent" to="/15min">
-              Schedule a Free Consultation
-            </CalendlyButton>
-          ) : (
-            <a
-              href="/15min"
-              className="bg-accent hover:bg-accent-dark text-white px-6 py-3 rounded-2xl font-semibold inline-block text-center"
-            >
-              Schedule a Free Consultation
-            </a>
-          )}
-          <span className="text-sm text-primary/70">No pressure. We’ll give you options and real pricing.</span>
+        {/* TOP CTA (services-style) */}
+        <div className="mt-8 text-center">
+          <p className="text-lg text-gray-700 mb-4">
+            Ready to skip the stress and find your perfect car?
+          </p>
+          <Button to="/purchase/" size="lg" color="accent">
+            Start Your Zen Journey
+          </Button>
         </div>
 
         {/* Reviews grid */}
         <section className="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {testimonialsData.map((t, i) => {
-            // find image by substring match (same pattern you used)
             const key = t.image ? t.image.replace(/\.(jpg|jpeg|png|webp|gif)$/i, "") : null;
             const image = key ? imageMap.get(key) : null;
+            const numericRating = toNumberRating(t.rating);
+
             return (
               <article key={i} className="bg-white border border-secondary rounded-lg shadow-md p-6 h-full flex flex-col">
                 {image && (
                   <div className="mb-4 rounded-md overflow-hidden">
-                    <GatsbyImage image={image} alt={`Photo of ${t.name}`} />
+                    <GatsbyImage image={image} alt={`Photo for ${t.name}`} />
                   </div>
                 )}
 
@@ -141,14 +146,13 @@ export default function ReviewsPage({ data }) {
 
                 <div className="mt-4 flex items-center justify-between">
                   <div className="text-primary font-semibold">{t.name}</div>
-                  {t.rating ? <StarRating value={Number(t.rating)} /> : null}
+                  {numericRating ? <StarRating value={numericRating} /> : null}
                 </div>
 
-                {/* Optional source/date line */}
-                {(t.source || t.date) && (
+                {(t.location || t.date) && (
                   <div className="mt-2 text-xs text-primary/60">
-                    {t.source ? <span>Source: {t.source}</span> : null}
-                    {t.source && t.date ? " · " : null}
+                    {t.location ? <span>{t.location}</span> : null}
+                    {t.location && t.date ? " · " : null}
                     {t.date ? <span>{t.date}</span> : null}
                   </div>
                 )}
@@ -157,21 +161,14 @@ export default function ReviewsPage({ data }) {
           })}
         </section>
 
-        {/* Bottom CTA */}
+        {/* BOTTOM CTA (services-style) */}
         <div className="mt-12 text-center">
-          {typeof window !== "undefined" ? (
-            <CalendlyButton size="lg" color="accent" to="/15min">
-              Schedule a Free Consultation
-            </CalendlyButton>
-          ) : (
-            <a
-              href="/15min"
-              className="bg-accent hover:bg-accent-dark text-white px-6 py-3 rounded-2xl font-semibold inline-block text-center"
-            >
-              Schedule a Free Consultation
-            </a>
-          )}
-          <p className="mt-2 text-sm text-primary/70">We’ll pull inventory and pricing for your short-list.</p>
+          <p className="text-lg text-gray-700 mb-4">
+            Ready to skip the stress and find your perfect car?
+          </p>
+          <Button to="/purchase/" size="lg" color="accent">
+            Start Your Zen Journey
+          </Button>
         </div>
 
         {/* Review schema */}
@@ -208,14 +205,11 @@ export const Head = ({ location }) => {
   const description =
     "Real reviews from drivers who used Zen Car Buying to find reliable, fairly-priced cars without dealership hassle.";
 
-  // Optional: compute real average rating
-  const avg =
-    testimonialsData.length > 0
-      ? (
-        testimonialsData.reduce((sum, t) => sum + (t.rating ?? 5), 0) /
-        testimonialsData.length
-      ).toFixed(1)
-      : "5.0";
+  // Optional: compute real average rating (from mixed formats)
+  const ratings = testimonialsData.map((t) => toNumberRating(t.rating)).filter(Boolean);
+  const avg = ratings.length
+    ? (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1)
+    : "5.0";
 
   const itemList = testimonialsData.map((t, i) => ({
     "@type": "ListItem",
@@ -225,12 +219,16 @@ export const Head = ({ location }) => {
       "@id": `${siteUrl}/reviews/#review-${i + 1}`,
       reviewBody: t.quote,
       author: { "@type": "Person", name: t.name },
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: String(t.rating ?? 5),
-        bestRating: "5",
-        worstRating: "1",
-      },
+      ...(toNumberRating(t.rating)
+        ? {
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: String(toNumberRating(t.rating)),
+              bestRating: "5",
+              worstRating: "1",
+            },
+          }
+        : {}),
       itemReviewed: {
         "@type": "Organization",
         name: "Zen Car Buying",
@@ -252,7 +250,6 @@ export const Head = ({ location }) => {
       itemListElement: itemList,
       numberOfItems: testimonialsData.length,
     },
-    // Optional page-level aggregate (separate from LocalBusiness)
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: avg,

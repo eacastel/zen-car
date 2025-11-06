@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import Slider from 'react-slick'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { useStaticQuery, graphql } from 'gatsby'
@@ -9,7 +10,6 @@ import { FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa'
 
 // Helpers to improve SEO content
 const splitNameAndCar = (full) => {
-  // Expected "Name -- Car" OR "Name - Car"
   if (!full) return { name: full || '', car: '' }
   const parts = full.split(/--|—|-\s/).map(s => s.trim()).filter(Boolean)
   if (parts.length >= 2) return { name: parts[0], car: parts.slice(1).join(' - ') }
@@ -24,16 +24,10 @@ const buildAlt = (nameCar, location) => {
   return `Customer review`
 }
 
-// Custom arrow components
+// Custom arrows
 const PrevArrow = ({ onClick }) => (
   <button
-    className="
-      absolute left-2
-      top-48 md:top-1/2
-      transform translate-y-0 md:-translate-y-1/2
-      bg-white p-3 rounded-full shadow-lg hover:bg-gray-200 z-10
-      focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
-    "
+    className="absolute left-2 top-48 md:top-1/2 transform translate-y-0 md:-translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-200 z-10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
     onClick={onClick}
     aria-label="Previous testimonials"
   >
@@ -43,13 +37,7 @@ const PrevArrow = ({ onClick }) => (
 
 const NextArrow = ({ onClick }) => (
   <button
-    className="
-      absolute right-2
-      top-48 md:top-1/2
-      transform translate-y-0 md:-translate-y-1/2
-      bg-white p-3 rounded-full shadow-lg hover:bg-gray-200 z-10
-      focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
-    "
+    className="absolute right-2 top-48 md:top-1/2 transform translate-y-0 md:-translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-gray-200 z-10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
     onClick={onClick}
     aria-label="Next testimonials"
   >
@@ -99,9 +87,18 @@ export default function Testimonials() {
   return (
     <section className="py-20 bg-secondary text-center" aria-labelledby="testimonials-heading">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 id="testimonials-heading" className="text-4xl font-medium text-accent mb-12">
-          What Our <span className="text-accent">Customers</span> Say
-        </h2>
+        <div className="mb-6 flex items-baseline justify-between">
+          <h2 id="testimonials-heading" className="text-4xl font-medium text-accent">
+            What Our <span className="text-accent">Customers</span> Say
+          </h2>
+          <Link
+            to="/reviews/"
+            className="text-sm text-primary underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded"
+            aria-label="See all reviews"
+          >
+            See all reviews
+          </Link>
+        </div>
 
         <div className="relative w-full max-w-6xl mx-auto">
           <Slider {...settings}>
@@ -114,7 +111,6 @@ export default function Testimonials() {
               const alt = buildAlt(testimonial.name, testimonial.location)
               const { name, car } = splitNameAndCar(testimonial.name)
 
-              // Basic numeric rating for schema (fallback to 5)
               const ratingValue = testimonial.rating && testimonial.rating.length
                 ? (testimonial.rating.match(/⭐/g)?.length || 5)
                 : 5
@@ -129,67 +125,66 @@ export default function Testimonials() {
                   "bestRating": "5",
                   "worstRating": "1"
                 },
-                "author": {
-                  "@type": "Person",
-                  "name": name || "Verified Customer"
-                },
+                "author": { "@type": "Person", "name": name || "Verified Customer" },
                 "itemReviewed": {
                   "@type": "Product",
                   "name": car || "Vehicle purchase/lease concierge service",
                   "brand": car ? undefined : "Zen Car Buying"
                 },
-                "publisher": {
-                  "@type": "Organization",
-                  "name": "Zen Car Buying"
-                },
-                // Helps local SEO without over-stuffing: include location when present
+                "publisher": { "@type": "Organization", "name": "Zen Car Buying" },
                 ...(testimonial.location ? { "location": testimonial.location } : {})
               }
 
               return (
                 <div key={index} className="px-2 md:px-4">
-                  <div className="flex flex-col items-center bg-white p-4 md:p-6 rounded-lg shadow-lg relative">
-                    {testimonial.note && (
-                      <div className="px-2 mb-2 text-accent font-pirulen tracking-widest text-md font-bold uppercase">
-                        {testimonial.note}
+                  <Link
+                    to="/reviews/"
+                    className="group block focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-lg"
+                    aria-label={`Read more reviews - ${name}${car ? ` — ${car}` : ""}`}
+                  >
+                    <div className="flex flex-col items-center bg-white p-4 md:p-6 rounded-lg shadow-lg relative hover:shadow-xl transition">
+                      {testimonial.note && (
+                        <div className="px-2 mb-2 text-accent font-pirulen tracking-widest text-md font-bold uppercase">
+                          {testimonial.note}
+                        </div>
+                      )}
+
+                      {image ? (
+                        <div className="w-full overflow-hidden rounded-md mb-4">
+                          <GatsbyImage
+                            image={image}
+                            alt={alt}
+                            className="rounded-md mb-4 w-full max-w-[600px] h-auto object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-24 h-24 bg-gray-300 rounded-full mb-4" aria-hidden="true" />
+                      )}
+
+                      <p className="text-base italic text-gray-700 px-2">"{testimonial.quote}"</p>
+
+                      {/* Yellow stars */}
+                      <div className="flex justify-center mt-3" aria-label={`Rated ${ratingValue} out of 5 stars`}>
+                        {[...Array(5)].map((_, i) => (
+                          <FaStar key={i} className={`text-yellow-400 text-lg ${i < 5 ? '' : 'opacity-50'}`} />
+                        ))}
                       </div>
-                    )}
 
-                    {image ? (
-                      <div className="w-full overflow-hidden rounded-md mb-4">
-                        <GatsbyImage
-                          image={image}
-                          alt={alt}
-                          className="rounded-md mb-4 w-full max-w-[600px] h-auto object-cover"
-                        />
+                      <div className="mt-4 text-lg font-semibold text-primary">
+                        {name}{car ? ` — ${car}` : ''}
                       </div>
-                    ) : (
-                      <div className="w-24 h-24 bg-gray-300 rounded-full mb-4" aria-hidden="true" />
-                    )}
 
-                    <p className="text-base italic text-gray-700 px-2">"{testimonial.quote}"</p>
+                      {testimonial.location && (
+                        <div className="text-sm text-gray-500 mt-1" aria-label="Reviewer location">
+                          {testimonial.location}
+                        </div>
+                      )}
 
-                    <div className="flex justify-center mt-3" aria-label={`Rated ${ratingValue} out of 5 stars`}>
-                      {[...Array(5)].map((_, i) => (
-                        <FaStar key={i} className={`text-accent text-lg ${i < 5 ? '' : 'opacity-50'}`} />
-                      ))}
+                      <script type="application/ld+json">
+                        {JSON.stringify(reviewSchema)}
+                      </script>
                     </div>
-
-                    <div className="mt-4 text-lg font-semibold text-primary">
-                      {name}{car ? ` — ${car}` : ''}
-                    </div>
-
-                    {testimonial.location && (
-                      <div className="text-sm text-gray-500 mt-1" aria-label="Reviewer location">
-                        {testimonial.location}
-                      </div>
-                    )}
-
-                    {/* JSON-LD per item to strengthen SEO */}
-                    <script type="application/ld+json">
-                      {JSON.stringify(reviewSchema)}
-                    </script>
-                  </div>
+                  </Link>
                 </div>
               )
             })}
