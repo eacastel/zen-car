@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "gatsby";
-import { openCalendlyPopup } from "../../utils/openCalendly";
 
 export default function Footer() {
   return (
@@ -28,18 +27,13 @@ export default function Footer() {
           <div>
             <h4 className="font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-            <li>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault(); // Prevent navigation
-                    openCalendlyPopup();
-                  }}
+              <li>
+                <Link
+                  to="/purchase/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
-                  aria-label="Schedule a call with Zen Car Buying"
                 >
-                  Get Started
-                </button>
+                  Packages
+                </Link>
               </li>
               <li>
                 <Link

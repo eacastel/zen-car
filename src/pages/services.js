@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import Seo from "../components/Seo";
 import { FaCheckCircle } from "react-icons/fa";
 import Button from "../components/Button";
+import CallToAction from '../components/CallToAction'
 
 const Testimonials = lazy(() => import('../components/Testimonials'))
 
@@ -14,66 +15,80 @@ const Services = () => {
 
   return (
     <Layout>
+      {/* SECTION 1: hero + packages on bg-secondary */}
+      <section className="bg-secondary">
+        <div className="container mx-auto px-4 md:px-6 py-16 max-w-4xl text-center">
+          <h1 id="page-title" className="text-4xl font-bold text-primary mb-8">
+            Stress-Free Car Buying, Done For You
+          </h1>
+
+          <p className="text-xl md:text-2xl text-primary font-medium mb-8">
+            We identify your needs, find the best matches, negotiate the best deal, and get the car to your door — saving you time, money, and stress.
+          </p>
+
+          {/* Services Offered */}
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-semibold text-center text-accent mb-2">
+              Prices start at $450
+            </h2>
+            <Button to="/purchase/" size="base" color="accent">
+              View Packages &amp; Get Started
+            </Button>
+          </div>
+
+          <p className="text-xl text-gray-700 mb-8">
+            Zen Car Buying offers two flexible service options designed to save you time, money, and hassle—whether you need full support or just expert guidance.
+          </p>
+
+          {/* Clickable Packages */}
+          <div className="grid gap-6 md:grid-cols-2 text-left text-base mb-4 md:mb-2 lg:mb-0">
+            <Link
+              to="/purchase/"
+              aria-label="Choose Starter Package on purchase page"
+              className="group block bg-white border border-gray-200 p-6 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 hover:shadow-md transition"
+            >
+              <article>
+                <h3 className="text-xl font-bold text-primary mb-2 group-hover:underline">
+                  Starter Package
+                </h3>
+                <ul className="list-disc pl-5 text-gray-700">
+                  <li>1-on-1 onboarding with your Zen Guide</li>
+                  <li>Personalized car recommendations (2–4 picks)</li>
+                  <li>Nationwide inventory sourcing</li>
+                  <li>Verified vehicle listings</li>
+                </ul>
+                <p className="mt-4 text-sm text-gray-500">
+                  Purchase assistance available.
+                </p>
+              </article>
+            </Link>
+
+            <Link
+              to="/purchase/"
+              aria-label="Choose Full Zen Experience on purchase page"
+              className="group block bg-gray-50 border border-gray-200 p-6 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 hover:shadow-md transition"
+            >
+              <article>
+                <h3 className="text-xl font-bold text-primary mb-2 group-hover:underline">
+                  Full Zen Experience
+                </h3>
+                <ul className="list-disc pl-5 text-gray-700">
+                  <li>Everything in the Starter Package</li>
+                  <li>Full purchase negotiation &amp; support</li>
+                  <li>Paperwork handling &amp; dealer coordination</li>
+                  <li>Final delivery assistance</li>
+                </ul>
+                <p className="mt-4 text-sm text-gray-500">
+                  Best for those ready to buy and delegate the hard parts.
+                </p>
+              </article>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 2: steps + CTA on default (white) background */}
       <section className="container mx-auto px-4 md:px-6 py-16 max-w-4xl text-center">
-        <h1 id="page-title" className="text-4xl font-bold text-primary mb-8">
-          Stress-Free Car Buying, Done For You
-        </h1>
-
-        <p className="text-xl md:text-2xl text-primary font-medium mb-8">
-          We identify your needs, find the best matches, negotiate the best deal, and get the car to your door — saving you time, money, and stress.
-        </p>
-
-        {/* Services Offered */}
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-semibold text-center text-accent mb-2">
-            Prices start at $450
-          </h2>
-          <Button to="/purchase/" size="base" color="accent">
-            View Packages & Get Started
-          </Button>
-        </div>
-
-        <p className="text-xl text-gray-700 mb-8">
-          Zen Car Buying offers two flexible service options designed to save you time, money, and hassle—whether you need full support or just expert guidance.
-        </p>
-
-        {/* Clickable Packages */}
-        <div className="grid gap-6 md:grid-cols-2 text-left text-base mb-12">
-          <Link
-            to="/purchase/"
-            aria-label="Choose Starter Package on purchase page"
-            className="group block bg-white border border-gray-200 p-6 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 hover:shadow-md transition"
-          >
-            <article>
-              <h3 className="text-xl font-bold text-primary mb-2 group-hover:underline">Starter Package</h3>
-              <ul className="list-disc pl-5 text-gray-700">
-                <li>1-on-1 onboarding with your Zen Guide</li>
-                <li>Personalized car recommendations (2–4 picks)</li>
-                <li>Nationwide inventory sourcing</li>
-                <li>Verified vehicle listings</li>
-              </ul>
-              <p className="mt-4 text-sm text-gray-500">Purchase assistance available.</p>
-            </article>
-          </Link>
-
-          <Link
-            to="/purchase/"
-            aria-label="Choose Full Zen Experience on purchase page"
-            className="group block bg-gray-50 border border-gray-200 p-6 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 hover:shadow-md transition"
-          >
-            <article>
-              <h3 className="text-xl font-bold text-primary mb-2 group-hover:underline">Full Zen Experience</h3>
-              <ul className="list-disc pl-5 text-gray-700">
-                <li>Everything in the Starter Package</li>
-                <li>Full purchase negotiation & support</li>
-                <li>Paperwork handling & dealer coordination</li>
-                <li>Final delivery assistance</li>
-              </ul>
-              <p className="mt-4 text-sm text-gray-500">Best for those ready to buy and delegate the hard parts.</p>
-            </article>
-          </Link>
-        </div>
-
         {/* What's Included (Clickable) */}
         <h2 className="text-2xl font-semibold text-center text-accent mb-6">
           What’s Included in Every Step
@@ -110,7 +125,9 @@ const Services = () => {
                     {service.title}
                   </h4>
                 </div>
-                <p className="text-gray-700 text-base md:text-center">{service.desc}</p>
+                <p className="text-gray-700 text-base md:text-center">
+                  {service.desc}
+                </p>
               </article>
             </Link>
           ))}
@@ -121,12 +138,13 @@ const Services = () => {
           <p className="text-lg text-gray-700 mb-4">
             Ready to skip the stress and find your perfect car?
           </p>
-          <Button to="/purchase/" size="lg" color="accent">
-            Start Your Zen Journey
+          <Button to="/15min/" size="lg" color="accent">
+            Book Your Free 15-Minute Call
           </Button>
         </div>
       </section>
 
+      {/* Testimonials */}
       <div ref={testimonialsRef}>
         {showTestimonials && (
           <Suspense fallback={<div className="py-20 text-center text-primary">Loading testimonials…</div>}>
@@ -134,6 +152,7 @@ const Services = () => {
           </Suspense>
         )}
       </div>
+      <CallToAction />
     </Layout>
   );
 };

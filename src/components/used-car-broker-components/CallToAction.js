@@ -1,5 +1,5 @@
 import React from 'react';
-import CalendlyButton from "../../components/CalendlyButton";
+import ServiceButton from "../../components/ServiceButton";
 
 export default function CallToAction() {
   return (
@@ -21,9 +21,9 @@ export default function CallToAction() {
         </p>
 
         <div className="inline-block">
-          <CalendlyButton size="lg" color="primary">
-            Schedule Your Free Consultation
-          </CalendlyButton>
+          <ServiceButton  to="/15min/" size="lg" color="primary">
+            Book Your Free 15-Minute Call
+          </ServiceButton>
         </div>
       </div>
     </section>

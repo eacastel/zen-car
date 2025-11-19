@@ -33,7 +33,7 @@ export default function Footer() {
                   to="/purchase/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
-                  Start Now
+                  Packages
                 </Link>
               </li>
               <li>

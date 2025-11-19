@@ -31,3 +31,7 @@ from = "/qr/review/"
 to = "https://g.page/r/Cb8gf5h0tb1MEBM/review"
 status = 301
 force = true
+
+[dev]
+  port = 8889       
+  targetPort = 8000 

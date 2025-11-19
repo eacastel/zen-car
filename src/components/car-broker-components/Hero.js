@@ -49,10 +49,24 @@ export function Hero() {
 
           {/* Buttons - Styled using the existing Button component */}
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <ServiceButton size="lg" color="accent">
-              Find My Car
+            <ServiceButton
+              size="lg"
+              color="accent"
+              to="/15min/"
+            >
+              Book Free 15-Minute Call
+            </ServiceButton>
+
+            <ServiceButton
+              size="lg"
+              color="secondary"
+              to="/purchase/"
+            >
+              View Packages
             </ServiceButton>
           </div>
+
+
           {/* BBB Seal for mobile - directly under button */}
           <div className="sm:hidden flex justify-center mt-8">
             <a

@@ -164,7 +164,7 @@ export default function Header() {
 
           <li className="ml-2">
             <ButtonHeader size="lg" color="accent" > 
-              Start Now
+              Book Consultation
             </ButtonHeader>
           </li>
         </ul>
@@ -178,7 +178,7 @@ export default function Header() {
           <ul className="flex flex-col items-center py-4 space-y-4">
             <li className="mt-4 w-full text-center">
               <ButtonHeader size="lg" color="accent">
-                Start Now
+                Book Consultation
               </ButtonHeader>
             </li>
 

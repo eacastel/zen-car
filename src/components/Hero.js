@@ -51,10 +51,22 @@ export function Hero() {
             Our Zen Guides find your perfect lightly used car — at up to 30–50% off new car prices.
           </h2>
 
-          {/* Buttons */}
+         {/* Buttons - Styled using the existing Button component */}
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <ServiceButton size="lg" color="accent">
-              Find My Car
+            <ServiceButton
+              size="lg"
+              color="accent"
+              to="/15min/"
+            >
+              Book Free 15-Minute Call
+            </ServiceButton>
+
+            <ServiceButton
+              size="lg"
+              color="secondary"
+              to="/purchase/"
+            >
+              View Packages
             </ServiceButton>
           </div>
 
