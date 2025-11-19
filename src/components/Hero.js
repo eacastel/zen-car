@@ -1,12 +1,12 @@
-import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import React from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import ServiceButton from "../components/ServiceButton";
 
 export function Hero() {
   const data = useStaticQuery(graphql`
-    query {
-      heroBg: file(relativePath: { eq: "hero-bg.png" }) {
+    query HomeHero2025 {
+      pattern: file(relativePath: { eq: "hero-pattern-car-outline.png" }) {
         childImageSharp {
           gatsbyImageData(
             layout: FULL_WIDTH
@@ -16,82 +16,109 @@ export function Hero() {
           )
         }
       }
+      person: file(relativePath: { eq: "hero-consultation.png" }) {
+        childImageSharp {
+          gatsbyImageData(
+            layout: CONSTRAINED
+            width: 420
+            placeholder: BLURRED
+            quality: 90
+          )
+        }
+      }
+      driveway: file(relativePath: { eq: "hero-driveway-bmw.png" }) {
+        childImageSharp {
+          gatsbyImageData(
+            layout: CONSTRAINED
+            width: 420
+            placeholder: BLURRED
+            quality: 90
+          )
+        }
+      }
     }
   `);
 
-  const heroImage = getImage(data.heroBg);
+  const patternImg = getImage(data.pattern);
+  const personImg = getImage(data.person);
+  const drivewayImg = getImage(data.driveway);
 
   return (
-    <section className="relative w-full h-[600px]">
-      {/* Background Image */}
-      <GatsbyImage
-        image={heroImage}
-        alt="Luxury used car parked in a cityscape, ideal for affordable and premium car buying with Zen Car Buying"
-        className="w-full h-full object-cover"
-      />
+    <section
+      className="
+        relative
+        w-full
+        bg-[#617b7f]    /* hero teal/gray */
+        text-white
+        pt-[96px]       /* leave room for fixed header */
+        pb-12
+        overflow-hidden
+        rounded-b-[40px]
+        shadow-[0_18px_40px_rgba(0,0,0,0.25)]
+      "
+    >
+      {/* Pattern / car-outline background */}
+      {patternImg && (
+        <GatsbyImage
+          image={patternImg}
+          alt=""
+          aria-hidden="true"
+  className="absolute bottom-[-12px] right-[-13px] opacity-20 w-[550px] pointer-events-none"
+          imgStyle={{ objectFit: "cover" }}
+        />
+      )}
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-[#1A1A1A]/80 md:bg-black/50 flex items-center">
-        <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px] text-center text-white">
-          <p className="text-lg uppercase tracking-wider mb-4 font-pirulen">
-            THE MODERN APPROACH TO CAR BUYING
-          </p>
+      {/* Content */}
+      <div className="relative z-10 max-w-6xl mx-auto px-4 lg:px-6">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] items-center py-12 lg:py-16">
+          {/* Left column: copy + CTAs */}
+          <div className="text-left">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-4 font-poppins">
+              <span className="block">Car buying made</span>
+              <span className="block">simple and</span>
+              <span className="block">stress-free</span>
+            </h1>
 
-          <h1
-            className="text-4xl md:text-5xl mb-4"
-            style={{
-              fontFamily:
-                '"Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-            }}
-          >
-            Stress-Free, Data-Driven Car Buying Assistance
-          </h1>
+            <p className="text-base sm:text-lg max-w-md mb-8 text-[#f4fbfb]">
+              Skip the dealership hassle, your Zen Guide handles everything —
+              from research and negotiation to getting the car to your door.
+            </p>
 
-          <h2 className="text-xl font-poppins tracking-widest uppercase mb-8">
-            Our Zen Guides find your perfect lightly used car — at up to 30–50% off new car prices.
-          </h2>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <ServiceButton size="lg" color="accent">
+                Explore services
+              </ServiceButton>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <ServiceButton size="lg" color="accent">
-              Find My Car
-            </ServiceButton>
+              <ServiceButton size="lg" color="secondary">
+                Book consultation
+              </ServiceButton>
+            </div>
           </div>
 
-          {/* BBB Seal for mobile - directly under button */}
-          <div className="sm:hidden flex justify-center mt-8">
-            <a
-              href="https://www.bbb.org/us/wa/spokane/profile/car-buying/zen-car-buying-llc-1296-1000183307/#sealclick"
-              target="_blank"
-              rel="noreferrer nofollow"
-              className="block"
-            >
-              <img
-                src="https://seal-alaskaoregonwesternwashington.bbb.org/seals/blue-seal-120-61-bbb-1000183307.png"
-                alt="Zen Car Buying LLC BBB Business Review"
-                className="opacity-80 hover:opacity-100 transition-opacity duration-300 w-[100px] h-auto"
-                style={{ border: 0 }}
-              />
-            </a>
+          {/* Right column: stacked images */}
+          <div className="flex justify-center lg:justify-end gap-6">
+            <div className="hidden sm:block self-center rounded-[32px] overflow-hidden shadow-xl bg-black/20">
+              {personImg && (
+                <GatsbyImage
+                  image={personImg}
+                  alt="Happy client on a call with a Zen Guide confirming car details"
+                  className="w-[220px] h-[340px] object-cover"
+                  imgStyle={{ objectFit: "cover" }}
+                />
+              )}
+            </div>
+            <div className="rounded-[32px] overflow-hidden shadow-xl bg-black/20">
+              {drivewayImg && (
+                <GatsbyImage
+                  image={drivewayImg}
+                  alt="Premium car delivered to client’s home after using Zen Car Buying"
+                  className="w-[200px] h-[340px] sm:w-[240px] sm:h-[360px] object-cover"
+                  imgStyle={{ objectFit: "cover" }}
+                />
+              )}
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* BBB Seal for desktop - absolute bottom-right */}
-      <div className="hidden sm:flex absolute bottom-4 right-4 md:right-16 z-10 flex-col items-end text-xs text-white">
-        <a
-          href="https://www.bbb.org/us/wa/spokane/profile/car-buying/zen-car-buying-llc-1296-1000183307/#sealclick"
-          target="_blank"
-          rel="noreferrer nofollow"
-          className="block"
-        >
-          <img
-            src="https://seal-alaskaoregonwesternwashington.bbb.org/seals/blue-seal-120-61-bbb-1000183307.png"
-            alt="Zen Car Buying LLC BBB Business Review"
-            className="opacity-80 hover:opacity-100 transition-opacity duration-300 w-[120px] h-auto"
-            style={{ border: 0 }}
-          />
-        </a>
       </div>
     </section>
   );
