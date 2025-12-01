@@ -145,7 +145,7 @@ export const openCalendlyPopup = async () => {
   if (window.__CALENDLY_POPUP_OPEN__) return;
 
   window.Calendly.initPopupWidget({
-    url: "https://calendly.com/zencarbuying/15-minute-consultation-with-a-zen-guide?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=f99f1b&text_color=6b8385&background_color=eaf3f3",
+    url: "https://calendly.com/zencarbuying/consult-internal-v3?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=f99f1b&text_color=6b8385&background_color=eaf3f3",
   });
 
   if (typeof window.fbq === "function") {

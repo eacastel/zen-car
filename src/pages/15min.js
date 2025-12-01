@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 import "../utils/openCalendly"; // keeps calendly.event_scheduled listener (Meta CAPI, GA/Ads, etc.)
 
 const CALENDLY_URL =
-  "https://calendly.com/zencarbuying/15-minute-consultation-with-a-zen-guide" +
+  "https://calendly.com/zencarbuying/consult-internal-v3" +
   "?hide_landing_page_details=1" +
   "&hide_gdpr_banner=1" +
   "&primary_color=f99f1b" +
