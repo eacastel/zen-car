@@ -32,34 +32,34 @@ export default function Header() {
   }, []);
 
 
- // 👉 NEW: keep a live CSS variable with the header’s visible height
- useEffect(() => {
-   const root = document.documentElement;
-   const headerEl = document.querySelector("header");
-   if (!headerEl) return;
+  // 👉 NEW: keep a live CSS variable with the header’s visible height
+  useEffect(() => {
+    const root = document.documentElement;
+    const headerEl = document.querySelector("header");
+    if (!headerEl) return;
 
-   const updateVar = () => {
-     // rect.height reflects visible height even while translateY hides/shows
-     const rect = headerEl.getBoundingClientRect();
-     const visible = Math.max(0, rect.height);
-     const pad = 8; // small breathing room below header
-     root.style.setProperty("--header-offset", `${visible + pad}px`);
-   };
+    const updateVar = () => {
+      // rect.height reflects visible height even while translateY hides/shows
+      const rect = headerEl.getBoundingClientRect();
+      const visible = Math.max(0, rect.height);
+      const pad = 8; // small breathing room below header
+      root.style.setProperty("--header-offset", `${visible + pad}px`);
+    };
 
-   updateVar();
-   const onScroll = () => updateVar();
-   const onResize = () => updateVar();
-   window.addEventListener("scroll", onScroll, { passive: true });
-   window.addEventListener("resize", onResize);
-   // track logo/menu reflows too
-   const ro = "ResizeObserver" in window ? new ResizeObserver(updateVar) : null;
-   if (ro) ro.observe(headerEl);
-   return () => {
-     window.removeEventListener("scroll", onScroll);
-     window.removeEventListener("resize", onResize);
-     if (ro) ro.disconnect();
-   };
- }, []);
+    updateVar();
+    const onScroll = () => updateVar();
+    const onResize = () => updateVar();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+    // track logo/menu reflows too
+    const ro = "ResizeObserver" in window ? new ResizeObserver(updateVar) : null;
+    if (ro) ro.observe(headerEl);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      if (ro) ro.disconnect();
+    };
+  }, []);
 
 
 
@@ -124,17 +124,17 @@ export default function Header() {
         {/* Hamburger – wraps under at <365px, right aligned otherwise */}
         <div className="flex lg:hidden w-full justify-center min-[365px]:w-auto min-[365px]:justify-end mt-2 min-[365px]:mt-0">
 
-            <Hamburger
-              toggled={isOpen}
-              toggle={setOpen}
-              size={28}
-              color="#6B8385"
-              rounded
-              as="button" 
-              label={isOpen ? "Close menu" : "Open menu"} 
-              aria-controls="mobile-menu"
-              aria-expanded={isOpen}
-            />
+          <Hamburger
+            toggled={isOpen}
+            toggle={setOpen}
+            size={28}
+            color="#6B8385"
+            rounded
+            as="button"
+            label={isOpen ? "Close menu" : "Open menu"}
+            aria-controls="mobile-menu"
+            aria-expanded={isOpen}
+          />
 
         </div>
 
@@ -163,7 +163,11 @@ export default function Header() {
           ))}
 
           <li className="ml-2">
-            <ButtonHeader size="lg" color="accent" > 
+            <ButtonHeader
+              to="/vip-consultation/?access=vip"
+              size="lg"
+              color="accent"
+              >
               Book Consultation
             </ButtonHeader>
           </li>
@@ -177,7 +181,11 @@ export default function Header() {
         >
           <ul className="flex flex-col items-center py-4 space-y-4">
             <li className="mt-4 w-full text-center">
-              <ButtonHeader size="lg" color="accent">
+              <ButtonHeader
+                to="/vip-consultation/?access=vip"
+                size="lg"
+                color="accent"
+                >
                 Book Consultation
               </ButtonHeader>
             </li>
