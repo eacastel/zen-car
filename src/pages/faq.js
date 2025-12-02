@@ -4,6 +4,7 @@ import Seo from "../components/Seo"
 import faqData from "../data/faqData.json"
 import { motion, AnimatePresence } from "framer-motion"
 import { openCalendlyPopup } from "../utils/openCalendly"
+import CallToAction from '../components/CallToAction'
 
 const FAQPage = () => {
   const [openIndex, setOpenIndex] = useState(null)
@@ -142,6 +143,7 @@ const FAQPage = () => {
           ))}
         </div>
       </section>
+      <CallToAction />
     </Layout>
   )
 }

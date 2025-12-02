@@ -3,6 +3,7 @@ import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 import CustomizeWizard from "../components/pricing-page/CustomizeWizard"
 import ZenExperienceSection from "../components/pricing-page/ZenExperienceSection"
+import ExitIntentPopup from "../components/ExitIntentPopup"
 
 
 // Cached Stripe client using your publishable key
@@ -89,6 +90,7 @@ const Purchase = () => {
           </Suspense>
         )}
       </div>
+            <ExitIntentPopup />
     </Layout>
   )
 }

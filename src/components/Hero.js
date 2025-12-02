@@ -63,7 +63,7 @@ export function Hero() {
           image={patternImg}
           alt=""
           aria-hidden="true"
-  className="absolute bottom-[-12px] right-[-13px] opacity-20 w-[550px] pointer-events-none"
+          className="absolute bottom-[-12px] right-[-13px] opacity-20 w-[550px] pointer-events-none"
           imgStyle={{ objectFit: "cover" }}
         />
       )}
@@ -85,37 +85,65 @@ export function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <ServiceButton size="lg" color="accent">
+              <ServiceButton
+                to="/vip-consultation/?access=vip"
+                size="lg"
+                color="accent"
+              >
                 Explore services
               </ServiceButton>
 
-              <ServiceButton size="lg" color="secondary">
+
+              <ServiceButton
+                to="/vip-consultation/?access=vip"
+                size="lg"
+                color="secondary"
+              >
                 Book consultation
               </ServiceButton>
             </div>
-          </div>
 
-          {/* Right column: stacked images */}
-          <div className="flex justify-center lg:justify-end gap-6">
-            <div className="hidden sm:block self-center rounded-[32px] overflow-hidden shadow-xl bg-black/20">
-              {personImg && (
-                <GatsbyImage
-                  image={personImg}
-                  alt="Happy client on a call with a Zen Guide confirming car details"
-                  className="w-[220px] h-[340px] object-cover"
-                  imgStyle={{ objectFit: "cover" }}
-                />
-              )}
+            {/* Buttons - Styled using the existing Button component */}
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <ServiceButton
+                size="lg"
+                color="accent"
+                to="/vip-consultation/?access=vip"
+              >
+                Book Free 15-Minute Call
+              </ServiceButton>
+
+              <ServiceButton
+                size="lg"
+                color="secondary"
+                to="/purchase/"
+              >
+                View Packages
+              </ServiceButton>
             </div>
-            <div className="rounded-[32px] overflow-hidden shadow-xl bg-black/20">
-              {drivewayImg && (
-                <GatsbyImage
-                  image={drivewayImg}
-                  alt="Premium car delivered to client’s home after using Zen Car Buying"
-                  className="w-[200px] h-[340px] sm:w-[240px] sm:h-[360px] object-cover"
-                  imgStyle={{ objectFit: "cover" }}
-                />
-              )}
+
+            {/* Right column: stacked images */}
+            <div className="flex justify-center lg:justify-end gap-6">
+              <div className="hidden sm:block self-center rounded-[32px] overflow-hidden shadow-xl bg-black/20">
+                {personImg && (
+                  <GatsbyImage
+                    image={personImg}
+                    alt="Happy client on a call with a Zen Guide confirming car details"
+                    className="w-[220px] h-[340px] object-cover"
+                    imgStyle={{ objectFit: "cover" }}
+                  />
+                )}
+              </div>
+              <div className="rounded-[32px] overflow-hidden shadow-xl bg-black/20">
+                {drivewayImg && (
+                  <GatsbyImage
+                    image={drivewayImg}
+                    alt="Premium car delivered to client’s home after using Zen Car Buying"
+                    className="w-[200px] h-[340px] sm:w-[240px] sm:h-[360px] object-cover"
+                    imgStyle={{ objectFit: "cover" }}
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>

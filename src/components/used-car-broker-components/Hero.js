@@ -57,12 +57,26 @@ export function Hero() {
             Zen Car Buying’s used car brokers save you time, stress, and 30–50% off original MSRP!
           </h2>
 
-          {/* Call to Action Button */}
+          {/* Buttons - Styled using the existing Button component */}
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <ServiceButton size="lg" color="accent">
-              Find My Car
+            <ServiceButton
+              size="lg"
+              color="accent"
+              to="/vip-consultation/?access=vip"
+            >
+              Book Free 15-Minute Call
+            </ServiceButton>
+
+            <ServiceButton
+              size="lg"
+              color="secondary"
+              to="/purchase/"
+            >
+              View Packages
             </ServiceButton>
           </div>
+
+          
         {/* BBB Seal for mobile - directly under button */}
           <div className="sm:hidden flex justify-center mt-8">
             <a
