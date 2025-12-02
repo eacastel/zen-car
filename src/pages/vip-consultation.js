@@ -1,20 +1,42 @@
 import React, { useEffect, useState, useRef } from "react";
+import { navigate } from "gatsby";
 import Seo from "../components/Seo";
 import Layout from "../components/Layout";
-import Turnstile from "react-turnstile"; // <--- Ensure you ran: npm install react-turnstile
+import Turnstile from "react-turnstile"; 
 import "../utils/openCalendly"; 
 
-export default function CalendlyInlinePage() {
+export default function VipConsultationPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  // 1. Authorization State
+  const [isAuthorized, setIsAuthorized] = useState(false);
   const calendarContainer = useRef(null);
 
-  // 1. Get the Key from Environment Variables (Gatsby requires GATSBY_ prefix)
+  // Get Key from Env
   const SITE_KEY = process.env.GATSBY_TURNSTILE_SITE_KEY;
-
   const STYLE_PARAMS = "hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=f99f1b&text_color=6b8385";
 
-  // 2. Helper to load scripts (same as before)
+  // -------------------------------------------
+  // STEP 1: THE GATEKEEPER (Check URL Params)
+  // -------------------------------------------
+  useEffect(() => {
+    // Check if the URL has ?access=vip
+    const params = new URLSearchParams(window.location.search);
+    const accessCode = params.get("access");
+
+    if (accessCode !== "vip") {
+      // If code is wrong or missing, kick them to home immediately
+      console.warn("Unauthorized access attempt");
+      navigate("/"); 
+    } else {
+      // Allowed in
+      setIsAuthorized(true);
+    }
+  }, []);
+
+  // -------------------------------------------
+  // STEP 2: HELPER FUNCTIONS
+  // -------------------------------------------
   const loadCalendlyAssets = () => {
     if (!document.querySelector('link[href*="assets/external/widget.css"]')) {
       const link = document.createElement("link");
@@ -22,7 +44,6 @@ export default function CalendlyInlinePage() {
       link.href = "https://assets.calendly.com/assets/external/widget.css";
       document.head.appendChild(link);
     }
-    
     return new Promise((resolve) => {
       if (window.Calendly) {
         resolve();
@@ -36,64 +57,60 @@ export default function CalendlyInlinePage() {
     });
   };
 
-  // 3. The Handler: Only runs when Cloudflare verifies the user
+  // -------------------------------------------
+  // STEP 3: TURNSTILE VERIFICATION
+  // -------------------------------------------
   const handleTurnstileVerify = async (token) => {
     try {
-      console.log("Human verified. Requesting secure link...");
+      console.log("Human verified. Fetching secure link...");
       
-      // POST request with the token
       const res = await fetch("/.netlify/functions/get-calendly-link", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token }), 
       });
       
-      if (!res.ok) throw new Error(`Verification failed: ${res.status}`);
+      if (!res.ok) throw new Error("Verification failed");
       
       const data = await res.json();
-      console.log("Received URL:", data.url);
-
-      if (!data.url) throw new Error("No URL returned from API");
+      if (!data.url) throw new Error("No URL returned");
       
       const separator = data.url.includes("?") ? "&" : "?";
       const finalUrl = `${data.url}${separator}${STYLE_PARAMS}`;
 
-      // Load Assets & Init Widget
       await loadCalendlyAssets();
 
       if (calendarContainer.current && window.Calendly) {
-        calendarContainer.current.innerHTML = ""; // Clear skeleton
-        
+        calendarContainer.current.innerHTML = "";
         window.Calendly.initInlineWidget({
           url: finalUrl,
           parentElement: calendarContainer.current,
           resize: true,
         });
-        
         setLoading(false);
       }
     } catch (err) {
-      console.error("Calendar Load Error:", err);
+      console.error("Load Error:", err);
       setError(true);
       setLoading(false);
     }
   };
 
-  // 4. Observer for Meta/GTM (Runs once on mount to watch the container)
+  // -------------------------------------------
+  // STEP 4: META / GTM TRACKING
+  // -------------------------------------------
   useEffect(() => {
-    if (calendarContainer.current) {
+    if (calendarContainer.current && isAuthorized) {
       const observer = new MutationObserver((mutations) => {
         for (const m of mutations) {
           if ([...m.addedNodes].some((n) => n.nodeName === "IFRAME")) {
             if (typeof window.fbq === "function") window.fbq("track", "Schedule");
-            
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
               event: "schedule_opened",
               method: "inline",
               page_location: window.location.href,
             });
-
             observer.disconnect();
             break;
           }
@@ -101,7 +118,16 @@ export default function CalendlyInlinePage() {
       });
       observer.observe(calendarContainer.current, { childList: true });
     }
-  }, []);
+  }, [isAuthorized]);
+
+  // -------------------------------------------
+  // RENDER
+  // -------------------------------------------
+  
+  // If not authorized yet, render nothing (or a spinner) to prevent content flash
+  if (!isAuthorized) {
+    return null; 
+  }
 
   return (
     <Layout>
@@ -111,7 +137,7 @@ export default function CalendlyInlinePage() {
           background: #fff !important;
           border-radius: 8px;
           box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-          max-width: 800px; /* Kept your preference */
+          max-width: 800px;
           margin: 0.5rem auto;
           padding: 0rem 1rem;
           min-height: 1200px;
@@ -127,7 +153,6 @@ export default function CalendlyInlinePage() {
           background-size: 400% 100%;
           animation: shimmer 1.2s infinite;
           border-radius: 6px;
-          /* Center the invisible widget logic */
           display: flex;
           align-items: center;
           justify-content: center;
@@ -136,9 +161,8 @@ export default function CalendlyInlinePage() {
       `}</style>
 
       <div className="calendly-wrapper">
-        <h1 className="sr-only">Book Your Free 15-Minute Consultation</h1>
+        <h1 className="sr-only">VIP Consultation</h1>
 
-        {/* LOADING STATE: Show Skeleton + Invisible Turnstile */}
         {loading && !error && (
           <div id="skeleton" className="skeleton">
             {SITE_KEY && (
@@ -146,39 +170,30 @@ export default function CalendlyInlinePage() {
                 sitekey={SITE_KEY}
                 onVerify={handleTurnstileVerify}
                 theme="light"
-                appearance="interaction-only" // Invisible mode
+                appearance="interaction-only" 
               />
             )}
-            {!SITE_KEY && <p>Loading...</p>}
+            {!SITE_KEY && <p>Loading Security...</p>}
           </div>
         )}
 
-        {/* ERROR STATE */}
         {error && (
           <div style={{ textAlign: "center", padding: "2rem" }}>
-            <p>We are having trouble verifying your request.</p>
-            <button onClick={() => window.location.reload()} className="btn">
-              Retry
-            </button>
+            <p>Verification failed. Please refresh.</p>
           </div>
         )}
 
-        {/* CALENDAR CONTAINER */}
-        <div
-          ref={calendarContainer}
-          className="calendly-container" 
-        />
+        <div ref={calendarContainer} className="calendly-container" />
       </div>
     </Layout>
   );
 }
 
 export const Head = () => (
-  <>
-    <Seo
-      title="Book Your Free 15-Minute Consultation"
-      description="Schedule your free 15-minute consultation with a Zen Guide."
-      pathname="/15min/"
-    />
-  </>
+  <Seo
+    title="VIP Consultation"
+    description="Schedule your consultation with a Zen Guide."
+    pathname="/vip-consultation/"
+    noIndex={true} 
+  />
 );

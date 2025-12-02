@@ -8,7 +8,7 @@ const CalendlyButton = ({
   size = "base",
   className = "",
   disabled = false,
-  to = "/15min", // default target
+  to = "/vip-consultation/?access=vip", // default target
   ...rest
 }) => {
   // Tailwind styles

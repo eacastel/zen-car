@@ -62,7 +62,7 @@ export function Hero() {
             <ServiceButton
               size="lg"
               color="accent"
-              to="/15min/"
+              to="/vip-consultation/?access=vip"
             >
               Book Free 15-Minute Call
             </ServiceButton>

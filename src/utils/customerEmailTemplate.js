@@ -21,7 +21,7 @@ function buildCustomerEmail({ name = "Customer", amount, currency, breakdown, pa
 
     <ol style="font-family: sans-serif; font-size: 16px; padding-left: 20px;">
       <li><strong>Step 1:</strong>  If you haven’t already, schedule your welcome call with your Zen Guide.<br />
-        <a href="https://zencarbuying.com/15min/" style="color: #e67e22;">Book Your Appointment →</a>
+        <a href="https://zencarbuying.com/vip-consultation/?access=vip" style="color: #e67e22;">Book Your Appointment →</a>
       </li>
       <li><strong>Step 2:</strong> We’ll review your goals, preferences and budget during the call.</li>
       <li><strong>Step 3:</strong> Based on the package you selected, we’ll begin the research, sourcing and/or negotiation process.</li>
