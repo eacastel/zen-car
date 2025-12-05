@@ -9,10 +9,11 @@
     "@heroicons/react": "^2.2.0",
     "@stripe/react-stripe-js": "^3.7.0",
     "@stripe/stripe-js": "^5.10.0",
+    "clsx": "^2.1.1",
     "co-body": "^6.2.0",
     "dotenv": "^16.4.7",
     "focus-visible": "^5.2.1",
-    "framer-motion": "^12.4.2",
+    "framer-motion": "^12.23.25",
     "gatsby": "^5.0.0",
     "gatsby-adapter-netlify": "^1.2.0",
     "gatsby-plugin-google-gtag": "^5.14.0",
@@ -28,6 +29,7 @@
     "gatsby-source-filesystem": "^5.14.0",
     "gatsby-transformer-sharp": "^5.14.0",
     "hamburger-react": "^2.5.2",
+    "lucide-react": "^0.555.0",
     "node-fetch": "^3.3.2",
     "prop-types": "^15.7.2",
     "react": "^18.2.0",
@@ -39,7 +41,8 @@
     "resend": "^4.6.0",
     "sharp": "^0.32.6",
     "slick-carousel": "^1.8.1",
-    "stripe": "^17.7.0"
+    "stripe": "^17.7.0",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",

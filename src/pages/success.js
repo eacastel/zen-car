@@ -43,7 +43,7 @@ const SuccessPage = () => {
               // 🔁 Meta Conversions API via Netlify function
               (async () => {
                 try {
-                  const email = data.receipt_email || data.customer_email || ""; 
+                  const email = data.receipt_email || data.customer_email || "";
                   const nameParts = (data?.customer_name ?? "").split(" ");
                   const firstName = nameParts[0] || "";
                   const lastName = nameParts.slice(1).join(" ") || "";
@@ -76,6 +76,8 @@ const SuccessPage = () => {
                 value: amountInDollars,
                 currency: "USD",
                 transaction_id: intentId,
+                customer_email: email || "",      
+                customer_name: data.customer_name || "", 
               });
 
               // 🟦 Meta Pixel

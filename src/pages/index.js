@@ -1,168 +1,443 @@
-import { navigate } from "gatsby";
-import React, { lazy, Suspense, useState, useEffect, useRef } from 'react'
-import { Link } from 'gatsby'
-import Layout from '../components/Layout'
-import Seo from '../components/Seo'
-import { Hero } from '../components/Hero'
-import CallToAction from '../components/CallToAction'
+import React, { useState, useEffect } from "react";
+import { Link, useStaticQuery, graphql } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  CheckCircle2,
+  ChevronDown,
+  Car,
+  Search,
+  FileCheck,
+  Star,
+  Quote
+} from "lucide-react";
 
+import Layout from "../components/Layout";
+import Seo from "../components/Seo";
+import ButtonHeader from "../components/ButtonHeader";
 
+// --- DATA: REVIEWS ---
+const REVIEWS = [
+  {
+    name: "Michael T.",
+    text: "Brian went above and beyond to help me find the perfect car within my timeline. The process was completely stress-free.",
+    car: "2024 BMW X5"
+  },
+  {
+    name: "Sarah Jenkins",
+    text: "I will never buy a car the old way again. Zen Car Buying saved me $4,000 and I didn't have to step foot in a dealership.",
+    car: "Mercedes GLE"
+  },
+  {
+    name: "David R.",
+    text: "Professional, transparent, and incredibly fast. The car was delivered to my driveway on Wednesday just like promised.",
+    car: "Audi Q7"
+  }
+];
 
-const HowItWorks = lazy(() => import('../components/HowItWorks'));
-const Testimonials = lazy(() => import('../components/Testimonials'));
-
-
-function useOnScreen(ref, rootMargin = "0px") {
-  const [isIntersecting, setIntersecting] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIntersecting(entry.isIntersecting),
-      { rootMargin }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, [ref, rootMargin]);
-
-  return isIntersecting;
-}
-
-
-const icons = {
-  recommendations: (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="h-12 w-12 mx-auto mb-4">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
-    </svg>
-  ),
-  warranty: (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="h-12 w-12 mx-auto mb-4">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-    </svg>
-  ),
-  sourcing: (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="h-12 w-12 mx-auto mb-4">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
-    </svg>
-  ),
-  negotiation: (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" strokeWidth="1" stroke="none" className="h-12 w-12 mx-auto mb-4">
-      <path d="M5.00488 9.00268C5.55717 9.00268 6.00488 9.45039 6.00488 10.0027C7.63965 10.0027 9.14352 10.5631 10.3349 11.5022L12.5049 11.5027C13.837 11.5027 15.0339 12.0815 15.8579 13.0014L19.0049 13.0027C20.9972 13.0027 22.7173 14.1679 23.521 15.8541C21.1562 18.9747 17.3268 21.0027 13.0049 21.0027C10.2142 21.0027 7.85466 20.3994 5.944 19.3447C5.80557 19.7283 5.43727 20.0027 5.00488 20.0027H2.00488C1.4526 20.0027 1.00488 19.555 1.00488 19.0027V10.0027C1.00488 9.45039 1.4526 9.00268 2.00488 9.00268H5.00488ZM6.00589 12.0027L6.00488 17.0238L6.05024 17.0572C7.84406 18.3176 10.183 19.0027 13.0049 19.0027C16.0089 19.0027 18.8035 17.847 20.84 15.8732L20.9729 15.7397L20.8537 15.6393C20.3897 15.2763 19.8205 15.051 19.2099 15.0096L19.0049 15.0027L16.8932 15.0017C16.9663 15.3236 17.0049 15.6586 17.0049 16.0027V17.0027H8.00488V15.0027L14.7949 15.0017L14.7605 14.9232C14.38 14.1296 13.593 13.568 12.6693 13.508L12.5049 13.5027L9.57547 13.5025C8.66823 12.5772 7.40412 12.003 6.00589 12.0027ZM4.00488 11.0027H3.00488V18.0027H4.00488V11.0027ZM13.6513 3.57806L14.0046 3.93183L14.3584 3.57806C15.3347 2.60175 16.9177 2.60175 17.894 3.57806C18.8703 4.55437 18.8703 6.13728 17.894 7.11359L14.0049 11.0027L10.1158 7.11359C9.13948 6.13728 9.13948 4.55437 10.1158 3.57806C11.0921 2.60175 12.675 2.60175 13.6513 3.57806ZM11.53 4.99227C11.3564 5.16584 11.3372 5.43526 11.4714 5.62938L11.5289 5.69831L14.0039 8.17368L16.4798 5.69938C16.6533 5.52581 16.6726 5.25639 16.5376 5.06152L16.4798 4.99227C16.3062 4.81871 16.0368 4.79942 15.8417 4.93457L15.7724 4.99249L14.0033 6.76111L12.236 4.9912L12.1679 4.93442C11.973 4.79942 11.7036 4.81871 11.53 4.99227Z" />
-    </svg>
-  ),
-};
-
-
-const HomePage = () => {
-  const testimonialsRef = useRef();
-  const showTestimonials = useOnScreen(testimonialsRef, '100px');
+// --- COMPONENT: COMPACT REVIEW CAROUSEL ---
+const ReviewCarousel = () => {
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const urlParams = new URLSearchParams(window.location.search);
-      const reset = urlParams.get("reset");
-      if (reset === "1") {
-        localStorage.removeItem("preferredHome");
-        document.cookie = "preferredHome=; path=/; max-age=0";
-        return;
-      }
-
-      const localPref = localStorage.getItem("preferredHome");
-      const cookieMatch = document.cookie.match(/(?:^|;\s*)preferredHome=([^;]+)/);
-      const cookiePref = cookieMatch?.[1];
-      const preferredHome = localPref || cookiePref;
-
-      if (preferredHome && preferredHome !== "/") {
-        navigate(preferredHome, { replace: true });
-      }
-    }
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % REVIEWS.length);
+    }, 6000);
+    return () => clearInterval(timer);
   }, []);
 
   return (
-    <Layout>
-      {/* ✅ Hero Section */}
-      <Hero />
-
-
-      {/* ✅ Key Benefits Section */}
-      <section className="py-16 bg-secondary" aria-labelledby="benefits-heading">
-        <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
-          <h2 id="benefits-heading" className="text-4xl font-medium text-accent text-center mb-6">
-            Why Choose <span className="text-accent">Zen Car Buying?</span>
-          </h2>
-          <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">Skip the dealer hassle. We help you buy smarter—with expert guidance, zero pressure, and one flat fee.</p>
-          <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
-            {[
-              { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'We provide tailored suggestions based on your needs & budget.' },
-              { title: 'Nationwide Vehicle Sourcing & Shipping', key: 'sourcing', desc: 'We find you the best deals, no matter where you live.' },
-              { title: 'Time Saving, Stress Free Buying', key: 'negotiation', desc: 'Let us do the work for you!' },
-            ].map((benefit, index) => (
-              <Link
-                key={index}
-                to="/services/"
-                aria-label={`Learn more about ${benefit.title}`}
-                style={{ cursor: "auto", textDecoration: "none", color: "inherit" }}
-              >
-                <div
-                  className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}
-                  <h3 className="text-xl font-medium text-primary">{benefit.title}</h3>
-                  <p className="text-gray-500">{benefit.desc}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+    <div className="mt-10 max-w-md">
+      {/* Google Badge */}
+      <div className="flex items-center gap-2 mb-3">
+        <div className="bg-white p-1 rounded-full shadow-sm">
+          <svg viewBox="0 0 24 24" className="w-4 h-4" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" /><path d="M5.84 14.11c-.22-.66-.35-1.36-.35-2.11s.13-1.45.35-2.11V7.05H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.95l3.66-2.84z" fill="#FBBC05" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.05l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" /></svg>
         </div>
-      </section>
-
-      {/* ✅ How It Works Section */}
-      <Suspense fallback={<div className="py-20 text-center text-primary">Loading process…</div>}>
-        <HowItWorks />
-      </Suspense>
-
-
-
-      <div ref={testimonialsRef}>
-        {showTestimonials && (
-          <Suspense fallback={<div className="py-20 text-center text-primary">Loading testimonials…</div>}>
-            <Testimonials />
-          </Suspense>
-        )}
+        <div className="flex text-yellow-400">
+          {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+        </div>
+        <span className="text-xs font-bold text-teal-50 tracking-wide ml-1">5.0 RATING</span>
       </div>
 
-      <CallToAction />
+      {/* Review Text */}
+      <div className="relative h-28">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 10 }}
+            transition={{ duration: 0.3 }}
+            className="absolute top-0 left-0 w-full"
+          >
+            <div className="flex gap-3">
+              <Quote className="text-[#f99f1b] flex-shrink-0" size={24} />
+              <div>
+                <p className="text-white text-base font-medium leading-relaxed italic opacity-90">
+                  "{REVIEWS[index].text}"
+                </p>
+                <p className="mt-2 text-sm text-teal-200 font-bold">
+                  — {REVIEWS[index].name} <span className="text-white/40 font-normal mx-1">|</span> {REVIEWS[index].car}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
+// --- REUSABLE SECTIONS ---
+const Section = ({ className, children, id }) => (
+  <section id={id} className={`py-16 md:py-24 px-4 ${className}`}>
+    <div className="container mx-auto max-w-6xl">{children}</div>
+  </section>
+);
+
+const FeatureCard = ({ icon: Icon, title, desc, delay }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay }}
+    className="bg-white p-8 rounded-2xl shadow-lg border border-teal-50 text-center hover:-translate-y-1 transition-transform duration-300"
+  >
+    <div className="bg-[#eaf3f3] w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-[#6b8385]">
+      <Icon size={32} strokeWidth={1.5} />
+    </div>
+    <h3 className="text-xl font-bold text-slate-800 mb-3">{title}</h3>
+    <p className="text-slate-600 leading-relaxed">{desc}</p>
+  </motion.div>
+);
+
+const FaqItem = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border-b border-slate-200">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full py-6 flex items-center justify-between text-left focus:outline-none"
+      >
+        <span className="text-lg font-semibold text-slate-800">{question}</span>
+        <ChevronDown
+          className={`transform transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+          color="#f99f1b"
+        />
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <p className="pb-6 text-slate-600 leading-relaxed">{answer}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default function LandingPage() {
+  const SECURE_LINK = "/vip-consultation/?access=vip";
+
+  const data = useStaticQuery(graphql`
+    query {
+      # THE NEW HERO BACKGROUND
+      heroBg: file(relativePath: { eq: "hero-bg.png" }) {
+        childImageSharp {
+          gatsbyImageData(
+            layout: FULL_WIDTH
+            placeholder: BLURRED
+            formats: [AUTO, WEBP]
+            quality: 90
+          )
+        }
+      }
+      # THE LOTUS FLOWER
+      lotus: file(relativePath: { eq: "zen-car-lotus.png" }) {
+        childImageSharp {
+          gatsbyImageData(
+            layout: CONSTRAINED
+            width: 800
+            placeholder: NONE
+            formats: [AUTO, WEBP]
+          )
+        }
+      }
+      consultation: file(relativePath: { eq: "consultation.jpg" }) {
+        childImageSharp {
+          gatsbyImageData(
+            layout: CONSTRAINED
+            width: 800
+            placeholder: BLURRED
+          )
+        }
+      }
+      deliveryKeys: file(relativePath: { eq: "delivery-keys.jpg" }) {
+        childImageSharp {
+          gatsbyImageData(
+            layout: CONSTRAINED
+            width: 800
+            placeholder: BLURRED
+          )
+        }
+      }
+    }
+  `);
+
+  const heroImg = getImage(data.heroBg);
+  const lotusImg = getImage(data.lotus);
+  const consultImg = getImage(data.consultation);
+  const deliveryImg = getImage(data.deliveryKeys);
+
+  return (
+    <Layout>
+      {/* 1. HERO SECTION */}
+      {/* LAYOUT STRATEGY: 
+          - Mobile: Flex Column (Image Top, Text Bottom).
+          - Desktop: Block with Absolute Positioning (Text Left, Image Right Overlay).
+      */}
+      <div className="relative bg-[#6b8385] text-white overflow-hidden min-h-[auto] md:min-h-[95vh] flex flex-col md:block">
+
+        {/* BACKGROUND LOTUS (Hidden on mobile to reduce noise, visible on desktop) */}
+        <div className="hidden md:block absolute right-0 bottom-0 opacity-10 w-2/3 md:w-1/2 pointer-events-none z-0 transform translate-x-1/4 translate-y-1/4">
+          <GatsbyImage image={lotusImg} alt="" className="w-full h-auto" />
+        </div>
+
+        {/* HERO IMAGE */}
+        {/* MOBILE: Relative height (350px), sits at top. Fades out at bottom.
+           DESKTOP: Absolute right, covers 45% width. Fades out at left.
+        */}
+        <div className="relative w-full h-[350px] md:absolute md:top-0 md:right-0 md:h-full md:w-[45%] z-0 order-1 md:order-none">
+          <div className="h-full w-full relative [mask-image:linear-gradient(to_bottom,black_60%,transparent)] md:[mask-image:linear-gradient(to_right,transparent,black_20%)]">
+            <GatsbyImage
+              image={heroImg}
+              alt="Luxury Car"
+              className="h-full w-full object-cover object-center"
+              style={{ position: "absolute" }}
+            />
+            {/* Overlay for tinting */}
+            <div className="absolute inset-0 bg-[#6b8385]/10 mix-blend-multiply" />
+          </div>
+        </div>
+
+        {/* TEXT CONTENT */}
+        {/* MOBILE: Order-2 (Bottom). Standard padding.
+           DESKTOP: Vertically centered (flex h-full). Width 70% to fix "squeezed" look.
+        */}
+        <div className="container mx-auto px-4 relative z-20 py-12 md:py-0 md:h-[95vh] md:flex md:items-center order-2 md:order-none">
+          {/* Changed width from md:w-1/2 to md:w-[70%] for more horizontal space */}
+          <div className="w-full md:w-[70%]">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <p className="text-sm md:text-base uppercase tracking-widest mb-4 font-pirulen text-teal-200">
+                The Modern Approach to Car Buying
+              </p>
+
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-6 drop-shadow-sm">
+                Car buying made <span className="text-[#f99f1b]">simple</span> and <span className="text-[#f99f1b]">stress-free</span>.
+              </h1>
+
+              {/* Increased max-width from max-w-lg to max-w-2xl so text spreads out */}
+              <p className="text-lg md:text-2xl text-teal-50 mb-8 max-w-2xl leading-relaxed drop-shadow-sm">
+                Skip the dealership. We find the perfect car, negotiate the best price, and deliver it to your door.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                <ButtonHeader
+                  to={SECURE_LINK}
+                  size="lg"
+                  className="w-full sm:w-auto text-center justify-center shadow-lg shadow-[#f99f1b]/20"
+                >
+                  Start Your Search
+                </ButtonHeader>
+                <Link
+                  to="/how-it-works"
+                  className="px-8 py-3 rounded-md font-bold text-white border-2 border-white/30 hover:bg-white/10 transition-colors text-center"
+                >
+                  How it works
+                </Link>
+              </div>
+
+              <ReviewCarousel />
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. VALUE PROPS */}
+      <Section className="bg-[#eaf3f3]">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
+            Your Car, The Zen Way
+          </h2>
+          <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+            We stripped away the salespeople, the pressure, and the hidden fees.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          <FeatureCard
+            icon={FileCheck}
+            title="1. Tell Us What You Want"
+            desc="Complete a short profile. We specialize in finding the exact make, model, and trim you desire."
+            delay={0.1}
+          />
+          <FeatureCard
+            icon={Search}
+            title="2. We Find & Negotiate"
+            desc="We search nationwide inventory and use our data to negotiate a price below market value."
+            delay={0.2}
+          />
+          <FeatureCard
+            icon={Car}
+            title="3. You Verify & Drive"
+            desc="We handle the paperwork and coordinate delivery. You just sign and accept the keys."
+            delay={0.3}
+          />
+        </div>
+      </Section>
+
+      {/* 3. PACKAGES STRIP */}
+      <div className="bg-[#6b8385] py-20 px-4 text-white">
+        <div className="container mx-auto max-w-5xl bg-[#5a6f71] rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10">
+
+          <div className="md:w-2/3">
+            <h2 className="text-3xl font-bold mb-4">Packages start at just $450</h2>
+            <p className="text-teal-50 text-lg mb-6 leading-relaxed">
+              Why pay thousands in dealer markups? Our flat-fee service saves you money and eliminates the stress of negotiation.
+            </p>
+            <ul className="grid sm:grid-cols-2 gap-3">
+              {["Nationwide Search", "Price Negotiation", "Trade-In Support", "Doorstep Delivery"].map(item => (
+                <li key={item} className="flex items-center gap-2 text-base font-medium">
+                  <CheckCircle2 size={20} className="text-[#f99f1b]" /> {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:w-1/3 w-full">
+            <ButtonHeader
+              to={SECURE_LINK}
+              className="w-full text-center justify-center py-4 text-lg"
+            >
+              Get Started
+            </ButtonHeader>
+            <p className="text-center text-xs text-white/50 mt-3">
+              No hidden fees. 100% Transparent.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      {/* 4. SPLIT FEATURE SECTIONS */}
+      <Section className="bg-white">
+        {/* Feature 1 */}
+        <div className="flex flex-col md:flex-row items-center gap-12 mb-24">
+          <div className="w-full md:w-1/2">
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <GatsbyImage
+                image={consultImg}
+                alt="Zen Guide looking at laptop"
+                className="aspect-video object-cover"
+              />
+            </div>
+          </div>
+          <div className="w-full md:w-1/2">
+            <h3 className="text-3xl font-bold text-slate-800 mb-4">
+              We handle the hard part: <span className="text-[#f99f1b]">Research & Negotiation</span>
+            </h3>
+            <p className="text-slate-600 leading-relaxed mb-6 text-lg">
+              You have better things to do than argue with a sales manager for 4 hours.
+              Our experts know the real invoice prices and incentives. We speak their language so you don't have to.
+            </p>
+            <Link to="/services" className="text-[#6b8385] font-bold hover:text-[#f99f1b] underline decoration-2 underline-offset-4">
+              Explore our services
+            </Link>
+          </div>
+        </div>
+
+        {/* Feature 2 (Reversed) */}
+        <div className="flex flex-col md:flex-row-reverse items-center gap-12">
+          <div className="w-full md:w-1/2">
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <GatsbyImage
+                image={deliveryImg}
+                alt="Handing over car keys"
+                className="aspect-video object-cover"
+              />
+            </div>
+          </div>
+          <div className="w-full md:w-1/2">
+            <h3 className="text-3xl font-bold text-slate-800 mb-4">
+              Delivery Wednesday — <span className="text-[#f99f1b]">Your Car, Right to Your Door</span>
+            </h3>
+            <p className="text-slate-600 leading-relaxed mb-6 text-lg">
+              Whether it’s sourced locally or from across the country, we coordinate the logistics.
+              Review the car, sign the papers, and enjoy the ride.
+            </p>
+          </div>
+        </div>
+      </Section>
+
+      {/* 5. FAQ SECTION */}
+      <Section className="bg-[#f8fafc]">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-slate-800">Frequently Asked Questions</h2>
+        </div>
+        <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+          <FaqItem
+            question="What car brands do you specialize in?"
+            answer="We specialize in German luxury vehicles including Mercedes-Benz, BMW, Audi, and Porsche. However, we can assist with most major makes and models."
+          />
+          <FaqItem
+            question="Do I pay the dealer or you?"
+            answer="You pay the dealer directly for the vehicle. You pay us a small flat fee for our service. We never mark up the price of the car."
+          />
+          <FaqItem
+            question="Can you help with trade-ins?"
+            answer="Absolutely. We can solicit bids for your trade-in from multiple sources to ensure you get the highest possible value, rather than just what one dealer offers."
+          />
+          <FaqItem
+            question="How does delivery work?"
+            answer="If the car is local, you can pick it up or we can arrange drop-off. If it is out of state, we coordinate with trusted transport carriers to bring it to your driveway."
+          />
+        </div>
+      </Section>
+
+      {/* 6. FINAL CTA */}
+      <section className="py-20 px-4 bg-white text-center">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-800 mb-6">
+            Start Your Car Buying Journey With a <span className="text-[#f99f1b]">Zen Guide</span>
+          </h2>
+          <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
+            No pressure. No obligation. Just a 15-minute chat to see if we can help you find your dream car.
+          </p>
+          <ButtonHeader
+            to={SECURE_LINK}
+            size="lg"
+            className="px-12 py-5 text-xl shadow-xl shadow-orange-200"
+          >
+            Book Your Free Consultation
+          </ButtonHeader>
+        </div>
+      </section>
     </Layout>
-  )
+  );
 }
 
-export default HomePage
-
-
-export const Head = ({ location }) => (
+export const Head = () => (
   <Seo
-    title="Zen Car Buying | Stress-Free Concierge Service for New, Lightly Used & Luxury Cars"
-    description="Zen Car Buying is your trusted concierge service for finding new cars, lightly used vehicles, and luxury models at affordable prices nationwide. Our proven 4-step system ensures a stress-free car-buying experience."
-    pathname={location?.pathname || "/"}
-  >
-    <script type="application/ld+json">
-      {JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: "Zen Car Buying",
-        url: "https://zencarbuying.com",
-        logo: "https://zencarbuying.com/zen-car-buying-logo.png",
-        sameAs: [
-          "https://www.facebook.com/zencarbuying",
-          "https://www.instagram.com/zencarbuying",
-          "https://www.linkedin.com/company/zencarbuying",
-          "https://www.yelp.com/biz/zencarbuying"
-        ],
-        description:
-          "Zen Car Buying helps you find luxury and lightly used cars at 30–50% off with expert concierge help."
-      })}
-    </script>
-  </Seo>
+    title="Zen Car Buying | Luxury Car Buying Made Simple"
+    description="Skip the dealership. We find, negotiate, and deliver your perfect Mercedes, BMW, or Audi."
+  />
 );
