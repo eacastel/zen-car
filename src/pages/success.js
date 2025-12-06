@@ -56,11 +56,17 @@ const SuccessPage = () => {
             if (!window.__CONVERSION_FIRED__) {
               window.__CONVERSION_FIRED__ = true;
 
-              // ---------- EMAIL / NAME for CAPI + dataLayer ----------
-              const email = data.receipt_email || data.customer_email || "";
-              const nameParts = (data?.customer_name ?? "").split(" ");
-              const firstName = nameParts[0] || "";
-              const lastName = nameParts.slice(1).join(" ") || "";
+              // ---------- EMAIL / NAME (used for CAPI + dataLayer) ----------
+              const email =
+                data.customer_email ||
+                data.receipt_email ||
+                "";
+
+              const nameRaw = data.customer_name || "";
+              const parts = nameRaw.split(" ").filter(Boolean);
+              const firstName = parts[0] || "";
+              const lastName = parts.slice(1).join(" ");
+              const customerName = nameRaw;
 
               // ---------- UTM LAST TOUCH from sessionStorage / URL ----------
               const utmSourceLast = getUtmLast("utm_source");
@@ -84,7 +90,6 @@ const SuccessPage = () => {
                         fn: firstName ? await sha256(firstName) : undefined,
                         ln: lastName ? await sha256(lastName) : undefined,
                       },
-                      // Send UTMs to CAPI as custom_data
                       customData: {
                         utm_source_last: utmSourceLast || undefined,
                         utm_medium_last: utmMediumLast || undefined,
@@ -105,7 +110,7 @@ const SuccessPage = () => {
                 currency: "USD",
                 transaction_id: intentId,
                 customer_email: email || "",
-                customer_name: data.customer_name || "",
+                customer_name: customerName || "",
                 utm_source_last: utmSourceLast || "",
                 utm_medium_last: utmMediumLast || "",
                 utm_campaign_last: utmCampaignLast || "",

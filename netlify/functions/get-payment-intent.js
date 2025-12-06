@@ -14,7 +14,26 @@ exports.handler = async (event) => {
       };
     }
 
-    const intent = await stripe.paymentIntents.retrieve(id);
+ // Get full PaymentIntent, including first charge's billing details
+    const intent = await stripe.paymentIntents.retrieve(id, {
+      expand: ["charges.data.billing_details"],
+    });
+
+    const metadata = intent.metadata || {};
+    const charge = intent.charges?.data?.[0] || {};
+    const billing = charge.billing_details || {};
+
+    // Try all reasonable places for email + name
+    const customerEmail =
+      intent.receipt_email ||
+      metadata.email ||
+      billing.email ||
+      "";
+
+    const customerName =
+      metadata.name ||
+      billing.name ||
+      "";
 
     return {
       statusCode: 200,
@@ -22,6 +41,10 @@ exports.handler = async (event) => {
         amount: intent.amount,
         currency: intent.currency,
         id: intent.id,
+        receipt_email: intent.receipt_email || "",
+        customer_email: customerEmail,
+        customer_name: customerName,
+        metadata,
       }),
     };
   } catch (error) {

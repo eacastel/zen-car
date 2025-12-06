@@ -45,5 +45,5 @@ status = 301
 force = true
 
 [dev]
-  port = 8889       
-  targetPort = 8000 
+  command = "gatsby develop"
+  targetPort = 8000
