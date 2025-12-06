@@ -1,0 +1,127 @@
+diff --git a/src/pages/success.js b/src/pages/success.js
+index b17313a..2bd68a4 100644
+--- a/src/pages/success.js
++++ b/src/pages/success.js
+@@ -10,7 +10,6 @@ const SuccessPage = () => {
+ 
+   useEffect(() => {
+     if (typeof window !== "undefined") {
+-
+       const sha256 = async (input) => {
+         const encoder = new TextEncoder();
+         const data = encoder.encode(input.toLowerCase().trim());
+@@ -20,6 +19,23 @@ const SuccessPage = () => {
+           .join("");
+       };
+ 
++      // Helper to get last-touch UTM from sessionStorage (or URL as fallback)
++      const getUtmLast = (key) => {
++        try {
++          const ss = window.sessionStorage;
++          const qs = new URLSearchParams(window.location.search);
++
++          return (
++            ss.getItem(key + "_last") ||    // utm_source_last, etc. if stored
++            ss.getItem(key) ||              // utm_source
++            qs.get(key) ||                  // ?utm_source=...
++            ""
++          );
++        } catch (e) {
++          return "";
++        }
++      };
++
+       const params = new URLSearchParams(window.location.search);
+       const intentId = params.get("payment_intent");
+       if (!intentId || window.__CONVERSION_FIRED__) return;
+@@ -30,9 +46,8 @@ const SuccessPage = () => {
+         method: "POST",
+         body: JSON.stringify({ id: intentId }),
+       })
+-        .then(res => res.json())
+-        .then(data => {
+-
++        .then((res) => res.json())
++        .then((data) => {
+           if (data && data.amount) {
+             const amountInDollars = data.amount / 100;
+             setAmount(amountInDollars);
+@@ -40,14 +55,20 @@ const SuccessPage = () => {
+             if (!window.__CONVERSION_FIRED__) {
+               window.__CONVERSION_FIRED__ = true;
+ 
++              // ---------- EMAIL / NAME (used for CAPI + dataLayer) ----------
++              const email = data.receipt_email || data.customer_email || "";
++              const nameParts = (data?.customer_name ?? "").split(" ");
++              const firstName = nameParts[0] || "";
++              const lastName = nameParts.slice(1).join(" ") || "";
++
++              // ---------- UTM LAST-TOUCH (from sessionStorage / URL) ----------
++              const utmSourceLast = getUtmLast("utm_source");
++              const utmMediumLast = getUtmLast("utm_medium");
++              const utmCampaignLast = getUtmLast("utm_campaign");
++
+               // 🔁 Meta Conversions API via Netlify function
+               (async () => {
+                 try {
+-                  const email = data.receipt_email || data.customer_email || "";
+-                  const nameParts = (data?.customer_name ?? "").split(" ");
+-                  const firstName = nameParts[0] || "";
+-                  const lastName = nameParts.slice(1).join(" ") || "";
+-
+                   await fetch("/.netlify/functions/meta-capi", {
+                     method: "POST",
+                     headers: { "Content-Type": "application/json" },
+@@ -62,6 +83,12 @@ const SuccessPage = () => {
+                         fn: firstName ? await sha256(firstName) : undefined,
+                         ln: lastName ? await sha256(lastName) : undefined,
+                       },
++                      // Send UTMs to CAPI as custom_data
++                      customData: {
++                        utm_source_last: utmSourceLast || undefined,
++                        utm_medium_last: utmMediumLast || undefined,
++                        utm_campaign_last: utmCampaignLast || undefined,
++                      },
+                     }),
+                   });
+                 } catch (err) {
+@@ -69,15 +96,18 @@ const SuccessPage = () => {
+                 }
+               })();
+ 
+-              // 🟩 Google Ads
++              // 🟩 Google Ads / GA4 dataLayer event
+               window.dataLayer = window.dataLayer || [];
+               window.dataLayer.push({
+                 event: "checkout_success",
+                 value: amountInDollars,
+                 currency: "USD",
+                 transaction_id: intentId,
+-                customer_email: email || "",      
+-                customer_name: data.customer_name || "", 
++                customer_email: email || "",
++                customer_name: data.customer_name || "",
++                utm_source_last: utmSourceLast || "",
++                utm_medium_last: utmMediumLast || "",
++                utm_campaign_last: utmCampaignLast || "",
+               });
+ 
+               // 🟦 Meta Pixel
+@@ -86,13 +116,15 @@ const SuccessPage = () => {
+                   currency: "USD",
+                   value: amountInDollars,
+                   content_name: "Zen Car Buying Package",
++                  utm_source_last: utmSourceLast || undefined,
++                  utm_medium_last: utmMediumLast || undefined,
++                  utm_campaign_last: utmCampaignLast || undefined,
+                 });
+               }
+             }
+           }
+-
+         })
+-        .catch(err => {
++        .catch((err) => {
+           console.error("❌ Failed to retrieve payment intent", err);
+         });
+     }

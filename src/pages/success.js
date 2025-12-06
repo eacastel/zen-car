@@ -10,7 +10,7 @@ const SuccessPage = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-
+      // ---- SHA-256 helper for Meta CAPI hashing ----
       const sha256 = async (input) => {
         const encoder = new TextEncoder();
         const data = encoder.encode(input.toLowerCase().trim());
@@ -18,6 +18,23 @@ const SuccessPage = () => {
         return Array.from(new Uint8Array(hashBuffer))
           .map((b) => b.toString(16).padStart(2, "0"))
           .join("");
+      };
+
+      // ---- Helper to get "last touch" UTM from sessionStorage or URL ----
+      const getUtmLast = (key) => {
+        try {
+          const ss = window.sessionStorage;
+          const qs = new URLSearchParams(window.location.search);
+
+          return (
+            ss.getItem(key + "_last") || // utm_source_last, etc.
+            ss.getItem(key) ||           // utm_source
+            qs.get(key) ||               // ?utm_source=...
+            ""
+          );
+        } catch (e) {
+          return "";
+        }
       };
 
       const params = new URLSearchParams(window.location.search);
@@ -30,9 +47,8 @@ const SuccessPage = () => {
         method: "POST",
         body: JSON.stringify({ id: intentId }),
       })
-        .then(res => res.json())
-        .then(data => {
-
+        .then((res) => res.json())
+        .then((data) => {
           if (data && data.amount) {
             const amountInDollars = data.amount / 100;
             setAmount(amountInDollars);
@@ -40,14 +56,20 @@ const SuccessPage = () => {
             if (!window.__CONVERSION_FIRED__) {
               window.__CONVERSION_FIRED__ = true;
 
+              // ---------- EMAIL / NAME for CAPI + dataLayer ----------
+              const email = data.receipt_email || data.customer_email || "";
+              const nameParts = (data?.customer_name ?? "").split(" ");
+              const firstName = nameParts[0] || "";
+              const lastName = nameParts.slice(1).join(" ") || "";
+
+              // ---------- UTM LAST TOUCH from sessionStorage / URL ----------
+              const utmSourceLast = getUtmLast("utm_source");
+              const utmMediumLast = getUtmLast("utm_medium");
+              const utmCampaignLast = getUtmLast("utm_campaign");
+
               // 🔁 Meta Conversions API via Netlify function
               (async () => {
                 try {
-                  const email = data.receipt_email || data.customer_email || ""; 
-                  const nameParts = (data?.customer_name ?? "").split(" ");
-                  const firstName = nameParts[0] || "";
-                  const lastName = nameParts.slice(1).join(" ") || "";
-
                   await fetch("/.netlify/functions/meta-capi", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -62,6 +84,12 @@ const SuccessPage = () => {
                         fn: firstName ? await sha256(firstName) : undefined,
                         ln: lastName ? await sha256(lastName) : undefined,
                       },
+                      // Send UTMs to CAPI as custom_data
+                      customData: {
+                        utm_source_last: utmSourceLast || undefined,
+                        utm_medium_last: utmMediumLast || undefined,
+                        utm_campaign_last: utmCampaignLast || undefined,
+                      },
                     }),
                   });
                 } catch (err) {
@@ -69,28 +97,35 @@ const SuccessPage = () => {
                 }
               })();
 
-              // 🟩 Google Ads
+              // 🟩 Google Ads / GA4 dataLayer event
               window.dataLayer = window.dataLayer || [];
               window.dataLayer.push({
                 event: "checkout_success",
                 value: amountInDollars,
                 currency: "USD",
                 transaction_id: intentId,
+                customer_email: email || "",
+                customer_name: data.customer_name || "",
+                utm_source_last: utmSourceLast || "",
+                utm_medium_last: utmMediumLast || "",
+                utm_campaign_last: utmCampaignLast || "",
               });
 
-              // 🟦 Meta Pixel
+              // 🟦 Meta Pixel (browser)
               if (window.fbq) {
                 window.fbq("track", "Purchase", {
                   currency: "USD",
                   value: amountInDollars,
                   content_name: "Zen Car Buying Package",
+                  utm_source_last: utmSourceLast || undefined,
+                  utm_medium_last: utmMediumLast || undefined,
+                  utm_campaign_last: utmCampaignLast || undefined,
                 });
               }
             }
           }
-
         })
-        .catch(err => {
+        .catch((err) => {
           console.error("❌ Failed to retrieve payment intent", err);
         });
     }
@@ -110,10 +145,14 @@ const SuccessPage = () => {
             Your checkout session has been successfully completed.
           </p>
           {paymentIntentId && (
-            <p className="text-sm text-gray-600 mb-2">PI-ID: {paymentIntentId}</p>
+            <p className="text-sm text-gray-600 mb-2">
+              PI-ID: {paymentIntentId}
+            </p>
           )}
           {amount && (
-            <p className="text-sm text-gray-600 mb-6">Amount: ${amount.toFixed(2)}</p>
+            <p className="text-sm text-gray-600 mb-6">
+              Amount: ${amount.toFixed(2)}
+            </p>
           )}
           <Button to={getHomePath()} color="accent" size="lg">
             Return Home

@@ -2,9 +2,16 @@
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-
 exports.handler = async function (event) {
-  const { eventName, userData, eventId, eventSourceUrl, value, currency } = JSON.parse(event.body);
+  const {
+    eventName,
+    userData,
+    eventId,
+    eventSourceUrl,
+    value,
+    currency,
+    customData = {},
+  } = JSON.parse(event.body);
 
   const pixelId = process.env.META_PIXEL_ID;
   const accessToken = process.env.META_CAPI_TOKEN;
@@ -19,8 +26,9 @@ exports.handler = async function (event) {
         event_source_url: eventSourceUrl,
         user_data: userData,
         custom_data: {
-          value: value || 0,
+          value: value ?? 0,
           currency: currency || "USD",
+          ...customData,
         },
       },
     ],
@@ -45,7 +53,10 @@ exports.handler = async function (event) {
     console.error("❌ Meta CAPI Error:", err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Meta CAPI failed", details: err.message }),
+      body: JSON.stringify({
+        error: "Meta CAPI failed",
+        details: err.message,
+      }),
     };
   }
 };
