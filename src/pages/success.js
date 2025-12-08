@@ -116,6 +116,23 @@ const SuccessPage = () => {
                 utm_campaign_last: utmCampaignLast || "",
               });
 
+              // 🟩 GA4 / Google Ads e-commerce purchase event
+              window.dataLayer.push({
+                event: "purchase",
+                transaction_id: intentId,
+                value: amountInDollars,      // number, no "$"
+                currency: "USD",
+                items: [
+                  {
+                    item_id: "zen_experience",         // or another id if you prefer
+                    item_name: "Zen Car Buying Package",
+                    price: amountInDollars,
+                    quantity: 1,
+                  },
+                ],
+              });
+
+
               // 🟦 Meta Pixel (browser)
               if (window.fbq) {
                 window.fbq("track", "Purchase", {
