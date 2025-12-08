@@ -116,15 +116,20 @@ const SuccessPage = () => {
                 utm_campaign_last: utmCampaignLast || "",
               });
 
-              // 🟩 GA4 / Google Ads e-commerce purchase event
+              // 🟩 GA4 / NEW e-commerce purchase event
               window.dataLayer.push({
                 event: "purchase",
                 transaction_id: intentId,
-                value: amountInDollars,      // number, no "$"
+                value: amountInDollars,
                 currency: "USD",
+                customer_email: email || "",
+                customer_name: customerName || "",
+                utm_source_last: utmSourceLast || "",
+                utm_medium_last: utmMediumLast || "",
+                utm_campaign_last: utmCampaignLast || "",
                 items: [
                   {
-                    item_id: "zen_experience",         // or another id if you prefer
+                    item_id: "zen_experience",
                     item_name: "Zen Car Buying Package",
                     price: amountInDollars,
                     quantity: 1,
