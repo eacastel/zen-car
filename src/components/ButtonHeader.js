@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import { motion } from "framer-motion";
 
 const ButtonHeader = ({
-  to = "/vip-consultation/?access=vip",  
+  to = "/vip-consultation/vip/",  
   onClick,          
   children = "Book Consultation",
   color = "accent",

@@ -13,7 +13,7 @@ export default function HowItWorks() {
                 <>
                     Choose a service package and book your onboarding call to get started —or book a{" "}
                     <Link
-                        to="/vip-consultation/?access=vip"
+                        to="/vip-consultation/vip/"
                         className="text-gray-200 underline focus:outline-none focus:ring-2 focus:ring-accent"
                         aria-label="Schedule your onboarding call"
                     >

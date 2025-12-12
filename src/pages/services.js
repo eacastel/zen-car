@@ -138,7 +138,7 @@ const Services = () => {
           <p className="text-lg text-gray-700 mb-4">
             Ready to skip the stress and find your perfect car?
           </p>
-          <Button to="/vip-consultation/?access=vip" size="lg" color="accent">
+          <Button to="/vip-consultation/vip/" size="lg" color="accent">
             Book Your Free 15-Minute Call
           </Button>
         </div>

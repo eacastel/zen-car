@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { navigate } from "gatsby";
 import Seo from "../components/Seo";
 import Layout from "../components/Layout";
-import Turnstile from "react-turnstile"; 
-import "../utils/openCalendly"; 
+import Turnstile from "react-turnstile";
+import "../utils/openCalendly";
 
-export default function VipConsultationPage() {
+export default function VipConsultationPage({ forceVip = false }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   // 1. Authorization State
@@ -19,20 +19,25 @@ export default function VipConsultationPage() {
   // -------------------------------------------
   // STEP 1: THE GATEKEEPER (Check URL Params)
   // -------------------------------------------
-  useEffect(() => {
-    // Check if the URL has ?access=vip
-    const params = new URLSearchParams(window.location.search);
-    const accessCode = params.get("access");
+useEffect(() => {
+  
+  if (forceVip) {
+    setIsAuthorized(true);
+    return;
+  }
 
-    if (accessCode !== "vip") {
-      // If code is wrong or missing, kick them to home immediately
-      console.warn("Unauthorized access attempt");
-      navigate("/"); 
-    } else {
-      // Allowed in
-      setIsAuthorized(true);
-    }
-  }, []);
+  const path = window.location.pathname.replace(/\/+$/, "");
+  const isVipPath = path === "/vip-consultation/vip";
+  const params = new URLSearchParams(window.location.search);
+  const accessCode = params.get("access");
+
+  if (!(isVipPath || accessCode === "vip")) {
+    console.warn("Unauthorized access attempt");
+    navigate("/");
+  } else {
+    setIsAuthorized(true);
+  }
+}, [forceVip]);
 
   // -------------------------------------------
   // STEP 2: HELPER FUNCTIONS
@@ -63,18 +68,18 @@ export default function VipConsultationPage() {
   const handleTurnstileVerify = async (token) => {
     try {
       console.log("Human verified. Fetching secure link...");
-      
+
       const res = await fetch("/.netlify/functions/get-calendly-link", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token }), 
+        body: JSON.stringify({ token }),
       });
-      
+
       if (!res.ok) throw new Error("Verification failed");
-      
+
       const data = await res.json();
       if (!data.url) throw new Error("No URL returned");
-      
+
       const separator = data.url.includes("?") ? "&" : "?";
       const finalUrl = `${data.url}${separator}${STYLE_PARAMS}`;
 
@@ -123,10 +128,10 @@ export default function VipConsultationPage() {
   // -------------------------------------------
   // RENDER
   // -------------------------------------------
-  
+
   // If not authorized yet, render nothing (or a spinner) to prevent content flash
   if (!isAuthorized) {
-    return null; 
+    return null;
   }
 
   return (
@@ -170,7 +175,7 @@ export default function VipConsultationPage() {
                 sitekey={SITE_KEY}
                 onVerify={handleTurnstileVerify}
                 theme="light"
-                appearance="interaction-only" 
+                appearance="interaction-only"
               />
             )}
             {!SITE_KEY && <p>Loading Security...</p>}
@@ -194,6 +199,6 @@ export const Head = () => (
     title="VIP Consultation"
     description="Schedule your consultation with a Zen Guide."
     pathname="/vip-consultation/"
-    noIndex={true} 
+    noIndex={true}
   />
 );

@@ -21,7 +21,7 @@ export default function CallToAction() {
         </p>
 
         <div className="inline-block">
-          <ServiceButton  to="/vip-consultation/?access=vip" size="lg" color="primary">
+          <ServiceButton  to="/vip-consultation/vip/" size="lg" color="primary">
             Book Your Free 15-Minute Call
           </ServiceButton>
         </div>

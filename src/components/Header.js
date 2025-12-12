@@ -164,7 +164,7 @@ export default function Header() {
 
           <li className="ml-2">
             <ButtonHeader
-              to="/vip-consultation/?access=vip"
+              to="/vip-consultation/vip/"
               size="lg"
               color="accent"
               >
@@ -182,7 +182,7 @@ export default function Header() {
           <ul className="flex flex-col items-center py-4 space-y-4">
             <li className="mt-4 w-full text-center">
               <ButtonHeader
-                to="/vip-consultation/?access=vip"
+                to="/vip-consultation/vip/"
                 size="lg"
                 color="accent"
                 >

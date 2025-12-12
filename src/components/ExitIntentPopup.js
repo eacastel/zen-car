@@ -7,7 +7,7 @@ export default function ExitIntentPopup() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const excludedPaths = ["/vip-consultation/?access=vip", "/thank-you/"];
+    const excludedPaths = ["/vip-consultation/vip/", "/thank-you/"];
     const currentPath = window.location.pathname;
     if (excludedPaths.includes(currentPath)) return;
 
@@ -70,7 +70,7 @@ export default function ExitIntentPopup() {
       if (window.openCalendlyPopup) {
         window.openCalendlyPopup();
       } else {
-        window.location.href = "/vip-consultation/?access=vip";
+        window.location.href = "/vip-consultation/vip/";
       }
       setVisible(false);
     }
