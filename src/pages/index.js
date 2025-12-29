@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import { Hero } from '../components/Hero'
+import HeroSocialProof from "../components/HeroSocialProof";
 import CallToAction from '../components/CallToAction'
 
 
@@ -85,6 +86,7 @@ const HomePage = () => {
     <Layout>
       {/* ✅ Hero Section */}
       <Hero />
+      <HeroSocialProof />
 
 
       {/* ✅ Key Benefits Section */}

@@ -16,17 +16,17 @@ export function Hero() {
           )
         }
       }
-      person: file(relativePath: { eq: "hero-consultation.png" }) {
+      person: file(relativePath: { eq: "hero-people1.png" }) {
         childImageSharp {
           gatsbyImageData(
             layout: CONSTRAINED
-            width: 420
+            width: 1200
             placeholder: BLURRED
             quality: 90
           )
         }
       }
-      driveway: file(relativePath: { eq: "hero-driveway-bmw.png" }) {
+      driveway: file(relativePath: { eq: "hero-land-rover2.png" }) {
         childImageSharp {
           gatsbyImageData(
             layout: CONSTRAINED
@@ -48,9 +48,9 @@ export function Hero() {
       className="
         relative
         w-full
-        bg-[#617b7f]    /* hero teal/gray */
+        bg-[#617b7f]    
         text-white
-        pt-[96px]       /* leave room for fixed header */
+        pt-[96px]       
         pb-12
         overflow-hidden
         rounded-b-[40px]
@@ -63,7 +63,7 @@ export function Hero() {
           image={patternImg}
           alt=""
           aria-hidden="true"
-  className="absolute bottom-[-12px] right-[-13px] opacity-20 w-[550px] pointer-events-none"
+          className="absolute bottom-[40px] right-[-40px] opacity-20 w-[1100px] pointer-events-none"
           imgStyle={{ objectFit: "cover" }}
         />
       )}
@@ -102,8 +102,14 @@ export function Hero() {
                 <GatsbyImage
                   image={personImg}
                   alt="Happy client on a call with a Zen Guide confirming car details"
-                  className="w-[220px] h-[340px] object-cover"
-                  imgStyle={{ objectFit: "cover" }}
+                  className="w-[190px] h-[330px] object-cover"
+                  imgStyle={{
+                    objectFit: "cover",
+                    objectPosition: "70% 55%",
+                    transform: "scale(1.2) ",  // zoom
+                    transformOrigin: "1% 58%",
+                  }}
+                  
                 />
               )}
             </div>
@@ -113,7 +119,12 @@ export function Hero() {
                   image={drivewayImg}
                   alt="Premium car delivered to client’s home after using Zen Car Buying"
                   className="w-[200px] h-[340px] sm:w-[240px] sm:h-[360px] object-cover"
-                  imgStyle={{ objectFit: "cover" }}
+                  imgStyle={{
+                    objectFit: "cover",
+                    objectPosition: "37% 55%", // pushes crop toward the front grille side
+                    transform: "scale(1.08)",
+                    transformOrigin: "67% 55%",
+                  }}
                 />
               )}
             </div>
