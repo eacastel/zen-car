@@ -1,3 +1,5 @@
+// zen-car/src/components/Hero.js
+
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -70,17 +72,18 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-4 lg:px-6">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] items-center py-12 lg:py-16">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] items-center pb-12 pt-8 lg:pb-16 lg:pt-10">
           {/* Left column: copy + CTAs */}
           <div className="text-left">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-4 font-poppins">
-              <span className="block">Car buying made</span>
-              <span className="block">simple and</span>
-              <span className="block">stress-free</span>
+            <p className="text-lg uppercase tracking-wider mb-4 font-pirulen">
+            THE MODERN APPROACH TO CAR BUYING
+          </p>
+            <h1 className="text-4xl md:text-5xl mb-4 font-poppins">
+              <span className="block">Car buying made simple and stress-free</span>
             </h1>
 
             <p className="text-base sm:text-lg max-w-md mb-8 text-[#f4fbfb]">
-              Skip the dealership hassle, your Zen Guide handles everything —
+              Enjoy the car buying process without the dealership hassle, your Zen Guide handles everything —
               from research and negotiation to getting the car to your door.
             </p>
 

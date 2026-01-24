@@ -11,7 +11,7 @@ export default function HowItWorks() {
             title: 'Start Your Zen Experience',
             desc: (
                 <>
-                    Choose a service package and book your onboarding call to get started —or book a{" "}
+                    Choose your package to get started —or book a{" "}
                     <Link
                         to="/15min"
                         className="text-gray-200 underline focus:outline-none focus:ring-2 focus:ring-accent"

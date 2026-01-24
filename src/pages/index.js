@@ -1,3 +1,5 @@
+// zen-car/src/pages/index.js
+
 import { navigate } from "gatsby";
 import React, { lazy, Suspense, useState, useEffect, useRef } from 'react'
 import { Link } from 'gatsby'
@@ -6,8 +8,29 @@ import Seo from '../components/Seo'
 import { Hero } from '../components/Hero'
 import HeroSocialProof from "../components/HeroSocialProof";
 import CallToAction from '../components/CallToAction'
+import CTABand from "../components/CTABand";
+import InlineCtaSplitChoice from "../components/InlineCtaSplitChoice";
+import CTAMicroInline from "../components/CTAMicroInline";
+import useRevealOnScroll from "../hooks/useRevealOnScroll";
+import InlineCtaInset from "../components/InlineCtaInset";
+import CarLogoStrip from "../components/CarLogoStrip";
 
 
+
+export function RevealSection({ children }) {
+  const { ref, isVisible } = useRevealOnScroll();
+  return (
+    <div
+      ref={ref}
+      className={[
+        "transition-all duration-700 ease-out",
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
+      ].join(" ")}
+    >
+      {children}
+    </div>
+  );
+}
 
 const HowItWorks = lazy(() => import('../components/HowItWorks'));
 const Testimonials = lazy(() => import('../components/Testimonials'));
@@ -86,56 +109,82 @@ const HomePage = () => {
     <Layout>
       {/* ✅ Hero Section */}
       <Hero />
-      <HeroSocialProof />
-
-
-      {/* ✅ Key Benefits Section */}
-      <section className="py-16 bg-secondary" aria-labelledby="benefits-heading">
-        <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
-          <h2 id="benefits-heading" className="text-4xl font-medium text-accent text-center mb-6">
-            Why Choose <span className="text-accent">Zen Car Buying?</span>
-          </h2>
-          <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">Skip the dealer hassle. We help you buy smarter—with expert guidance, zero pressure, and one flat fee.</p>
-          <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
-            {[
-              { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'We provide tailored suggestions based on your needs & budget.' },
-              { title: 'Nationwide Vehicle Sourcing & Shipping', key: 'sourcing', desc: 'We find you the best deals, no matter where you live.' },
-              { title: 'Time Saving, Stress Free Buying', key: 'negotiation', desc: 'Let us do the work for you!' },
-            ].map((benefit, index) => (
-              <Link
-                key={index}
-                to="/services/"
-                aria-label={`Learn more about ${benefit.title}`}
-                style={{ cursor: "auto", textDecoration: "none", color: "inherit" }}
-              >
-                <div
-                  className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}
-                  <h3 className="text-xl font-medium text-primary">{benefit.title}</h3>
-                  <p className="text-gray-500">{benefit.desc}</p>
-                </div>
-              </Link>
-            ))}
+      <RevealSection>
+        <HeroSocialProof />
+      </RevealSection>
+      <RevealSection>
+        {/* ✅ Key Benefits Section */}
+        <section className="py-16 bg-secondary" aria-labelledby="benefits-heading">
+          <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
+            <h2 id="benefits-heading" className="text-4xl font-medium text-accent text-center mb-6">
+              Why Choose <span className="text-accent">Zen Car Buying?</span>
+            </h2>
+            <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">Skip the dealer hassle. We help you buy smarter—with expert guidance, zero pressure, and one flat fee.</p>
+            <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
+              {[
+                { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'We provide tailored suggestions based on your needs & budget.' },
+                { title: 'Nationwide Vehicle Sourcing & Shipping', key: 'sourcing', desc: 'We find you the best deals, no matter where you live.' },
+                { title: 'Make Your Next Car Purchase Stress Free', key: 'negotiation', desc: 'Our guides streamline the car buying process for you!' },
+              ].map((benefit, index) => (
+                <Link
+                  key={index}
+                  to="/services/"
+                  aria-label={`Learn more about ${benefit.title}`}
+                  style={{ cursor: "auto", textDecoration: "none", color: "inherit" }}
+                >
+                  <div
+                    className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}
+                    <h3 className="text-xl font-medium text-primary">{benefit.title}</h3>
+                    <p className="text-gray-500">{benefit.desc}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
+
+        </section>
+      </RevealSection>
+
+      <RevealSection>
+        <div className="pt-20">
+          <InlineCtaInset />
         </div>
-      </section>
+      </RevealSection>
 
-      {/* ✅ How It Works Section */}
-      <Suspense fallback={<div className="py-20 text-center text-primary">Loading process…</div>}>
-        <HowItWorks />
-      </Suspense>
+      <RevealSection>
+        {/* ✅ How It Works Section */}
+        <Suspense fallback={<div className="py-20 text-center text-primary">Loading process…</div>}>
+          <HowItWorks />
+        </Suspense>
+      </RevealSection>
+
+      <RevealSection>
+        <InlineCtaSplitChoice />
+      </RevealSection>
+
+      <RevealSection>
+        <div ref={testimonialsRef}>
+          {showTestimonials && (
+            <Suspense fallback={<div className="py-20 text-center text-primary">Loading testimonials…</div>}>
+              <Testimonials />
+            </Suspense>
+          )}
+        </div>
+      </RevealSection>
+
+      <RevealSection>
+        <CTABand />
+      </RevealSection>
+
+      <RevealSection>
+        <CarLogoStrip />
+      </RevealSection>
 
 
-
-      <div ref={testimonialsRef}>
-        {showTestimonials && (
-          <Suspense fallback={<div className="py-20 text-center text-primary">Loading testimonials…</div>}>
-            <Testimonials />
-          </Suspense>
-        )}
-      </div>
-
-      <CallToAction />
+      <RevealSection>
+        <CallToAction />
+      </RevealSection>
     </Layout>
   )
 }
