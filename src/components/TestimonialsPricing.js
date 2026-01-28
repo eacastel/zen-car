@@ -54,21 +54,19 @@ export default function TestimonialsPricing() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <Slider {...settings} className="max-w-5xl mx-auto">
           {testimonialsData.map((testimonial, index) => {
-            const image = getImage(
-              data.allFile.edges.find(edge => testimonial.image.includes(edge.node.name))
-                ?.node.childImageSharp.gatsbyImageData
-            )
+            const match = data.allFile.edges.find(({ node }) => {
+              return testimonial.image?.includes(node.name) && node.childImageSharp;
+            });
+            const image = match ? getImage(match.node) : null;
 
             return (
               <div key={index} className="px-4">
                 <div className="bg-secondary rounded-xl shadow-xl p-6 md:p-8 h-full flex flex-col justify-center max-w-md mx-auto">
                   <div className="flex items-start gap-4 text-left">
-                    {image && (
-                      <GatsbyImage
-                        image={image}
-                        alt={`Photo of ${testimonial.name}`}
-                        className="rounded-full w-[64px] h-[64px] object-cover flex-shrink-0"
-                      />
+                    {image ? (
+                      <GatsbyImage image={image} alt={`Photo of ${testimonial.name}`} />
+                    ) : (
+                      <div className="w-24 h-24 bg-gray-300 rounded-full" />
                     )}
 
                     <div className="flex flex-col">
