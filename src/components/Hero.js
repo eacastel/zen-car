@@ -47,7 +47,8 @@ export function Hero() {
     }
   `);
 
-  const patternImg = getImage(data.pattern);
+  const patternData = getImage(data.pattern);
+  const patternSrc = patternData?.images?.fallback?.src || null;
 
   const carSlides = useMemo(() => {
     return (data.heroCars?.nodes || [])
@@ -55,7 +56,7 @@ export function Hero() {
       .filter((s) => !!s.image);
   }, [data.heroCars]);
 
-  // Slick (desktop only)
+  // Desktop slick
   const desktopSliderSettings = {
     dots: true,
     arrows: false,
@@ -74,12 +75,11 @@ export function Hero() {
     adaptiveHeight: false,
   };
 
-  // Mobile scroller (scroll-snap + auto-advance)
+  // Mobile scroll-snap + auto-advance WITHOUT scrollIntoView() (prevents "jump to top")
   const scrollerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const activeIndexRef = useRef(0);
 
-  // Scroll horizontally to a slide WITHOUT affecting page scroll
   const scrollToIndex = useCallback((i) => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -88,17 +88,16 @@ export function Hero() {
     const node = slides[i];
     if (!node) return;
 
+    // Center the slide in the viewport horizontally
     const targetLeft = node.offsetLeft - (el.clientWidth - node.clientWidth) / 2;
     el.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
   }, []);
 
-  // Track active slide on scroll
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
 
     let raf = 0;
-
     const onScroll = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
@@ -133,7 +132,6 @@ export function Hero() {
     };
   }, []);
 
-  // Auto-advance every 5500ms (no scrollIntoView -> no page jump)
   useEffect(() => {
     if (carSlides.length <= 1) return;
 
@@ -154,22 +152,18 @@ export function Hero() {
         shadow-[0_18px_40px_rgba(0,0,0,0.25)]
       "
     >
-      {/* Pattern background: force BEHIND and push down so it doesn't sit "on top" on mobile */}
-      {patternImg && (
-        <GatsbyImage
-          image={patternImg}
-          alt=""
+      {/* Pattern as CSS background layer (prevents it from becoming "content on top") */}
+      {patternSrc && (
+        <div
           aria-hidden="true"
-          className="
-            absolute z-0 pointer-events-none
-            opacity-[0.18]
-            w-[900px] sm:w-[1050px] lg:w-[1200px]
-            right-[-110px]
-            bottom-[-170px] sm:bottom-[-220px] lg:bottom-[40px]
-          "
-          imgStyle={{
-            objectFit: "cover",
-            objectPosition: "right bottom",
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${patternSrc})`,
+            backgroundRepeat: "no-repeat",
+            // push it DOWN and RIGHT so it reads as background, not "top content"
+            backgroundPosition: "right -140px bottom -240px",
+            backgroundSize: "1150px auto",
+            opacity: 0.18,
           }}
         />
       )}
@@ -178,7 +172,7 @@ export function Hero() {
         <div className="grid gap-8 md:gap-10 items-start py-6 md:py-10 lg:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           {/* MEDIA */}
           <div className="order-1 lg:order-2 min-w-0">
-            {/* MOBILE + MD: film-strip scroll-snap (partial neighbors visible) */}
+            {/* MD + MOBILE: film-strip scroll-snap (neighbors visible on purpose) */}
             <div className="lg:hidden">
               {carSlides.length > 0 ? (
                 <div className="relative">
@@ -209,8 +203,7 @@ export function Hero() {
                             relative
                             h-[230px] sm:h-[280px] md:h-[320px]
                             rounded-[24px] overflow-hidden
-                            bg-white/10
-                            ring-1 ring-white/15
+                            bg-white/10 ring-1 ring-white/15
                             shadow-[0_18px_45px_rgba(0,0,0,0.22)]
                           "
                         >
@@ -335,7 +328,7 @@ export function Hero() {
           height: 100%;
         }
 
-        /* prevent tap highlight / weird "ghost" interaction feel */
+        /* reduce weird tap/hover artifacts */
         a, button { -webkit-tap-highlight-color: transparent; }
       `}</style>
     </section>
