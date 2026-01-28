@@ -11,35 +11,35 @@ import { FaChevronLeft, FaChevronRight, FaStar } from 'react-icons/fa'
 
 // Custom arrow components
 const PrevArrow = ({ onClick }) => (
-  <button
-    className="
+    <button
+        className="
       absolute left-2
       top-48 md:top-1/2
       transform translate-y-0 md:-translate-y-1/2
       bg-white p-3 rounded-full shadow-lg hover:bg-gray-200 z-10
       focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
     "
-    onClick={onClick}
-    aria-label="Previous testimonials"
-  >
-    <FaChevronLeft className="text-primary" />
-  </button>
+        onClick={onClick}
+        aria-label="Previous testimonials"
+    >
+        <FaChevronLeft className="text-primary" />
+    </button>
 );
 
 const NextArrow = ({ onClick }) => (
-  <button
-    className="
+    <button
+        className="
       absolute right-2
       top-48 md:top-1/2
       transform translate-y-0 md:-translate-y-1/2
       bg-white p-3 rounded-full shadow-lg hover:bg-gray-200 z-10
       focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
     "
-    onClick={onClick}
-    aria-label="Next testimonials"
-  >
-    <FaChevronRight className="text-primary" />
-  </button>
+        onClick={onClick}
+        aria-label="Next testimonials"
+    >
+        <FaChevronRight className="text-primary" />
+    </button>
 );
 
 export default function Testimonials() {
@@ -74,12 +74,15 @@ export default function Testimonials() {
         autoplaySpeed: 12000,
         arrows: true,
         // adaptiveHeight: true,
-        prevArrow: <PrevArrow />, 
+        prevArrow: <PrevArrow />,
         nextArrow: <NextArrow />,
         responsive: [
             { breakpoint: 1100, settings: { slidesToShow: 2, slidesToScroll: 1, adaptiveHeight: false, } },
-            { breakpoint: 1020, settings: { slidesToShow: 1, slidesToScroll: 1, adaptiveHeight: true
-             } },
+            {
+                breakpoint: 1020, settings: {
+                    slidesToShow: 1, slidesToScroll: 1, adaptiveHeight: true
+                }
+            },
         ],
     }
 
@@ -93,9 +96,11 @@ export default function Testimonials() {
                 <div className="relative w-full max-w-6xl mx-auto">
                     <Slider {...settings}>
                         {testimonialsData.map((testimonial, index) => {
-                            const image = getImage(data.allFile.edges.find(edge =>
-                                testimonial.image.includes(edge.node.name)
-                            )?.node.childImageSharp.gatsbyImageData)
+                            const match = data.allFile.edges.find(({ node }) => {
+                                return testimonial.image?.includes(node.name) && node.childImageSharp;
+                            });
+
+                            const image = match ? getImage(match.node) : null;
 
                             return (
                                 <div key={index} className="px-2 md:px-4">
