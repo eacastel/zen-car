@@ -57,3 +57,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
   });
 };
+exports.onCreatePage = async ({ page, actions }) => {
+  const { deletePage } = actions;
+
+  // Netlify sets CONTEXT = "branch-deploy" for branch deploys
+  const isBranchDeploy = process.env.CONTEXT === "branch-deploy";
+
+  if (isBranchDeploy && /^\/reviews\/?$/.test(page.path)) {
+    deletePage(page);
+  }
+};
