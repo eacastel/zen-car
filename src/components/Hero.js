@@ -1,6 +1,6 @@
 // zen-car/src/components/Hero.js
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import Slider from "react-slick";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -55,7 +55,7 @@ export function Hero() {
       .filter((s) => !!s.image);
   }, [data.heroCars]);
 
-  // Desktop slick
+  // Slick (desktop only)
   const desktopSliderSettings = {
     dots: true,
     arrows: false,
@@ -74,15 +74,31 @@ export function Hero() {
     adaptiveHeight: false,
   };
 
-  // Mobile: scroll-snap + optional auto-advance (keeps your 5500 feel)
+  // Mobile scroller (scroll-snap + auto-advance)
   const scrollerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const activeIndexRef = useRef(0);
 
+  // Scroll horizontally to a slide WITHOUT affecting page scroll
+  const scrollToIndex = useCallback((i) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    const slides = Array.from(el.querySelectorAll("[data-hero-slide]"));
+    const node = slides[i];
+    if (!node) return;
+
+    const targetLeft = node.offsetLeft - (el.clientWidth - node.clientWidth) / 2;
+    el.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
+  }, []);
+
+  // Track active slide on scroll
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
 
     let raf = 0;
+
     const onScroll = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
@@ -90,12 +106,12 @@ export function Hero() {
         if (!slides.length) return;
 
         const viewportCenter = el.scrollLeft + el.clientWidth / 2;
+
         let bestIdx = 0;
         let bestDist = Infinity;
 
         slides.forEach((node, idx) => {
-          const left = node.offsetLeft;
-          const center = left + node.clientWidth / 2;
+          const center = node.offsetLeft + node.clientWidth / 2;
           const dist = Math.abs(center - viewportCenter);
           if (dist < bestDist) {
             bestDist = dist;
@@ -103,6 +119,7 @@ export function Hero() {
           }
         });
 
+        activeIndexRef.current = bestIdx;
         setActiveIndex(bestIdx);
       });
     };
@@ -116,47 +133,52 @@ export function Hero() {
     };
   }, []);
 
+  // Auto-advance every 5500ms (no scrollIntoView -> no page jump)
   useEffect(() => {
     if (carSlides.length <= 1) return;
-    const el = scrollerRef.current;
-    if (!el) return;
 
     const id = window.setInterval(() => {
-      const slides = Array.from(el.querySelectorAll("[data-hero-slide]"));
-      if (!slides.length) return;
-
-      const next = (activeIndex + 1) % slides.length;
-      slides[next].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      const next = (activeIndexRef.current + 1) % carSlides.length;
+      scrollToIndex(next);
     }, 5500);
 
     return () => window.clearInterval(id);
-  }, [activeIndex, carSlides.length]);
+  }, [carSlides.length, scrollToIndex]);
 
   return (
     <section
       className="
-        relative w-full bg-[#617b7f] text-white
+        relative isolate w-full bg-[#617b7f] text-white
         pt-[57px] md:pt-[57px] pb-10 md:pb-12 overflow-hidden
         rounded-b-[40px]
         shadow-[0_18px_40px_rgba(0,0,0,0.25)]
       "
     >
+      {/* Pattern background: force BEHIND and push down so it doesn't sit "on top" on mobile */}
       {patternImg && (
         <GatsbyImage
           image={patternImg}
           alt=""
           aria-hidden="true"
-          className="absolute bottom-[40px] right-[-60px] opacity-20 w-[1200px] pointer-events-none"
-          imgStyle={{ objectFit: "cover" }}
+          className="
+            absolute z-0 pointer-events-none
+            opacity-[0.18]
+            w-[900px] sm:w-[1050px] lg:w-[1200px]
+            right-[-110px]
+            bottom-[-170px] sm:bottom-[-220px] lg:bottom-[40px]
+          "
+          imgStyle={{
+            objectFit: "cover",
+            objectPosition: "right bottom",
+          }}
         />
       )}
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 lg:px-6">
-        {/* min-w-0 is key to prevent the right-side cutoff in grids */}
         <div className="grid gap-8 md:gap-10 items-start py-6 md:py-10 lg:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           {/* MEDIA */}
           <div className="order-1 lg:order-2 min-w-0">
-            {/* MOBILE: swipeable scroll-snap */}
+            {/* MOBILE + MD: film-strip scroll-snap (partial neighbors visible) */}
             <div className="lg:hidden">
               {carSlides.length > 0 ? (
                 <div className="relative">
@@ -164,17 +186,23 @@ export function Hero() {
                     ref={scrollerRef}
                     className="
                       flex gap-4 overflow-x-auto snap-x snap-mandatory
-                      pb-3
+                      px-4 pr-14 pb-3
+                      overscroll-x-contain
                       [-ms-overflow-style:none] [scrollbar-width:none]
                       [&::-webkit-scrollbar]:hidden
                     "
-                    style={{ WebkitOverflowScrolling: "touch" }}
+                    style={{
+                      WebkitOverflowScrolling: "touch",
+                      touchAction: "pan-x",
+                      scrollPaddingLeft: "16px",
+                      scrollPaddingRight: "56px",
+                    }}
                   >
                     {carSlides.map((slide, idx) => (
                       <div
                         key={slide.name}
                         data-hero-slide
-                        className="snap-center shrink-0 w-[92%] sm:w-[86%] md:w-[78%]"
+                        className="snap-center shrink-0 w-[88%] sm:w-[82%] md:w-[72%]"
                       >
                         <div
                           className="
@@ -187,7 +215,6 @@ export function Hero() {
                           "
                         >
                           <div className="pointer-events-none absolute inset-0 z-10 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.10),inset_0_18px_30px_rgba(0,0,0,0.18)]" />
-                          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-black/10 via-transparent to-black/20" />
 
                           <GatsbyImage
                             image={slide.image}
@@ -213,16 +240,10 @@ export function Hero() {
                         type="button"
                         aria-label={`Go to slide ${i + 1}`}
                         className={[
-                          "h-2 w-2 rounded-full transition-opacity",
-                          i === activeIndex ? "opacity-90 bg-white" : "opacity-35 bg-white",
+                          "h-2 w-2 rounded-full transition-opacity bg-white",
+                          i === activeIndex ? "opacity-90" : "opacity-35",
                         ].join(" ")}
-                        onClick={() => {
-                          const el = scrollerRef.current;
-                          if (!el) return;
-                          const slides = Array.from(el.querySelectorAll("[data-hero-slide]"));
-                          if (!slides[i]) return;
-                          slides[i].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-                        }}
+                        onClick={() => scrollToIndex(i)}
                       />
                     ))}
                   </div>
@@ -247,7 +268,6 @@ export function Hero() {
                 "
               >
                 <div className="pointer-events-none absolute inset-0 z-10 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.10),inset_0_18px_30px_rgba(0,0,0,0.18)]" />
-                <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-transparent to-black/15" />
 
                 {carSlides.length > 0 ? (
                   <Slider className="hero-slick" {...desktopSliderSettings}>
@@ -315,7 +335,7 @@ export function Hero() {
           height: 100%;
         }
 
-        /* stop CTA hover "ghosting" in hero only */
+        /* prevent tap highlight / weird "ghost" interaction feel */
         a, button { -webkit-tap-highlight-color: transparent; }
       `}</style>
     </section>
