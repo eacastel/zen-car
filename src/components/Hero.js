@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import Slider from "react-slick";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery, withPrefix } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import ServiceButton from "../components/ServiceButton";
 
@@ -47,8 +47,9 @@ export function Hero() {
     }
   `);
 
-  const patternData = getImage(data.pattern);
-  const patternSrc = patternData?.images?.fallback?.src || null;
+  const patternImg = getImage(data.pattern);
+  const patternSrcRaw = patternImg?.images?.fallback?.src || null;
+  const patternSrc = patternSrcRaw ? withPrefix(patternSrcRaw) : null;
 
   const carSlides = useMemo(() => {
     return (data.heroCars?.nodes || [])
@@ -75,7 +76,7 @@ export function Hero() {
     adaptiveHeight: false,
   };
 
-  // Mobile scroll-snap + auto-advance WITHOUT scrollIntoView() (prevents "jump to top")
+  // Mobile: scroll-snap + auto-advance
   const scrollerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const activeIndexRef = useRef(0);
@@ -88,7 +89,7 @@ export function Hero() {
     const node = slides[i];
     if (!node) return;
 
-    // Center the slide in the viewport horizontally
+    // Center horizontally WITHOUT scrollIntoView (prevents page jumping to top)
     const targetLeft = node.offsetLeft - (el.clientWidth - node.clientWidth) / 2;
     el.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
   }, []);
@@ -105,7 +106,6 @@ export function Hero() {
         if (!slides.length) return;
 
         const viewportCenter = el.scrollLeft + el.clientWidth / 2;
-
         let bestIdx = 0;
         let bestDist = Infinity;
 
@@ -152,7 +152,7 @@ export function Hero() {
         shadow-[0_18px_40px_rgba(0,0,0,0.25)]
       "
     >
-      {/* Pattern as CSS background layer (prevents it from becoming "content on top") */}
+      {/* Background pattern (CSS layer so it can never become "content") */}
       {patternSrc && (
         <div
           aria-hidden="true"
@@ -160,7 +160,6 @@ export function Hero() {
           style={{
             backgroundImage: `url(${patternSrc})`,
             backgroundRepeat: "no-repeat",
-            // push it DOWN and RIGHT so it reads as background, not "top content"
             backgroundPosition: "right -140px bottom -240px",
             backgroundSize: "1150px auto",
             opacity: 0.18,
@@ -172,7 +171,7 @@ export function Hero() {
         <div className="grid gap-8 md:gap-10 items-start py-6 md:py-10 lg:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           {/* MEDIA */}
           <div className="order-1 lg:order-2 min-w-0">
-            {/* MD + MOBILE: film-strip scroll-snap (neighbors visible on purpose) */}
+            {/* MOBILE / MD: swipeable scroll-snap "film strip" */}
             <div className="lg:hidden">
               {carSlides.length > 0 ? (
                 <div className="relative">
@@ -180,7 +179,7 @@ export function Hero() {
                     ref={scrollerRef}
                     className="
                       flex gap-4 overflow-x-auto snap-x snap-mandatory
-                      px-4 pr-14 pb-3
+                      px-3 sm:px-4 pr-14 pb-3
                       overscroll-x-contain
                       [-ms-overflow-style:none] [scrollbar-width:none]
                       [&::-webkit-scrollbar]:hidden
@@ -203,7 +202,8 @@ export function Hero() {
                             relative
                             h-[230px] sm:h-[280px] md:h-[320px]
                             rounded-[24px] overflow-hidden
-                            bg-white/10 ring-1 ring-white/15
+                            bg-white/10
+                            ring-1 ring-white/15
                             shadow-[0_18px_45px_rgba(0,0,0,0.22)]
                           "
                         >
@@ -319,7 +319,6 @@ export function Hero() {
       </div>
 
       <style>{`
-        /* keep slick height stable on desktop */
         .hero-media .hero-slick,
         .hero-media .hero-slick .slick-list,
         .hero-media .hero-slick .slick-track,
@@ -328,7 +327,6 @@ export function Hero() {
           height: 100%;
         }
 
-        /* reduce weird tap/hover artifacts */
         a, button { -webkit-tap-highlight-color: transparent; }
       `}</style>
     </section>
