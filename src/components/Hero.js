@@ -128,7 +128,7 @@ export function Hero() {
         />
       )}
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 lg:px-6">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-6">
         <div className="grid gap-8 md:gap-10 items-start py-6 md:py-10 lg:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           
           {/* MEDIA COLUMN (Slider) */}
@@ -196,17 +196,18 @@ export function Hero() {
             <p className="text-base sm:hidden text-[#f4fbfb] mb-6">
               Your Zen Guide handles the research, negotiation, and delivery.
             </p>
-            <p className="hidden sm:block text-base sm:text-lg max-w-md mb-8 text-[#f4fbfb]">
+            <p className="hidden sm:block text-base sm:text-lg max-w-none lg:max-w-[42ch] xl:max-w-[52ch] mb-8 text-[#f4fbfb]">
+
               Enjoy the car buying process without the dealership hassle, your Zen Guide handles everything —
               from research and negotiation to getting the car to your door.
             </p>
 
             <div className="grid grid-cols-2 gap-3 max-w-[520px] pr-2">
               <ServiceButton size="lg" color="accent">
-                Explore services
+                Explore&nbsp;services
               </ServiceButton>
               <ServiceButton size="lg" color="secondary">
-                Book consultation
+                Book&nbsp;consultation
               </ServiceButton>
             </div>
           </div>
