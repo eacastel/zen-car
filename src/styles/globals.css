@@ -8,7 +8,8 @@ html, body {
   min-height: 100vh;            /* Fixes Calendly popup clipping issues */
   height: auto;                 /* Ensures full content height */
   overflow-y: visible;          /* Ensures body scrolling when necessary */
-  overscroll-behavior: contain; /* Maintains bounce prevention */
+  overscroll-behavior: auto !important;  /* Fixed mouse wheel not working */
+  overscroll-behavior-y: auto !important; /* Fixed mouse wheel not working */
   overflow-x: hidden;
   max-width: 100%; /* Ensures no content exceeds screen width */
 }
