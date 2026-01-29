@@ -39,7 +39,7 @@ export default function HeroSocialProof() {
 
   return (
     <section aria-label="Social proof" className="relative z-20 -mt-10 sm:-mt-12">
-      <div className="container mx-auto px-4 md:px-2  md:px-8 md:max-w-[1280px]">
+      <div className="container mx-auto px-4   md:px-8 md:max-w-[1280px]">
         <div className="bg-white rounded-[28px] shadow-[0_22px_50px_rgba(0,0,0,0.18)] border border-black/10 px-4 sm:px-6 lg:px-8 py-7 sm:py-9">
           {/* Header: title left, logos right (no shrink / no cutoff) */}
           <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between sm:gap-6 mb-6">

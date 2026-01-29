@@ -113,20 +113,21 @@ export function Hero() {
         pt-[57px] md:pt-[57px] pb-10 md:pb-12
         rounded-b-[40px]
         shadow-[0_18px_40px_rgba(0,0,0,0.25)]
-        /* Re-add overflow-hidden to contain the pattern image properly */
         overflow-hidden
       "
     >
       {/* Background Pattern */}
-      {patternImg && (
-        <GatsbyImage
-          image={patternImg}
-          alt=""
-          aria-hidden="true"
-          className="absolute bottom-[40px] right-[-60px] opacity-20 w-[1200px] pointer-events-none z-0"
-          imgStyle={{ objectFit: "cover" }}
-        />
-      )}
+{patternImg && (
+  <div className="absolute bottom-[40px] right-[-60px] opacity-20 w-[1200px] pointer-events-none z-0">
+    <GatsbyImage
+      image={patternImg}
+      alt=""
+      aria-hidden="true"
+      className="w-full h-full"
+      imgStyle={{ objectFit: "cover" }}
+    />
+  </div>
+)}
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-6">
         <div className="grid gap-8 md:gap-10 items-start py-6 md:py-10 lg:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">

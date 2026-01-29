@@ -8,7 +8,7 @@ html, body {
   min-height: 100vh;            /* Fixes Calendly popup clipping issues */
   height: auto;                 /* Ensures full content height */
   overflow-y: visible;          /* Ensures body scrolling when necessary */
-  overscroll-behavior: auto !important; /* Maintains bounce prevention */
+  overscroll-behavior: auto !important; 
   overscroll-behavior-y: auto !important;
   overflow-x: hidden;
   max-width: 100%; /* Ensures no content exceeds screen width */
@@ -66,24 +66,4 @@ a {
   font-weight: 300;
   font-style: oblique; /* ✅ This ensures proper italic rendering */
   font-display: swap;
-}
-
-.reveal-section {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 520ms ease, transform 520ms ease;
-  will-change: opacity, transform;
-}
-
-.reveal-section.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal-section {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
 }
