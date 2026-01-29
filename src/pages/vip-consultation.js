@@ -1,3 +1,5 @@
+// src/pages/vip-consultation.js
+
 import React, { useEffect, useState, useRef } from "react";
 import { navigate } from "gatsby";
 import Seo from "../components/Seo";

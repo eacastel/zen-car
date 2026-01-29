@@ -1,3 +1,5 @@
+// src/pages/vip-consultation/vip.js
+
 import React from "react";
 import Seo from '../../components/Seo'
 import VipConsultationPage from "../vip-consultation";
