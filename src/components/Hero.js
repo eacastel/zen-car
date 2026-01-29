@@ -1,8 +1,8 @@
 // zen-car/src/components/Hero.js
 
-import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import React, { useMemo } from "react";
 import Slider from "react-slick";
-import { graphql, useStaticQuery, withPrefix } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import ServiceButton from "../components/ServiceButton";
 
@@ -12,7 +12,10 @@ import "slick-carousel/slick/slick-theme.css";
 export function Hero() {
   const data = useStaticQuery(graphql`
     query HomeHero2025 {
-      pattern: file(relativePath: { eq: "hero-pattern-car-outline.png" }) {
+      pattern: file(
+        sourceInstanceName: { eq: "images" }
+        relativePath: { eq: "hero-pattern-car-outline.png" }
+      ) {
         childImageSharp {
           gatsbyImageData(
             layout: FULL_WIDTH
@@ -26,7 +29,8 @@ export function Hero() {
       heroCars: allFile(
         filter: {
           sourceInstanceName: { eq: "images" }
-          name: { regex: "/^(hero-car-|hero-land-rover)/" }
+          relativeDirectory: { eq: "hero" }
+          name: { regex: "/^(hero-car-)/" }
           extension: { regex: "/(png|jpe?g|webp)/" }
         }
         sort: { name: ASC }
@@ -47,249 +51,140 @@ export function Hero() {
     }
   `);
 
-  const patternImg = getImage(data.pattern);
-  const patternSrcRaw = patternImg?.images?.fallback?.src || null;
-  const patternSrc = patternSrcRaw ? withPrefix(patternSrcRaw) : null;
-
+  const patternImg = getImage(data?.pattern);
   const carSlides = useMemo(() => {
-    return (data.heroCars?.nodes || [])
+    return (data?.heroCars?.nodes || [])
       .map((n) => ({ name: n.name, image: getImage(n) }))
       .filter((s) => !!s.image);
-  }, [data.heroCars]);
+  }, [data?.heroCars]);
 
-  // Desktop slick
-  const desktopSliderSettings = {
+  // --- SAFE MODE SETTINGS ---
+  const sliderSettings = {
     dots: true,
     arrows: false,
     infinite: true,
-    speed: 650,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    speed: 600,
     autoplay: true,
     autoplaySpeed: 5500,
     pauseOnHover: true,
-    swipe: true,
-    draggable: true,
-    touchMove: true,
-    swipeToSlide: true,
-    lazyLoad: "ondemand",
-    adaptiveHeight: false,
+    
+    // 1. DESKTOP: DISABLE ALL INTERACTIONS
+    // This ensures Slick acts as a simple "viewer" and doesn't hijack the mouse.
+    draggable: false, 
+    swipe: false, // Critical: Disable swipe on desktop to prevent event capturing
+    accessibility: false, // Prevents focus stealing on scroll
+    
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerMode: false,
+
+    responsive: [
+      {
+        // 2. TABLET/MOBILE: RE-ENABLE TOUCH
+        // We only enable swipe/touch behaviors on smaller screens where they are needed.
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          centerPadding: "15%",
+          swipe: true, // Enable swipe for touch devices
+          swipeToSlide: true,
+          touchThreshold: 10,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          centerPadding: "10%",
+          swipe: true,
+          swipeToSlide: true,
+        },
+      },
+    ],
   };
-
-  // Mobile: scroll-snap + auto-advance
-  const scrollerRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeIndexRef = useRef(0);
-
-  const scrollToIndex = useCallback((i) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-
-    const slides = Array.from(el.querySelectorAll("[data-hero-slide]"));
-    const node = slides[i];
-    if (!node) return;
-
-    // Center horizontally WITHOUT scrollIntoView (prevents page jumping to top)
-    const targetLeft = node.offsetLeft - (el.clientWidth - node.clientWidth) / 2;
-    el.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
-  }, []);
-
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-
-    let raf = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const slides = Array.from(el.querySelectorAll("[data-hero-slide]"));
-        if (!slides.length) return;
-
-        const viewportCenter = el.scrollLeft + el.clientWidth / 2;
-        let bestIdx = 0;
-        let bestDist = Infinity;
-
-        slides.forEach((node, idx) => {
-          const center = node.offsetLeft + node.clientWidth / 2;
-          const dist = Math.abs(center - viewportCenter);
-          if (dist < bestDist) {
-            bestDist = dist;
-            bestIdx = idx;
-          }
-        });
-
-        activeIndexRef.current = bestIdx;
-        setActiveIndex(bestIdx);
-      });
-    };
-
-    el.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
-    return () => {
-      cancelAnimationFrame(raf);
-      el.removeEventListener("scroll", onScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (carSlides.length <= 1) return;
-
-    const id = window.setInterval(() => {
-      const next = (activeIndexRef.current + 1) % carSlides.length;
-      scrollToIndex(next);
-    }, 5500);
-
-    return () => window.clearInterval(id);
-  }, [carSlides.length, scrollToIndex]);
 
   return (
     <section
       className="
-        relative isolate w-full bg-[#617b7f] text-white
-        pt-[57px] md:pt-[57px] pb-10 md:pb-12 overflow-hidden
+        hero-section-root
+        relative w-full bg-[#617b7f] text-white
+        pt-[57px] md:pt-[57px] pb-10 md:pb-12
         rounded-b-[40px]
         shadow-[0_18px_40px_rgba(0,0,0,0.25)]
+        /* Re-add overflow-hidden to contain the pattern image properly */
+        overflow-hidden
       "
     >
-      {/* Background pattern (CSS layer so it can never become "content") */}
-      {patternSrc && (
-        <div
+      {/* Background Pattern */}
+      {patternImg && (
+        <GatsbyImage
+          image={patternImg}
+          alt=""
           aria-hidden="true"
-          className="absolute inset-0 z-0 pointer-events-none"
-          style={{
-            backgroundImage: `url(${patternSrc})`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "right -140px bottom -240px",
-            backgroundSize: "1150px auto",
-            opacity: 0.18,
-          }}
+          className="absolute bottom-[40px] right-[-60px] opacity-20 w-[1200px] pointer-events-none z-0"
+          imgStyle={{ objectFit: "cover" }}
         />
       )}
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 lg:px-6">
         <div className="grid gap-8 md:gap-10 items-start py-6 md:py-10 lg:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
-          {/* MEDIA */}
-          <div className="order-1 lg:order-2 min-w-0">
-            {/* MOBILE / MD: swipeable scroll-snap "film strip" */}
-            <div className="lg:hidden">
+          
+          {/* MEDIA COLUMN (Slider) */}
+          {/* Added 'z-0' to push it to the back stack, just in case */}
+          <div className="order-1 lg:order-2 min-w-0 relative z-0">
+            <div
+              className="
+                hero-media
+                relative w-full
+                h-[230px] sm:h-[280px] md:h-[320px] 
+                lg:h-[400px] lg:max-w-[560px] lg:ml-auto
+                rounded-[24px] lg:rounded-[28px]
+                /* Only hide overflow on the media wrapper, not the slider track */
+                overflow-hidden
+              "
+            >
               {carSlides.length > 0 ? (
-                <div className="relative">
-                  <div
-                    ref={scrollerRef}
-                    className="
-                      flex gap-4 overflow-x-auto snap-x snap-mandatory
-                      px-3 sm:px-4 pr-14 pb-3
-                      overscroll-x-contain
-                      [-ms-overflow-style:none] [scrollbar-width:none]
-                      [&::-webkit-scrollbar]:hidden
-                    "
-                    style={{
-                      WebkitOverflowScrolling: "touch",
-                      touchAction: "pan-x",
-                      scrollPaddingLeft: "16px",
-                      scrollPaddingRight: "56px",
-                    }}
-                  >
-                    {carSlides.map((slide, idx) => (
+                <Slider className="hero-slick h-full" {...sliderSettings}>
+                  {carSlides.map((slide, idx) => (
+                    <div key={slide.name} className="h-full px-2 lg:px-0 outline-none">
                       <div
-                        key={slide.name}
-                        data-hero-slide
-                        className="snap-center shrink-0 w-[88%] sm:w-[82%] md:w-[72%]"
+                        className="
+                          relative w-full h-full
+                          rounded-[24px] overflow-hidden
+                          bg-white/10 ring-1 ring-white/15
+                          shadow-[0_18px_45px_rgba(0,0,0,0.22)]
+                        "
                       >
-                        <div
-                          className="
-                            relative
-                            h-[230px] sm:h-[280px] md:h-[320px]
-                            rounded-[24px] overflow-hidden
-                            bg-white/10
-                            ring-1 ring-white/15
-                            shadow-[0_18px_45px_rgba(0,0,0,0.22)]
-                          "
-                        >
-                          <div className="pointer-events-none absolute inset-0 z-10 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.10),inset_0_18px_30px_rgba(0,0,0,0.18)]" />
+                        <div className="pointer-events-none absolute inset-0 z-10 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.10),inset_0_18px_30px_rgba(0,0,0,0.18)]" />
 
-                          <GatsbyImage
-                            image={slide.image}
-                            alt="A car delivered after using Zen Car Buying"
-                            loading={idx === 0 ? "eager" : "lazy"}
-                            className="w-full h-full"
-                            imgStyle={{
-                              objectFit: "cover",
-                              objectPosition: "50% 55%",
-                              transform: "scale(1.02)",
-                            }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* dots */}
-                  <div className="flex justify-center gap-2 mt-2">
-                    {carSlides.map((_, i) => (
-                      <button
-                        key={i}
-                        type="button"
-                        aria-label={`Go to slide ${i + 1}`}
-                        className={[
-                          "h-2 w-2 rounded-full transition-opacity bg-white",
-                          i === activeIndex ? "opacity-90" : "opacity-35",
-                        ].join(" ")}
-                        onClick={() => scrollToIndex(i)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full h-[230px] rounded-[24px] bg-white/10 ring-1 ring-white/15 flex items-center justify-center text-white/85 text-sm text-center px-6">
-                  Add hero images named <strong className="mx-1">hero-car-*</strong> (or hero-land-rover*)
-                  under the Gatsby <strong className="mx-1">images</strong> source.
-                </div>
-              )}
-            </div>
-
-            {/* DESKTOP: slick */}
-            <div className="hidden lg:flex justify-center lg:justify-end min-w-0">
-              <div
-                className="
-                  hero-media
-                  relative w-full max-w-[560px] h-[400px]
-                  rounded-[28px] overflow-hidden
-                  bg-white/10 ring-1 ring-white/20
-                  shadow-[0_22px_55px_rgba(0,0,0,0.26)]
-                "
-              >
-                <div className="pointer-events-none absolute inset-0 z-10 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.10),inset_0_18px_30px_rgba(0,0,0,0.18)]" />
-
-                {carSlides.length > 0 ? (
-                  <Slider className="hero-slick" {...desktopSliderSettings}>
-                    {carSlides.map((slide) => (
-                      <div key={slide.name} className="h-full">
                         <GatsbyImage
                           image={slide.image}
                           alt="A car delivered after using Zen Car Buying"
-                          className="w-full h-[400px]"
+                          loading={idx === 0 ? "eager" : "lazy"}
+                          className="w-full h-full"
                           imgStyle={{
                             objectFit: "cover",
-                            objectPosition: "50% 50%",
+                            objectPosition: "50% 55%",
                             transform: "scale(1.03)",
                           }}
                         />
                       </div>
-                    ))}
-                  </Slider>
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-white/80">
-                    Add hero images to /src/images (hero-car-*.png/jpg/webp)
-                  </div>
-                )}
-              </div>
+                    </div>
+                  ))}
+                </Slider>
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-white/10 rounded-[24px] ring-1 ring-white/15 px-6 text-center text-sm">
+                  Add hero images to src/images/hero/
+                </div>
+              )}
             </div>
           </div>
 
-          {/* COPY */}
-          <div className="order-2 lg:order-1 text-left min-w-0">
+          {/* TEXT COLUMN */}
+          {/* Added 'z-10' to ensure text is ALWAYS clickable/scrollable above the slider */}
+          <div className="order-2 lg:order-1 text-left min-w-0 relative z-10 pointer-events-auto">
             <p className="text-lg uppercase tracking-wider mb-4 font-pirulen text-accent">
               THE MODERN APPROACH TO CAR BUYING
             </p>
@@ -319,15 +214,51 @@ export function Hero() {
       </div>
 
       <style>{`
-        .hero-media .hero-slick,
-        .hero-media .hero-slick .slick-list,
-        .hero-media .hero-slick .slick-track,
-        .hero-media .hero-slick .slick-slide,
-        .hero-media .hero-slick .slick-slide > div {
+        /* 1. FORCE HEIGHTS */
+        .hero-media .slick-slider,
+        .hero-media .slick-list,
+        .hero-media .slick-track,
+        .hero-media .slick-slide,
+        .hero-media .slick-slide > div {
           height: 100%;
         }
 
-        a, button { -webkit-tap-highlight-color: transparent; }
+        /* 2. NUCLEAR SCROLL FIX 
+           This explicitly resets touch-action for the whole section 
+           and only enables pan-y (vertical scroll) on the slider.
+        */
+        .hero-section-root {
+          touch-action: auto !important;
+        }
+        .hero-media .slick-slider,
+        .hero-media .slick-list,
+        .hero-media .slick-track {
+          touch-action: pan-y !important;
+        }
+
+        /* 3. POINTER EVENTS CLEANUP
+           Ensure the slider wrapper doesn't block clicks/scrolls in empty spaces 
+        */
+        .hero-media .slick-list {
+            pointer-events: none;
+        }
+        .hero-media .slick-slide {
+            pointer-events: auto; /* Re-enable events on the images */
+        }
+
+        /* Dots adjustment */
+        .hero-media .slick-dots {
+          bottom: -25px;
+        }
+        .hero-media .slick-dots li button:before {
+          color: white;
+          opacity: 0.35;
+          font-size: 10px;
+        }
+        .hero-media .slick-dots li.slick-active button:before {
+          color: white;
+          opacity: 0.9;
+        }
       `}</style>
     </section>
   );
