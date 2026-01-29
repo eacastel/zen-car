@@ -14,7 +14,7 @@ const ServiceButton = ({
   const sizes = {
     sm: "px-4 py-2 text-sm",
     base: "px-6 py-3",
-    lg: "px-8 py-4 text-lg",
+    lg: "px-4 py-2  md:px-6 md:py-4 md:text-lg",
   };
 
   const colors = {

@@ -67,13 +67,13 @@ export function Hero() {
     autoplay: true,
     autoplaySpeed: 5500,
     pauseOnHover: true,
-    
+
     // 1. DESKTOP: DISABLE ALL INTERACTIONS
     // This ensures Slick acts as a simple "viewer" and doesn't hijack the mouse.
-    draggable: false, 
+    draggable: false,
     swipe: false, // Critical: Disable swipe on desktop to prevent event capturing
     accessibility: false, // Prevents focus stealing on scroll
-    
+
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: false,
@@ -117,21 +117,21 @@ export function Hero() {
       "
     >
       {/* Background Pattern */}
-{patternImg && (
-  <div className="absolute bottom-[40px] right-[-60px] opacity-20 w-[1200px] pointer-events-none z-0">
-    <GatsbyImage
-      image={patternImg}
-      alt=""
-      aria-hidden="true"
-      className="w-full h-full"
-      imgStyle={{ objectFit: "cover" }}
-    />
-  </div>
-)}
+      {patternImg && (
+        <div className="absolute bottom-[40px] right-[-60px] opacity-20 w-[1200px] pointer-events-none z-0">
+          <GatsbyImage
+            image={patternImg}
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full"
+            imgStyle={{ objectFit: "cover" }}
+          />
+        </div>
+      )}
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-6">
         <div className="grid gap-8 md:gap-10 items-start py-6 md:py-10 lg:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
-          
+
           {/* MEDIA COLUMN (Slider) */}
           {/* Added 'z-0' to push it to the back stack, just in case */}
           <div className="order-1 lg:order-2 min-w-0 relative z-0">
@@ -205,10 +205,10 @@ export function Hero() {
 
             <div className="grid grid-cols-2 gap-3 max-w-[520px] pr-2">
               <ServiceButton size="lg" color="accent">
-                Explore&nbsp;services
+                Explore services
               </ServiceButton>
               <ServiceButton size="lg" color="secondary">
-                Book&nbsp;consultation
+                Book consultation
               </ServiceButton>
             </div>
           </div>
