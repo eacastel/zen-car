@@ -13,6 +13,7 @@ import InlineCtaSplitChoice from "../components/InlineCtaSplitChoice";
 import InlineCtaInset from "../components/InlineCtaInset";
 import CarLogoStrip from "../components/CarLogoStrip";
 import RevealSection from "../components/RevealSection";
+import FaqSectionHomepage from "../components/FaqSectionHomepage";
 
 
 
@@ -97,6 +98,11 @@ const HomePage = () => {
       <RevealSection>
         <HeroSocialProof />
       </RevealSection>
+
+            <RevealSection>
+        <CarLogoStrip />
+      </RevealSection>
+
       <RevealSection>
         {/* ✅ Key Benefits Section */}
         <section className="py-16 bg-secondary" aria-labelledby="benefits-heading">
@@ -145,6 +151,10 @@ const HomePage = () => {
       </RevealSection>
 
       <RevealSection>
+  <FaqSectionHomepage />
+</RevealSection>
+
+      <RevealSection>
         <InlineCtaSplitChoice />
       </RevealSection>
 
@@ -162,9 +172,6 @@ const HomePage = () => {
         <CTABand />
       </RevealSection>
 
-      <RevealSection>
-        <CarLogoStrip />
-      </RevealSection>
 
 
       <RevealSection>
