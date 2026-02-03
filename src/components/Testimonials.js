@@ -48,7 +48,9 @@ const NextArrow = ({ onClick }) => (
 export default function Testimonials() {
   const data = useStaticQuery(graphql`
     query {
-      allFile(filter: { sourceInstanceName: { eq: "images" } }) {
+      allFile(filter: { sourceInstanceName: { eq: "images" }
+      extension: { in: ["png", "jpg", "jpeg", "webp"] }
+       }) {
         edges {
           node {
             childImageSharp {
@@ -121,7 +123,10 @@ export default function Testimonials() {
           <Slider {...settings}>
             {testimonialsData.map((testimonial, index) => {
               const match = data.allFile.edges.find(
-                (edge) => edge?.node?.name && testimonial?.image?.includes(edge.node.name)
+                (edge) =>
+                  edge?.node?.childImageSharp &&
+                  edge?.node?.name &&
+                  testimonial?.image?.toLowerCase().includes(edge.node.name.toLowerCase())
               );
 
               const image = match ? getImage(match.node) : null;
