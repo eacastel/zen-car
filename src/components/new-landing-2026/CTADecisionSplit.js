@@ -25,7 +25,7 @@ export default function CTADecisionSplit({
   left = {
     title: "Talk to a Zen Guide",
     badge: "Best first step",
-    body: "Quick call to confirm your needs, timeline, and budget. Then we handle the research and dealer back-and-forth.",
+    body: "Quick call to confirm your needs, timeline and budget. Then we handle the research and dealer back-and-forth.",
     buttonLabel: "Book Free 15-Minute Call",
     buttonTo: "/vip-consultation/?access=vip",
     buttonColor: "accent",

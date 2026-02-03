@@ -1,29 +1,29 @@
 // zen-car/src/components/CarLogoStrip.js
 import React from "react";
 
-import Acura from "../../images/brands/acura.svg";
+import Lexus from "../../images/brands/lexus.svg";
 import Audi from "../../images/brands/audi.svg";
 import BMW from "../../images/brands/bmw.svg";
-import Ford from "../../images/brands/ford.svg";
+import GM from "../../images/brands/gm.svg";
 import Honda from "../../images/brands/honda.svg";
-import Volvo from "../../images/brands/volvo.svg";
+import Toyota from "../../images/brands/toyota.svg";
 import Mercedes from "../../images/brands/mercedes-benz.svg";
 import Hyundai from "../../images/brands/hyundai.svg";
 
 const LOGOS = [
-  { name: "Acura", Src: Acura },
+  { name: "Lexus", Src: Lexus },
   { name: "Audi", Src: Audi },
   { name: "BMW", Src: BMW },
-  { name: "Ford", Src: Ford },
+  { name: "GM", Src: GM },
   { name: "Honda", Src: Honda },
-  { name: "Volvo", Src: Volvo },
+  { name: "Toyota", Src: Toyota },
   { name: "Mercedes-Benz", Src: Mercedes },
   { name: "Hyundai", Src: Hyundai },
 ];
 
 export default function CarLogoStrip({
-  title = "We help with most makes",
-  subtitle = "New or used. Mainstream or premium. Your Zen Guide works with your preferences.",
+  title = "We Help With All Makes and Models",
+  subtitle = "New or used. Buy or lease. We are your car buying advocate. ",
 }) {
   return (
     <section className="w-full bg-[#617b7f] py-10">

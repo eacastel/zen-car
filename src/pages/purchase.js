@@ -59,7 +59,7 @@ const Purchase = () => {
             </h1>
             <p className="mx-auto max-w-4xl text-lg md:text-xl text-center text-primary mb-12">
               Get our full-service concierge package—expert research, inventory
-              sourcing, and purchase help—all in one seamless, cost-effective
+              sourcing and purchase help—all in one seamless, cost-effective
               experience.
             </p>
 
@@ -103,9 +103,9 @@ export const Head = ({ location }) => {
     "@type": "Service",
     name: "Nationwide Car Buying Concierge",
     serviceType:
-      "Nationwide Car Buying Concierge, Consultation, and Assistance",
+      "Nationwide Car Buying Concierge, Consultation and Assistance",
     serviceOutput:
-      "Concierge-style used car buying support, including price negotiation, vehicle sourcing, and shipping coordination.",
+      "Concierge-style used car buying support, including price negotiation, vehicle sourcing and shipping coordination.",
     provider: {
       "@type": "Organization",
       name: "Zen Car Buying",
@@ -117,7 +117,7 @@ export const Head = ({ location }) => {
       name: "United States",
     },
     description:
-      "Zen Car Buying offers a comprehensive nationwide car buying experience, including a free 15-minute consultation, expert recommendations, inventory sourcing, and purchase assistance.",
+      "Zen Car Buying offers a comprehensive nationwide car buying experience, including a free 15-minute consultation, expert recommendations, inventory sourcing and purchase assistance.",
     offers: {
       "@type": "Offer",
       priceCurrency: "USD",
@@ -151,7 +151,7 @@ export const Head = ({ location }) => {
     <>
       <Seo
         title="Zen Car Buying Pricing | Nationwide Car Buying Packages"
-        description="Explore Zen Car Buying's nationwide car buying services — from a free 15-minute consultation to complete concierge assistance covering sourcing, negotiation, and delivery."
+        description="Explore Zen Car Buying's nationwide car buying services — from a free 15-minute consultation to complete concierge assistance covering sourcing, negotiation and delivery."
         pathname={location?.pathname || "/purchase/"}
       />
       <script type="application/ld+json">{JSON.stringify(schemaData)}</script>

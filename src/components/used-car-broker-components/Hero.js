@@ -54,7 +54,7 @@ export function Hero() {
           </h1>
 
           <h2 className="text-xl font-poppins tracking-widest uppercase mb-8">
-            Zen Car Buying’s used car brokers save you time, stress, and 30–50% off original MSRP!
+            Zen Car Buying’s used car brokers save you time, stress and 30–50% off original MSRP!
           </h2>
 
           {/* Buttons - Styled using the existing Button component */}

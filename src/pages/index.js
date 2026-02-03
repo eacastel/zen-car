@@ -93,7 +93,7 @@ const HomePage = () => {
           <h2 id="benefits-heading" className="text-4xl font-medium text-accent text-center mb-6">
             Why Choose <span className="text-accent">Zen Car Buying?</span>
           </h2>
-          <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">Skip the dealer hassle. We help you buy smarter—with expert guidance, zero pressure, and one flat fee.</p>
+          <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">Skip the dealer hassle. We help you buy smarter—with expert guidance, zero pressure and one flat fee.</p>
           <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
             {[
               { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'We provide tailored suggestions based on your needs & budget.' },
@@ -144,7 +144,7 @@ export default HomePage
 export const Head = ({ location }) => (
   <Seo
     title="Zen Car Buying | Stress-Free Concierge Service for New, Lightly Used & Luxury Cars"
-    description="Zen Car Buying is your trusted concierge service for finding new cars, lightly used vehicles, and luxury models at affordable prices nationwide. Our proven 4-step system ensures a stress-free car-buying experience."
+    description="Zen Car Buying is your trusted concierge service for finding new cars, lightly used vehicles and luxury models at affordable prices nationwide. Our proven 4-step system ensures a stress-free car-buying experience."
     pathname={location?.pathname || "/"}
   >
     <script type="application/ld+json">

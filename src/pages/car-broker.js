@@ -73,7 +73,7 @@ const CarBroker = () => {
           <h2 id="car-broker-benefits" className="text-4xl font-medium text-accent text-center mb-6">
             Car Broker Services <span className="text-accent">That Work for You</span>
           </h2>
-          <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">Skip the dealer hassle. We help you buy smarter—with expert guidance, zero pressure, and one flat fee.</p>
+          <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">Skip the dealer hassle. We help you buy smarter—with expert guidance, zero pressure and one flat fee.</p>
           <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
             {[
               { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'We provide tailored suggestions based on your needs & budget.' },
@@ -120,7 +120,7 @@ export default CarBroker
 export const Head = ({ location }) => (
   <Seo
     title="Car Broker for New & Used Cars Nationwide - Zen Car Buying"
-    description="Looking for a trusted car broker? Zen Car Buying provides nationwide car broker services to help you find, negotiate, and buy your ideal car without dealership stress."
+    description="Looking for a trusted car broker? Zen Car Buying provides nationwide car broker services to help you find, negotiate and buy your ideal car without dealership stress."
     pathname={location?.pathname || "/car-broker/"}
   >
     <script type="application/ld+json">
@@ -130,7 +130,7 @@ export const Head = ({ location }) => (
         name: "Car Broker Services",
         serviceType: "Car Broker",
         description:
-          "Looking for a trusted car broker? Zen Car Buying provides nationwide car broker services to help you find, negotiate, and buy your ideal car without dealership stress.",
+          "Looking for a trusted car broker? Zen Car Buying provides nationwide car broker services to help you find, negotiate and buy your ideal car without dealership stress.",
         url: "https://zencarbuying.com/car-broker/",
         provider: {
           "@type": "Organization",

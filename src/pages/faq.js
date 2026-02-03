@@ -42,7 +42,7 @@ const FAQPage = () => {
     <Layout>
       <Seo
         title="Frequently Asked Questions (FAQ) - Zen Car Buying"
-        description="Get expert guidance on buying a used car. Discover how our car buying concierge service can help you find the best deals, source inventory nationwide, and avoid costly mistakes."
+        description="Get expert guidance on buying a used car. Discover how our car buying concierge service can help you find the best deals, source inventory nationwide and avoid costly mistakes."
       />
 
       <section
@@ -185,7 +185,7 @@ export const Head = ({ location }) => {
     <>
       <Seo
         title="Frequently Asked Questions (FAQ) - Zen Car Buying"
-        description="Get expert guidance on buying a used car. Discover how our car buying concierge service helps you find the best deals, source inventory nationwide, and avoid costly mistakes."
+        description="Get expert guidance on buying a used car. Discover how our car buying concierge service helps you find the best deals, source inventory nationwide and avoid costly mistakes."
         pathname={location?.pathname || "/faq/"}
       />
       <script type="application/ld+json">{JSON.stringify(schema)}</script>

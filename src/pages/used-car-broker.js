@@ -73,7 +73,7 @@ const CarBroker = () => {
           <h2 id="car-broker-benefits" className="text-4xl font-medium text-accent text-center mb-6">
             Used Car Broker Services <span className="text-accent">That Work for You</span>
           </h2>
-          <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">Skip the dealer hassle. We help you buy smarter—with expert guidance, zero pressure, and one flat fee.</p>
+          <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">Skip the dealer hassle. We help you buy smarter—with expert guidance, zero pressure and one flat fee.</p>
           <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
             {[
               { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'We provide tailored suggestions based on your needs & budget.' },
@@ -120,7 +120,7 @@ export default CarBroker
 export const Head = ({ location }) => (
   <Seo
     title="Used Car Broker | Nationwide Concierge Car Buying Service"
-    description="Zen Car Buying is a trusted nationwide used car broker service. Our expert car brokers help you find, negotiate, and buy the perfect used car—without dealership stress."
+    description="Zen Car Buying is a trusted nationwide used car broker service. Our expert car brokers help you find, negotiate and buy the perfect used car—without dealership stress."
     pathname={location?.pathname || "/used-car-broker/"}
   >
     <script type="application/ld+json">
@@ -130,7 +130,7 @@ export const Head = ({ location }) => (
         name: "Nationwide Used Car Broker",
         serviceType: "Used Car Broker Service",
         description:
-          "Zen Car Buying is a nationwide used car broker. We help you find, evaluate, and purchase the right used vehicle with no dealership hassle.",
+          "Zen Car Buying is a nationwide used car broker. We help you find, evaluate and purchase the right used vehicle with no dealership hassle.",
         url: "https://zencarbuying.com/used-car-broker/",
         provider: {
           "@type": "Organization",

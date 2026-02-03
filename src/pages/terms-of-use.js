@@ -23,12 +23,12 @@ export default function WebsiteTerms() {
 
           <h2 className="text-2xl font-semibold">2. Intellectual Property</h2>
           <p>
-            All content, trademarks, logos, and other intellectual property displayed on this Site are the property of Zen Car Buying, LLC or its licensors. You may not copy, reproduce, distribute, or otherwise use any content from this Site without express written permission.
+            All content, trademarks, logos and other intellectual property displayed on this Site are the property of Zen Car Buying, LLC or its licensors. You may not copy, reproduce, distribute, or otherwise use any content from this Site without express written permission.
           </p>
 
           <h2 className="text-2xl font-semibold">3. Third-Party Services</h2>
           <p>
-            This Site uses third-party services such as Stripe (for payments), Calendly (for scheduling), and other embedded tools (“Third-Party Services”). By using this Site, you acknowledge that such services are governed by their own terms and conditions, which are not under ZCB’s control. ZCB is not responsible for the content, functionality, or practices of these services.
+            This Site uses third-party services such as Stripe (for payments), Calendly (for scheduling) and other embedded tools (“Third-Party Services”). By using this Site, you acknowledge that such services are governed by their own terms and conditions, which are not under ZCB’s control. ZCB is not responsible for the content, functionality, or practices of these services.
           </p>
 
           <h2 className="text-2xl font-semibold">4. Disclaimer of Warranties</h2>
@@ -68,7 +68,7 @@ export default function WebsiteTerms() {
 export const Head = ({ location }) => (
   <Seo
     title="Website Terms of Use | Zen Car Buying"
-    description="Review Zen Car Buying's Terms of Use for this website, covering user conduct, intellectual property, and limitations of liability when accessing our content or services online."
+    description="Review Zen Car Buying's Terms of Use for this website, covering user conduct, intellectual property and limitations of liability when accessing our content or services online."
     pathname={location.pathname}
     robots="noindex, follow"
   />

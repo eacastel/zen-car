@@ -90,7 +90,7 @@ export const Head = ({ location }) => (
   <>
     <Seo
       title="Used Car Buying Tips & Guides | Zen Car Buying Blog"
-      description="Explore expert car buying tips, market insights, and strategies from Zen Car Buying. Learn how to save on used cars, understand financing, warranties, and more."
+      description="Explore expert car buying tips, market insights and strategies from Zen Car Buying. Learn how to save on used cars, understand financing, warranties and more."
       pathname={location.pathname}
     />
     <script type="application/ld+json">
@@ -98,7 +98,7 @@ export const Head = ({ location }) => (
         "@context": "https://schema.org",
         "@type": "Blog",
         name: "Zen Car Buying Blog",
-        description: "Used car buying strategies, cost-saving guides, and expert advice from Zen Car Buying.",
+        description: "Used car buying strategies, cost-saving guides and expert advice from Zen Car Buying.",
         url: "https://zencarbuying.com/blog/",
         publisher: {
           "@type": "Organization",

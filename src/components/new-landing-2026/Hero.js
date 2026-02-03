@@ -195,7 +195,7 @@ export function Hero() {
             </h1>
 
             <p className="text-base sm:hidden text-[#f4fbfb] mb-6">
-              Your Zen Guide handles the research, negotiation, and delivery.
+              Your Zen Guide handles the research, negotiation and delivery.
             </p>
             <p className="hidden sm:block text-base sm:text-lg max-w-none lg:max-w-[42ch] xl:max-w-[52ch] mb-8 text-[#f4fbfb]">
 
@@ -206,7 +206,7 @@ export function Hero() {
               <ServiceButton size="lg" color="accent">
                 Explore services
               </ServiceButton>
-              <ServiceButton size="lg" color="secondary" to="/vip-consultation/?access=vip">
+              <ServiceButton size="lg" color="secondary" to="/vip-consultation/vip/">
                 Book consultation
               </ServiceButton>
             </div>

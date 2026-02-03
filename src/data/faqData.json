@@ -4,16 +4,16 @@
         "answer": [
             {
                 "type": "text",
-                "content": "A Zen Guide is a car-buying concierge that helps you find, negotiate, and purchase your next vehicle without the hassle of spending long hours shopping at dealerships. We handle everything from research to inventory sourcing to coordinating video walkthroughs, shipping, and paperwork. This ensures you get the best deal with minimal stress."
+                "content": "A Zen Guide is a car-buying concierge that helps you find, negotiate and purchase your next vehicle without the hassle of spending long hours shopping at dealerships. We handle everything from research to inventory sourcing to coordinating video walkthroughs, shipping and paperwork. This ensures you get the best deal with minimal stress."
             }
         ]
     },
     {
-        "question": "What is a car broker, and how is it different from a dealer?",
+        "question": "What is a car broker and how is it different from a dealer?",
         "answer": [
             {
                 "type": "text",
-                "content": "A car broker is a professional who works on your behalf—not the dealer’s—to help you find and negotiate the best deal on a vehicle. Unlike traditional dealers, we don't have inventory to sell, so our only goal is to save you time, money, and stress."
+                "content": "A car broker is a professional who works on your behalf—not the dealer’s—to help you find and negotiate the best deal on a vehicle. Unlike traditional dealers, we don't have inventory to sell, so our only goal is to save you time, money and stress."
             },
             {
                 "type": "text",
@@ -33,7 +33,7 @@
                 "content": [
                     {
                         "label": "Consultation",
-                        "description": "We discuss your needs, budget, and preferences."
+                        "description": "We discuss your needs, budget and preferences."
                     },
                     {
                         "label": "Recommendations",
@@ -45,7 +45,7 @@
                     },
                     {
                         "label": "Purchase Assistance",
-                        "description": "We negotiate the price, financing, and any additional details on your behalf, including coordinating the paperwork and delivery."
+                        "description": "We negotiate the price, financing and any additional details on your behalf, including coordinating the paperwork and delivery."
                     }
                 ]
             }
@@ -56,11 +56,11 @@
         "answer": [
             {
                 "type": "text",
-                "content": "Yes — we help clients find both new and lightly used cars, depending on your needs, preferences, and budget. Many of our clients choose lightly used vehicles (2–4 years old) to save 30–50% off the original MSRP while still enjoying the reliability and features of a newer car."
+                "content": "Yes — we help clients find both new and lightly used cars, depending on your needs, preferences and budget. Many of our clients choose lightly used vehicles (2–4 years old) to save 30–50% off the original MSRP while still enjoying the reliability and features of a newer car."
             },
             {
                 "type": "text",
-                "content": "If you prefer a brand-new car, we can assist with that too — including personalized model recommendations, dealer communication, and negotiation. Whether you're after the best value on a used car or want the latest model with full factory warranty, our Zen Guides will make the process smooth and stress-free."
+                "content": "If you prefer a brand-new car, we can assist with that too — including personalized model recommendations, dealer communication and negotiation. Whether you're after the best value on a used car or want the latest model with full factory warranty, our Zen Guides will make the process smooth and stress-free."
             }
         ]
     },

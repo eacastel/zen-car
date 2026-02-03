@@ -4,13 +4,13 @@ import ServiceButton from "../ServiceButton";
 
 export default function InlineCtaSplitChoice({
   eyebrow = "Choose your next step",
-  sub = "Either path works. Pick what feels easiest right now.",
+  sub = "Pick what works best for you.",
   leftTitle = "Talk to a Zen Guide",
-  leftBody = "Quick call to confirm needs and timeline. Then we handle the dealer back-and-forth.",
+  leftBody = "Schedule an introductory based on your schedule!",
   leftCta = "Book Free 15-Minute Call",
   leftTo = "/vip-consultation/?access=vip",
   rightTitle = "See Packages First",
-  rightBody = "Review options and pricing. Book the call when you’re ready. No pressure.",
+  rightBody = "Review options and pricing. Book the call when you’re ready.",
   rightCta = "View Packages",
   rightTo = "/purchase/",
 }) {

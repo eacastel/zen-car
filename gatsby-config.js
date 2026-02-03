@@ -10,7 +10,7 @@ const normalizeWithSlash = (p) => {
 module.exports = {
   siteMetadata: {
     title: `Zen Car Buying | Stress-Free Concierge Service for New, Lightly Used & Luxury Cars`,
-    description: `Zen Car Buying is your trusted concierge service for finding new cars, lightly used vehicles, and even luxury models at affordable prices nationwide. Our proven 4-step system ensures a stress-free car-buying experience.`,
+    description: `Zen Car Buying is your trusted concierge service for finding new cars, lightly used vehicles and even luxury models at affordable prices nationwide. Our proven 4-step system ensures a stress-free car-buying experience.`,
     author: `@zencarbuying`,
     siteUrl: `https://zencarbuying.com`
   },

@@ -11,7 +11,7 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Zen Car Buying</h3>
             <p className="text-secondary leading-relaxed">
-              Zen Car Buying is a nationwide used car brokerage providing a concierge service for stress-free purchases. Our Zen Guides help you find, evaluate, and purchase lightly used luxury and everyday vehicles — all without stepping into a dealership, saving you time, money, and stress.
+              Zen Car Buying is a nationwide used car brokerage providing a concierge service for stress-free purchases. Our Zen Guides help you find, evaluate and purchase lightly used luxury and everyday vehicles — all without stepping into a dealership, saving you time, money and stress.
             </p>
             <p className="leading-relaxed mt-2">
               Call Us:

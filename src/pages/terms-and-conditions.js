@@ -14,18 +14,18 @@ const TermsPage = () => {
 
         <section className="space-y-6 text-primary">
         <p>
-          This Clickwrap Terms and Conditions Agreement ("Agreement") is a legally binding contract between Zen Car Buying, LLC, a Washington limited liability company ("ZCB," "Company," "we," or "us"), and you ("User" or "you"). By clicking "I AGREE," you confirm that you have reviewed, understood, and accepted this Agreement in its entirety. If you do not agree, you must discontinue access to and use of the Company’s resources, which include vehicle research recommendations, inventory sourcing, and purchase assistance as described herein.
+          This Clickwrap Terms and Conditions Agreement ("Agreement") is a legally binding contract between Zen Car Buying, LLC, a Washington limited liability company ("ZCB," "Company," "we," or "us") and you ("User" or "you"). By clicking "I AGREE," you confirm that you have reviewed, understood and accepted this Agreement in its entirety. If you do not agree, you must discontinue access to and use of the Company’s resources, which include vehicle research recommendations, inventory sourcing and purchase assistance as described herein.
         </p>
 
         <h2 className="text-2xl font-semibold">1. Definitions</h2>
         <h3 className="text-xl font-semibold">1.1 Services</h3>
         <p>
-          The online platform provided by the Company facilitates vehicle research, vehicle sourcing, and/or vehicle purchase assistance by us and for you, and supports transactions, communications, and related activities. The Company provides vehicle research recommendations, inventory sourcing, and purchase assistance as a service to you in consideration for certain fees provided on the Company’s website.
+          The online platform provided by the Company facilitates vehicle research, vehicle sourcing and/or vehicle purchase assistance by us and for you and supports transactions, communications and related activities. The Company provides vehicle research recommendations, inventory sourcing and purchase assistance as a service to you in consideration for certain fees provided on the Company’s website.
         </p>
 
         <h3 className="text-xl font-semibold">1.2 Platform</h3>
         <p>
-          Our website, including integrated content, tools, technology, and features.
+          Our website, including integrated content, tools, technology and features.
         </p>
 
         <h3 className="text-xl font-semibold">1.3 Agreement</h3>
@@ -65,7 +65,7 @@ const TermsPage = () => {
 
         <h3 className="text-xl font-semibold">3.4 No Warranty</h3>
         <p>
-          The Company provides the platform "as is" and disclaims all warranties, express or implied, including warranties of merchantability, fitness for a particular purpose, and non-infringement.
+          The Company provides the platform "as is" and disclaims all warranties, express or implied, including warranties of merchantability, fitness for a particular purpose and non-infringement.
         </p>
 
         <h3 className="text-xl font-semibold">3.5 Limitation of Liability</h3>
@@ -86,12 +86,12 @@ const TermsPage = () => {
         <h2 className="text-2xl font-semibold">4. Required Regulatory Disclosures</h2>
         <h3 className="text-xl font-semibold">4.1 Fee Disclosures</h3>
         <p>
-          The Company charges service fees for its Services, including for vehicle research recommendations, inventory sourcing, purchase assistance, and other premium features. Fees will be transparently disclosed on the Platform before incurring charges, in compliance with the Washington Consumer Protection Act (CPA).
+          The Company charges service fees for its Services, including for vehicle research recommendations, inventory sourcing, purchase assistance and other premium features. Fees will be transparently disclosed on the Platform before incurring charges, in compliance with the Washington Consumer Protection Act (CPA).
         </p>
 
         <h3 className="text-xl font-semibold">4.2 Company Limitations</h3>
         <p>
-          The Company operates as a facilitator and is not a party to purchase agreements between you and a dealer/individual. You are responsible for independently verifying all terms with the dealer directly, conducting your own due diligence, and ensuring compliance with any applicable warranties and conditions.
+          The Company operates as a facilitator and is not a party to purchase agreements between you and a dealer/individual. You are responsible for independently verifying all terms with the dealer directly, conducting your own due diligence and ensuring compliance with any applicable warranties and conditions.
         </p>
 
         <h3 className="text-xl font-semibold">4.3 Additional Disclosures</h3>
@@ -116,7 +116,7 @@ const TermsPage = () => {
 
         <h3 className="text-xl font-semibold">6.2 Payment Terms</h3>
         <p>
-          Payments must be made via accepted methods (i.e., Stripe), and failure to remit payment may result in suspension of the Services.
+          Payments must be made via accepted methods (i.e., Stripe) and failure to remit payment may result in suspension of the Services.
         </p>
 
         <h3 className="text-xl font-semibold">6.3 Fee Example</h3>
@@ -137,7 +137,7 @@ const TermsPage = () => {
 
         <h3 className="text-xl font-semibold">7.3 Dispute Resolution</h3>
         <p>
-          Prior to filing any legal action, The Parties agree to enter into mediation in good faith, and with a sincere desire to reach a mutually acceptable resolution of their differences.
+          Prior to filing any legal action, The Parties agree to enter into mediation in good faith and with a sincere desire to reach a mutually acceptable resolution of their differences.
         </p>
 
         <h2 className="text-2xl font-semibold">8. Technological Requirements and UI Enforceability</h2>
@@ -148,7 +148,7 @@ const TermsPage = () => {
 
         <h3 className="text-xl font-semibold">8.2 Accessibility</h3>
         <p>
-          This Agreement complies with UI design best practices, including clear presentation, font colors/sizes, and conspicuous placement of critical disclaimers.
+          This Agreement complies with UI design best practices, including clear presentation, font colors/sizes and conspicuous placement of critical disclaimers.
         </p>
 
         <h2 className="text-2xl font-semibold">9. Termination and Suspension</h2>
@@ -174,7 +174,7 @@ const TermsPage = () => {
         <h2 className="text-2xl font-semibold">13. User Acknowledgements</h2>
         <p>
           By clicking "I AGREE," you acknowledge that: <br />
-          • You have read, understood, and accepted the terms of this Agreement. <br />
+          • You have read, understood and accepted the terms of this Agreement. <br />
           • You are at least 18 years old and legally capable of entering into a binding contract. <br />
           • Your consent creates a legally enforceable agreement under Washington law.
         </p>
@@ -199,7 +199,7 @@ export default TermsPage;
 export const Head = ({ location }) => (
   <Seo
     title="Service Terms & Conditions | Zen Car Buying"
-    description="Read Zen Car Buying's Terms & Conditions governing all concierge car-buying services, including pricing, deliverables, limitations, and refund policies."
+    description="Read Zen Car Buying's Terms & Conditions governing all concierge car-buying services, including pricing, deliverables, limitations and refund policies."
     pathname={location.pathname}
     robots="noindex, follow"
   />

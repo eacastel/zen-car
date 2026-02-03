@@ -38,9 +38,7 @@ export default function InlineCtaInset({
               <ServiceButton to={primaryTo} size="lg" color="accent">
                 {primaryLabel}
               </ServiceButton>
-              <ServiceButton to={secondaryTo} size="lg" color="secondary">
-                {secondaryLabel}
-              </ServiceButton>
+
             </div>
           </div>
         </div>

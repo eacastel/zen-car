@@ -75,21 +75,18 @@ export default function FaqSectionHomepage() {
 
         <div className="max-w-3xl mx-auto bg-white rounded-[28px] shadow-[0_22px_50px_rgba(0,0,0,0.12)] border border-black/10 px-6 sm:px-8">
           <FaqItem
-            question="What car brands do you specialize in?"
-            answer="We work with all major makes and models. We’re especially experienced with premium and luxury brands, but the process works the same no matter what you’re buying."
+            question="What kinds of transactions do you support?"
+            answer="We do everything from leases, to financing and cash deals."
           />
           <FaqItem
-            question="Do I pay the dealer or you?"
-            answer="You pay the dealer directly for the vehicle. You pay Zen Car Buying a flat service fee. We don’t mark up the price of the car."
+            question="What brands?"
+            answer="We work with all makes and models ranging from premium luxury brands to budget vehicles including new and used."
           />
           <FaqItem
-            question="Can you help with trade-ins?"
-            answer="Yes. We can help you compare options and guide you to the strongest trade-in path so you don’t leave value on the table."
+            question="Am I buying the car from you?"
+            answer="You buy the car directly from the dealer; however, we negotiate the best price and coordinate all the paper work."
           />
-          <FaqItem
-            question="How does delivery work?"
-            answer="If the car is local, you can pick it up or we can arrange drop-off. If it’s out of state, we coordinate transport to bring it to your driveway."
-          />
+          
         </div>
       </div>
     </section>

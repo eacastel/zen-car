@@ -23,7 +23,7 @@ const Services = () => {
           </h1>
 
           <p className="text-xl md:text-2xl text-primary font-medium mb-8">
-            We identify your needs, find the best matches, negotiate the best deal, and get the car to your door — saving you time, money, and stress.
+            We identify your needs, find the best matches, negotiate the best deal and get the car to your door — saving you time, money and stress.
           </p>
 
           {/* Services Offered */}
@@ -37,7 +37,7 @@ const Services = () => {
           </div>
 
           <p className="text-xl text-gray-700 mb-8">
-            Zen Car Buying offers two flexible service options designed to save you time, money, and hassle—whether you need full support or just expert guidance.
+            Zen Car Buying offers two flexible service options designed to save you time, money and hassle—whether you need full support or just expert guidance.
           </p>
 
           {/* Clickable Packages */}
@@ -97,7 +97,7 @@ const Services = () => {
           {[
             {
               title: "1-on-1 Onboarding Call",
-              desc: "We get to know your budget, needs, and goals so everything is tailored to you.",
+              desc: "We get to know your budget, needs and goals so everything is tailored to you.",
             },
             {
               title: "Personalized Car Picks",
@@ -109,7 +109,7 @@ const Services = () => {
             },
             {
               title: "Seamless Purchase Support",
-              desc: "We handle the back-and-forth with dealers, paperwork, and delivery saving you time and stress.",
+              desc: "We handle the back-and-forth with dealers, paperwork and delivery saving you time and stress.",
             },
           ].map((service, idx) => (
             <Link
@@ -168,7 +168,7 @@ export const Head = ({ location }) => {
     name: "Nationwide Car Buying Concierge",
     serviceType: "Nationwide Car Buying Concierge, Consultation and Assistance",
     serviceOutput:
-      "Concierge-style used car buying support, including price negotiation, vehicle sourcing, and shipping coordination.",
+      "Concierge-style used car buying support, including price negotiation, vehicle sourcing and shipping coordination.",
     provider: {
       "@type": "Organization",
       name: "Zen Car Buying",
@@ -177,7 +177,7 @@ export const Head = ({ location }) => {
     },
     areaServed: { "@type": "Country", name: "United States" },
     description:
-      "Zen Car Buying offers a comprehensive, nationwide car buying experience including a free 15-minute consultation, expert recommendations, inventory sourcing, and purchase assistance.",
+      "Zen Car Buying offers a comprehensive, nationwide car buying experience including a free 15-minute consultation, expert recommendations, inventory sourcing and purchase assistance.",
     offers: {
       "@type": "AggregateOffer",
       priceCurrency: "USD",
@@ -196,7 +196,7 @@ export const Head = ({ location }) => {
     <>
       <Seo
         title="Zen Car Buying Services | Nationwide Car Buying Packages"
-        description="Explore Zen Car Buying's nationwide car buying services. Choose a package to get started, or book a free 15-minute onboarding call to learn how we save you time, money, and stress."
+        description="Explore Zen Car Buying's nationwide car buying services. Choose a package to get started, or book a free 15-minute onboarding call to learn how we save you time, money and stress."
         pathname={location?.pathname || "/services/"}
       />
       <script type="application/ld+json">{JSON.stringify(schemaData)}</script>

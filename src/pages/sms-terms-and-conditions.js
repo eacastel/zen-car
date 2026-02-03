@@ -89,7 +89,7 @@ export default function SmsTerms() {
 export const Head = ({ location }) => (
   <Seo
     title="SMS Terms & Conditions | Zen Car Buying"
-    description="Review Zen Car Buying's SMS Terms & Conditions outlining consent, message frequency, data rates, opt-out instructions, and privacy practices related to text messaging."
+    description="Review Zen Car Buying's SMS Terms & Conditions outlining consent, message frequency, data rates, opt-out instructions and privacy practices related to text messaging."
     pathname={location.pathname}
     robots="noindex, follow"
   />

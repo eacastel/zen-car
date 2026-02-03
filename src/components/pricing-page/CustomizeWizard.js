@@ -106,7 +106,7 @@ const CustomizeWizard = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-primary">Research + Inventory Sourcing</h3>
                       <p className="text-sm text-gray-600 mt-1">
-                        We'll help you choose the best make, model, and year — and locate ideal matches.
+                        We'll help you choose the best make, model and year — and locate ideal matches.
                       </p>
                     </div>
                   </div>
@@ -136,7 +136,7 @@ const CustomizeWizard = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-primary">Purchase Assistance</h3>
                       <p className="text-sm text-gray-600 mt-1">
-                        We negotiate, confirm options, coordinate delivery, and ensure everything’s right before you sign.
+                        We negotiate, confirm options, coordinate delivery and ensure everything’s right before you sign.
                       </p>
                     </div>
                   </div>

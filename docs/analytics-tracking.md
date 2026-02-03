@@ -1,6 +1,6 @@
 # Analytics & Conversion Tracking Documentation
 
-This file documents the current analytics, advertising, and event tracking implementation for Zen Car Buying, including Google Ads, GA4, Meta (Facebook) Pixel + CAPI, and Calendly integration.
+This file documents the current analytics, advertising and event tracking implementation for Zen Car Buying, including Google Ads, GA4, Meta (Facebook) Pixel + CAPI and Calendly integration.
 
 ---
 

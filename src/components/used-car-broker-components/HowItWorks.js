@@ -29,7 +29,7 @@ export default function HowItWorks() {
         {
             step: '2',
             title: 'Get Recommendations',
-            desc: 'Receive a tailored proposal with ideal vehicles, trims, and years.',
+            desc: 'Receive a tailored proposal with ideal vehicles, trims and years.',
         },
         {
             step: '3',

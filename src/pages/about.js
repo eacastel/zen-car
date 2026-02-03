@@ -75,7 +75,7 @@ export default function AboutPage({ data }) {
         </section>
 
         <section className="mb-12">
-          <h2 className="text-2xl font-semibold text-primary mb-4">How We Save You Time, Money, and Stress</h2>
+          <h2 className="text-2xl font-semibold text-primary mb-4">How We Save You Time, Money and Stress</h2>
           <p className="text-base md:text-lg text-primary leading-relaxed mb-6 max-w-3xl">
             We make car buying simple and stress-free—no dealer games, no wasted time. Just expert help and one flat fee, with your best deal as our only goal.
           </p>
@@ -106,17 +106,17 @@ export default function AboutPage({ data }) {
               {
                 step: '2',
                 title: 'Receive Expert Recommendations',
-                desc: 'We hand-select your ideal vehicle based on your lifestyle, reliability needs, and long-term goals.',
+                desc: 'We hand-select your ideal vehicle based on your lifestyle, reliability needs and long-term goals.',
               },
               {
                 step: '3',
                 title: 'Get Matched with Available Inventory',
-                desc: 'We source the best available listings nationwide, verify them, and present them to you with key details.',
+                desc: 'We source the best available listings nationwide, verify them and present them to you with key details.',
               },
               {
                 step: '4',
                 title: 'Enjoy Purchase & Delivery Support',
-                desc: 'We negotiate, manage paperwork, and coordinate delivery so you can buy with confidence and ease.',
+                desc: 'We negotiate, manage paperwork and coordinate delivery so you can buy with confidence and ease.',
               },
             ].map((item, index) => (
               <motion.div
@@ -204,7 +204,7 @@ export const Head = ({ location }) => {
     name: "About Zen Car Buying",
     url: `${siteUrl}/about/`,
     description:
-      "Learn about Zen Car Buying's nationwide car brokering and concierge service—our mission, process, and commitment to helping drivers buy the right vehicle stress-free.",
+      "Learn about Zen Car Buying's nationwide car brokering and concierge service—our mission, process and commitment to helping drivers buy the right vehicle stress-free.",
     mainEntity: {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
@@ -212,7 +212,7 @@ export const Head = ({ location }) => {
       url: siteUrl,
       logo: `${siteUrl}/zen-car-buying-logo.png`,
       description:
-        "Zen Car Buying provides local and nationwide car brokering and concierge services to source, negotiate, and deliver the best new and used vehicles.",
+        "Zen Car Buying provides local and nationwide car brokering and concierge services to source, negotiate and deliver the best new and used vehicles.",
       foundingDate: "2020",
       founder: {
         "@type": "Person",
@@ -238,7 +238,7 @@ export const Head = ({ location }) => {
     <>
       <Seo
         title="About Zen Car Buying | Nationwide Car Broker & Concierge"
-        description="Zen Car Buying provides local and nationwide car brokering and concierge services to source, negotiate, and deliver the best new and used vehicles—saving you time, money, and stress."
+        description="Zen Car Buying provides local and nationwide car brokering and concierge services to source, negotiate and deliver the best new and used vehicles—saving you time, money and stress."
         pathname={location?.pathname || "/about/"}
       />
       <script type="application/ld+json">
