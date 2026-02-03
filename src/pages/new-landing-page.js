@@ -223,7 +223,7 @@ export default HomePage
 
 
 export const Head = ({ location }) => (
-  <Seo
+    <Seo
     title="Zen Car Buying | Stress-Free Concierge Service for New, Lightly Used & Luxury Cars"
     description="Zen Car Buying is your trusted concierge service for finding new cars, lightly used vehicles and luxury models at affordable prices nationwide. Our proven 4-step system ensures a stress-free car-buying experience."
     pathname={location?.pathname || "/"}
