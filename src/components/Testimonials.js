@@ -103,10 +103,11 @@ export default function Testimonials() {
         <div className="relative w-full max-w-6xl mx-auto">
           <Slider {...settings}>
             {testimonialsData.map((testimonial, index) => {
-              const imageNode = data.allFile.edges.find(edge =>
-                testimonial.image && testimonial.image.includes(edge.node.name)
-              )
-              const image = getImage(imageNode?.node.childImageSharp.gatsbyImageData)
+              const match = data.allFile.edges.find(
+                (edge) => edge?.node?.name && testimonial?.image?.includes(edge.node.name)
+              );
+
+              const image = match ? getImage(match.node) : null;
 
               const alt = buildAlt(testimonial.name, testimonial.location)
               const { name, car } = splitNameAndCar(testimonial.name)
@@ -153,7 +154,7 @@ export default function Testimonials() {
                         <div className="w-full overflow-hidden rounded-md mb-4">
                           <GatsbyImage
                             image={image}
-                            alt={alt}
+                            alt={alt || "Testimonial"}
                             className="rounded-md mb-4 w-full max-w-[600px] h-auto object-cover"
                           />
                         </div>

@@ -206,7 +206,7 @@ export function Hero() {
               <ServiceButton size="lg" color="accent">
                 Explore services
               </ServiceButton>
-              <ServiceButton size="lg" color="secondary">
+              <ServiceButton size="lg" color="secondary" to="/vip-consultation/?access=vip">
                 Book consultation
               </ServiceButton>
             </div>

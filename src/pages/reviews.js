@@ -44,10 +44,12 @@ export default function ReviewsPage({ data }) {
   const imageMap = useMemo(() => {
     const map = new Map();
     data.allFile.edges.forEach(({ node }) => {
-      map.set(node.name, getImage(node.childImageSharp.gatsbyImageData));
+      const img = getImage(node);
+      if (img) map.set(node.name, img);
     });
     return map;
   }, [data]);
+
 
   // Compute aggregate rating from mixed formats
   const ratingNums = testimonialsData
@@ -95,7 +97,7 @@ export default function ReviewsPage({ data }) {
     <Layout>
       <div className="container mx-auto px-6 md:px-12 lg:px-24 xl:px-32 py-12">
         <header className="max-w-3xl">
-          <h1 className="text-4xl md:text-5xl font-poppins text-primary mb-4">
+          <h1 className="text-4xl md:text-5xl font-poppins text-primary mb-4 capitalize">
             Reviews from Zen Car Buying Clients
           </h1>
           <p className="text-lg text-primary/90">

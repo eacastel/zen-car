@@ -42,16 +42,37 @@ export default function TestimonialsPricing() {
     arrows: false,
     responsive: [{ breakpoint: 768, settings: { slidesToShow: 1 } }],
   }
+  const splitNameAndCar = (full) => {
+  if (!full) return { name: full || '', car: '' }
+  const parts = full.split(/--|—|-\s/).map(s => s.trim()).filter(Boolean)
+  if (parts.length >= 2) return { name: parts[0], car: parts.slice(1).join(' - ') }
+  return { name: full, car: '' }
+}
+
+  const buildAlt = (nameCar, location) => {
+  const { name, car } = splitNameAndCar(nameCar)
+  if (name && car && location) return `Review from ${name} in ${location} about ${car}`
+  if (name && car) return `Review from ${name} about ${car}`
+  if (name && location) return `Review from ${name} in ${location}`
+  return `Customer review`
+}
+
 
   return (
     <section className="py-10 bg-white text-center" aria-labelledby="testimonials-pricing-heading">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <Slider {...settings} className="max-w-5xl mx-auto">
           {testimonialsData.map((testimonial, index) => {
-            const image = getImage(
-              data.allFile.edges.find(edge => testimonial.image.includes(edge.node.name))
-                ?.node.childImageSharp.gatsbyImageData
-            )
+            const match = data.allFile.edges.find(
+              (edge) =>
+                edge?.node?.name &&
+                testimonial?.image &&
+                testimonial.image.includes(edge.node.name)
+            );
+            const alt = buildAlt(testimonial.name, testimonial.location)
+
+            const image = match ? getImage(match.node) : null;
+
 
             return (
               <div key={index} className="px-4">
@@ -62,11 +83,7 @@ export default function TestimonialsPricing() {
                 >
                   <div className="bg-secondary rounded-xl shadow-xl p-6 md:p-8 h-full flex flex-col justify-center max-w-md mx-auto hover:shadow-2xl transition">
                     <div className="flex items-start gap-4 text-left">
-                      {image && (
-                        <GatsbyImage
-                          image={image}
-                          alt={`Photo of ${testimonial.name}`}
-                          className="rounded-full w-[64px] h-[64px] object-cover flex-shrink-0"
+                      {image && ( <GatsbyImage image={image} alt={`Photo of ${alt || "Testimonial"}}`} className="rounded-full w-[64px] h-[64px] object-cover flex-shrink-0"
                         />
                       )}
 

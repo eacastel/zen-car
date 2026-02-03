@@ -8,20 +8,20 @@
     "location": "Clinton, New Jersey"
   },
   {
-    "name": "Anne -- 2017 Camaro ZL1",
-    "quote": "Excellent service from Brian A. at Zen Brokers. Brian was attentive 7 days a week any time of day. Smooth, uneventful transaction that got me the car I wanted. I would recommend Brian and Zen Brokers to a friend.",
-    "image": "2017-Camaro-ZL1.jpeg",
-    "rating": "⭐⭐⭐⭐⭐",
-    "note": "“Bitchin’ Camaro”",
-    "location": "Fleetwood, Pennsylvania"
-  },
-  {
     "name": "Reid -- 2025 Lexus RX 350",
     "quote": "Brian Alexander is outstanding! He followed up on every detail and was available on a moment’s notice. He was tenacious with the car dealers we approached and got us a very fair deal. He’s the best car person I have dealt with.",
     "image": "2025-lexus-rx-350.png",
     "rating": "⭐⭐⭐⭐⭐",
-    "note": "Outstanding service and a very fair deal",
+    "note": "Outstanding service",
     "location": "Denver, Colorado"
+  },
+  {
+    "name": "Lisa -- 2016 Hyundai Genesis R Spec",
+    "quote": "100% Satisfaction using Zen Car! Brian gave continuous options and stayed at our price point! We couldn’t be happier with our experience and the car Brian found for us!",
+    "image": "2024-lisa-success.png",
+    "rating": "⭐⭐⭐⭐⭐",
+    "note": "High mileage success!",
+    "location": "Redondo Beach, California"
   },
   {
     "name": "Ian -- 2021 Ford F150",
@@ -40,12 +40,12 @@
     "location": "Weston, Massachusetts"
   },
   {
-    "name": "Lisa -- 2024 Hyundai Genesis R Spec",
-    "quote": "100% Satisfaction using Zen Car! Brian gave continuous options and stayed at our price point! We couldn’t be happier with our experience and the car Brian found for us!",
-    "image": "2024-lisa-success.png",
+    "name": "Anne -- 2017 Camaro ZL1",
+    "quote": "Excellent service from Brian A. at Zen Brokers. Brian was attentive 7 days a week any time of day. Smooth, uneventful transaction that got me the car I wanted. I would recommend Brian and Zen Brokers to a friend.",
+    "image": "2017-Camaro-ZL1.jpeg",
     "rating": "⭐⭐⭐⭐⭐",
-    "note": "High mileage success!",
-    "location": "Redondo Beach, California"
+    "note": "“Bitchin’ Camaro”",
+    "location": "Fleetwood, Pennsylvania"
   },
   {
     "name": "Ashley -- 2025 Subaru Forester",
