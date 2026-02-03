@@ -1,6 +1,6 @@
 // src/components/CTABand.js
 import React from "react";
-import ServiceButton from "../components/ServiceButton";
+import ServiceButton from "../ServiceButton";
 
 export default function CTABand({
   eyebrow = "Ready when you are",

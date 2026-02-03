@@ -1,14 +1,14 @@
 // zen-car/src/components/CarLogoStrip.js
 import React from "react";
 
-import Acura from "../images/brands/acura.svg";
-import Audi from "../images/brands/audi.svg";
-import BMW from "../images/brands/bmw.svg";
-import Ford from "../images/brands/ford.svg";
-import Honda from "../images/brands/honda.svg";
-import Volvo from "../images/brands/volvo.svg";
-import Mercedes from "../images/brands/mercedes-benz.svg";
-import Hyundai from "../images/brands/hyundai.svg";
+import Acura from "../../images/brands/acura.svg";
+import Audi from "../../images/brands/audi.svg";
+import BMW from "../../images/brands/bmw.svg";
+import Ford from "../../images/brands/ford.svg";
+import Honda from "../../images/brands/honda.svg";
+import Volvo from "../../images/brands/volvo.svg";
+import Mercedes from "../../images/brands/mercedes-benz.svg";
+import Hyundai from "../../images/brands/hyundai.svg";
 
 const LOGOS = [
   { name: "Acura", Src: Acura },

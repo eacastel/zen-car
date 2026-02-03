@@ -3,7 +3,7 @@
 import React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import testimonialsData from "../data/testimonials.json";
+import testimonialsData from "../../data/testimonials.json";
 
 const StarRow = () => (
   <div className="flex items-center gap-1 shrink-0" aria-label="5 out of 5 stars">

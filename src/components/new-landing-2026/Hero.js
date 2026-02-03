@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import Slider from "react-slick";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import ServiceButton from "../components/ServiceButton";
+import ServiceButton from "../ServiceButton";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

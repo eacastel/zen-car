@@ -1,6 +1,6 @@
 // src/components/InlineCtaSplitChoice.js
 import React from "react";
-import ServiceButton from "./ServiceButton";
+import ServiceButton from "../ServiceButton";
 
 export default function InlineCtaSplitChoice({
   eyebrow = "Choose your next step",
