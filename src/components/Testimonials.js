@@ -84,6 +84,23 @@ export default function Testimonials() {
     ],
   }
 
+  const trimReview = (text, max = 180) => {
+  if (!text) return "";
+  const t = text.trim();
+
+  if (t.length <= max) return t;
+
+  // trim at a word boundary
+  let cut = t.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  if (lastSpace > 60) cut = cut.slice(0, lastSpace);
+
+  // remove trailing punctuation/spaces so we don't end up with ".…"
+  cut = cut.replace(/[\s.,;:!?)\]]+$/g, "");
+
+  return `${cut}…`;
+};
+
   return (
     <section className="py-20 bg-secondary text-center" aria-labelledby="testimonials-heading">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -162,7 +179,10 @@ export default function Testimonials() {
                         <div className="w-24 h-24 bg-gray-300 rounded-full mb-4" aria-hidden="true" />
                       )}
 
-                      <p className="text-base italic text-gray-700 px-2">"{testimonial.quote}"</p>
+                      <p className="text-base italic text-gray-700 px-2">
+                        "{trimReview(testimonial.quote, 180)}"
+                      </p>
+
 
                       {/* Yellow stars */}
                       <div className="flex justify-center mt-3" aria-label={`Rated ${ratingValue} out of 5 stars`}>
