@@ -6,7 +6,7 @@ export default function InlineCtaSplitChoice({
   eyebrow = "Choose your next step",
   sub = "Pick what works best for you.",
   leftTitle = "Talk to a Zen Guide",
-  leftBody = "Schedule an introductory based on your schedule!",
+  leftBody = "Schedule an introductory call based on your schedule!",
   leftCta = "Book Free 15-Minute Call",
   leftTo = "/vip-consultation/?access=vip",
   rightTitle = "See Packages First",

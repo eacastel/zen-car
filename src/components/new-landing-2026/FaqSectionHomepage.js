@@ -75,7 +75,7 @@ export default function FaqSectionHomepage() {
 
         <div className="max-w-3xl mx-auto bg-white rounded-[28px] shadow-[0_22px_50px_rgba(0,0,0,0.12)] border border-black/10 px-6 sm:px-8">
           <FaqItem
-            question="What kinds of transactions do you support?"
+            question="What kinds of purchases do you support?"
             answer="We do everything from leases, to financing and cash deals."
           />
           <FaqItem
@@ -84,9 +84,16 @@ export default function FaqSectionHomepage() {
           />
           <FaqItem
             question="Am I buying the car from you?"
-            answer="You buy the car directly from the dealer; however, we negotiate the best price and coordinate all the paper work."
+            answer="No, you buy the car directly from the dealer; however, we negotiate the price, coordinate paper work and delivery if needed."
           />
-          
+            <FaqItem
+            question="Do you do new and used?"
+            answer="Yes! We work with all makes and models ranging from premium luxury brands to budget vehicles including new and used."
+          />
+            <FaqItem
+            question="What states do you work in? "
+            answer="We work with customers across the US using our market intelligence and dealership connections."
+          />          
         </div>
       </div>
     </section>
