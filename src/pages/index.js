@@ -35,6 +35,22 @@ function useOnScreen(ref, rootMargin = "0px") {
   return isIntersecting;
 }
 
+function useDeferredRender(delayMs = 1200) {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(() => setReady(true), { timeout: delayMs });
+      return () => window.cancelIdleCallback(id);
+    }
+    const t = window.setTimeout(() => setReady(true), delayMs);
+    return () => window.clearTimeout(t);
+  }, [delayMs]);
+
+  return ready;
+}
+
 const icons = {
   recommendations: (
     <svg
@@ -92,6 +108,7 @@ const icons = {
 const HomePage = () => {
   const testimonialsRef = useRef();
   const showTestimonials = useOnScreen(testimonialsRef, '100px');
+  const deferredReady = useDeferredRender(1200);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -158,13 +175,15 @@ const HomePage = () => {
 
       <RevealSection>
         {/* ✅ How It Works Section */}
-        <Suspense fallback={<div className="py-20 text-center text-primary">Loading process…</div>}>
-          <HowItWorks />
-        </Suspense>
+        {deferredReady && (
+          <Suspense fallback={<div className="py-20 text-center text-primary">Loading process…</div>}>
+            <HowItWorks />
+          </Suspense>
+        )}
       </RevealSection>
 
       <RevealSection>
-        <FaqSectionHomepage />
+        {deferredReady && <FaqSectionHomepage />}
       </RevealSection>
 
       <RevealSection>
@@ -173,7 +192,7 @@ const HomePage = () => {
 
       <RevealSection>
         <div ref={testimonialsRef}>
-          {showTestimonials && (
+          {deferredReady && showTestimonials && (
             <Suspense fallback={<div className="py-20 text-center text-primary">Loading testimonials…</div>}>
               <Testimonials />
             </Suspense>
@@ -182,11 +201,11 @@ const HomePage = () => {
       </RevealSection>
 
       <RevealSection>
-        <CTABand />
+        {deferredReady && <CTABand />}
       </RevealSection>
 
       <RevealSection>
-        <CallToAction />
+        {deferredReady && <CallToAction />}
       </RevealSection>
     </Layout>
   )

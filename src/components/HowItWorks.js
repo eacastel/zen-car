@@ -49,24 +49,27 @@ export default function HowItWorks() {
                 </h3>
 
                 <div className="grid md:grid-cols-1 lg:grid-cols-4 gap-12">
-                    {steps.map((step, index) => (
-                        <Link
-                            to="/services/"
-                            style={{ cursor: "auto", textDecoration: "none", color: "inherit" }}
-                            aria-label={`Learn more about step ${step.step}`}
+                    {steps.map((step) => (
+                        <motion.div
+                            key={step.step}
+                            className="text-center p-6 bg-white/10 rounded-lg shadow-lg border-primary border-2 hover:shadow-xl transition-shadow duration-300 h-full"
+                            whileHover={{ scale: 1.05 }}
                         >
-                            <motion.div
-                                key={index}
-                                className="text-center p-6 bg-white/10 rounded-lg shadow-lg border-primary border-2 hover:shadow-xl transition-shadow duration-300 h-full"
-                                whileHover={{ scale: 1.05 }}
-                            >
-                                <div className="text-4xl font-bold text-accent bg-primary px-5 py-2 inline-block rounded-full mb-3">
-                                    {step.step}
-                                </div>
-                                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                                <p className="text-gray-200">{step.desc}</p>
-                            </motion.div>
-                        </Link>
+                            <div className="text-4xl font-bold text-accent bg-primary px-5 py-2 inline-block rounded-full mb-3">
+                                {step.step}
+                            </div>
+                            <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                            <p className="text-gray-200">{step.desc}</p>
+                            <div className="mt-4">
+                                <Link
+                                    to="/services/"
+                                    className="text-accent underline"
+                                    aria-label={`Learn more about step ${step.step}`}
+                                >
+                                    Learn about services
+                                </Link>
+                            </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
