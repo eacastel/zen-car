@@ -27,10 +27,24 @@ export default function InlineCtaFinalBand({
             <p className="text-white/90 mt-3 max-w-2xl">{subtitle}</p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <ServiceButton to={primaryTo} size="lg" color="accent">
+              <ServiceButton
+                to={primaryTo}
+                size="lg"
+                color="accent"
+                trackingEvent="cta_click"
+                trackingLabel="final_band_primary"
+                trackingLocation="inline_cta_final_band"
+              >
                 {primaryLabel}
               </ServiceButton>
-              <ServiceButton to={secondaryTo} size="lg" color="secondary">
+              <ServiceButton
+                to={secondaryTo}
+                size="lg"
+                color="secondary"
+                trackingEvent="cta_click"
+                trackingLabel="final_band_secondary"
+                trackingLocation="inline_cta_final_band"
+              >
                 {secondaryLabel}
               </ServiceButton>
             </div>

@@ -34,7 +34,15 @@ export default function InlineCtaSplitChoice({
             </div>
             <p className="text-gray-700 mt-3">{leftBody}</p>
             <div className="mt-6">
-              <ServiceButton to={leftTo} size="lg" color="accent" className="w-full">
+              <ServiceButton
+                to={leftTo}
+                size="lg"
+                color="accent"
+                className="w-full"
+                trackingEvent="cta_click"
+                trackingLabel="inline_split_left"
+                trackingLocation="inline_cta_split_choice"
+              >
                 {leftCta}
               </ServiceButton>
             </div>
@@ -49,7 +57,15 @@ export default function InlineCtaSplitChoice({
             </div>
             <p className="text-gray-700 mt-3">{rightBody}</p>
             <div className="mt-6">
-              <ServiceButton to={rightTo} size="lg" color="secondary" className="w-full">
+              <ServiceButton
+                to={rightTo}
+                size="lg"
+                color="secondary"
+                className="w-full"
+                trackingEvent="cta_click"
+                trackingLabel="inline_split_right"
+                trackingLocation="inline_cta_split_choice"
+              >
                 {rightCta}
               </ServiceButton>
             </div>

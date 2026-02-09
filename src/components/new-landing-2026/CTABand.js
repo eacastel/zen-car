@@ -27,10 +27,24 @@ export default function CTABand({
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 lg:justify-end">
-                <ServiceButton size="lg" color="accent" to={primaryTo}>
+                <ServiceButton
+                  size="lg"
+                  color="accent"
+                  to={primaryTo}
+                  trackingEvent="cta_click"
+                  trackingLabel="cta_band_primary"
+                  trackingLocation="cta_band"
+                >
                   {primaryLabel}
                 </ServiceButton>
-                <ServiceButton size="lg" color="secondary" to={secondaryTo}>
+                <ServiceButton
+                  size="lg"
+                  color="secondary"
+                  to={secondaryTo}
+                  trackingEvent="cta_click"
+                  trackingLabel="cta_band_secondary"
+                  trackingLocation="cta_band"
+                >
                   {secondaryLabel}
                 </ServiceButton>
               </div>

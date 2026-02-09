@@ -35,7 +35,14 @@ export default function InlineCtaInset({
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
-              <ServiceButton to={primaryTo} size="lg" color="accent">
+              <ServiceButton
+                to={primaryTo}
+                size="lg"
+                color="accent"
+                trackingEvent="cta_click"
+                trackingLabel="inline_inset_primary"
+                trackingLocation="inline_cta_inset"
+              >
                 {primaryLabel}
               </ServiceButton>
 

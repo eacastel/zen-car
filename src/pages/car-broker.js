@@ -58,9 +58,8 @@ const CarBroker = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const path = "/car-broker/";
-      localStorage.setItem("preferredHome", path);
-      document.cookie = `preferredHome=${path}; path=/; max-age=2592000`;
+      localStorage.removeItem("preferredHome");
+      document.cookie = "preferredHome=; path=/; max-age=0";
     }
   }, []);
 

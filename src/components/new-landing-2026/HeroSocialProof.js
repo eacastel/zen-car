@@ -28,8 +28,9 @@ export default function HeroSocialProof() {
 
   const googleImg = getImage(data.google);
 
-  // pick first 3
-  const items = (testimonialsData || []).slice(0, 3);
+  const allItems = testimonialsData || [];
+  const desktopItems = allItems.slice(0, 3);
+  const mobileItems = allItems;
 
   const truncateWords = (text = "", maxWords = 28) => {
     const words = String(text).trim().split(/\s+/).filter(Boolean);
@@ -90,57 +91,87 @@ export default function HeroSocialProof() {
             </div>
           </div>
 
-          {/* Testimonials:
-              - Keep horizontal slider through md
-              - Only switch to grid at lg to avoid md stacking */
-          }
-          <div className="lg:grid lg:grid-cols-3 lg:gap-4">
-            <div
-              className="
-                flex gap-4 overflow-x-auto pb-2 -mx-2 px-2
-                snap-x snap-mandatory
-                lg:contents lg:overflow-visible lg:p-0 lg:mx-0
-              "
-              aria-label="Customer testimonials"
-            >
-              {items.map((t, idx) => {
-                const headline = t.note || "Great experience";
-                const nameCar = t.name || "";
-                const quote = t.quote || "";
+          {/* Mobile: swipeable list with more reviews */}
+          <div
+            className="
+              flex gap-4 overflow-x-auto pb-2 -mx-2 px-2
+              snap-x snap-mandatory
+              lg:hidden
+            "
+            aria-label="Customer testimonials"
+          >
+            {mobileItems.map((t, idx) => {
+              const headline = t.note || "Great experience";
+              const nameCar = t.name || "";
+              const quote = t.quote || "";
 
-                return (
-                  <article
-                    key={idx}
-                    className="
-                      snap-start shrink-0
-                      w-[78%] sm:w-[52%] md:w-[46%]
-                      lg:w-auto lg:shrink
-                      rounded-[18px] border border-black/10 bg-white px-5 py-5
-                    "
-                  >
-                    <header className="mb-3">
-                      <div className="flex items-start justify-between gap-3">
-                        <h3 className="text-base sm:text-lg font-semibold text-[#1f2a2c] leading-tight pr-2">
-                          {headline}
-                        </h3>
-                        <StarRow />
-                      </div>
-                      <p className="mt-1 text-xs sm:text-sm text-[#1f2a2c]/60">{nameCar}</p>
-                    </header>
-
-                    <p className="text-[15px] sm:text-base text-[#1f2a2c]/80 leading-relaxed">
-                      “{truncateWords(quote, 28)}”
-                    </p>
-
-                    <div className="mt-4">
-                      <Link to="/reviews/" className="text-xs font-semibold text-[#F5A623]">
-                        Read more
-                      </Link>
+              return (
+                <article
+                  key={idx}
+                  className="
+                    snap-start shrink-0
+                    w-[78%] sm:w-[52%] md:w-[46%]
+                    rounded-[18px] border border-black/10 bg-white px-5 py-5
+                  "
+                >
+                  <header className="mb-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-base sm:text-lg font-semibold text-[#1f2a2c] leading-tight pr-2">
+                        {headline}
+                      </h3>
+                      <StarRow />
                     </div>
-                  </article>
-                );
-              })}
-            </div>
+                    <p className="mt-1 text-xs sm:text-sm text-[#1f2a2c]/60">{nameCar}</p>
+                  </header>
+
+                  <p className="text-[15px] sm:text-base text-[#1f2a2c]/80 leading-relaxed">
+                    “{truncateWords(quote, 28)}”
+                  </p>
+
+                  <div className="mt-4">
+                    <Link to="/reviews/" className="text-xs font-semibold text-[#F5A623]">
+                      Read more
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          {/* Desktop: fixed 3-up grid */}
+          <div className="hidden lg:grid lg:grid-cols-3 lg:gap-4">
+            {desktopItems.map((t, idx) => {
+              const headline = t.note || "Great experience";
+              const nameCar = t.name || "";
+              const quote = t.quote || "";
+
+              return (
+                <article
+                  key={idx}
+                  className="rounded-[18px] border border-black/10 bg-white px-5 py-5"
+                >
+                  <header className="mb-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-base sm:text-lg font-semibold text-[#1f2a2c] leading-tight pr-2">
+                        {headline}
+                      </h3>
+                      <StarRow />
+                    </div>
+                    <p className="mt-1 text-xs sm:text-sm text-[#1f2a2c]/60">{nameCar}</p>
+                  </header>
+
+                  <p className="text-[15px] sm:text-base text-[#1f2a2c]/80 leading-relaxed">
+                    “{truncateWords(quote, 28)}”
+                  </p>
+
+                  <div className="mt-4">
+                    <Link to="/reviews/" className="text-xs font-semibold text-[#F5A623]">
+                      Read more
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
           <p className="mt-4 text-center text-xs text-[#1f2a2c]/50 lg:hidden">

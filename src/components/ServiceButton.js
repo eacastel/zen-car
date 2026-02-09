@@ -9,6 +9,11 @@ const ServiceButton = ({
   className = "",
   disabled = false,
   to = "/services",
+  trackingEvent,
+  trackingLabel,
+  trackingLocation,
+  trackingDestination,
+  onClick,
   ...rest
 }) => {
   const sizes = {
@@ -25,6 +30,23 @@ const ServiceButton = ({
 
   const finalClassName = `inline-flex items-center justify-center ${colors[color]} ${sizes[size]} appearance-none border-0 focus:outline-none focus:ring-0 rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg ${disabled ? "opacity-50 cursor-not-allowed" : ""} ${className}`;
 
+  const handleClick = (event) => {
+    if (typeof window !== "undefined" && trackingEvent) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: trackingEvent,
+        label: trackingLabel,
+        location: trackingLocation,
+        destination: trackingDestination || to,
+        page_location: window.location.href,
+      });
+    }
+
+    if (typeof onClick === "function") {
+      onClick(event);
+    }
+  };
+
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
@@ -34,6 +56,7 @@ const ServiceButton = ({
       <Link
         to={to}
         className={finalClassName}
+        onClick={handleClick}
         aria-label="Find your Car - Choose your package"
         {...rest}
       >

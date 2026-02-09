@@ -9,6 +9,11 @@ const CalendlyButton = ({
   className = "",
   disabled = false,
   to = "/vip-consultation/vip/", // default target
+  trackingEvent,
+  trackingLabel,
+  trackingLocation,
+  trackingDestination,
+  onClick,
   ...rest
 }) => {
   // Tailwind styles
@@ -26,6 +31,23 @@ const CalendlyButton = ({
 
   const finalClassName = `inline-flex items-center justify-center ${colors[color]} ${sizes[size]} appearance-none border-0 focus:outline-none focus:ring-0 rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg ${disabled ? "opacity-50 cursor-not-allowed" : ""} ${className}`;
 
+  const handleClick = (event) => {
+    if (typeof window !== "undefined" && trackingEvent) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: trackingEvent,
+        label: trackingLabel,
+        location: trackingLocation,
+        destination: trackingDestination || to,
+        page_location: window.location.href,
+      });
+    }
+
+    if (typeof onClick === "function") {
+      onClick(event);
+    }
+  };
+
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
@@ -36,6 +58,7 @@ const CalendlyButton = ({
         to={to}
         className={finalClassName}
         aria-label="Go to scheduling page"
+        onClick={handleClick}
         {...rest}
       >
         {children}

@@ -45,6 +45,42 @@ status = 301
 force = true
 
 [[redirects]]
+from = "/new-landing-page"
+to = "/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/new-landing-page/"
+to = "/"
+status = 301
+force = true
+
+[[redirects]]
+from = "/car-broker"
+to = "/"
+status = 302
+force = true
+
+[[redirects]]
+from = "/car-broker/"
+to = "/"
+status = 302
+force = true
+
+[[redirects]]
+from = "/used-car-broker"
+to = "/"
+status = 302
+force = true
+
+[[redirects]]
+from = "/used-car-broker/"
+to = "/"
+status = 302
+force = true
+
+[[redirects]]
 from = "/fb/vip"
 to = "/vip-consultation/vip/?utm_source=facebook&utm_medium=social&utm_campaign=jan_social_awareness&utm_content=organic_post"
 status = 302

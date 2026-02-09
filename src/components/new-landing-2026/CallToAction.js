@@ -21,7 +21,14 @@ export default function CallToAction() {
         </p>
 
         <div className="inline-block">
-          <CalendlyButton  to="/vip-consultation/vip/" size="lg" color="primary">
+          <CalendlyButton
+            to="/vip-consultation/vip/"
+            size="lg"
+            color="primary"
+            trackingEvent="cta_click"
+            trackingLabel="final_cta_book_call"
+            trackingLocation="final_call_to_action"
+          >
             Get Started Today
           </CalendlyButton>
         </div>

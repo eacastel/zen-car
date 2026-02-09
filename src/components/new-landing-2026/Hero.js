@@ -203,10 +203,24 @@ export function Hero() {
             </p>
 
             <div className="grid grid-cols-2 gap-3 max-w-[520px] pr-2">
-              <ServiceButton size="lg" color="accent">
+              <ServiceButton
+                size="lg"
+                color="accent"
+                trackingEvent="cta_click"
+                trackingLabel="hero_explore_services"
+                trackingLocation="hero"
+                trackingDestination="/services/"
+              >
                 Explore services
               </ServiceButton>
-              <ServiceButton size="lg" color="secondary" to="/vip-consultation/vip/">
+              <ServiceButton
+                size="lg"
+                color="secondary"
+                to="/vip-consultation/vip/"
+                trackingEvent="cta_click"
+                trackingLabel="hero_book_consultation"
+                trackingLocation="hero"
+              >
                 Book consultation
               </ServiceButton>
             </div>

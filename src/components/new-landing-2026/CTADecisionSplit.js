@@ -2,7 +2,16 @@
 import React from "react";
 import ServiceButton from "../ServiceButton";
 
-function Card({ title, body, badge, buttonLabel, buttonTo, buttonColor }) {
+function Card({
+  title,
+  body,
+  badge,
+  buttonLabel,
+  buttonTo,
+  buttonColor,
+  trackingLabel,
+  trackingLocation,
+}) {
   return (
     <div className="rounded-[22px] bg-white border border-black/10 shadow-[0_12px_30px_rgba(0,0,0,0.08)] p-7">
       <div className="flex items-center justify-between gap-3">
@@ -13,7 +22,15 @@ function Card({ title, body, badge, buttonLabel, buttonTo, buttonColor }) {
       </div>
       <p className="mt-3 text-gray-700">{body}</p>
       <div className="mt-6">
-        <ServiceButton size="lg" color={buttonColor} to={buttonTo} className="w-full">
+        <ServiceButton
+          size="lg"
+          color={buttonColor}
+          to={buttonTo}
+          className="w-full"
+          trackingEvent="cta_click"
+          trackingLabel={trackingLabel}
+          trackingLocation={trackingLocation}
+        >
           {buttonLabel}
         </ServiceButton>
       </div>
@@ -29,6 +46,8 @@ export default function CTADecisionSplit({
     buttonLabel: "Book Free 15-Minute Call",
     buttonTo: "/vip-consultation/?access=vip",
     buttonColor: "accent",
+    trackingLabel: "decision_split_left",
+    trackingLocation: "cta_decision_split",
   },
   right = {
     title: "See Packages First",
@@ -37,6 +56,8 @@ export default function CTADecisionSplit({
     buttonLabel: "View Packages",
     buttonTo: "/purchase/",
     buttonColor: "secondary",
+    trackingLabel: "decision_split_right",
+    trackingLocation: "cta_decision_split",
   },
   heading = "Choose your next step",
   subheading = "Either path gets you to the same outcome. A better car deal with less stress.",

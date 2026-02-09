@@ -19,6 +19,12 @@ http://*  https://:splat  301!
 /api/*  /.netlify/functions/__api  200
 /pricing      /purchase/     301!
 /pricing/     /purchase/     301!
+/new-landing-page/  /  301!
+/new-landing-page   /  301!
+/car-broker/  /  302
+/car-broker   /  302
+/used-car-broker/  /  302
+/used-car-broker   /  302
 
 # QR Codes
 /qr/review   https://g.page/r/Cb8gf5h0tb1MEBM/review   301!
