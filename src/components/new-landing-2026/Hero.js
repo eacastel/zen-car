@@ -206,22 +206,24 @@ export function Hero() {
               <ServiceButton
                 size="lg"
                 color="accent"
+                to="/vip-consultation/vip/"
+                trackingEvent="cta_click"
+                trackingLabel="hero_book_consultation"
+                trackingLocation="hero"
+                trackingDestination="/vip-consultation/vip/"
+              >
+                Book Consultation
+              </ServiceButton>
+              <ServiceButton
+                size="lg"
+                color="secondary"
+                to="/services/"
                 trackingEvent="cta_click"
                 trackingLabel="hero_explore_services"
                 trackingLocation="hero"
                 trackingDestination="/services/"
               >
                 Explore services
-              </ServiceButton>
-              <ServiceButton
-                size="lg"
-                color="secondary"
-                to="/vip-consultation/vip/"
-                trackingEvent="cta_click"
-                trackingLabel="hero_book_consultation"
-                trackingLocation="hero"
-              >
-                Book consultation
               </ServiceButton>
             </div>
           </div>

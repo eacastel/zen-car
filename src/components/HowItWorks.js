@@ -11,15 +11,7 @@ export default function HowItWorks() {
             title: 'Start Your Zen Experience',
             desc: (
                 <>
-                    Choose a service package or book a{" "}
-                    <Link
-                        to="/vip-consultation/vip/"
-                        className="text-gray-200 underline focus:outline-none focus:ring-2 focus:ring-accent"
-                        aria-label="Schedule your onboarding call"
-                    >
-                        quick intro call
-                    </Link>{" "}
-                    to learn more.
+                    Choose a service package or book a quick intro call to learn more.
                 </>
             )
         },
@@ -50,26 +42,23 @@ export default function HowItWorks() {
 
                 <div className="grid md:grid-cols-1 lg:grid-cols-4 gap-12">
                     {steps.map((step) => (
-                        <motion.div
+                        <Link
                             key={step.step}
-                            className="text-center p-6 bg-white/10 rounded-lg shadow-lg border-primary border-2 hover:shadow-xl transition-shadow duration-300 h-full"
-                            whileHover={{ scale: 1.05 }}
+                            to="/services/"
+                            className="block text-inherit no-underline"
+                            aria-label={`Learn more about step ${step.step}`}
                         >
-                            <div className="text-4xl font-bold text-accent bg-primary px-5 py-2 inline-block rounded-full mb-3">
-                                {step.step}
-                            </div>
-                            <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                            <p className="text-gray-200">{step.desc}</p>
-                            <div className="mt-4">
-                                <Link
-                                    to="/services/"
-                                    className="text-accent underline"
-                                    aria-label={`Learn more about step ${step.step}`}
-                                >
-                                    Learn about services
-                                </Link>
-                            </div>
-                        </motion.div>
+                            <motion.div
+                                className="text-center p-6 bg-white/10 rounded-lg shadow-lg border-primary border-2 hover:shadow-xl transition-shadow duration-300 h-full"
+                                whileHover={{ scale: 1.05 }}
+                            >
+                                <div className="text-4xl font-bold text-accent bg-primary px-5 py-2 inline-block rounded-full mb-3">
+                                    {step.step}
+                                </div>
+                                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                                <p className="text-gray-200">{step.desc}</p>
+                            </motion.div>
+                        </Link>
                     ))}
                 </div>
             </div>
