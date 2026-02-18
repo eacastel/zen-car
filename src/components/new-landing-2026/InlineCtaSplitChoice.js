@@ -8,7 +8,7 @@ export default function InlineCtaSplitChoice({
   leftTitle = "Talk to a Zen Guide",
   leftBody = "Schedule an introductory call based on your schedule!",
   leftCta = "Book Free 15-Minute Call",
-  leftTo = "/vip-consultation/?access=vip",
+  leftTo = "/vip-consultation/vip/",
   rightTitle = "See Packages First",
   rightBody = "Review options and pricing. Book the call when you’re ready.",
   rightCta = "View Packages",

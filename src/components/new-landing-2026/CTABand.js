@@ -7,7 +7,7 @@ export default function CTABand({
   title = "Get a Zen Guide on your side",
   body = "Book a quick call, or review packages first. Either way, we keep it simple and stress-free.",
   primaryLabel = "Book Free 15-Minute Call",
-  primaryTo = "/vip-consultation/?access=vip",
+  primaryTo = "/vip-consultation/vip/",
   secondaryLabel = "View Packages",
   secondaryTo = "/purchase/",
 }) {

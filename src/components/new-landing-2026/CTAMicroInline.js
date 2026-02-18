@@ -5,7 +5,7 @@ import ServiceButton from "../ServiceButton";
 export default function CTAMicroInline({
   text = "Want a clearer plan in 15 minutes?",
   primaryLabel = "Book Free Call",
-  primaryTo = "/vip-consultation/?access=vip",
+  primaryTo = "/vip-consultation/vip/",
   secondaryLabel = "View Packages",
   secondaryTo = "/purchase/",
 }) {

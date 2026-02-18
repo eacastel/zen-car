@@ -6,7 +6,7 @@ export default function InlineCtaFinalBand({
   title = "Ready when you are.",
   subtitle = "Get expert guidance and a calmer way to buy, without dealership pressure.",
   primaryLabel = "Book Free Call",
-  primaryTo = "/vip-consultation/?access=vip",
+  primaryTo = "/vip-consultation/vip/",
   secondaryLabel = "View Packages",
   secondaryTo = "/purchase/",
 }) {

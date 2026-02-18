@@ -6,7 +6,7 @@ export default function InlineCtaInset({
   title = "Want a clearer plan in 15 minutes?",
   subtitle = "Book a quick call and we’ll map your next steps with zero pressure.",
   primaryLabel = "Book Free Call",
-  primaryTo = "/vip-consultation/?access=vip",
+  primaryTo = "/vip-consultation/vip/",
   secondaryLabel = "View Packages",
   secondaryTo = "/purchase/",
 }) {
