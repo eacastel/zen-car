@@ -55,7 +55,7 @@ export default function HowItWorks() {
                                 <div className="text-4xl font-bold text-accent bg-primary px-5 py-2 inline-block rounded-full mb-3">
                                     {step.step}
                                 </div>
-                                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                                <h3 className="text-xl font-semibold mb-2 text-white">{step.title}</h3>
                                 <p className="text-gray-200">{step.desc}</p>
                             </motion.div>
                         </Link>
