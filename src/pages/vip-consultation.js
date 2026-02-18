@@ -1,131 +1,132 @@
 // src/pages/vip-consultation.js
 
-import React, { useEffect, useState, useRef } from "react";
-import { navigate } from "gatsby";
-import Seo from "../components/Seo";
-import Layout from "../components/Layout";
-import Turnstile from "react-turnstile";
-import "../utils/openCalendly";
+import React, { useEffect, useState, useRef } from "react"
+import { navigate } from "gatsby"
+import Seo from "../components/Seo"
+import Layout from "../components/Layout"
+import Turnstile from "react-turnstile"
+import "../utils/openCalendly"
 
 export default function VipConsultationPage({ forceVip = false }) {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
   // 1. Authorization State
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const calendarContainer = useRef(null);
+  const [isAuthorized, setIsAuthorized] = useState(false)
+  const calendarContainer = useRef(null)
 
   // Get Key from Env
-  const SITE_KEY = process.env.GATSBY_TURNSTILE_SITE_KEY;
-  const STYLE_PARAMS = "hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=f99f1b&text_color=6b8385";
+  const SITE_KEY = process.env.GATSBY_TURNSTILE_SITE_KEY
+  const STYLE_PARAMS =
+    "hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=f99f1b&text_color=6b8385"
 
   // -------------------------------------------
   // STEP 1: THE GATEKEEPER (Check URL Params)
   // -------------------------------------------
-useEffect(() => {
-  
-  if (forceVip) {
-    setIsAuthorized(true);
-    return;
-  }
+  useEffect(() => {
+    if (forceVip) {
+      setIsAuthorized(true)
+      return
+    }
 
-  const path = window.location.pathname.replace(/\/+$/, "");
-  const isVipPath = path === "/vip-consultation/vip";
-  const params = new URLSearchParams(window.location.search);
-  const accessCode = params.get("access");
+    const path = window.location.pathname.replace(/\/+$/, "")
+    const isVipPath = path === "/vip-consultation/vip"
+    const params = new URLSearchParams(window.location.search)
+    const accessCode = params.get("access")
 
-  if (!(isVipPath || accessCode === "vip")) {
-    console.warn("Unauthorized access attempt");
-    navigate("/");
-  } else {
-    setIsAuthorized(true);
-  }
-}, [forceVip]);
+    if (!(isVipPath || accessCode === "vip")) {
+      console.warn("Unauthorized access attempt")
+      navigate("/")
+    } else {
+      setIsAuthorized(true)
+    }
+  }, [forceVip])
 
   // -------------------------------------------
   // STEP 2: HELPER FUNCTIONS
   // -------------------------------------------
   const loadCalendlyAssets = () => {
     if (!document.querySelector('link[href*="assets/external/widget.css"]')) {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = "https://assets.calendly.com/assets/external/widget.css";
-      document.head.appendChild(link);
+      const link = document.createElement("link")
+      link.rel = "stylesheet"
+      link.href = "https://assets.calendly.com/assets/external/widget.css"
+      document.head.appendChild(link)
     }
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       if (window.Calendly) {
-        resolve();
+        resolve()
       } else {
-        const script = document.createElement("script");
-        script.src = "https://assets.calendly.com/assets/external/widget.js";
-        script.async = true;
-        script.onload = () => resolve();
-        document.head.appendChild(script);
+        const script = document.createElement("script")
+        script.src = "https://assets.calendly.com/assets/external/widget.js"
+        script.async = true
+        script.onload = () => resolve()
+        document.head.appendChild(script)
       }
-    });
-  };
+    })
+  }
 
   // -------------------------------------------
   // STEP 3: TURNSTILE VERIFICATION
   // -------------------------------------------
-  const handleTurnstileVerify = async (token) => {
+  const handleTurnstileVerify = async token => {
     try {
-      console.log("Human verified. Fetching secure link...");
+      console.log("Human verified. Fetching secure link...")
 
       const res = await fetch("/.netlify/functions/get-calendly-link", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token }),
-      });
+      })
 
-      if (!res.ok) throw new Error("Verification failed");
+      if (!res.ok) throw new Error("Verification failed")
 
-      const data = await res.json();
-      if (!data.url) throw new Error("No URL returned");
+      const data = await res.json()
+      if (!data.url) throw new Error("No URL returned")
 
-      const separator = data.url.includes("?") ? "&" : "?";
-      const finalUrl = `${data.url}${separator}${STYLE_PARAMS}`;
+      const separator = data.url.includes("?") ? "&" : "?"
+      const finalUrl = `${data.url}${separator}${STYLE_PARAMS}`
 
-      await loadCalendlyAssets();
+      await loadCalendlyAssets()
 
       if (calendarContainer.current && window.Calendly) {
-        calendarContainer.current.innerHTML = "";
+        calendarContainer.current.innerHTML = ""
         window.Calendly.initInlineWidget({
           url: finalUrl,
           parentElement: calendarContainer.current,
           resize: true,
-        });
-        setLoading(false);
+        })
+        setLoading(false)
       }
     } catch (err) {
-      console.error("Load Error:", err);
-      setError(true);
-      setLoading(false);
+      console.error("Load Error:", err)
+      setError(true)
+      setLoading(false)
     }
-  };
+  }
 
   // -------------------------------------------
   // STEP 4: META / GTM TRACKING
   // -------------------------------------------
   useEffect(() => {
     if (calendarContainer.current && isAuthorized) {
-      const observer = new MutationObserver((mutations) => {
+      const observer = new MutationObserver(mutations => {
         for (const m of mutations) {
-          if ([...m.addedNodes].some((n) => n.nodeName === "IFRAME")) {
-            if (typeof window.fbq === "function") window.fbq("track", "Schedule");
-            window.dataLayer = window.dataLayer || [];
+          if ([...m.addedNodes].some(n => n.nodeName === "IFRAME")) {
+            if (typeof window.fbq === "function")
+              window.fbq("track", "Schedule")
+            window.dataLayer = window.dataLayer || []
             window.dataLayer.push({
               event: "schedule_opened",
               method: "inline",
               page_location: window.location.href,
-            });
-            observer.disconnect();
-            break;
+            })
+            observer.disconnect()
+            break
           }
         }
-      });
-      observer.observe(calendarContainer.current, { childList: true });
+      })
+      observer.observe(calendarContainer.current, { childList: true })
     }
-  }, [isAuthorized]);
+  }, [isAuthorized])
 
   // -------------------------------------------
   // RENDER
@@ -133,7 +134,7 @@ useEffect(() => {
 
   // If not authorized yet, render nothing (or a spinner) to prevent content flash
   if (!isAuthorized) {
-    return null;
+    return null
   }
 
   return (
@@ -194,7 +195,7 @@ useEffect(() => {
         <div ref={calendarContainer} className="calendly-container" />
       </div>
     </Layout>
-  );
+  )
 }
 
 export const Head = () => (
@@ -204,4 +205,4 @@ export const Head = () => (
     pathname="/vip-consultation/"
     noIndex={true}
   />
-);
+)

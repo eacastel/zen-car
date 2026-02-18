@@ -1,6 +1,6 @@
 // src/components/InlineCtaSplitChoice.js
-import React from "react";
-import ServiceButton from "../ServiceButton";
+import React from "react"
+import ServiceButton from "../ServiceButton"
 
 export default function InlineCtaSplitChoice({
   eyebrow = "Choose your next step",
@@ -27,7 +27,9 @@ export default function InlineCtaSplitChoice({
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-2xl bg-white border border-gray-100 shadow-[0_12px_30px_rgba(0,0,0,0.10)] p-7">
             <div className="flex items-center justify-between">
-              <h4 className="text-xl font-semibold text-primary">{leftTitle}</h4>
+              <h4 className="text-xl font-semibold text-primary">
+                {leftTitle}
+              </h4>
               <span className="text-xs font-medium px-3 py-1 rounded-full bg-[#EAF4F4] text-primary">
                 Best first step
               </span>
@@ -50,7 +52,9 @@ export default function InlineCtaSplitChoice({
 
           <div className="rounded-2xl bg-white border border-gray-100 shadow-[0_12px_30px_rgba(0,0,0,0.10)] p-7">
             <div className="flex items-center justify-between">
-              <h4 className="text-xl font-semibold text-primary">{rightTitle}</h4>
+              <h4 className="text-xl font-semibold text-primary">
+                {rightTitle}
+              </h4>
               <span className="text-xs font-medium px-3 py-1 rounded-full bg-[#F3F4F6] text-gray-700">
                 Pricing-first
               </span>
@@ -73,5 +77,5 @@ export default function InlineCtaSplitChoice({
         </div>
       </div>
     </section>
-  );
+  )
 }

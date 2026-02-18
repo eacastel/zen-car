@@ -2,18 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Prevent page shift */
-html, body {
-  min-height: 100vh;            /* Fixes Calendly popup clipping issues */
-  height: auto;                 /* Ensures full content height */
-  overflow-y: visible;          /* Ensures body scrolling when necessary */
-  overscroll-behavior: auto !important;  /* Fixed mouse wheel not working */
+html,
+body {
+  min-height: 100vh; /* Fixes Calendly popup clipping issues */
+  height: auto; /* Ensures full content height */
+  overflow-y: visible; /* Ensures body scrolling when necessary */
+  overscroll-behavior: auto !important; /* Fixed mouse wheel not working */
   overscroll-behavior-y: auto !important; /* Fixed mouse wheel not working */
   overflow-x: hidden;
   max-width: 100%; /* Ensures no content exceeds screen width */
 }
-
 
 h1 {
   @apply text-2xl;
@@ -25,40 +24,40 @@ h3 {
   @apply text-lg;
 }
 @font-face {
-  font-family: 'Pirulen';
-  src: url('/fonts/Pirulen-Regular.woff2') format('woff2');
+  font-family: "Pirulen";
+  src: url("/fonts/Pirulen-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('/fonts/Poppins-Regular.woff2') format('woff2');
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('/fonts/Poppins-Bold.woff2') format('woff2');
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Poppins';
-  src: url('/fonts/Poppins-Light.woff2') format('woff2');
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Helvetica Light Oblique';
-  src: url('/fonts/helvetica-light-oblique.woff2') format('woff2');
+  font-family: "Helvetica Light Oblique";
+  src: url("/fonts/helvetica-light-oblique.woff2") format("woff2");
   font-weight: 300;
   font-style: oblique; /* ✅ This ensures proper italic rendering */
   font-display: swap;

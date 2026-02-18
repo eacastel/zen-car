@@ -1,6 +1,6 @@
 // src/components/CTABand.js
-import React from "react";
-import ServiceButton from "../ServiceButton";
+import React from "react"
+import ServiceButton from "../ServiceButton"
 
 export default function CTABand({
   eyebrow = "Ready when you are",
@@ -22,7 +22,9 @@ export default function CTABand({
 
             <div className="mt-3 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
               <div>
-                <h3 className="text-2xl sm:text-3xl font-poppins capitalize">{title}</h3>
+                <h3 className="text-2xl sm:text-3xl font-poppins capitalize">
+                  {title}
+                </h3>
                 <p className="mt-3 text-[#f4fbfb] max-w-2xl">{body}</p>
               </div>
 
@@ -53,5 +55,5 @@ export default function CTABand({
         </div>
       </div>
     </section>
-  );
+  )
 }

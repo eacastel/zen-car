@@ -1,6 +1,6 @@
 // src/components/CTAMicroInline.js
-import React from "react";
-import ServiceButton from "../ServiceButton";
+import React from "react"
+import ServiceButton from "../ServiceButton"
 
 export default function CTAMicroInline({
   text = "Want a clearer plan in 15 minutes?",
@@ -39,5 +39,5 @@ export default function CTAMicroInline({
         </div>
       </div>
     </section>
-  );
+  )
 }

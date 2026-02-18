@@ -1,6 +1,6 @@
 // src/components/CTADecisionSplit.js
-import React from "react";
-import ServiceButton from "../ServiceButton";
+import React from "react"
+import ServiceButton from "../ServiceButton"
 
 function Card({
   title,
@@ -35,7 +35,7 @@ function Card({
         </ServiceButton>
       </div>
     </div>
-  );
+  )
 }
 
 export default function CTADecisionSplit({
@@ -66,7 +66,9 @@ export default function CTADecisionSplit({
     <section className="w-full">
       <div className="max-w-6xl mx-auto px-4 lg:px-6 py-12">
         <div className="text-center mb-8">
-          <h2 className="text-2xl sm:text-3xl font-poppins text-primary">{heading}</h2>
+          <h2 className="text-2xl sm:text-3xl font-poppins text-primary">
+            {heading}
+          </h2>
           <p className="mt-2 text-gray-700">{subheading}</p>
         </div>
 
@@ -76,5 +78,5 @@ export default function CTADecisionSplit({
         </div>
       </div>
     </section>
-  );
+  )
 }

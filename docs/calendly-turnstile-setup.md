@@ -65,9 +65,9 @@ Current pattern:
 
 ```js
 export const openCalendlyPopup = async () => {
-  if (typeof window === "undefined") return;
-  window.location.assign("/vip-consultation/vip/");
-};
+  if (typeof window === "undefined") return
+  window.location.assign("/vip-consultation/vip/")
+}
 ```
 
 ### 2) Protected page with Turnstile
@@ -91,7 +91,7 @@ fetch("/.netlify/functions/get-calendly-link", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ token }),
-});
+})
 ```
 
 ## Netlify Function Hardening

@@ -1,6 +1,6 @@
 // src/components/InlineCtaInset.js
-import React from "react";
-import ServiceButton from "../ServiceButton";
+import React from "react"
+import ServiceButton from "../ServiceButton"
 
 export default function InlineCtaInset({
   title = "Want a clearer plan in 15 minutes?",
@@ -45,11 +45,10 @@ export default function InlineCtaInset({
               >
                 {primaryLabel}
               </ServiceButton>
-
             </div>
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

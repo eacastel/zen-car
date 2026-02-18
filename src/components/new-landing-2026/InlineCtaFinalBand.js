@@ -1,6 +1,6 @@
 // src/components/InlineCtaFinalBand.js
-import React from "react";
-import ServiceButton from "../ServiceButton";
+import React from "react"
+import ServiceButton from "../ServiceButton"
 
 export default function InlineCtaFinalBand({
   title = "Ready when you are.",
@@ -55,5 +55,5 @@ export default function InlineCtaFinalBand({
         </div>
       </div>
     </section>
-  );
+  )
 }
