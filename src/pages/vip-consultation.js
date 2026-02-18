@@ -176,6 +176,7 @@ useEffect(() => {
               <Turnstile
                 sitekey={SITE_KEY}
                 onVerify={handleTurnstileVerify}
+                action="vip_consultation"
                 theme="light"
                 appearance="interaction-only"
               />

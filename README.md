@@ -13,3 +13,7 @@ This repository contains the source code for the Zen Car Buying website, built w
 - **Analytics:** Google Analytics (GA4) + Google Tag Manager
 
 ---
+
+## Internal Docs
+
+- Secure Calendly + Turnstile setup: `docs/calendly-turnstile-setup.md`
