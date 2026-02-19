@@ -1,54 +1,57 @@
-import React, { lazy, Suspense, useState, useEffect, useRef } from 'react'
-import { Link } from 'gatsby'
-import Layout from '../components/Layout'
-import Seo from '../components/Seo'
-import { Hero } from '../components/new-landing-2026/Hero'
-import HeroSocialProof from "../components/new-landing-2026/HeroSocialProof";
-import CallToAction from '../components/new-landing-2026/CallToAction'
-import CTABand from "../components/new-landing-2026/CTABand";
-import InlineCtaSplitChoice from "../components/new-landing-2026/InlineCtaSplitChoice";
-import InlineCtaInset from "../components/new-landing-2026/InlineCtaInset";
-import CarLogoStrip from "../components/new-landing-2026/CarLogoStrip";
-import RevealSection from "../components/new-landing-2026/RevealSection";
-import FaqSectionHomepage from "../components/new-landing-2026/FaqSectionHomepage";
-import CallTextCtaBar from "../components/new-landing-2026/CallTextCtaBar";
+import React, { lazy, Suspense, useState, useEffect, useRef } from "react"
+import { Link } from "gatsby"
+import { useLocation } from "@reach/router"
+import Layout from "../components/Layout"
+import Seo from "../components/Seo"
+import { Hero } from "../components/new-landing-2026/Hero"
+import HeroSocialProof from "../components/new-landing-2026/HeroSocialProof"
+import CallToAction from "../components/new-landing-2026/CallToAction"
+import CTABand from "../components/new-landing-2026/CTABand"
+import InlineCtaSplitChoice from "../components/new-landing-2026/InlineCtaSplitChoice"
+import InlineCtaInset from "../components/new-landing-2026/InlineCtaInset"
+import CarLogoStrip from "../components/new-landing-2026/CarLogoStrip"
+import RevealSection from "../components/new-landing-2026/RevealSection"
+import FaqSectionHomepage from "../components/new-landing-2026/FaqSectionHomepage"
+import CallTextCtaBar from "../components/new-landing-2026/CallTextCtaBar"
 
-const HowItWorks = lazy(() => import('../components/HowItWorks'));
-const Testimonials = lazy(() => import('../components/Testimonials'));
+const HowItWorks = lazy(() => import("../components/HowItWorks"))
+const Testimonials = lazy(() => import("../components/Testimonials"))
 
 function useOnScreen(ref, rootMargin = "0px") {
-  const [isIntersecting, setIntersecting] = useState(false);
+  const [isIntersecting, setIntersecting] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setIntersecting(entry.isIntersecting),
       { rootMargin }
-    );
+    )
 
     if (ref.current) {
-      observer.observe(ref.current);
+      observer.observe(ref.current)
     }
 
-    return () => observer.disconnect();
-  }, [ref, rootMargin]);
+    return () => observer.disconnect()
+  }, [ref, rootMargin])
 
-  return isIntersecting;
+  return isIntersecting
 }
 
 function useDeferredRender(delayMs = 1200) {
-  const [ready, setReady] = useState(false);
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") return
     if ("requestIdleCallback" in window) {
-      const id = window.requestIdleCallback(() => setReady(true), { timeout: delayMs });
-      return () => window.cancelIdleCallback(id);
+      const id = window.requestIdleCallback(() => setReady(true), {
+        timeout: delayMs,
+      })
+      return () => window.cancelIdleCallback(id)
     }
-    const t = window.setTimeout(() => setReady(true), delayMs);
-    return () => window.clearTimeout(t);
-  }, [delayMs]);
+    const t = window.setTimeout(() => setReady(true), delayMs)
+    return () => window.clearTimeout(t)
+  }, [delayMs])
 
-  return ready;
+  return ready
 }
 
 const icons = {
@@ -67,7 +70,6 @@ const icons = {
         d="M3 8L5.72187 10.2682C5.90158 10.418 6.12811 10.5 6.36205 10.5H17.6379C17.8719 10.5 18.0984 10.418 18.2781 10.2682L21 8M6.5 14H6.51M17.5 14H17.51M8.16065 4.5H15.8394C16.5571 4.5 17.2198 4.88457 17.5758 5.50772L20.473 10.5777C20.8183 11.1821 21 11.8661 21 12.5623V18.5C21 19.0523 20.5523 19.5 20 19.5H19C18.4477 19.5 18 19.0523 18 18.5V17.5H6V18.5C6 19.0523 5.55228 19.5 5 19.5H4C3.44772 19.5 3 19.0523 3 18.5V12.5623C3 11.8661 3.18166 11.1821 3.52703 10.5777L6.42416 5.50772C6.78024 4.88457 7.44293 4.5 8.16065 4.5ZM7 14C7 14.2761 6.77614 14.5 6.5 14.5C6.22386 14.5 6 14.2761 6 14C6 13.7239 6.22386 13.5 6.5 13.5C6.77614 13.5 7 13.7239 7 14ZM18 14C18 14.2761 17.7761 14.5 17.5 14.5C17.2239 14.5 17 14.2761 17 14C17 13.7239 17.2239 13.5 17.5 13.5C17.7761 13.5 18 13.7239 18 14Z"
       />
       <path strokeLinecap="round" strokeLinejoin="round" />
-
     </svg>
   ),
   negotiation: (
@@ -79,7 +81,11 @@ const icons = {
       strokeWidth="2"
       className="h-12 w-12 mx-auto mb-4"
     >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M14.5 4.5A2.5 2.5 0 1 1 9.5 4.5a2.5 2.5 0 0 1 5 0Z" />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M14.5 4.5A2.5 2.5 0 1 1 9.5 4.5a2.5 2.5 0 0 1 5 0Z"
+      />
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -94,31 +100,92 @@ const icons = {
   ),
 
   warranty: (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="h-12 w-12 mx-auto mb-4">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      className="h-12 w-12 mx-auto mb-4"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+      />
     </svg>
   ),
   sourcing: (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="h-12 w-12 mx-auto mb-4">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      className="h-12 w-12 mx-auto mb-4"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+      />
     </svg>
   ),
-};
+}
 
 const HomePage = () => {
-  const testimonialsRef = useRef();
-  const showTestimonials = useOnScreen(testimonialsRef, '100px');
-  const deferredReady = useDeferredRender(1200);
+  const location = useLocation()
+  const testimonialsRef = useRef()
+  const showTestimonials = useOnScreen(testimonialsRef, "100px")
+  const deferredReady = useDeferredRender(1200)
+  const [showScheduledModal, setShowScheduledModal] = useState(false)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      localStorage.removeItem("preferredHome");
-      document.cookie = "preferredHome=; path=/; max-age=0";
+      localStorage.removeItem("preferredHome")
+      document.cookie = "preferredHome=; path=/; max-age=0"
     }
-  }, []);
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const params = new URLSearchParams(location.search || "")
+    if (params.get("appointment") !== "scheduled") return
+
+    setShowScheduledModal(true)
+
+    params.delete("appointment")
+    const nextSearch = params.toString()
+    const nextUrl = nextSearch ? `/?${nextSearch}` : "/"
+    window.history.replaceState({}, "", nextUrl)
+
+    const timer = window.setTimeout(() => {
+      setShowScheduledModal(false)
+    }, 4500)
+
+    return () => window.clearTimeout(timer)
+  }, [location.search])
 
   return (
     <Layout>
+      {showScheduledModal && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 px-4">
+          <div
+            role="status"
+            aria-live="polite"
+            className="w-full max-w-lg rounded-2xl bg-white p-6 text-center shadow-2xl"
+          >
+            <h2 className="text-2xl font-bold text-primary mb-2">
+              Appointment Scheduled
+            </h2>
+            <p className="text-primary text-lg">
+              We look forward to speaking with you.
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* ✅ Hero Section */}
       <Hero />
 
@@ -135,35 +202,61 @@ const HomePage = () => {
 
       <RevealSection>
         {/* ✅ Key Benefits Section */}
-        <section className="py-16 bg-secondary" aria-labelledby="benefits-heading">
+        <section
+          className="py-16 bg-secondary"
+          aria-labelledby="benefits-heading"
+        >
           <div className="container mx-auto px-4 md:px-2 md:max-w-[750px] lg:px-6 lg:max-w-[1280px]">
-            <h2 id="benefits-heading" className="text-4xl font-medium text-accent text-center mb-6">
+            <h2
+              id="benefits-heading"
+              className="text-4xl font-medium text-accent text-center mb-6"
+            >
               Why Choose <span className="text-accent">Zen Car Buying?</span>
             </h2>
-            <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">Skip the dealer hassle. We help you buy smarter with expert guidance and proven strategies all for one flat fee.</p>
+            <p className="text-2xl font-medium text-primary text-center max-w-3xl mx-auto mb-12">
+              Skip the dealer hassle. We help you buy smarter with expert
+              guidance and proven strategies all for one flat fee.
+            </p>
             <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-12">
               {[
-                { title: 'Personalized Vehicle Recommendations', key: 'recommendations', desc: 'We provide tailored suggestions based on your needs & budget.' },
-                { title: 'Nationwide Vehicle Sourcing', key: 'sourcing', desc: 'We find you the best deals, no matter where you live.' },
-                { title: 'Stress Free Process', key: 'negotiation', desc: 'Our Zen Guides streamline the car buying process for you!' },
+                {
+                  title: "Personalized Vehicle Recommendations",
+                  key: "recommendations",
+                  desc: "We provide tailored suggestions based on your needs & budget.",
+                },
+                {
+                  title: "Nationwide Vehicle Sourcing",
+                  key: "sourcing",
+                  desc: "We find you the best deals, no matter where you live.",
+                },
+                {
+                  title: "Stress Free Process",
+                  key: "negotiation",
+                  desc: "Our Zen Guides streamline the car buying process for you!",
+                },
               ].map((benefit, index) => (
                 <Link
                   key={index}
                   to="/services/"
                   aria-label={`Learn more about ${benefit.title}`}
-                  style={{ cursor: "auto", textDecoration: "none", color: "inherit" }}
+                  style={{
+                    cursor: "auto",
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
                 >
                   <div className="text-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow h-full flex flex-col">
-
-                    <div className="text-accent">{icons[benefit.key]}</div> {/* ✅ This applies stroke color */}
-                    <h3 className="text-xl font-medium text-primary">{benefit.title}</h3>
+                    <div className="text-accent">{icons[benefit.key]}</div>{" "}
+                    {/* ✅ This applies stroke color */}
+                    <h3 className="text-xl font-medium text-primary">
+                      {benefit.title}
+                    </h3>
                     <p className="text-gray-500">{benefit.desc}</p>
                   </div>
                 </Link>
               ))}
             </div>
           </div>
-
         </section>
       </RevealSection>
 
@@ -176,15 +269,19 @@ const HomePage = () => {
       <RevealSection>
         {/* ✅ How It Works Section */}
         {deferredReady && (
-          <Suspense fallback={<div className="py-20 text-center text-primary">Loading process…</div>}>
+          <Suspense
+            fallback={
+              <div className="py-20 text-center text-primary">
+                Loading process…
+              </div>
+            }
+          >
             <HowItWorks />
           </Suspense>
         )}
       </RevealSection>
 
-      <RevealSection>
-        {deferredReady && <FaqSectionHomepage />}
-      </RevealSection>
+      <RevealSection>{deferredReady && <FaqSectionHomepage />}</RevealSection>
 
       <RevealSection>
         <InlineCtaSplitChoice />
@@ -193,20 +290,22 @@ const HomePage = () => {
       <RevealSection>
         <div ref={testimonialsRef}>
           {deferredReady && showTestimonials && (
-            <Suspense fallback={<div className="py-20 text-center text-primary">Loading testimonials…</div>}>
+            <Suspense
+              fallback={
+                <div className="py-20 text-center text-primary">
+                  Loading testimonials…
+                </div>
+              }
+            >
               <Testimonials />
             </Suspense>
           )}
         </div>
       </RevealSection>
 
-      <RevealSection>
-        {deferredReady && <CTABand />}
-      </RevealSection>
+      <RevealSection>{deferredReady && <CTABand />}</RevealSection>
 
-      <RevealSection>
-        {deferredReady && <CallToAction />}
-      </RevealSection>
+      <RevealSection>{deferredReady && <CallToAction />}</RevealSection>
     </Layout>
   )
 }
@@ -230,11 +329,11 @@ export const Head = ({ location }) => (
           "https://www.facebook.com/zencarbuying",
           "https://www.instagram.com/zencarbuying",
           "https://www.linkedin.com/company/zencarbuying",
-          "https://www.yelp.com/biz/zencarbuying"
+          "https://www.yelp.com/biz/zencarbuying",
         ],
         description:
-          "Zen Car Buying helps you find luxury and lightly used cars at 30–50% off with expert concierge help."
+          "Zen Car Buying helps you find luxury and lightly used cars at 30–50% off with expert concierge help.",
       })}
     </script>
   </Seo>
-);
+)

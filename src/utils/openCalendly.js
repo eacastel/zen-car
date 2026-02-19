@@ -104,6 +104,11 @@ if (typeof window !== "undefined" && !window.__CALENDLY_BOOKED_LISTENER__) {
             undefined,
         },
       })
+
+      // Route users to home and show transient confirmation modal.
+      window.setTimeout(() => {
+        window.location.assign("/?appointment=scheduled")
+      }, 300)
     } catch (err) {
       console.warn("📛 Error parsing Calendly event:", err)
     }

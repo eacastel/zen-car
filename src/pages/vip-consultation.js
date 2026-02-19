@@ -13,6 +13,8 @@ export default function VipConsultationPage({ forceVip = false }) {
   // 1. Authorization State
   const [isAuthorized, setIsAuthorized] = useState(false)
   const calendarContainer = useRef(null)
+  const hasRequestedLink = useRef(false)
+  const hasInitializedWidget = useRef(false)
 
   // Get Key from Env
   const SITE_KEY = process.env.GATSBY_TURNSTILE_SITE_KEY
@@ -68,6 +70,11 @@ export default function VipConsultationPage({ forceVip = false }) {
   // STEP 3: TURNSTILE VERIFICATION
   // -------------------------------------------
   const handleTurnstileVerify = async token => {
+    if (hasRequestedLink.current || hasInitializedWidget.current) {
+      return
+    }
+    hasRequestedLink.current = true
+
     try {
       console.log("Human verified. Fetching secure link...")
 
@@ -94,10 +101,12 @@ export default function VipConsultationPage({ forceVip = false }) {
           parentElement: calendarContainer.current,
           resize: true,
         })
+        hasInitializedWidget.current = true
         setLoading(false)
       }
     } catch (err) {
       console.error("Load Error:", err)
+      hasRequestedLink.current = false
       setError(true)
       setLoading(false)
     }
