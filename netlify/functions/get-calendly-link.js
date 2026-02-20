@@ -1,4 +1,11 @@
 // netlify/functions/get-calendly-link.js
+import {
+  getClientIp,
+  getClientUserAgent,
+  getNonceSecret,
+  verifyBookingNonce,
+} from "./_bookingNonce.js"
+
 const ALLOWED_HOSTS = new Set([
   "zencarbuying.com",
   "www.zencarbuying.com",
@@ -7,7 +14,11 @@ const ALLOWED_HOSTS = new Set([
 ])
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000 // 10 minutes
 const RATE_LIMIT_MAX_REQUESTS = 8 // max secure-link requests per window per IP
+const FALLBACK_WINDOW_MS = 30 * 60 * 1000 // 30 minutes
+const FALLBACK_MAX_REQUESTS = 1 // strict fallback when Turnstile token is null
 const RECENT_REQUESTS_BY_IP = new Map()
+const FALLBACK_REQUESTS_BY_IP = new Map()
+const USED_NONCES = new Map()
 
 const getHostFromHeaderUrl = (rawValue = "") => {
   if (!rawValue || typeof rawValue !== "string") return ""
@@ -24,35 +35,29 @@ const isAllowedHost = (host = "") => {
   return host.endsWith(".netlify.app")
 }
 
-const getClientIp = event =>
-  event.headers["x-nf-client-connection-ip"] ||
-  event.headers["client-ip"] ||
-  event.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
-  "unknown"
-
-const isRateLimited = ip => {
+const isRateLimited = (ip, { windowMs, maxRequests, store }) => {
   const now = Date.now()
 
   // Opportunistic cleanup to keep memory bounded in warm instances.
-  for (const [knownIp, timestamps] of RECENT_REQUESTS_BY_IP.entries()) {
-    const active = timestamps.filter(ts => now - ts < RATE_LIMIT_WINDOW_MS)
+  for (const [knownIp, timestamps] of store.entries()) {
+    const active = timestamps.filter(ts => now - ts < windowMs)
     if (active.length === 0) {
-      RECENT_REQUESTS_BY_IP.delete(knownIp)
+      store.delete(knownIp)
     } else {
-      RECENT_REQUESTS_BY_IP.set(knownIp, active)
+      store.set(knownIp, active)
     }
   }
 
-  const timestamps = RECENT_REQUESTS_BY_IP.get(ip) || []
-  const active = timestamps.filter(ts => now - ts < RATE_LIMIT_WINDOW_MS)
+  const timestamps = store.get(ip) || []
+  const active = timestamps.filter(ts => now - ts < windowMs)
 
-  if (active.length >= RATE_LIMIT_MAX_REQUESTS) {
-    RECENT_REQUESTS_BY_IP.set(ip, active)
+  if (active.length >= maxRequests) {
+    store.set(ip, active)
     return true
   }
 
   active.push(now)
-  RECENT_REQUESTS_BY_IP.set(ip, active)
+  store.set(ip, active)
   return false
 }
 
@@ -67,27 +72,53 @@ export const handler = async event => {
     return { statusCode: 403, body: "Forbidden" }
   }
 
-  // 1. Parse the body to get the token
+  // 1. Parse body
   let token
+  let bookingNonce
+  let turnstileStatus
   try {
     const body = JSON.parse(event.body || "{}")
-    token = body.token
+    token = body.token ?? null
+    bookingNonce = body.bookingNonce
+    turnstileStatus = body.turnstileStatus || "ok"
   } catch (e) {
     return { statusCode: 400, body: "Invalid JSON" }
   }
 
-  if (!token) {
-    return { statusCode: 403, body: "Missing Human Token" }
-  }
-
-  // 2. Verify the token with Cloudflare
-  const SECRET_KEY = process.env.TURNSTILE_SECRET_KEY
-  if (!SECRET_KEY) {
-    return { statusCode: 500, body: "Missing Turnstile Config" }
-  }
-
   const ip = getClientIp(event)
-  if (isRateLimited(ip)) {
+  const userAgent = getClientUserAgent(event)
+
+  const nonceSecret = getNonceSecret()
+  if (!nonceSecret) {
+    return { statusCode: 500, body: "Missing nonce config" }
+  }
+
+  const nonceResult = verifyBookingNonce({
+    nonceToken: bookingNonce,
+    ip,
+    userAgent,
+    secret: nonceSecret,
+  })
+  if (!nonceResult.ok) {
+    return { statusCode: 403, body: "Invalid booking nonce" }
+  }
+
+  const now = Date.now()
+  for (const [nonceId, exp] of USED_NONCES.entries()) {
+    if (exp <= now) USED_NONCES.delete(nonceId)
+  }
+  if (USED_NONCES.has(nonceResult.nonceId)) {
+    return { statusCode: 409, body: "Booking nonce already used" }
+  }
+
+  // Baseline rate limiting
+  if (
+    isRateLimited(ip, {
+      windowMs: RATE_LIMIT_WINDOW_MS,
+      maxRequests: RATE_LIMIT_MAX_REQUESTS,
+      store: RECENT_REQUESTS_BY_IP,
+    })
+  ) {
     return {
       statusCode: 429,
       headers: { "Retry-After": "600" },
@@ -95,27 +126,53 @@ export const handler = async event => {
     }
   }
 
-  const formData = new FormData()
-  formData.append("secret", SECRET_KEY)
-  formData.append("response", token)
-  formData.append("remoteip", ip)
+  // 2. Verify Turnstile (or strict null-token fallback)
+  const SECRET_KEY = process.env.TURNSTILE_SECRET_KEY
+  const isNullTokenFallback = !token && turnstileStatus === "unavailable"
+  if (token) {
+    if (!SECRET_KEY) {
+      return { statusCode: 500, body: "Missing Turnstile Config" }
+    }
 
-  const url = "https://challenges.cloudflare.com/turnstile/v0/siteverify"
-  const result = await fetch(url, { body: formData, method: "POST" })
-  const outcome = await result.json()
+    const formData = new FormData()
+    formData.append("secret", SECRET_KEY)
+    formData.append("response", token)
+    formData.append("remoteip", ip)
 
-  if (!outcome.success) {
-    console.error("Bot detected:", outcome["error-codes"])
-    return { statusCode: 403, body: "Bot detected" }
-  }
+    const url = "https://challenges.cloudflare.com/turnstile/v0/siteverify"
+    const result = await fetch(url, { body: formData, method: "POST" })
+    const outcome = await result.json()
 
-  const outcomeHost = (outcome.hostname || "").toLowerCase()
-  if (!isAllowedHost(outcomeHost)) {
-    return { statusCode: 403, body: "Invalid verification host" }
-  }
+    if (!outcome.success) {
+      console.error("Bot detected:", outcome["error-codes"])
+      return { statusCode: 403, body: "Bot detected" }
+    }
 
-  if (outcome.action && outcome.action !== "vip_consultation") {
-    return { statusCode: 403, body: "Invalid verification action" }
+    const outcomeHost = (outcome.hostname || "").toLowerCase()
+    if (!isAllowedHost(outcomeHost)) {
+      return { statusCode: 403, body: "Invalid verification host" }
+    }
+
+    if (outcome.action && outcome.action !== "vip_consultation") {
+      return { statusCode: 403, body: "Invalid verification action" }
+    }
+  } else if (isNullTokenFallback) {
+    // Failsafe path for Turnstile outage: strict limit, nonce still required.
+    if (
+      isRateLimited(ip, {
+        windowMs: FALLBACK_WINDOW_MS,
+        maxRequests: FALLBACK_MAX_REQUESTS,
+        store: FALLBACK_REQUESTS_BY_IP,
+      })
+    ) {
+      return {
+        statusCode: 429,
+        headers: { "Retry-After": "1800" },
+        body: "Fallback rate limit exceeded.",
+      }
+    }
+  } else {
+    return { statusCode: 403, body: "Missing Human Token" }
   }
 
   const CALENDLY_TOKEN = process.env.CALENDLY_API_TOKEN
@@ -139,6 +196,13 @@ export const handler = async event => {
     })
 
     const data = await response.json()
+    if (!response.ok || !data?.resource?.booking_url) {
+      return { statusCode: 502, body: "Calendly scheduling link error" }
+    }
+
+    // Burn nonce after successful link generation.
+    USED_NONCES.set(nonceResult.nonceId, nonceResult.exp || Date.now() + 60000)
+
     return {
       statusCode: 200,
       body: JSON.stringify({ url: data.resource.booking_url }),

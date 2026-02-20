@@ -12,6 +12,8 @@ export default function VipConsultationPage({ forceVip = false }) {
   const [error, setError] = useState(false)
   // 1. Authorization State
   const [isAuthorized, setIsAuthorized] = useState(false)
+  const [bookingNonce, setBookingNonce] = useState("")
+  const [turnstileUnavailable, setTurnstileUnavailable] = useState(false)
   const calendarContainer = useRef(null)
   const hasRequestedLink = useRef(false)
   const hasInitializedWidget = useRef(false)
@@ -66,22 +68,56 @@ export default function VipConsultationPage({ forceVip = false }) {
     })
   }
 
+  const fetchBookingNonce = async () => {
+    const nonceRes = await fetch("/.netlify/functions/get-booking-nonce", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ source: "vip_consultation" }),
+    })
+
+    if (!nonceRes.ok) {
+      throw new Error("Failed to initialize booking session")
+    }
+
+    const nonceData = await nonceRes.json()
+    if (!nonceData?.bookingNonce) {
+      throw new Error("Missing booking nonce")
+    }
+
+    setBookingNonce(nonceData.bookingNonce)
+    return nonceData.bookingNonce
+  }
+
+  useEffect(() => {
+    if (!isAuthorized) return
+    fetchBookingNonce().catch(err => {
+      console.error("Nonce init error:", err)
+      setError(true)
+      setLoading(false)
+    })
+  }, [isAuthorized])
+
   // -------------------------------------------
   // STEP 3: TURNSTILE VERIFICATION
   // -------------------------------------------
-  const handleTurnstileVerify = async token => {
+  const handleTurnstileVerify = async (token, status = "ok") => {
     if (hasRequestedLink.current || hasInitializedWidget.current) {
       return
     }
     hasRequestedLink.current = true
 
     try {
+      const nonce = bookingNonce || (await fetchBookingNonce())
       console.log("Human verified. Fetching secure link...")
 
       const res = await fetch("/.netlify/functions/get-calendly-link", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token }),
+        body: JSON.stringify({
+          token: token || null,
+          bookingNonce: nonce,
+          turnstileStatus: status,
+        }),
       })
 
       if (!res.ok) throw new Error("Verification failed")
@@ -107,6 +143,7 @@ export default function VipConsultationPage({ forceVip = false }) {
     } catch (err) {
       console.error("Load Error:", err)
       hasRequestedLink.current = false
+      setBookingNonce("")
       setError(true)
       setLoading(false)
     }
@@ -185,13 +222,32 @@ export default function VipConsultationPage({ forceVip = false }) {
             {SITE_KEY && (
               <Turnstile
                 sitekey={SITE_KEY}
-                onVerify={handleTurnstileVerify}
+                onVerify={token => handleTurnstileVerify(token, "ok")}
+                onError={() => setTurnstileUnavailable(true)}
+                onExpire={() => setTurnstileUnavailable(true)}
                 action="vip_consultation"
                 theme="light"
                 appearance="interaction-only"
               />
             )}
-            {!SITE_KEY && <p>Loading Security...</p>}
+            {!SITE_KEY && (
+              <p>Security check unavailable. Use fallback below.</p>
+            )}
+            {turnstileUnavailable && (
+              <p className="text-center text-sm text-primary px-4 mt-2">
+                Security challenge is temporarily unavailable. Use secure
+                fallback.
+              </p>
+            )}
+            {(!SITE_KEY || turnstileUnavailable) && (
+              <button
+                type="button"
+                className="mt-4 bg-accent text-white px-5 py-3 rounded-lg font-semibold"
+                onClick={() => handleTurnstileVerify(null, "unavailable")}
+              >
+                Continue to Scheduling
+              </button>
+            )}
           </div>
         )}
 

@@ -1,101 +1,107 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react"
 
 export default function ExitIntentPopup() {
-  const [visible, setVisible] = useState(false);
-  const modalRef = useRef(null);
+  const [visible, setVisible] = useState(false)
+  const modalRef = useRef(null)
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") return
 
-    const excludedPaths = ["/vip-consultation/vip/", "/thank-you/"];
-    const currentPath = window.location.pathname;
-    if (excludedPaths.includes(currentPath)) return;
+    const excludedPaths = ["/vip-consultation/vip/"]
+    const currentPath = window.location.pathname
+    if (excludedPaths.includes(currentPath)) return
 
-    const shownAt = localStorage.getItem("exitIntentShownAt");
-    const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
-    if (shownAt && Date.now() - parseInt(shownAt, 10) < SEVEN_DAYS) return;
+    const shownAt = localStorage.getItem("exitIntentShownAt")
+    const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000
+    if (shownAt && Date.now() - parseInt(shownAt, 10) < SEVEN_DAYS) return
 
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < 768
 
     const showPopup = () => {
-      setVisible(true);
-      localStorage.setItem("exitIntentShownAt", Date.now().toString());
-    };
+      setVisible(true)
+      localStorage.setItem("exitIntentShownAt", Date.now().toString())
+    }
 
     if (!isMobile) {
-      const handleMouseMove = (e) => {
+      const handleMouseMove = e => {
         if (e.clientY < 10) {
-          showPopup();
-          document.removeEventListener("mousemove", handleMouseMove);
+          showPopup()
+          document.removeEventListener("mousemove", handleMouseMove)
         }
-      };
+      }
       const delay = setTimeout(() => {
-        document.addEventListener("mousemove", handleMouseMove);
-      }, 3000);
+        document.addEventListener("mousemove", handleMouseMove)
+      }, 3000)
 
       return () => {
-        clearTimeout(delay);
-        document.removeEventListener("mousemove", handleMouseMove);
-      };
+        clearTimeout(delay)
+        document.removeEventListener("mousemove", handleMouseMove)
+      }
     } else {
       const handleScroll = () => {
-        const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+        const scrollPercent =
+          (window.scrollY / (document.body.scrollHeight - window.innerHeight)) *
+          100
         if (scrollPercent > 50) {
-          showPopup();
-          window.removeEventListener("scroll", handleScroll);
+          showPopup()
+          window.removeEventListener("scroll", handleScroll)
         }
-      };
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
+      }
+      window.addEventListener("scroll", handleScroll)
+      return () => window.removeEventListener("scroll", handleScroll)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handleClickOutside = e => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
-        setVisible(false);
+        setVisible(false)
       }
-    };
-    if (visible) document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [visible]);
+    }
+    if (visible) document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [visible])
 
-  const handleClose = () => setVisible(false);
+  const handleClose = () => setVisible(false)
 
   const handleBookCall = () => {
     if (typeof window !== "undefined") {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: "exit_intent_cta_click", label: "Exit Intent Popup" });
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push({
+        event: "exit_intent_cta_click",
+        label: "Exit Intent Popup",
+      })
 
       if (window.openCalendlyPopup) {
-        window.openCalendlyPopup();
+        window.openCalendlyPopup()
       } else {
-        window.location.href = "/vip-consultation/vip/";
+        window.location.href = "/vip-consultation/vip/"
       }
-      setVisible(false);
+      setVisible(false)
     }
-  };
+  }
 
   const handleContinuePurchase = () => {
     if (typeof window !== "undefined") {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: "exit_intent_continue_purchase" });
-      setVisible(false);
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push({ event: "exit_intent_continue_purchase" })
+      setVisible(false)
 
       // Smooth-scroll and focus back to purchase section
       setTimeout(() => {
-        const target = document.querySelector("#purchase-start");
+        const target = document.querySelector("#purchase-start")
         if (target) {
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          target.scrollIntoView({ behavior: "smooth", block: "start" })
           // make sure focusable, then focus (a11y)
-          if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
-          target.focus({ preventScroll: true });
+          if (!target.hasAttribute("tabindex"))
+            target.setAttribute("tabindex", "-1")
+          target.focus({ preventScroll: true })
         }
-      }, 50);
+      }, 50)
     }
-  };
+  }
 
-  if (!visible) return null;
+  if (!visible) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
@@ -125,13 +131,20 @@ export default function ExitIntentPopup() {
             stroke="currentColor"
             strokeWidth={2}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
 
         {/* Main content */}
         <div className="bg-white mx-0 mt-0 mb-2 p-6 rounded-xl text-center">
-          <h2 id="exit-intent-title" className="text-2xl font-medium text-accent mb-3 font-poppins">
+          <h2
+            id="exit-intent-title"
+            className="text-2xl font-medium text-accent mb-3 font-poppins"
+          >
             Make your next move with confidence.
           </h2>
           <p className="text-md text-primary mb-4">
@@ -165,5 +178,5 @@ export default function ExitIntentPopup() {
         </div>
       </div>
     </div>
-  );
+  )
 }

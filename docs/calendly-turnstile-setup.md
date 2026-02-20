@@ -12,6 +12,7 @@ Only allow real users from your website to generate a Calendly booking link, and
 2. CTA routes to a protected page: `/vip-consultation/vip/`.
 3. Protected page runs Cloudflare Turnstile challenge.
 4. On successful challenge, frontend calls `/.netlify/functions/get-calendly-link` with Turnstile token.
+   4.5. Frontend first requests `/.netlify/functions/get-booking-nonce` and sends the nonce with booking-link request.
 5. Netlify function verifies:
    - request method
    - origin/referer host allowlist
@@ -34,6 +35,7 @@ Set these in Netlify Site settings and your local `.env.*` as needed.
 2. `TURNSTILE_SECRET_KEY`
 3. `CALENDLY_API_TOKEN`
 4. `CALENDLY_EVENT_UUID`
+5. `BOOKING_NONCE_SECRET` (recommended; falls back to `TURNSTILE_SECRET_KEY` if omitted)
 
 ## Calendly Setup
 
@@ -108,6 +110,10 @@ fetch("/.netlify/functions/get-calendly-link", {
 5. Turnstile `hostname` allowlist check.
 6. Turnstile `action` check (`vip_consultation`).
 7. Calendly single-use link creation via `max_event_count: 1`.
+8. Signed booking nonce validation (IP/UA-bound, short-lived).
+9. Nonce replay protection (single-use token burn on success).
+
+`netlify/functions/get-booking-nonce.js` issues the signed nonce used by step 8.
 
 Important: in-memory rate limiting works per warm serverless instance. It is effective for burst reduction but not globally consistent across all instances.
 
