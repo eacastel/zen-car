@@ -17,3 +17,4 @@ This repository contains the source code for the Zen Car Buying website, built w
 ## Internal Docs
 
 - Secure Calendly + Turnstile setup: `docs/calendly-turnstile-setup.md`
+- Sprint notes (Calendly abuse response, Feb 20 2026): `docs/sprint-2026-02-20-calendly-abuse-response.md`
