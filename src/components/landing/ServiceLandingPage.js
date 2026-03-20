@@ -102,7 +102,7 @@ export default function ServiceLandingPage({ serviceType }) {
       <LandingHero
         eyebrow={config.heroEyebrow}
         title={config.heroTitle}
-        description={`${config.primaryKeywordDisplay} support should be strategic, calm and direct. ${config.heroDescription}`}
+        description={config.heroDescription}
         accentLine={config.heroAccent}
         ctaNote="We research, negotiate and coordinate delivery. You just choose the car."
         primaryCta={{
@@ -125,7 +125,7 @@ export default function ServiceLandingPage({ serviceType }) {
             page_type: "service",
           },
         }}
-        badgeItems={config.introCards}
+        badgeItems={config.heroBadges}
       />
 
       <HeroSocialProof />
@@ -134,11 +134,7 @@ export default function ServiceLandingPage({ serviceType }) {
         background="bg-white"
         eyebrow="How We Help"
         title={config.introHeading}
-        description={`Buyers searching for ${config.secondaryKeywords
-          .slice(0, 2)
-          .join(
-            " and "
-          )} usually need the same thing: sharper guidance and less dealership friction.`}
+        description="Most buyers need the same thing here: clearer guidance, less dealership pressure and a faster path to the right vehicle."
       >
         <div className="grid gap-5 lg:grid-cols-3">
           {config.introCards.map(card => (
@@ -181,9 +177,8 @@ export default function ServiceLandingPage({ serviceType }) {
               High-intent buyers
             </p>
             <p className="text-lg leading-relaxed mb-6">
-              If you are comparing searches like "{config.longTailKeywords[0]}"{" "}
-              or "{config.longTailKeywords[1]}", the fastest move is a short
-              consultation before you start negotiating blind.
+              A short consultation is the fastest way to pressure-test pricing,
+              narrow the right options and avoid negotiating blind.
             </p>
             <ServiceButton
               to={buildServicePath(serviceType)}
@@ -221,9 +216,7 @@ export default function ServiceLandingPage({ serviceType }) {
 
       <LandingFaqSection
         title={`Questions people ask before they hire a ${config.displayName.toLowerCase()}`}
-        description={`These answers are built around the intent behind searches like ${config.secondaryKeywords
-          .slice(2, 4)
-          .join(" and ")}.`}
+        description="These answers address the questions that usually come up before buyers decide how much help they need."
         items={config.faq}
       />
 

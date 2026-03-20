@@ -14,9 +14,23 @@ export const SERVICE_CONFIGS = {
     heroTitle:
       "Hire a car broker to buy your next car without the dealership stress",
     heroDescription:
-      "Our car broker service handles research, sourcing, negotiation and delivery coordination so you can buy with more clarity and far less friction.",
+      "Skip dealership pressure while we source, negotiate and coordinate delivery on your behalf.",
     heroAccent:
       "Built for drivers who want expert representation instead of dealership pressure.",
+    heroBadges: [
+      {
+        title: "Skip dealership pressure",
+        description: "We handle negotiation so you avoid pricing games and wasted time.",
+      },
+      {
+        title: "See better options",
+        description: "We compare local and nationwide inventory to uncover stronger deals.",
+      },
+      {
+        title: "Buy with confidence",
+        description: "You get clear guidance before making a major car decision.",
+      },
+    ],
     primaryKeyword: "car broker",
     primaryKeywordDisplay: "Car broker",
     secondaryKeywords: [
@@ -95,9 +109,23 @@ export const SERVICE_CONFIGS = {
     heroTitle:
       "Work with a used car broker to avoid overpaying, guessing and dealer pressure",
     heroDescription:
-      "Our used car broker service helps you narrow the right vehicles, inspect the market, avoid bad listings and negotiate with more confidence before money changes hands.",
+      "Get expert help narrowing inventory, avoiding bad listings and negotiating the right used car without wasting weekends.",
     heroAccent:
       "Ideal for buyers who want used-car guidance without wasting weekends chasing questionable inventory.",
+    heroBadges: [
+      {
+        title: "Avoid bad listings",
+        description: "We filter weak inventory early so you do not waste time or money.",
+      },
+      {
+        title: "Compare more inventory",
+        description: "We widen the search when local used options are overpriced or risky.",
+      },
+      {
+        title: "Decide with clarity",
+        description: "You get practical guidance before committing to a used vehicle.",
+      },
+    ],
     primaryKeyword: "used car broker",
     primaryKeywordDisplay: "Used car broker",
     secondaryKeywords: [
@@ -259,6 +287,14 @@ export function getCityKeywordSet(cityData, serviceType) {
     secondaryKeywords: cityData.secondaryKeywords || [],
     longTailKeywords: cityData.longTailKeywords || [],
   }
+}
+
+export function getCityHeroSubheadline(serviceType) {
+  if (serviceType === "used_car_broker") {
+    return "Skip the guesswork while we compare used inventory, negotiate cleanly and help you avoid expensive mistakes."
+  }
+
+  return "Skip dealership pressure while we compare inventory, negotiate pricing and coordinate delivery for you."
 }
 
 export function getServiceConfig(serviceType) {
