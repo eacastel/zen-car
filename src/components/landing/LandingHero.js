@@ -7,6 +7,7 @@ export default function LandingHero({
   description,
   accentLine,
   ctaNote,
+  ctaSubnote,
   primaryCta,
   secondaryCta,
   badgeItems = [],
@@ -80,6 +81,11 @@ export default function LandingHero({
             {ctaNote && (
               <p className="mt-4 max-w-[42rem] text-sm md:text-base text-white/80">
                 {ctaNote}
+              </p>
+            )}
+            {ctaSubnote && (
+              <p className="mt-2 max-w-[42rem] text-sm md:text-base text-white/90">
+                {ctaSubnote}
               </p>
             )}
           </div>

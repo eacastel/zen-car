@@ -17,6 +17,7 @@ import {
   capitalizeFirst,
   getCityPath,
   getServiceConfig,
+  getServiceHeroCtaSubnote,
 } from "../../utils/landingPages"
 
 const Testimonials = lazy(() => import("../Testimonials"))
@@ -105,6 +106,7 @@ export default function ServiceLandingPage({ serviceType }) {
         description={config.heroDescription}
         accentLine={config.heroAccent}
         ctaNote="We research, negotiate and coordinate delivery. You just choose the car."
+        ctaSubnote={getServiceHeroCtaSubnote(serviceType)}
         primaryCta={{
           text: "Book consultation",
           to: bookingPath,
@@ -127,6 +129,25 @@ export default function ServiceLandingPage({ serviceType }) {
         }}
         badgeItems={config.heroBadges}
       />
+
+      <section className="bg-white">
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-[1280px] -mt-6 relative z-10">
+          <div className="rounded-[24px] border border-primary/10 bg-white p-6 md:p-8 shadow-[0_16px_40px_rgba(20,31,34,0.08)]">
+            <h2 className="text-2xl md:text-3xl font-medium text-primary mb-3">
+              Not sure where to start?
+            </h2>
+            <p className="text-lg text-primary/80 max-w-3xl mb-3">
+              A quick consultation helps you understand pricing, inventory and
+              whether local or out-of-state buying makes more sense.
+            </p>
+            <p className="text-primary/75 max-w-3xl">
+              We research the market, source inventory, negotiate with dealers
+              and coordinate delivery when the right vehicle is outside your
+              area.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <HeroSocialProof />
 

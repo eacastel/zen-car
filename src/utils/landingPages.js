@@ -14,7 +14,7 @@ export const SERVICE_CONFIGS = {
     heroTitle:
       "Hire a car broker to buy your next car without the dealership stress",
     heroDescription:
-      "Skip dealership pressure while we source, negotiate and coordinate delivery on your behalf.",
+      "Skip dealership pressure and overpriced listings while we source, negotiate and secure the right car for you.",
     heroAccent:
       "Built for drivers who want expert representation instead of dealership pressure.",
     heroBadges: [
@@ -109,7 +109,7 @@ export const SERVICE_CONFIGS = {
     heroTitle:
       "Work with a used car broker to avoid overpaying, guessing and dealer pressure",
     heroDescription:
-      "Get expert help narrowing inventory, avoiding bad listings and negotiating the right used car without wasting weekends.",
+      "Skip dealership pressure and overpriced listings while we find, negotiate and secure the right used car for you.",
     heroAccent:
       "Ideal for buyers who want used-car guidance without wasting weekends chasing questionable inventory.",
     heroBadges: [
@@ -291,10 +291,26 @@ export function getCityKeywordSet(cityData, serviceType) {
 
 export function getCityHeroSubheadline(serviceType) {
   if (serviceType === "used_car_broker") {
-    return "Skip the guesswork while we compare used inventory, negotiate cleanly and help you avoid expensive mistakes."
+    return "Skip dealership pressure and overpriced listings while we find, negotiate and secure the right used car for you."
   }
 
-  return "Skip dealership pressure while we compare inventory, negotiate pricing and coordinate delivery for you."
+  return "Skip dealership pressure and overpriced listings while we source, negotiate and secure the right car for you."
+}
+
+export function getCityHeroCtaSubnote(cityData, serviceType) {
+  if (serviceType === "used_car_broker") {
+    return `Work with a trusted used car broker in ${cityData.city} to compare, negotiate and secure the right vehicle.`
+  }
+
+  return `Work with a trusted car broker in ${cityData.city} to compare, negotiate and secure the right vehicle.`
+}
+
+export function getServiceHeroCtaSubnote(serviceType) {
+  if (serviceType === "used_car_broker") {
+    return "Work with a trusted used car broker to compare, negotiate and secure the right vehicle."
+  }
+
+  return "Work with a trusted car broker to compare, negotiate and secure the right vehicle."
 }
 
 export function getServiceConfig(serviceType) {
