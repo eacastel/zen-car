@@ -89,10 +89,22 @@ In `src/pages/vip-consultation.js`, verify Turnstile and pass token to backend:
 Then call:
 
 ```js
+const nonceRes = await fetch("/.netlify/functions/get-booking-nonce", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ source: "vip_consultation" }),
+})
+
+const { bookingNonce } = await nonceRes.json()
+
 fetch("/.netlify/functions/get-calendly-link", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ token }),
+  body: JSON.stringify({
+    token,
+    bookingNonce,
+    turnstileStatus: "ok",
+  }),
 })
 ```
 
@@ -112,6 +124,7 @@ fetch("/.netlify/functions/get-calendly-link", {
 7. Calendly single-use link creation via `max_event_count: 1`.
 8. Signed booking nonce validation (IP/UA-bound, short-lived).
 9. Nonce replay protection (single-use token burn on success).
+10. Strict fallback mode when Turnstile is unavailable and returns null.
 
 `netlify/functions/get-booking-nonce.js` issues the signed nonce used by step 8.
 
@@ -129,6 +142,9 @@ Important: in-memory rate limiting works per warm serverless instance. It is eff
    - should eventually return `429`.
 5. Use generated scheduling link twice:
    - second attempt should fail in Calendly because link is single-use.
+6. Temporarily simulate Turnstile outage/null token:
+   - fallback button should appear
+   - fallback should still be nonce-gated and heavily rate-limited
 
 ## Local Testing Notes
 

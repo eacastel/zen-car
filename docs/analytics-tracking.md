@@ -8,19 +8,20 @@ This file documents the current analytics, advertising and event tracking implem
 
 ### Tags:
 
-* **Google Tag – GA4 (with traffic\_type)** – Fires on all pages
-* **Google Ads – Purchase Success** – Fires on `/success` after Stripe payment
-* **Google Ads – Calendly Booked** – Fires on `calendly.event_scheduled`
-* **GA4 Event – Purchase Success (checkout\_success)**
-* **GA4 Event – Calendly Booked (calendly\_booked)**
-* **Microsoft Clarity** – Custom HTML tag
+- **Google Tag – GA4 (with traffic_type)** – Fires on all pages
+- **Google Ads – Purchase Success** – Fires on `/success` after Stripe payment
+- **Google Ads – Calendly Booked** – Fires on `calendly_booked`
+- **GA4 Event – Purchase Success (checkout_success)**
+- **GA4 Event – Calendly Booked (calendly_booked)**
+- **Microsoft Clarity** – Custom HTML tag
 
 ### Variables:
 
-* `DL - value` → `value` from DataLayer (purchase amount)
-* `DL - currency` → `currency` from DataLayer (e.g. USD)
-* `DL - transaction_id` → Stripe payment intent ID
-* `DL - calendly_url` → URL passed from Calendly event
+- `DL - value` → `value` from DataLayer (purchase amount)
+- `DL - currency` → `currency` from DataLayer (e.g. USD)
+- `DL - transaction_id` → Stripe payment intent ID
+- `DL - calendly_url` → URL passed from Calendly event
+- `DL - enhanced_conversion_data` → normalized Google Ads enhanced conversion payload
 
 ---
 
@@ -34,28 +35,28 @@ CTA clicks on the homepage and new-landing CTAs push a dedicated `cta_click` eve
 window.dataLayer.push({
   event: "cta_click",
   label: "hero_book_consultation", // CTA identifier
-  location: "hero",                // component/section
+  location: "hero", // component/section
   destination: "/vip-consultation/vip/",
-  page_location: window.location.href
-});
+  page_location: window.location.href,
+})
 ```
 
 ### Current labels (homepage + new landing):
 
-* `hero_explore_services`
-* `hero_book_consultation`
-* `inline_inset_primary`
-* `inline_split_left`
-* `inline_split_right`
-* `cta_band_primary`
-* `cta_band_secondary`
-* `final_cta_book_call`
-* `micro_inline_primary`
-* `micro_inline_secondary`
-* `final_band_primary`
-* `final_band_secondary`
-* `decision_split_left`
-* `decision_split_right`
+- `hero_explore_services`
+- `hero_book_consultation`
+- `inline_inset_primary`
+- `inline_split_left`
+- `inline_split_right`
+- `cta_band_primary`
+- `cta_band_secondary`
+- `final_cta_book_call`
+- `micro_inline_primary`
+- `micro_inline_secondary`
+- `final_band_primary`
+- `final_band_secondary`
+- `decision_split_left`
+- `decision_split_right`
 
 ---
 
@@ -65,19 +66,19 @@ window.dataLayer.push({
 
 ### Fired on:
 
-* **checkout\_success** (Stripe success page)
-* **calendly\_booked** (Calendly booking via GTM)
+- **checkout_success** (Stripe success page)
+- **calendly_booked** (Calendly booking via GTM)
 
 ### Tracked fields:
 
-* Event Name: `Purchase` or `Lead`
-* Event ID: `stripe_${intentId}` or `calendly_${timestamp}`
-* Email, first name, last name → Hashed via SHA256
+- Event Name: `Purchase` or `Lead`
+- Event ID: `stripe_${intentId}` or `calendly_${timestamp}`
+- Email, first name, last name → Hashed via SHA256
 
 ### Notes:
 
-* Uses `TEST98035` for test events
-* Production traffic sends hashed `em`, `fn`, `ln`
+- Uses `TEST98035` for test events
+- Production traffic sends hashed `em`, `fn`, `ln`
 
 ---
 
@@ -85,7 +86,7 @@ window.dataLayer.push({
 
 ### Triggered by:
 
-* `message` event `calendly.event_scheduled` in browser
+- `message` event `calendly.event_scheduled` in browser
 
 ### Data pushed to DataLayer:
 
@@ -93,14 +94,20 @@ window.dataLayer.push({
 window.dataLayer.push({
   event: "calendly_booked",
   calendly_url: event.data.payload.event.uri,
-});
+})
 ```
 
 ### Tracked by:
 
-* GA4 Event: `calendly_booked`
-* Google Ads Conversion: `Google Ads - Calendly Booked`
-* Meta CAPI: `Lead`
+- GA4 Event: `calendly_booked`
+- Google Ads Conversion: `Google Ads - Calendly Booked`
+- Meta CAPI: `Lead`
+- Google enhanced conversions via `enhanced_conversion_data`
+
+### Notes:
+
+- Calendly raw browser event is `calendly.event_scheduled`
+- GTM/dataLayer event to trigger on is `calendly_booked`
 
 ---
 
@@ -108,20 +115,54 @@ window.dataLayer.push({
 
 ### Custom Events:
 
-* `checkout_success` (parameters: value, currency, transaction\_id)
-* `calendly_booked` (parameters: calendly\_url)
+- `checkout_success` (parameters: value, currency, transaction_id)
+- `calendly_booked` (parameters: calendly_url)
+- `enhanced_conversion_data` (parameters: `user_data.email`, `user_data.first_name`, `user_data.last_name`)
+
+### Purchase Enhanced Conversions
+
+The purchase success page now sends enhanced conversion user data in two ways:
+
+```js
+window.dataLayer.push({
+  event: "enhanced_conversion_data",
+  user_data: {
+    email,
+    first_name,
+    last_name,
+  },
+})
+```
+
+and on the purchase conversion event itself:
+
+```js
+window.dataLayer.push({
+  event: "checkout_success",
+  value,
+  currency,
+  transaction_id,
+  enhanced_conversion_data: {
+    email,
+    first_name,
+    last_name,
+  },
+})
+```
+
+This data is sourced from Stripe payment intent metadata and billing details returned by `/.netlify/functions/get-payment-intent`.
 
 ### Debugging:
 
-* Use GA4 DebugView (in GA4 Admin)
-* Use GTM Preview mode to confirm event parameter passing
+- Use GA4 DebugView (in GA4 Admin)
+- Use GTM Preview mode to confirm event parameter passing
 
 ### Marked as Conversions:
 
-* [ ] checkout\_success
-* [ ] calendly\_booked
+- [ ] checkout_success
+- [ ] calendly_booked
 
-*(Mark manually in GA4 → Admin → Events or Conversions)*
+_(Mark manually in GA4 → Admin → Events or Conversions)_
 
 ---
 
@@ -134,8 +175,8 @@ window.dataLayer.push({
   event: "checkout_success",
   value: 100,
   currency: "USD",
-  transaction_id: "test_intent_123"
-});
+  transaction_id: "test_intent_123",
+})
 ```
 
 ### Fire `calendly_booked` manually (console):
@@ -143,17 +184,17 @@ window.dataLayer.push({
 ```js
 window.dataLayer.push({
   event: "calendly_booked",
-  calendly_url: "https://calendly.com/zen-booking/test-session"
-});
+  calendly_url: "https://calendly.com/zen-booking/test-session",
+})
 ```
 
 ---
 
 ## TODO / Improvements
 
-* [ ] Create a standalone public-facing docs page
-* [ ] Include screenshots of GTM tag setups
-* [ ] Confirm all custom GA4 events are marked as conversions
+- [ ] Create a standalone public-facing docs page
+- [ ] Include screenshots of GTM tag setups
+- [ ] Confirm all custom GA4 events are marked as conversions
 
 ---
 
@@ -165,49 +206,49 @@ window.dataLayer.push({
 
 ### Tags (current)
 
-* Google Tag – GA4 (with traffic_type)
-* Google Tag AW-17034476300
-* Google Ads – Purchase Success
-* Google Ads – Calendly Booked
-* GA4 Event – Purchase Success (checkout_success)
-* GA4 Event – Calendly Booked (calendly_booked)
-* GA4 – Purchase Event (purchase)
-* GA4 – Exit Intent Call Click
-* GA4 – Click to Call
-* GA4 – Click to Text
-* GA4 – share_click
-* GA4 – share_copy
-* Google Ads – Click to Call
-* Google Ads – Click to Text
-* Conversion Linker
-* Microsoft Clarity
-* LinkedIn Insight
-* LinkedIn – Purchase (Checkout Success)
-* LinkedIn – Lead (Calendly Booked)
-* UTM – Last Touch Storage
-* Store UTMs in Session Storage
+- Google Tag – GA4 (with traffic_type)
+- Google Tag AW-17034476300
+- Google Ads – Purchase Success
+- Google Ads – Calendly Booked
+- GA4 Event – Purchase Success (checkout_success)
+- GA4 Event – Calendly Booked (calendly_booked)
+- GA4 – Purchase Event (purchase)
+- GA4 – Exit Intent Call Click
+- GA4 – Click to Call
+- GA4 – Click to Text
+- GA4 – share_click
+- GA4 – share_copy
+- Google Ads – Click to Call
+- Google Ads – Click to Text
+- Conversion Linker
+- Microsoft Clarity
+- LinkedIn Insight
+- LinkedIn – Purchase (Checkout Success)
+- LinkedIn – Lead (Calendly Booked)
+- UTM – Last Touch Storage
+- Store UTMs in Session Storage
 
 ### Triggers (current)
 
-* Custom Event: `checkout_success`
-* Custom Event: `calendly_booked`
-* Custom Event: `enhanced_conversion_data`
-* Custom Event: `exit_intent_call_click`
-* Custom Event: `share_click`
-* Custom Event: `share_copy`
-* Link Click: `tel:` links
-* Link Click: `sms:` links
+- Custom Event: `checkout_success`
+- Custom Event: `calendly_booked`
+- Custom Event: `enhanced_conversion_data`
+- Custom Event: `exit_intent_call_click`
+- Custom Event: `share_click`
+- Custom Event: `share_copy`
+- Link Click: `tel:` links
+- Link Click: `sms:` links
 
 ### Variables (current)
 
-* Data Layer: `value`, `currency`, `transaction_id`, `calendly_url`
-* Data Layer: `page_title`, `page_path`, `copy_url`, `platform`
-* Data Layer: `items`, `customer_email`
-* Built-ins: Page URL, Page Hostname, Page Path, Referrer, Event, Click URL, Click Text
-* UTM Query: `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `gclid`
-* Last-touch UTM: `utm_source_last`, `utm_medium_last`, `utm_campaign_last`
+- Data Layer: `value`, `currency`, `transaction_id`, `calendly_url`
+- Data Layer: `page_title`, `page_path`, `copy_url`, `platform`, `enhanced_conversion_data`
+- Data Layer: `items`, `customer_email`
+- Built-ins: Page URL, Page Hostname, Page Path, Referrer, Event, Click URL, Click Text
+- UTM Query: `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `gclid`
+- Last-touch UTM: `utm_source_last`, `utm_medium_last`, `utm_campaign_last`
 
 ### Missing (needs to be added)
 
-* Triggers for `cta_click` and `cta_contact_click`
-* GA4 event tag(s) to forward those events + parameters
+- Triggers for `cta_click` and `cta_contact_click`
+- GA4 event tag(s) to forward those events + parameters

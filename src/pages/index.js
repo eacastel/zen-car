@@ -13,6 +13,7 @@ import CarLogoStrip from "../components/new-landing-2026/CarLogoStrip"
 import RevealSection from "../components/new-landing-2026/RevealSection"
 import FaqSectionHomepage from "../components/new-landing-2026/FaqSectionHomepage"
 import CallTextCtaBar from "../components/new-landing-2026/CallTextCtaBar"
+import { SOCIAL_SCHEMA_SAME_AS } from "../utils/socialProfiles"
 
 const HowItWorks = lazy(() => import("../components/HowItWorks"))
 const Testimonials = lazy(() => import("../components/Testimonials"))
@@ -325,12 +326,7 @@ export const Head = ({ location }) => (
         name: "Zen Car Buying",
         url: "https://zencarbuying.com",
         logo: "https://zencarbuying.com/zen-car-buying-logo.png",
-        sameAs: [
-          "https://www.facebook.com/zencarbuying",
-          "https://www.instagram.com/zencarbuying",
-          "https://www.linkedin.com/company/zencarbuying",
-          "https://www.yelp.com/biz/zencarbuying",
-        ],
+        sameAs: SOCIAL_SCHEMA_SAME_AS,
         description:
           "Zen Car Buying helps you find luxury and lightly used cars at 30–50% off with expert concierge help.",
       })}

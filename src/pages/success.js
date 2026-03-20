@@ -1,80 +1,98 @@
-import React, { useEffect, useState } from "react";
-import Layout from "../components/Layout";
-import Seo from "../components/Seo";
-import Button from "../components/Button";
-import { getHomePath } from "../utils/getHomePath";
+import React, { useEffect, useState } from "react"
+import Layout from "../components/Layout"
+import Seo from "../components/Seo"
+import Button from "../components/Button"
+import { getHomePath } from "../utils/getHomePath"
 
 const SuccessPage = () => {
-  const [amount, setAmount] = useState(null);
-  const [paymentIntentId, setPaymentIntentId] = useState("");
+  const [amount, setAmount] = useState(null)
+  const [paymentIntentId, setPaymentIntentId] = useState("")
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       // ---- SHA-256 helper for Meta CAPI hashing ----
-      const sha256 = async (input) => {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(input.toLowerCase().trim());
-        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+      const sha256 = async input => {
+        const encoder = new TextEncoder()
+        const data = encoder.encode(input.toLowerCase().trim())
+        const hashBuffer = await crypto.subtle.digest("SHA-256", data)
         return Array.from(new Uint8Array(hashBuffer))
-          .map((b) => b.toString(16).padStart(2, "0"))
-          .join("");
-      };
+          .map(b => b.toString(16).padStart(2, "0"))
+          .join("")
+      }
 
       // ---- Helper to get "last touch" UTM from sessionStorage or URL ----
-      const getUtmLast = (key) => {
+      const getUtmLast = key => {
         try {
-          const ss = window.sessionStorage;
-          const qs = new URLSearchParams(window.location.search);
+          const ss = window.sessionStorage
+          const qs = new URLSearchParams(window.location.search)
 
           return (
             ss.getItem(key + "_last") || // utm_source_last, etc.
-            ss.getItem(key) ||           // utm_source
-            qs.get(key) ||               // ?utm_source=...
+            ss.getItem(key) || // utm_source
+            qs.get(key) || // ?utm_source=...
             ""
-          );
+          )
         } catch (e) {
-          return "";
+          return ""
         }
-      };
+      }
 
-      const params = new URLSearchParams(window.location.search);
-      const intentId = params.get("payment_intent");
-      if (!intentId || window.__CONVERSION_FIRED__) return;
+      const params = new URLSearchParams(window.location.search)
+      const intentId = params.get("payment_intent")
+      if (!intentId || window.__CONVERSION_FIRED__) return
 
-      setPaymentIntentId(intentId);
+      setPaymentIntentId(intentId)
 
       fetch("/.netlify/functions/get-payment-intent", {
         method: "POST",
         body: JSON.stringify({ id: intentId }),
       })
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
           if (data && data.amount) {
-            const amountInDollars = data.amount / 100;
-            setAmount(amountInDollars);
+            const amountInDollars = data.amount / 100
+            setAmount(amountInDollars)
 
             if (!window.__CONVERSION_FIRED__) {
-              window.__CONVERSION_FIRED__ = true;
+              window.__CONVERSION_FIRED__ = true
 
               // ---------- EMAIL / NAME (used for CAPI + dataLayer) ----------
-              const email =
-                data.customer_email ||
-                data.receipt_email ||
-                "";
+              const email = data.customer_email || data.receipt_email || ""
 
-              const nameRaw = data.customer_name || "";
-              const parts = nameRaw.split(" ").filter(Boolean);
-              const firstName = parts[0] || "";
-              const lastName = parts.slice(1).join(" ");
-              const customerName = nameRaw;
+              const nameRaw = data.customer_name || ""
+              const parts = nameRaw.split(" ").filter(Boolean)
+              const firstName = parts[0] || ""
+              const lastName = parts.slice(1).join(" ")
+              const customerName = nameRaw
 
               // ---------- UTM LAST TOUCH from sessionStorage / URL ----------
-              const utmSourceLast = getUtmLast("utm_source");
-              const utmMediumLast = getUtmLast("utm_medium");
-              const utmCampaignLast = getUtmLast("utm_campaign");
+              const utmSourceLast = getUtmLast("utm_source")
+              const utmMediumLast = getUtmLast("utm_medium")
+              const utmCampaignLast = getUtmLast("utm_campaign")
+
+              // ---------- Google Enhanced Conversions ----------
+              if (email) {
+                window.dataLayer = window.dataLayer || []
+                window.dataLayer.push({
+                  event: "enhanced_conversion_data",
+                  user_data: {
+                    email,
+                    first_name: firstName || undefined,
+                    last_name: lastName || undefined,
+                  },
+                })
+
+                if (typeof window.gtag === "function") {
+                  window.gtag("set", "user_data", {
+                    email,
+                    first_name: firstName || undefined,
+                    last_name: lastName || undefined,
+                  })
+                }
+              }
 
               // 🔁 Meta Conversions API via Netlify function
-              (async () => {
+              ;(async () => {
                 try {
                   await fetch("/.netlify/functions/meta-capi", {
                     method: "POST",
@@ -96,14 +114,14 @@ const SuccessPage = () => {
                         utm_campaign_last: utmCampaignLast || undefined,
                       },
                     }),
-                  });
+                  })
                 } catch (err) {
-                  console.error("❌ Meta CAPI error (Purchase):", err);
+                  console.error("❌ Meta CAPI error (Purchase):", err)
                 }
-              })();
+              })()
 
               // 🟩 Google Ads / GA4 dataLayer event
-              window.dataLayer = window.dataLayer || [];
+              window.dataLayer = window.dataLayer || []
               window.dataLayer.push({
                 event: "checkout_success",
                 value: amountInDollars,
@@ -114,7 +132,12 @@ const SuccessPage = () => {
                 utm_source_last: utmSourceLast || "",
                 utm_medium_last: utmMediumLast || "",
                 utm_campaign_last: utmCampaignLast || "",
-              });
+                enhanced_conversion_data: {
+                  email,
+                  first_name: firstName || undefined,
+                  last_name: lastName || undefined,
+                },
+              })
 
               // 🟩 GA4 / NEW e-commerce purchase event
               window.dataLayer.push({
@@ -135,8 +158,7 @@ const SuccessPage = () => {
                     quantity: 1,
                   },
                 ],
-              });
-
+              })
 
               // 🟦 Meta Pixel (browser)
               if (window.fbq) {
@@ -147,16 +169,16 @@ const SuccessPage = () => {
                   utm_source_last: utmSourceLast || undefined,
                   utm_medium_last: utmMediumLast || undefined,
                   utm_campaign_last: utmCampaignLast || undefined,
-                });
+                })
               }
             }
           }
         })
-        .catch((err) => {
-          console.error("❌ Failed to retrieve payment intent", err);
-        });
+        .catch(err => {
+          console.error("❌ Failed to retrieve payment intent", err)
+        })
     }
-  }, []);
+  }, [])
 
   return (
     <Layout>
@@ -187,7 +209,7 @@ const SuccessPage = () => {
         </div>
       </section>
     </Layout>
-  );
-};
+  )
+}
 
-export default SuccessPage;
+export default SuccessPage

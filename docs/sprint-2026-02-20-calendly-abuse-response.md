@@ -46,6 +46,12 @@ Reduce Calendly spam/abuse while preserving a smooth booking flow for real users
 2. Clarified that URL slug changes do not always create a new UUID.
 3. Recommended deactivating old Calendly event types once rotated.
 
+### 5) Social metadata and footer consistency
+
+1. Centralized canonical social profile URLs in `src/utils/socialProfiles.js`.
+2. Reused the same canonical social set in shared SEO schema and page-specific schema.
+3. Added UTM-tagged footer social links for Google, Facebook, Instagram, and LinkedIn.
+
 ## Files Touched (Sprint Scope)
 
 1. `netlify/functions/get-calendly-link.js`

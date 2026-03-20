@@ -1,8 +1,17 @@
-import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
-import testimonialsData from "../data/testimonials.json";
+import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
+import testimonialsData from "../data/testimonials.json"
+import { SOCIAL_SCHEMA_SAME_AS } from "../utils/socialProfiles"
 
-const Seo = ({ title, description, image, pathname = "/", robots = "index, follow", schemaMarkup, children }) => {
+const Seo = ({
+  title,
+  description,
+  image,
+  pathname = "/",
+  robots = "index, follow",
+  schemaMarkup,
+  children,
+}) => {
   const {
     site: { siteMetadata },
   } = useStaticQuery(graphql`
@@ -16,56 +25,59 @@ const Seo = ({ title, description, image, pathname = "/", robots = "index, follo
         }
       }
     }
-  `);
+  `)
 
-  const coerceRating = (val) => {
-    if (typeof val === "number" && !isNaN(val)) return val;
+  const coerceRating = val => {
+    if (typeof val === "number" && !isNaN(val)) return val
     if (typeof val === "string") {
       // try digit first
-      const digits = val.match(/\d+(\.\d+)?/);
-      if (digits) return Number(digits[0]);
+      const digits = val.match(/\d+(\.\d+)?/)
+      if (digits) return Number(digits[0])
       // then count stars
-      const stars = (val.match(/⭐/g) || []).length;
-      if (stars) return stars;
+      const stars = (val.match(/⭐/g) || []).length
+      if (stars) return stars
     }
-    return 5; // default
-  };
+    return 5 // default
+  }
 
   // Ensure no trailing slash on siteUrl
-  const rawSiteUrl = siteMetadata.siteUrl || "";
-  const siteUrl = rawSiteUrl.endsWith("/") ? rawSiteUrl.slice(0, -1) : rawSiteUrl;
+  const rawSiteUrl = siteMetadata.siteUrl || ""
+  const siteUrl = rawSiteUrl.endsWith("/")
+    ? rawSiteUrl.slice(0, -1)
+    : rawSiteUrl
 
-  const defaultTitle = siteMetadata.title;
-  const defaultDescription = siteMetadata.description;
-  const defaultImage = "/images/og-zencarbuying.jpg";
+  const defaultTitle = siteMetadata.title
+  const defaultDescription = siteMetadata.description
+  const defaultImage = "/images/og-zencarbuying.jpg"
 
-  const metaTitle = title || defaultTitle;
-  const metaDescription = description || defaultDescription;
+  const metaTitle = title || defaultTitle
+  const metaDescription = description || defaultDescription
 
   const metaImage =
     image?.startsWith("http") || image?.startsWith("//")
       ? image
-      : `${siteUrl}${image || defaultImage}`;
-
+      : `${siteUrl}${image || defaultImage}`
 
   // Canonical with trailing slash normalization
-  const canonicalPath = pathname === "/" ? "/" : pathname.endsWith("/") ? pathname : `${pathname}/`;
-  const url = `${siteUrl}${canonicalPath}`;
+  const canonicalPath =
+    pathname === "/" ? "/" : pathname.endsWith("/") ? pathname : `${pathname}/`
+  const url = `${siteUrl}${canonicalPath}`
 
-  const reviewsForSchema = testimonialsData.slice(0, 10);
+  const reviewsForSchema = testimonialsData.slice(0, 10)
 
   const avgRating = reviewsForSchema.length
     ? (
-      reviewsForSchema.reduce((sum, t) => sum + coerceRating(t.rating), 0) /
-      reviewsForSchema.length
-    ).toFixed(1)
-    : "5.0";
+        reviewsForSchema.reduce((sum, t) => sum + coerceRating(t.rating), 0) /
+        reviewsForSchema.length
+      ).toFixed(1)
+    : "5.0"
 
   const showReviews =
-    canonicalPath === "/" || canonicalPath === "/services/" || canonicalPath === "/reviews/";
+    canonicalPath === "/" ||
+    canonicalPath === "/services/" ||
+    canonicalPath === "/reviews/"
 
-
-  const orgId = `${siteUrl}/#organization`;
+  const orgId = `${siteUrl}/#organization`
 
   const globalSchema = {
     "@context": "https://schema.org",
@@ -81,28 +93,24 @@ const Seo = ({ title, description, image, pathname = "/", robots = "index, follo
     availableChannel: "Online",
     serviceType: "Car Buying Concierge",
     telephone: "+1-888-651-6088",
-    sameAs: [
-      "https://www.facebook.com/zencarbuying",
-      "https://www.linkedin.com/company/zencarbuying",
-      "https://www.yelp.com/biz/zencarbuying"
-    ],
+    sameAs: SOCIAL_SCHEMA_SAME_AS,
     contactPoint: [
-            {
-              "@type": "ContactPoint",
-              telephone: "+1-888-651-6088",
-              contactType: "Customer Support",
-              email: "info@zencarbuying.com",
-              areaServed: "US",
-              availableLanguage: "English",
-            },
-          ],
+      {
+        "@type": "ContactPoint",
+        telephone: "+1-888-651-6088",
+        contactType: "Customer Support",
+        email: "info@zencarbuying.com",
+        areaServed: "US",
+        availableLanguage: "English",
+      },
+    ],
     ...(showReviews && {
       aggregateRating: {
         "@type": "AggregateRating",
         ratingValue: String(avgRating),
         reviewCount: String(reviewsForSchema.length),
         bestRating: "5",
-        worstRating: "1"
+        worstRating: "1",
       },
       review: reviewsForSchema.map((t, i) => ({
         "@type": "Review",
@@ -113,15 +121,15 @@ const Seo = ({ title, description, image, pathname = "/", robots = "index, follo
           "@type": "Rating",
           ratingValue: String(coerceRating(t.rating)),
           bestRating: "5",
-          worstRating: "1"
+          worstRating: "1",
         },
         itemReviewed: {
           "@type": "LocalBusiness",
-          "@id": orgId
-        }
-      }))
-    })
-  };
+          "@id": orgId,
+        },
+      })),
+    }),
+  }
 
   return (
     <>
@@ -133,7 +141,10 @@ const Seo = ({ title, description, image, pathname = "/", robots = "index, follo
       <meta property="og:title" content={metaTitle} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:url" content={url} />
-      <meta property="og:type" content={canonicalPath.startsWith("/blog/") ? "article" : "website"} />
+      <meta
+        property="og:type"
+        content={canonicalPath.startsWith("/blog/") ? "article" : "website"}
+      />
       <meta property="og:image" content={metaImage} />
       <meta
         property="og:image:alt"
@@ -156,7 +167,7 @@ const Seo = ({ title, description, image, pathname = "/", robots = "index, follo
 
       {children}
     </>
-  );
-};
+  )
+}
 
-export default Seo;
+export default Seo
