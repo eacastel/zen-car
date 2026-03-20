@@ -102,7 +102,7 @@ export default function ServiceLandingPage({ serviceType }) {
       <LandingHero
         eyebrow={config.heroEyebrow}
         title={config.heroTitle}
-        description={`${config.primaryKeyword} support should be strategic, calm and direct. ${config.heroDescription}`}
+        description={`${config.primaryKeywordDisplay} support should be strategic, calm and direct. ${config.heroDescription}`}
         accentLine={config.heroAccent}
         ctaNote="We research, negotiate and coordinate delivery. You just choose the car."
         primaryCta={{

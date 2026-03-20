@@ -18,6 +18,7 @@ export const SERVICE_CONFIGS = {
     heroAccent:
       "Built for drivers who want expert representation instead of dealership pressure.",
     primaryKeyword: "car broker",
+    primaryKeywordDisplay: "Car broker",
     secondaryKeywords: [
       "auto broker service",
       "car buying concierge",
@@ -98,6 +99,7 @@ export const SERVICE_CONFIGS = {
     heroAccent:
       "Ideal for buyers who want used-car guidance without wasting weekends chasing questionable inventory.",
     primaryKeyword: "used car broker",
+    primaryKeywordDisplay: "Used car broker",
     secondaryKeywords: [
       "used car buying service",
       "help buying a used car",

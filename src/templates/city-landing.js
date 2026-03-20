@@ -100,7 +100,7 @@ const CityLandingTemplate = ({ data, pageContext }) => {
           cityData.stateCode
         } ${serviceConfig.displayName.toLowerCase()}`}
         title={`${keywordSet.primaryKeywordDisplay} | Car buying concierge in ${cityData.city}`}
-        description={`${keywordSet.primaryKeyword} support should feel local, direct and strategic. ${cityData.localizedPainPoint}`}
+        description={`${keywordSet.primaryKeywordDisplay} support should feel local, direct and strategic. ${cityData.localizedPainPoint}`}
         accentLine={serviceConfig.heroAccent}
         ctaNote="We research, negotiate and coordinate delivery. You just choose the car."
         heroImage={cityData.heroImage}
