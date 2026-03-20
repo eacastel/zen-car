@@ -29,17 +29,44 @@
     "someone to inspect used car before buying in Seattle",
     "best used SUVs for Seattle weather"
   ],
-  "heroImage": "/images/cities/seattle.jpg",
+  "heroImage": "/images/cities/seattle.png",
+  "heroBadges": [
+    {
+      "title": "Avoid the wrong setup",
+      "description": "We help you choose for real Seattle driving, not dealer upsells."
+    },
+    {
+      "title": "Expand your options",
+      "description": "We compare Seattle inventory with stronger vehicles across the Northwest."
+    },
+    {
+      "title": "Feel sure before buying",
+      "description": "You get clear advice on price, fit and weather-ready choices."
+    }
+  ],
   "localizedPainPoint": "Buying a car in Seattle often means balancing weather-ready options with limited inventory and fast-moving pricing - making it easy to settle for the wrong car or pay too much if you rush the decision.",
+  "localContextParagraphs": [
+    "Seattle buyers often default to AWD without comparing fuel cost, long-term reliability or whether it is actually needed for their commute. Hybrid and weather-ready trims also get picked over quickly, which makes rushed decisions even more expensive when buyers assume the safest choice is always the most capable one. That can push people into the wrong trim before they step back and look at how they actually drive.",
+    "We help you compare practical options for Seattle driving, not dealership upsells, and widen the search across Washington and Oregon when local inventory gets tight. That helps you choose based on real weather needs, daily use and long-term value instead of paying extra for the wrong setup. You get more clarity before wet-weather urgency turns into an expensive shortcut."
+  ],
   "localIntro": "A dependable car broker in Seattle should do more than send options - they should help you choose the right vehicle for the way you actually drive. Between AWD demand, hybrid competition and dealership pressure, many buyers move too fast before they know what fits their budget and lifestyle best.",
   "supportingParagraphs": [
     "Buyers searching for the best cars for Seattle weather usually need help balancing traction, fuel efficiency, comfort and reliability - not just defaulting to the most expensive AWD option on the lot.",
     "We help you compare Seattle inventory, evaluate hybrid and AWD options and decide when expanding your search across Washington or Oregon leads to a better value."
   ],
   "marketInsights": [
-    "AWD, hybrid and EV demand can make the most practical trims harder to find and more expensive.",
-    "Seattle weather and terrain usually make usability and confidence more important than raw performance.",
-    "Looking beyond Seattle into the wider Northwest market often opens up better pricing and more inventory."
+    {
+      "title": "AWD is over-selected",
+      "description": "Many Seattle buyers default to AWD even when it adds cost without improving the daily commute."
+    },
+    {
+      "title": "Hybrid demand spikes pricing",
+      "description": "Strong demand for hybrids and EVs often pushes similar Seattle-area listings to very different prices."
+    },
+    {
+      "title": "Inventory improves regionally",
+      "description": "Looking beyond Seattle into Washington or Oregon often reveals better pricing and more available trims."
+    }
   ],
   "neighborhoods": ["Ballard", "Bellevue", "Capitol Hill"],
   "nearbyCities": ["portland-or", "san-francisco-ca", "chicago-il"],

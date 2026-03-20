@@ -34,16 +34,43 @@
     "best used SUV deals Los Angeles"
   ],
   "heroImage": "/images/cities/los-angeles.jpg",
+  "heroBadges": [
+    {
+      "title": "Avoid dealer markups",
+      "description": "We pressure-test the numbers before inflated pricing becomes your problem."
+    },
+    {
+      "title": "See more good options",
+      "description": "We compare Los Angeles inventory with better opportunities beyond the city."
+    },
+    {
+      "title": "Know the deal fast",
+      "description": "You get clear guidance before wasting weekends on the wrong car."
+    }
+  ],
   "localizedPainPoint": "Buying a car in Los Angeles often means fighting traffic, comparing crowded dealerships and sorting through markups that can change the deal fast - making it easy to waste time or overpay without a clear plan.",
+  "localContextParagraphs": [
+    "Los Angeles buyers deal with two problems at once: brutal traffic between dealerships and pricing that changes fast once markups, accessories and finance pressure appear. That makes it easy to waste a weekend chasing a car that was never a good deal to begin with, especially when popular trims are moving quickly. By the time many shoppers compare the real numbers, they are already tired of the process.",
+    "We help you compare real numbers across Los Angeles and nearby markets, handle negotiation and decide when it makes more sense to buy outside the city. Instead of reacting to dealer urgency, you get a clearer read on value, timing and whether the convenience of buying locally is actually worth the premium you are being asked to pay."
+  ],
   "localIntro": "A strong car broker in Los Angeles should do more than send listings - they should help you cut through dealership noise and make a confident decision in a market that can get expensive fast. Between dealer add-ons, heavy EV demand and major pricing swings from one store to the next, many buyers lose leverage before the real negotiation even starts.",
   "supportingParagraphs": [
     "Buyers comparing inventory in Santa Monica, Pasadena and across the Valley often find the same vehicle priced very differently once add-ons, accessories and finance pressure get layered in. That is why many shoppers looking for the best way to buy a car in Los Angeles need stronger market context before they step onto a lot.",
     "We help you compare inventory across Los Angeles and beyond, avoid dealership markup and decide when expanding your search outside Southern California leads to a better deal."
   ],
   "marketInsights": [
-    "High EV demand can make popular inventory move quickly and push pricing higher than expected.",
-    "Dealer add-ons and protection packages often inflate the real price more than buyers realize at first.",
-    "Cross-town traffic turns comparison shopping into a bigger time commitment than most people expect."
+    {
+      "title": "EV demand moves fast",
+      "description": "Strong EV demand can tighten inventory and push popular trims to higher prices quickly."
+    },
+    {
+      "title": "Add-ons distort deals",
+      "description": "Dealer accessories and protection packages often inflate the real Los Angeles purchase price."
+    },
+    {
+      "title": "Traffic adds friction",
+      "description": "Cross-town dealership visits take enough time that buyers often rush decisions just to be done."
+    }
   ],
   "neighborhoods": ["Santa Monica", "Pasadena", "Burbank"],
   "nearbyCities": ["san-diego-ca", "san-francisco-ca", "portland-or"],

@@ -29,16 +29,43 @@
     "avoid used car scams Portland"
   ],
   "heroImage": "/images/cities/portland.jpg",
+  "heroBadges": [
+    {
+      "title": "Skip wasted dealership trips",
+      "description": "We narrow the right cars before you lose time chasing weak options."
+    },
+    {
+      "title": "Find better regional deals",
+      "description": "We compare Portland inventory with stronger options across the Northwest."
+    },
+    {
+      "title": "Choose the right fit",
+      "description": "You get clear help balancing efficiency, practicality and price."
+    }
+  ],
   "localizedPainPoint": "Buying a car in Portland often means balancing efficiency, practicality and limited inventory - making it easy to settle too quickly or overpay for the trims people want most.",
+  "localContextParagraphs": [
+    "Portland buyers often want one car that handles weekday commuting, weekend trips and wet weather without wasting fuel. When hybrid and practical trims get tight, people end up settling too quickly or paying extra for whatever is available first instead of waiting for the right fit. That is how buyers end up with a car that works on paper but not in real life.",
+    "We help you compare efficiency, usability and price side by side, then widen the search across Oregon and the Northwest when Portland inventory gets thin. That makes it easier to choose a vehicle that works for everyday life without overpaying for a car that only solves part of the problem. You get a better read on value before availability pressure takes over."
+  ],
   "localIntro": "A strong car broker in Portland should do more than send listings - they should help you compare real value in a market where the best commuter and hybrid options can disappear fast. Between demand for efficient vehicles, regional pricing differences and the need for practical everyday transportation, many buyers lose leverage before they narrow the right car.",
   "supportingParagraphs": [
     "Buyers searching for help with hybrid car buying in Portland usually need more than a quick inventory list. They need help balancing timing, efficiency, reliability and price without overbuying.",
     "We help you compare Portland inventory with broader Oregon and Northwest options so you can decide whether the closest car is actually the best value."
   ],
   "marketInsights": [
-    "Efficient commuter vehicles and hybrids can move quickly when inventory gets tight.",
-    "Portland buyers often need a vehicle that works for city driving during the week and flexibility on weekends.",
-    "Looking beyond Portland into the wider Northwest market can create better value and more choice."
+    {
+      "title": "Hybrids move quickly",
+      "description": "Efficient commuter vehicles in Portland can disappear fast when inventory tightens."
+    },
+    {
+      "title": "Versatility matters",
+      "description": "Many Portland buyers need one vehicle that works for weekday errands and weekend trips."
+    },
+    {
+      "title": "Northwest inventory helps",
+      "description": "Looking beyond Portland often creates better value and more usable trim choices."
+    }
   ],
   "neighborhoods": ["Pearl District", "Beaverton", "Lake Oswego"],
   "nearbyCities": ["seattle-wa", "san-francisco-ca", "los-angeles-ca"],

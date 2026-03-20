@@ -29,16 +29,43 @@
     "avoid used car scams Atlanta"
   ],
   "heroImage": "/images/cities/atlanta.jpg",
+  "heroBadges": [
+    {
+      "title": "Skip dealership pressure",
+      "description": "We handle the back-and-forth so you do not lose time or overpay."
+    },
+    {
+      "title": "Compare more inventory",
+      "description": "We look across Atlanta and beyond to find stronger options."
+    },
+    {
+      "title": "Choose with confidence",
+      "description": "You get clear advice before making a big car decision."
+    }
+  ],
   "localizedPainPoint": "Buying a car in Atlanta often means dealing with heavy traffic, crowded dealerships and inconsistent pricing - making it easy to waste time or overpay if you go in without a clear strategy.",
+  "localContextParagraphs": [
+    "Atlanta buyers often spend too much time driving between dealerships only to find the same model priced very differently once fees, add-ons and financing pressure show up. Long commutes also push people toward comfort and fuel savings, but many still get rushed into whatever is easiest to test-drive first instead of what actually fits their budget and daily routine. That usually leads to a decision built around convenience, not long-term value.",
+    "That is where our service helps. We compare inventory across Atlanta and the wider Georgia market, handle dealership negotiation and help you choose the right fit before you waste weekends or overpay. Instead of reacting to the closest lot, you get a clearer view of price, availability and whether expanding the search leads to a stronger deal that holds up after fees."
+  ],
   "localIntro": "A strong car broker in Atlanta should do more than send listings - they should help you make a confident decision in a market that can quickly become overwhelming. Between long commutes, dealership pressure and uneven pricing across the metro, many buyers lose clarity before they find the right car.",
   "supportingParagraphs": [
     "Buyers searching for the best commuter cars for Atlanta traffic usually need help balancing fuel efficiency, comfort and long-term reliability - not just reacting to whatever is easiest to test-drive that weekend.",
     "We help you compare inventory across Atlanta and beyond, handle dealership negotiation on your behalf and decide when expanding your search across Georgia leads to a better deal."
   ],
   "marketInsights": [
-    "Long daily commutes make comfort, fuel efficiency and reliability more important than impulse buying.",
-    "High dealership density means more options, but also more inconsistent pricing and pressure tactics.",
-    "Looking beyond Atlanta into the wider Georgia market often leads to better pricing and cleaner deals."
+    {
+      "title": "Traffic shapes priorities",
+      "description": "Long Atlanta commutes make comfort, fuel economy and reliability more important than impulse upgrades."
+    },
+    {
+      "title": "Pricing varies widely",
+      "description": "Dense dealership clusters create more choice, but the same vehicle can land at very different out-the-door prices."
+    },
+    {
+      "title": "Georgia opens options",
+      "description": "Looking beyond Atlanta often reveals cleaner deals and better inventory than the closest lot."
+    }
   ],
   "neighborhoods": ["Buckhead", "Sandy Springs", "Decatur"],
   "nearbyCities": ["miami-fl", "houston-tx", "chicago-il"],

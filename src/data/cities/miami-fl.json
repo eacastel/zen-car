@@ -30,16 +30,43 @@
     "avoid used car scams Miami"
   ],
   "heroImage": "/images/cities/miami.jpg",
+  "heroBadges": [
+    {
+      "title": "Avoid inflated pricing",
+      "description": "We separate real value from dealer hype before you overpay."
+    },
+    {
+      "title": "Compare more than Miami",
+      "description": "We look across South Florida and beyond for better options."
+    },
+    {
+      "title": "Feel certain about value",
+      "description": "You know what is worth the premium and what is not."
+    }
+  ],
   "localizedPainPoint": "Buying a car in Miami often means dealing with luxury-heavy inventory, dealer markups and pricing that can be driven more by image than value - making it easy to overpay if you do not have a clear strategy.",
+  "localContextParagraphs": [
+    "Miami buyers see a lot of polished inventory, but presentation can hide weak value fast. Luxury demand, image-driven pricing and dealer markups make it easy to pay a premium for a car that does not justify it, especially when a vehicle looks rare or high-status on the lot. In this market, appearance can shape the deal more than the actual numbers.",
+    "We help you separate hype from real value, compare South Florida options side by side and widen the search when the better deal is outside Miami. That keeps you focused on condition, pricing and long-term fit instead of paying extra for image alone. You get a clearer read on whether the premium is real or just part of the sales pitch."
+  ],
   "localIntro": "A strong car broker in Miami should do more than send listings - they should help you separate real value from flashy presentation in a market where pricing can get inflated fast. Between luxury demand, exotic inventory and dealership pressure, many buyers lose clarity before they know whether a car is actually worth the premium.",
   "supportingParagraphs": [
     "Buyers searching for a luxury car broker in Miami usually need help deciding what is actually worth paying for and what is just presentation, markup or dealer hype.",
     "We help you compare Miami inventory with broader South Florida and nationwide options, evaluate luxury and everyday vehicles with the same discipline and coordinate delivery when the better deal is outside the city."
   ],
   "marketInsights": [
-    "Luxury and lifestyle vehicles often carry pricing premiums that have more to do with perception than real market value.",
-    "Looking beyond Miami into the wider South Florida market can create better leverage and better inventory options.",
-    "Dealer add-ons and polished presentation can make a weak deal look stronger than it is."
+    {
+      "title": "Image skews pricing",
+      "description": "Miami luxury and lifestyle demand often pushes prices beyond what the vehicle actually justifies."
+    },
+    {
+      "title": "South Florida helps",
+      "description": "Looking beyond Miami often opens stronger inventory and better leverage across the region."
+    },
+    {
+      "title": "Presentation hides flaws",
+      "description": "Dealer cosmetics and add-ons can make a weak deal look better than it is."
+    }
   ],
   "neighborhoods": ["Brickell", "Coral Gables", "Aventura"],
   "nearbyCities": ["atlanta-ga", "houston-tx", "chicago-il"],

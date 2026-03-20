@@ -30,16 +30,43 @@
     "avoid used car scams San Diego"
   ],
   "heroImage": "/images/cities/san-diego.jpg",
+  "heroBadges": [
+    {
+      "title": "Cut dealership hassle",
+      "description": "We handle the pricing conversations so you avoid wasted trips and pressure."
+    },
+    {
+      "title": "Compare beyond San Diego",
+      "description": "We check Southern California inventory to find the stronger deal."
+    },
+    {
+      "title": "Move forward with clarity",
+      "description": "You know when local convenience is worth it and when it is not."
+    }
+  ],
   "localizedPainPoint": "Buying a car in San Diego often means comparing limited local inventory against Orange County or Los Angeles options - making it easy to waste a weekend chasing the wrong deal or paying too much for convenience.",
+  "localContextParagraphs": [
+    "San Diego buyers often face the same question: is the local car worth it, or is the better deal up the coast? Thin local inventory and dealer fees can make convenience expensive, especially when nearby markets have more choice and better availability on the trims people actually want. Many shoppers lose a full weekend just trying to answer that one question before they even start negotiating.",
+    "We help you compare Southern California options side by side, pressure-test the full numbers and decide when staying local makes sense and when it does not. Instead of guessing whether the drive is worth it, you get a clearer answer on pricing, timing and the real cost of convenience before emotion takes over or the wrong car starts to feel like the only option."
+  ],
   "localIntro": "A strong car broker in San Diego should do more than negotiate price - they should help you decide where the best deal actually is. Between local inventory gaps, dealership fees and the constant question of whether Los Angeles pricing is worth the drive, many buyers lose time and leverage before they find the right car.",
   "supportingParagraphs": [
     "Buyers deciding whether to buy in San Diego or Los Angeles usually need more than a quick price check. Dealer fees, timing, transport and limited local inventory can change the real value fast.",
     "We help you compare Southern California inventory side by side, handle dealership negotiation and decide when local convenience is worth it - and when a broader search leads to the better outcome."
   ],
   "marketInsights": [
-    "Popular trims can move quickly because buyers often cross-shop San Diego, Orange County and Los Angeles at the same time.",
-    "Local convenience matters, but dealer fees and thin inventory can erase that advantage quickly.",
-    "Coastal driving and daily commuting patterns shape what makes the most practical vehicle for San Diego buyers."
+    {
+      "title": "Regional cross-shopping moves cars",
+      "description": "Shared demand across San Diego, Orange County and Los Angeles can thin out popular trims quickly."
+    },
+    {
+      "title": "Convenience costs more",
+      "description": "Local inventory can feel easier, but fees and thin selection often erase that advantage."
+    },
+    {
+      "title": "Driving patterns matter",
+      "description": "Coastal commuting and daily mileage change which vehicles make the most practical sense."
+    }
   ],
   "neighborhoods": ["La Jolla", "North Park", "Carlsbad"],
   "nearbyCities": ["los-angeles-ca", "san-francisco-ca", "portland-or"],

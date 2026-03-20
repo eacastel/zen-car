@@ -17,34 +17,11 @@ import {
   buildCitySchemas,
   buildPricingPath,
   buildServicePath,
+  getCityHeroSubheadline,
   getCityKeywordSet,
   getNearbyCities,
   getServiceConfig,
 } from "../utils/landingPages"
-
-function buildLocalizedCards(cityData, serviceType, keywords) {
-  const serviceLabel =
-    serviceType === "used_car_broker" ? "used car broker" : "car broker"
-
-  return [
-    {
-      title: `${cityData.city} pricing needs context`,
-      description: `A ${serviceLabel} in ${cityData.city} helps you compare listings against real market conditions instead of reacting to the first attractive ad or dealership promise.`,
-    },
-    {
-      title: `The right search radius changes the deal`,
-      description: `Buyers in ${
-        cityData.city
-      } often get better leverage when they compare ${cityData.neighborhoods.join(
-        ", "
-      )} and wider regional inventory instead of staying locked into the nearest lot.`,
-    },
-    {
-      title: `Your keyword search should lead to strategy`,
-      description: `Shoppers typing searches like "${keywords.secondaryKeywords[0]}" or "${keywords.longTailKeywords[0]}" usually need a clear plan before dealership pressure narrows their options.`,
-    },
-  ]
-}
 
 const CityLandingTemplate = ({ data, pageContext }) => {
   const cityData = data.citiesJson
@@ -61,7 +38,14 @@ const CityLandingTemplate = ({ data, pageContext }) => {
     citySlug: cityData.slug,
     serviceType,
   })
-  const localizedCards = buildLocalizedCards(cityData, serviceType, keywordSet)
+  const heroBadges = (cityData.heroBadges || []).slice(0, 3)
+  const localContextParagraphs =
+    cityData.localContextParagraphs &&
+    cityData.localContextParagraphs.slice(0, 2).filter(Boolean).length
+      ? cityData.localContextParagraphs.slice(0, 2).filter(Boolean)
+      : [cityData.localIntro, ...(cityData.supportingParagraphs || [])]
+          .filter(Boolean)
+          .slice(0, 2)
 
   const serviceLinks = [
     {
@@ -99,8 +83,8 @@ const CityLandingTemplate = ({ data, pageContext }) => {
         eyebrow={`${cityData.city}, ${
           cityData.stateCode
         } ${serviceConfig.displayName.toLowerCase()}`}
-        title={`${keywordSet.primaryKeywordDisplay} | Car buying concierge in ${cityData.city}`}
-        description={`${keywordSet.primaryKeywordDisplay} support should feel local, direct and strategic. ${cityData.localizedPainPoint}`}
+        title={keywordSet.primaryKeywordDisplay}
+        description={getCityHeroSubheadline(serviceType)}
         accentLine={serviceConfig.heroAccent}
         ctaNote="We research, negotiate and coordinate delivery. You just choose the car."
         heroImage={cityData.heroImage}
@@ -128,18 +112,18 @@ const CityLandingTemplate = ({ data, pageContext }) => {
             state: cityData.state,
           },
         }}
-        badgeItems={localizedCards}
+        badgeItems={heroBadges}
       />
 
       <LandingSection
         background="bg-white"
         eyebrow={`${cityData.region} Market`}
         title={`${keywordSet.primaryKeywordDisplay} guidance starts with local context`}
-        description={cityData.localIntro}
+        description={localContextParagraphs[0]}
       >
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,360px)]">
           <div className="space-y-5 text-lg leading-relaxed text-primary/80">
-            {cityData.supportingParagraphs.map(paragraph => (
+            {localContextParagraphs.slice(1).map(paragraph => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
@@ -165,22 +149,18 @@ const CityLandingTemplate = ({ data, pageContext }) => {
         background="bg-secondary"
         eyebrow="Market Insights"
         title={`What’s different about buying a car in ${cityData.city}?`}
-        description={`Searches like ${keywordSet.secondaryKeywords
-          .slice(0, 2)
-          .join(
-            " and "
-          )} usually reflect the same issue: local buying conditions matter.`}
+        description={`Local inventory, pricing pressure and dealership behavior can change the deal more than most buyers expect.`}
       >
         <div className="grid gap-5 md:grid-cols-3">
           {cityData.marketInsights.map(insight => (
             <article
-              key={insight}
+              key={insight.title}
               className="rounded-[24px] border border-white/70 bg-white p-6 shadow-sm"
             >
               <h3 className="text-xl font-semibold text-primary mb-3">
-                {cityData.city} insight
+                {insight.title}
               </h3>
-              <p className="text-primary/75">{insight}</p>
+              <p className="text-primary/75">{insight.description}</p>
             </article>
           ))}
         </div>
@@ -192,10 +172,10 @@ const CityLandingTemplate = ({ data, pageContext }) => {
         title={`Why use a ${serviceConfig.displayName.toLowerCase()} in ${
           cityData.city
         }?`}
-        description={`Buyers looking for ${keywordSet.secondaryKeywords[1]} or ${keywordSet.secondaryKeywords[2]} usually want help simplifying one of the most time-consuming purchases they make.`}
+        description={`The right support removes pressure, opens better options and helps you make a confident decision without wasting weekends.`}
       >
         <div className="grid gap-5 lg:grid-cols-3">
-          {localizedCards.map(card => (
+          {heroBadges.map(card => (
             <article
               key={card.title}
               className="rounded-[24px] border border-primary/10 bg-secondary p-6 shadow-sm"
@@ -241,10 +221,9 @@ const CityLandingTemplate = ({ data, pageContext }) => {
               Next step
             </p>
             <p className="text-lg text-white/85 leading-relaxed mb-6">
-              If you are comparing phrases like "
-              {keywordSet.longTailKeywords[0]}" or "
-              {keywordSet.longTailKeywords[1]}", a short consultation is the
-              fastest way to clarify pricing and fit.
+              A short consultation is the fastest way to clarify pricing, fit
+              and whether the best option is local or worth sourcing from
+              farther out.
             </p>
             <div className="flex flex-col gap-3">
               <ServiceButton
@@ -286,9 +265,7 @@ const CityLandingTemplate = ({ data, pageContext }) => {
 
       <LandingFaqSection
         title={`Local questions about buying in ${cityData.city}`}
-        description={`These answers are written to support long-tail searches like ${keywordSet.longTailKeywords
-          .slice(0, 3)
-          .join(", ")}.`}
+        description={`These answers cover the questions that come up most often before buyers commit to the next step.`}
         items={cityData.faq}
       />
 
@@ -377,16 +354,26 @@ export const query = graphql`
       stateCode
       region
       primaryKeyword
+      primaryKeywordDisplay
       secondaryKeywords
       longTailKeywords
       usedPrimaryKeyword
+      usedPrimaryKeywordDisplay
       usedSecondaryKeywords
       usedLongTailKeywords
+      heroBadges {
+        title
+        description
+      }
       heroImage
+      localContextParagraphs
       localizedPainPoint
       localIntro
       supportingParagraphs
-      marketInsights
+      marketInsights {
+        title
+        description
+      }
       neighborhoods
       nearbyCities
       faq {
