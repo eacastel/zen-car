@@ -1,0 +1,58 @@
+{
+  "slug": "san-diego-ca",
+  "city": "San Diego",
+  "state": "California",
+  "stateCode": "CA",
+  "region": "West Coast",
+  "primaryKeyword": "car broker in San Diego",
+  "secondaryKeywords": [
+    "car buying service San Diego",
+    "auto broker San Diego",
+    "help buying a car San Diego"
+  ],
+  "longTailKeywords": [
+    "buy car in San Diego vs LA",
+    "car delivery San Diego",
+    "best car deals Southern California",
+    "avoid dealership fees San Diego"
+  ],
+  "usedPrimaryKeyword": "used car broker in San Diego",
+  "usedSecondaryKeywords": [
+    "used car buying service San Diego",
+    "help buying a used car San Diego",
+    "used car concierge service San Diego"
+  ],
+  "usedLongTailKeywords": [
+    "used car broker near me San Diego",
+    "someone to inspect used car before buying in San Diego",
+    "avoid used car scams San Diego"
+  ],
+  "heroImage": "/images/cities/san-diego.jpg",
+  "localizedPainPoint": "San Diego buyers often balance military-family timing, coastal inventory gaps and the constant question of whether LA inventory is actually worth the drive.",
+  "localIntro": "A strong car broker San Diego buyers rely on needs to solve more than price negotiation. The market often pushes shoppers to compare local dealer stock against Orange County or Los Angeles, which means the wrong buying plan can cost both money and a full weekend.",
+  "supportingParagraphs": [
+    "If you are deciding whether to buy car in San Diego vs LA, the answer is rarely just sticker price. Dealer fees, timing, transport and limited in-demand trims can change the picture quickly.",
+    "We help buyers compare the best car deals Southern California inventory can offer, then decide whether local convenience or broader sourcing creates the better total outcome."
+  ],
+  "marketInsights": [
+    "Inventory can tighten quickly on popular trims because buyers cross-shop Los Angeles and Orange County.",
+    "Local convenience is valuable, but dealer fees and limited selection can erase that advantage.",
+    "Coastal and commuter-heavy driving patterns change what practical inventory looks like."
+  ],
+  "neighborhoods": ["La Jolla", "North Park", "Carlsbad"],
+  "nearbyCities": ["los-angeles-ca", "san-francisco-ca", "portland-or"],
+  "faq": [
+    {
+      "question": "Should I shop San Diego dealers or expand to Los Angeles inventory?",
+      "answer": "It depends on the model, urgency and total acquisition cost. We often compare buy car in San Diego vs LA scenarios so clients can decide with actual pricing context instead of assumptions."
+    },
+    {
+      "question": "Can Zen Car Buying help with delivery to San Diego?",
+      "answer": "Yes. If the best deal is outside the local market, we help coordinate the path forward, including the logistics behind car delivery San Diego buyers may need."
+    },
+    {
+      "question": "How do I avoid unexpected dealer fees in San Diego?",
+      "answer": "The easiest way is to review the full out-the-door structure before emotion takes over. We help buyers avoid dealership fees San Diego stores may bury in the process."
+    }
+  ]
+}

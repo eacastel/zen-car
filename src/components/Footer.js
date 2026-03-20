@@ -1,12 +1,13 @@
 import React from "react"
 import { Link } from "gatsby"
 import SocialFooterLinks from "./SocialFooterLinks"
+import { FOOTER_MARKETS, getCityPath } from "../utils/landingPages"
 
 export default function Footer() {
   return (
     <footer className="bg-primary text-white py-8 mt-auto">
       <div className="container mx-auto px-4 md:px-8 lg:px-12 md:max-w-[750px] lg:max-w-[1280px]">
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 md:gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-8 md:gap-12 lg:gap-16">
           {/* Larger First Column */}
           <div>
             <h3 className="text-xl font-bold mb-4">Zen Car Buying</h3>
@@ -67,6 +68,22 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  to="/car-broker/"
+                  className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  Car broker
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/used-car-broker/"
+                  className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  Used car broker
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/blog/"
                   className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
                 >
@@ -81,6 +98,22 @@ export default function Footer() {
                   Contact
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold mb-4">Markets</h4>
+            <ul className="space-y-2">
+              {FOOTER_MARKETS.map(market => (
+                <li key={market.slug}>
+                  <Link
+                    to={getCityPath(market.slug, "car_broker")}
+                    className="text-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                  >
+                    {market.city}, {market.stateCode}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

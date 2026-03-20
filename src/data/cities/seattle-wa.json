@@ -1,0 +1,58 @@
+{
+  "slug": "seattle-wa",
+  "city": "Seattle",
+  "state": "Washington",
+  "stateCode": "WA",
+  "region": "Pacific Northwest",
+  "primaryKeyword": "car broker in Seattle",
+  "secondaryKeywords": [
+    "car buying service Seattle",
+    "auto broker Seattle",
+    "help buying a car Seattle"
+  ],
+  "longTailKeywords": [
+    "best cars for Seattle weather",
+    "AWD car buying Seattle",
+    "car broker Washington state",
+    "buy car out of state Seattle delivery"
+  ],
+  "usedPrimaryKeyword": "used car broker in Seattle",
+  "usedSecondaryKeywords": [
+    "used car buying service Seattle",
+    "help buying a used car Seattle",
+    "used car concierge Seattle"
+  ],
+  "usedLongTailKeywords": [
+    "used car broker near me Seattle",
+    "someone to inspect used car before buying in Seattle",
+    "best used SUVs for Seattle weather"
+  ],
+  "heroImage": "/images/cities/seattle.jpg",
+  "localizedPainPoint": "Seattle buyers often need to balance weather-ready vehicle choices with inventory that moves quickly across the Puget Sound market.",
+  "localIntro": "A dependable car broker Seattle buyers can work with should understand how weather, terrain and regional pricing shape the market. Between AWD demand, hybrid competition and limited patience for dealership runaround, Seattle can punish rushed decisions.",
+  "supportingParagraphs": [
+    "If you are comparing the best cars for Seattle weather, the right answer depends on commute, parking, elevation and how often you leave the city. That usually means filtering marketing language out of the decision first.",
+    "We help shoppers evaluate AWD car buying Seattle options, hybrid value and Washington-state sourcing so the final shortlist fits both lifestyle and budget."
+  ],
+  "marketInsights": [
+    "AWD, hybrid and EV demand can compress inventory on the most practical trims.",
+    "Weather and terrain matter more than raw horsepower for many Seattle commuters.",
+    "Regional buyers often compare Seattle inventory with broader Washington and Oregon sourcing."
+  ],
+  "neighborhoods": ["Ballard", "Bellevue", "Capitol Hill"],
+  "nearbyCities": ["portland-or", "san-francisco-ca", "chicago-il"],
+  "faq": [
+    {
+      "question": "Do I really need AWD in Seattle?",
+      "answer": "Not always. Buyers searching AWD car buying Seattle advice usually benefit from matching drivetrain choice to commute, parking and mountain travel rather than defaulting to the highest-priced option."
+    },
+    {
+      "question": "Can you help me buy outside Washington if the deal is better?",
+      "answer": "Yes. We regularly evaluate broader regional options and help buyers compare buy car out of state Seattle delivery scenarios when local inventory is weak."
+    },
+    {
+      "question": "What vehicles do Seattle buyers ask about most often?",
+      "answer": "Practical AWD crossovers, hybrids and efficient commuter vehicles dominate many searches around the best cars for Seattle weather."
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "slug": "san-francisco-ca",
+  "city": "San Francisco",
+  "state": "California",
+  "stateCode": "CA",
+  "region": "West Coast",
+  "primaryKeyword": "car broker in San Francisco",
+  "secondaryKeywords": [
+    "car buying service Bay Area",
+    "auto broker San Francisco",
+    "EV car buying service San Francisco"
+  ],
+  "longTailKeywords": [
+    "buy electric car Bay Area broker",
+    "car broker Silicon Valley",
+    "limited inventory Bay Area cars",
+    "car delivery San Francisco"
+  ],
+  "usedPrimaryKeyword": "used car broker in San Francisco",
+  "usedSecondaryKeywords": [
+    "used car buying service Bay Area",
+    "used car concierge San Francisco",
+    "help buying a used car San Francisco"
+  ],
+  "usedLongTailKeywords": [
+    "used EV broker Bay Area",
+    "used car broker near me San Francisco",
+    "avoid used car scams Bay Area"
+  ],
+  "heroImage": "/images/cities/san-francisco.jpg",
+  "localizedPainPoint": "Bay Area buyers deal with limited urban inventory, high EV competition and pricing pressure that spreads from Silicon Valley through the whole region.",
+  "localIntro": "The right car broker San Francisco buyers choose needs to understand Bay Area market behavior, not just vehicle specs. Urban inventory constraints, EV demand and cross-bridge shopping can distort value quickly if you are only watching local listings.",
+  "supportingParagraphs": [
+    "Buyers looking for a buy electric car Bay Area broker usually need help comparing incentives, inventory timing and which trims are worth waiting for. The same is true when limited inventory Bay Area cars pushes you toward a rushed decision.",
+    "We help clients compare city inventory, Peninsula stores and broader California options so the buying path fits the market instead of reacting to it."
+  ],
+  "marketInsights": [
+    "EV demand remains high and can create abrupt pricing differences on similar inventory.",
+    "Urban lot constraints mean some dealers show shallow local stock even in popular segments.",
+    "Silicon Valley cross-shopping influences pricing well beyond San Francisco proper."
+  ],
+  "neighborhoods": ["SoMa", "Pac Heights", "Daly City"],
+  "nearbyCities": ["los-angeles-ca", "san-diego-ca", "seattle-wa"],
+  "faq": [
+    {
+      "question": "Is the Bay Area a difficult market for EV buyers?",
+      "answer": "It can be. Buyers often need an EV car buying service San Francisco drivers can use to compare inventory timing, incentives and markup pressure before committing."
+    },
+    {
+      "question": "Do you only search San Francisco inventory?",
+      "answer": "No. Bay Area pricing often makes a wider California search smarter, especially when limited inventory Bay Area cars creates rushed dealership decisions."
+    },
+    {
+      "question": "Can you help coordinate delivery into San Francisco?",
+      "answer": "Yes. When the best option is outside the immediate market, we help map the purchase and car delivery San Francisco clients may need."
+    }
+  ]
+}

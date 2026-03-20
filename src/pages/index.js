@@ -282,6 +282,59 @@ const HomePage = () => {
         )}
       </RevealSection>
 
+      <RevealSection>
+        <section
+          className="py-16 bg-white"
+          aria-labelledby="service-hubs-heading"
+        >
+          <div className="container mx-auto px-4 md:px-6 lg:max-w-[1280px]">
+            <div className="max-w-3xl mb-8">
+              <p className="text-sm uppercase tracking-[0.24em] text-accent font-pirulen mb-4">
+                Service Hubs
+              </p>
+              <h2
+                id="service-hubs-heading"
+                className="text-3xl md:text-4xl font-medium text-primary mb-3"
+              >
+                Explore the buying path that fits your search
+              </h2>
+              <p className="text-lg text-primary/75">
+                Start with the service page that matches your intent, then move
+                into the city landing page for localized market guidance.
+              </p>
+            </div>
+
+            <div className="grid gap-5 lg:grid-cols-2">
+              <Link
+                to="/car-broker/"
+                className="rounded-[24px] border border-primary/10 bg-secondary p-6 shadow-sm hover:border-accent"
+              >
+                <h3 className="text-2xl font-semibold text-primary mb-2">
+                  Car Broker
+                </h3>
+                <p className="text-primary/75">
+                  For buyers who want expert representation across research,
+                  sourcing, negotiation and delivery support.
+                </p>
+              </Link>
+
+              <Link
+                to="/used-car-broker/"
+                className="rounded-[24px] border border-primary/10 bg-secondary p-6 shadow-sm hover:border-accent"
+              >
+                <h3 className="text-2xl font-semibold text-primary mb-2">
+                  Used Car Broker
+                </h3>
+                <p className="text-primary/75">
+                  For buyers focused on avoiding risky listings, overpaying and
+                  used-car surprises.
+                </p>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </RevealSection>
+
       <RevealSection>{deferredReady && <FaqSectionHomepage />}</RevealSection>
 
       <RevealSection>

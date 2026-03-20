@@ -1,20 +1,20 @@
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-});
+})
 
-const normalizeWithSlash = (p) => {
-  if (!p || p === "/") return "/";
-  return p.endsWith("/") ? p : `${p}/`;
-};
+const normalizeWithSlash = p => {
+  if (!p || p === "/") return "/"
+  return p.endsWith("/") ? p : `${p}/`
+}
 
 module.exports = {
   siteMetadata: {
     title: `Zen Car Buying | Stress-Free Concierge Service for New, Lightly Used & Luxury Cars`,
     description: `Zen Car Buying is your trusted concierge service for finding new cars, lightly used vehicles and even luxury models at affordable prices nationwide. Our proven 4-step system ensures a stress-free car-buying experience.`,
     author: `@zencarbuying`,
-    siteUrl: `https://zencarbuying.com`
+    siteUrl: `https://zencarbuying.com`,
   },
-  trailingSlash: 'always', 
+  trailingSlash: "always",
   plugins: [
     `gatsby-plugin-image`,
     {
@@ -57,12 +57,17 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `cities`,
+        path: `${__dirname}/src/data/cities`,
+      },
+    },
+    `gatsby-transformer-json`,
+    {
       resolve: `gatsby-plugin-postcss`,
       options: {
-        postCssPlugins: [
-          require(`tailwindcss`),
-          require(`autoprefixer`),
-        ],
+        postCssPlugins: [require(`tailwindcss`), require(`autoprefixer`)],
       },
     },
     {
@@ -102,24 +107,21 @@ module.exports = {
         sitemap: "https://zencarbuying.com/sitemap-index.xml",
         resolveEnv: () => process.env.NETLIFY_ENV || process.env.NODE_ENV,
         env: {
-          'production': {
+          production: {
             policy: [
               {
                 userAgent: "*",
                 allow: "/",
-                disallow: [
-                  '/tag-me',
-                  '/untag-me'
-                ]
-              }
+                disallow: ["/tag-me", "/untag-me"],
+              },
             ],
           },
-          'branch-deploy': {
+          "branch-deploy": {
             policy: [{ userAgent: "*", disallow: "/" }],
             sitemap: null,
             host: null,
           },
-          'deploy-preview': {
+          "deploy-preview": {
             policy: [{ userAgent: "*", disallow: "/" }],
             sitemap: null,
             host: null,
@@ -137,7 +139,7 @@ module.exports = {
         precachePages: [],
       },
     },
-{
+    {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         output: `/`,
@@ -156,33 +158,43 @@ module.exports = {
           `/sms-terms-and-conditions/`,
         ],
         serialize: ({ path }) => {
-          if (!path || path.includes("undefined")) return null;
-          const withSlash = normalizeWithSlash(path);
+          if (!path || path.includes("undefined")) return null
+          const withSlash = normalizeWithSlash(path)
 
-          let priority = 0.7;
+          let priority = 0.7
           switch (withSlash) {
             case "/":
-              priority = 1.0;
-              break;
+              priority = 1.0
+              break
             case "/services/":
             case "/purchase/":
             case "/about/":
-              priority = 0.9;
-              break;
+            case "/car-broker/":
+            case "/used-car-broker/":
+              priority = 0.9
+              break
             case "/faq/":
             case "/contact/":
             case "/blog/":
-              priority = 0.8;
-              break;
+            case "/car-broker/service-areas/":
+              priority = 0.8
+              break
             default:
-              priority = 0.7;
+              if (
+                withSlash.startsWith("/car-broker/") ||
+                withSlash.startsWith("/used-car-broker/")
+              ) {
+                priority = 0.85
+              } else {
+                priority = 0.7
+              }
           }
 
           return {
             url: `https://zencarbuying.com${withSlash}`,
             changefreq: `weekly`,
             priority,
-          };
+          }
         },
       },
     },

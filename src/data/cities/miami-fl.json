@@ -1,0 +1,58 @@
+{
+  "slug": "miami-fl",
+  "city": "Miami",
+  "state": "Florida",
+  "stateCode": "FL",
+  "region": "South",
+  "primaryKeyword": "car broker in Miami",
+  "secondaryKeywords": [
+    "car buying service Miami",
+    "auto broker Miami FL",
+    "help buying a car Miami"
+  ],
+  "longTailKeywords": [
+    "luxury car broker Miami",
+    "exotic car buying Miami",
+    "avoid dealer markup Miami",
+    "car delivery South Florida"
+  ],
+  "usedPrimaryKeyword": "used car broker in Miami",
+  "usedSecondaryKeywords": [
+    "used car buying service Miami",
+    "help buying a used car Miami",
+    "used luxury car broker Miami"
+  ],
+  "usedLongTailKeywords": [
+    "used car broker near me Miami",
+    "someone to inspect used luxury car before buying in Miami",
+    "avoid used car scams Miami"
+  ],
+  "heroImage": "/images/cities/miami.jpg",
+  "localizedPainPoint": "Miami buyers often face image-driven pricing, imported inventory variety and sharp markups on luxury and in-demand lifestyle vehicles.",
+  "localIntro": "A smart car broker Miami buyers use needs to understand both value and optics. In Miami, pricing on luxury, exotic and style-forward inventory can move on perception as much as actual market logic.",
+  "supportingParagraphs": [
+    "If you are looking for a luxury car broker Miami drivers trust, you need more than a flashy listing feed. You need help evaluating what is worth the premium and where dealer markup is just noise.",
+    "We help buyers compare exotic car buying Miami options, mainstream commuter needs and delivery logistics across South Florida so the deal stays grounded."
+  ],
+  "marketInsights": [
+    "Luxury and lifestyle inventory can carry perception-driven pricing premiums.",
+    "South Florida geography makes delivery and broader sourcing useful leverage points.",
+    "Dealer add-ons and presentation polish can hide weak value quickly."
+  ],
+  "neighborhoods": ["Brickell", "Coral Gables", "Aventura"],
+  "nearbyCities": ["atlanta-ga", "houston-tx", "chicago-il"],
+  "faq": [
+    {
+      "question": "Do you help with luxury and exotic vehicles in Miami?",
+      "answer": "Yes. Buyers searching for a luxury car broker Miami service often need help separating genuine value from presentation-driven markup before they commit."
+    },
+    {
+      "question": "Can Zen Car Buying help if the right car is outside Miami?",
+      "answer": "Yes. We regularly compare broader inventory and help plan car delivery South Florida buyers may need when the best option is elsewhere."
+    },
+    {
+      "question": "How do you help buyers avoid inflated pricing in Miami?",
+      "answer": "We help clients avoid dealer markup Miami stores may build into the process by comparing real market comps, not just the local sales pitch."
+    }
+  ]
+}

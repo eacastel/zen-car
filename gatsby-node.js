@@ -1,10 +1,16 @@
-const path = require("path");
+const path = require("path")
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions;
+  const { createPage } = actions
+  const cityLandingTemplate = path.resolve(`./src/templates/city-landing.tsx`)
 
   const result = await graphql(`
     query {
+      allCitiesJson {
+        nodes {
+          slug
+        }
+      }
       allContentfulBlogPost {
         nodes {
           slug
@@ -21,29 +27,50 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
       }
     }
-  `);
+  `)
 
   if (result.errors) {
-    reporter.panic("Error fetching posts or tags:", result.errors);
-    return;
+    reporter.panic("Error fetching posts or tags:", result.errors)
+    return
   }
 
-  const posts = result.data.allContentfulBlogPost.nodes;
-  posts.forEach((post) => {
+  const cities = result.data.allCitiesJson.nodes
+  cities.forEach(city => {
+    createPage({
+      path: `/car-broker/${city.slug}/`,
+      component: cityLandingTemplate,
+      context: {
+        slug: city.slug,
+        serviceType: "car_broker",
+      },
+    })
+
+    createPage({
+      path: `/used-car-broker/${city.slug}/`,
+      component: cityLandingTemplate,
+      context: {
+        slug: city.slug,
+        serviceType: "used_car_broker",
+      },
+    })
+  })
+
+  const posts = result.data.allContentfulBlogPost.nodes
+  posts.forEach(post => {
     createPage({
       path: `/blog/${post.slug}`,
       component: path.resolve(`./src/templates/blog-post.js`),
       context: { slug: post.slug },
-    });
-  });
+    })
+  })
 
-  const tags = result.data.allContentfulTag.nodes;
-  tags.forEach((tag) => {
+  const tags = result.data.allContentfulTag.nodes
+  tags.forEach(tag => {
     const relatedPosts = posts
-      .filter((post) =>
-        post.metadata?.tags.some((postTag) => postTag.name === tag.name)
+      .filter(post =>
+        post.metadata?.tags.some(postTag => postTag.name === tag.name)
       )
-      .map((post) => post.slug);
+      .map(post => post.slug)
 
     if (relatedPosts.length > 0) {
       createPage({
@@ -53,7 +80,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           tagName: tag.name,
           relatedPosts,
         },
-      });
+      })
     }
-  });
-};
+  })
+}
