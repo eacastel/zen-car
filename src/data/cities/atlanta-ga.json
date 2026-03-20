@@ -5,6 +5,7 @@
   "stateCode": "GA",
   "region": "South",
   "primaryKeyword": "car broker in Atlanta",
+  "primaryKeywordDisplay": "Car broker in Atlanta",
   "secondaryKeywords": [
     "car buying service Atlanta",
     "auto broker Atlanta GA",
@@ -16,6 +17,7 @@
     "dealership negotiation Atlanta"
   ],
   "usedPrimaryKeyword": "used car broker in Atlanta",
+  "usedPrimaryKeywordDisplay": "Used car broker in Atlanta",
   "usedSecondaryKeywords": [
     "used car buying service Atlanta",
     "help buying a used car Atlanta",
@@ -27,31 +29,31 @@
     "avoid used car scams Atlanta"
   ],
   "heroImage": "/images/cities/atlanta.jpg",
-  "localizedPainPoint": "Atlanta shoppers often need commuter practicality and pricing discipline in a market where traffic and dealership urgency both wear buyers down quickly.",
-  "localIntro": "The right car broker Atlanta buyers choose should do more than source listings. Atlanta can be a high-friction buying market where traffic, dealership density and inconsistent pricing make it easy to lose clarity halfway through the process.",
+  "localizedPainPoint": "Buying a car in Atlanta often means dealing with heavy traffic, crowded dealerships and inconsistent pricing - making it easy to waste time or overpay if you go in without a clear strategy.",
+  "localIntro": "A strong car broker in Atlanta should do more than send listings - they should help you make a confident decision in a market that can quickly become overwhelming. Between long commutes, dealership pressure and uneven pricing across the metro, many buyers lose clarity before they find the right car.",
   "supportingParagraphs": [
-    "Buyers searching best commuter cars Atlanta traffic solutions usually need help balancing fuel economy, comfort and long-term reliability instead of reacting to whatever is easiest to test-drive that weekend.",
-    "We help clients compare metro inventory, structure the dealership negotiation Atlanta buyers often dread and decide when a broader Georgia search creates the better deal."
+    "Buyers searching for the best commuter cars for Atlanta traffic usually need help balancing fuel efficiency, comfort and long-term reliability - not just reacting to whatever is easiest to test-drive that weekend.",
+    "We help you compare inventory across Atlanta and beyond, handle dealership negotiation on your behalf and decide when expanding your search across Georgia leads to a better deal."
   ],
   "marketInsights": [
-    "Commute-heavy lifestyles shift value toward comfortable, efficient daily drivers.",
-    "Dealer density creates plenty of choice, but not always clean price transparency.",
-    "Regional Georgia sourcing can improve leverage when metro inventory is overpriced."
+    "Long daily commutes make comfort, fuel efficiency and reliability more important than impulse buying.",
+    "High dealership density means more options, but also more inconsistent pricing and pressure tactics.",
+    "Looking beyond Atlanta into the wider Georgia market often leads to better pricing and cleaner deals."
   ],
   "neighborhoods": ["Buckhead", "Sandy Springs", "Decatur"],
   "nearbyCities": ["miami-fl", "houston-tx", "chicago-il"],
   "faq": [
     {
-      "question": "What kinds of vehicles do Atlanta buyers ask about most?",
-      "answer": "Many start with commuter-focused searches like best commuter cars Atlanta traffic lists, then narrow from there once budget, family needs and highway use get factored in."
+      "question": "What kinds of vehicles do Atlanta buyers usually look for?",
+      "answer": "Most Atlanta buyers focus on reliable daily drivers that handle long commutes comfortably - often prioritizing fuel efficiency, safety and long-term cost over impulse purchases."
     },
     {
-      "question": "Can you help if I hate dealership negotiation?",
-      "answer": "Yes. A big reason buyers hire us is to reduce dealership negotiation Atlanta stores often force onto the customer."
+      "question": "Can you handle dealership negotiation for me?",
+      "answer": "Yes. We manage the negotiation process for you so you do not have to deal with dealership pressure, pricing games or back-and-forth conversations."
     },
     {
-      "question": "Do you work beyond the Atlanta metro?",
-      "answer": "Yes. We can compare broader state inventory and help with car broker Georgia delivery planning when the best option is outside the city."
+      "question": "Do I have to buy a car in Atlanta?",
+      "answer": "No. Many clients choose to buy outside the Atlanta metro area to get better pricing or inventory. We help you compare options nationwide and coordinate delivery if needed."
     }
   ]
 }

@@ -2,7 +2,7 @@ const path = require("path")
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-  const cityLandingTemplate = path.resolve(`./src/templates/city-landing.tsx`)
+  const cityLandingTemplate = path.resolve(`./src/templates/city-landing.js`)
 
   const result = await graphql(`
     query {

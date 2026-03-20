@@ -5,6 +5,7 @@
   "stateCode": "CA",
   "region": "West Coast",
   "primaryKeyword": "car broker in Los Angeles",
+  "primaryKeywordDisplay": "Car broker in Los Angeles",
   "secondaryKeywords": [
     "car buying service Los Angeles",
     "auto broker Los Angeles",
@@ -19,6 +20,7 @@
     "negotiate car price Los Angeles"
   ],
   "usedPrimaryKeyword": "used car broker in Los Angeles",
+  "usedPrimaryKeywordDisplay": "Used car broker in Los Angeles",
   "usedSecondaryKeywords": [
     "used car buying service Los Angeles",
     "help buying a used car Los Angeles",
@@ -32,31 +34,31 @@
     "best used SUV deals Los Angeles"
   ],
   "heroImage": "/images/cities/los-angeles.jpg",
-  "localizedPainPoint": "Dealer density, aggressive markups and time-heavy cross-city shopping make Los Angeles one of the easiest places to overpay.",
-  "localIntro": "If you are looking for a car broker Los Angeles drivers can trust, the main challenge is not finding listings, it is filtering the noise. Between dealer add-ons, high EV demand and store-to-store pricing swings, buying in Los Angeles can burn days before you even get to the negotiation.",
+  "localizedPainPoint": "Buying a car in Los Angeles often means fighting traffic, comparing crowded dealerships and sorting through markups that can change the deal fast - making it easy to waste time or overpay without a clear plan.",
+  "localIntro": "A strong car broker in Los Angeles should do more than send listings - they should help you cut through dealership noise and make a confident decision in a market that can get expensive fast. Between dealer add-ons, heavy EV demand and major pricing swings from one store to the next, many buyers lose leverage before the real negotiation even starts.",
   "supportingParagraphs": [
-    "Buyers comparing Santa Monica, Pasadena and Valley inventory often see the same model priced very differently once markups, accessories and finance pressure get layered in. That is why shoppers searching for the best way to buy a car in Los Angeles usually need stronger market context before they step onto a lot.",
-    "We help clients avoid dealership markup Los Angeles stores are known for by widening the search radius, comparing out-of-state options when the math works and handling the negotiation strategy upfront."
+    "Buyers comparing inventory in Santa Monica, Pasadena and across the Valley often find the same vehicle priced very differently once add-ons, accessories and finance pressure get layered in. That is why many shoppers looking for the best way to buy a car in Los Angeles need stronger market context before they step onto a lot.",
+    "We help you compare inventory across Los Angeles and beyond, avoid dealership markup and decide when expanding your search outside Southern California leads to a better deal."
   ],
   "marketInsights": [
-    "High EV adoption creates fast-moving inventory pockets and uneven dealer pricing.",
-    "Dealer add-ons and protection packages can change the effective price materially.",
-    "Cross-town traffic makes comparison shopping more expensive in time than most buyers expect."
+    "High EV demand can make popular inventory move quickly and push pricing higher than expected.",
+    "Dealer add-ons and protection packages often inflate the real price more than buyers realize at first.",
+    "Cross-town traffic turns comparison shopping into a bigger time commitment than most people expect."
   ],
   "neighborhoods": ["Santa Monica", "Pasadena", "Burbank"],
   "nearbyCities": ["san-diego-ca", "san-francisco-ca", "portland-or"],
   "faq": [
     {
-      "question": "Why do Los Angeles car prices vary so much between dealerships?",
-      "answer": "Los Angeles stores often layer add-ons, financing incentives and inventory-based markup differently, so the cheapest advertised number is not always the real deal. That is why many buyers use a car buying service Los Angeles shoppers can trust before they negotiate."
+      "question": "Why do Los Angeles prices vary so much from one dealership to another?",
+      "answer": "Los Angeles dealerships often structure deals very differently - adding markups, accessories, incentives and fees that can make the same car look cheaper than it really is. We help you compare the real numbers before you commit."
     },
     {
-      "question": "Can you help me buy outside Los Angeles if the local inventory is weak?",
-      "answer": "Yes. We frequently compare Southern California inventory against nearby and out-of-state options when it improves value, especially for buyers searching buy car out of state California delivery solutions."
+      "question": "Can you help me buy outside Los Angeles if the local inventory is overpriced?",
+      "answer": "Yes. Many buyers get a better outcome by expanding their search beyond Los Angeles. We help you compare nearby and out-of-state options, then coordinate the next steps if the better deal is somewhere else."
     },
     {
-      "question": "Is a broker useful if I already found the car I want?",
-      "answer": "Yes. We can still help negotiate car price Los Angeles dealerships quote, pressure-test the numbers and help you decide whether the listing actually represents good value."
+      "question": "Is a broker still useful if I already found the car I want?",
+      "answer": "Yes. We can still review the listing, pressure-test the numbers and negotiate on your behalf so you know whether the deal actually makes sense before you move forward."
     }
   ]
 }

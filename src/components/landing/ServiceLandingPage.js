@@ -104,6 +104,7 @@ export default function ServiceLandingPage({ serviceType }) {
         title={config.heroTitle}
         description={`${config.primaryKeyword} support should be strategic, calm and direct. ${config.heroDescription}`}
         accentLine={config.heroAccent}
+        ctaNote="We research, negotiate and coordinate delivery. You just choose the car."
         primaryCta={{
           text: "Book consultation",
           to: bookingPath,

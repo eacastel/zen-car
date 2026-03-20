@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql, HeadFC, PageProps } from "gatsby"
+import { graphql } from "gatsby"
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 import HowItWorks from "../components/HowItWorks"
@@ -11,22 +11,18 @@ import LandingPageAnalytics from "../components/landing/LandingPageAnalytics"
 import ServiceButton from "../components/ServiceButton"
 import {
   buildBookingPath,
+  capitalizeFirst,
   buildCityMetaDescription,
   buildCityMetaTitle,
   buildCitySchemas,
   buildPricingPath,
   buildServicePath,
-  capitalizeFirst,
   getCityKeywordSet,
   getNearbyCities,
   getServiceConfig,
 } from "../utils/landingPages"
 
-function buildLocalizedCards(
-  cityData: any,
-  serviceType: string,
-  keywords: any
-) {
+function buildLocalizedCards(cityData, serviceType, keywords) {
   const serviceLabel =
     serviceType === "used_car_broker" ? "used car broker" : "car broker"
 
@@ -50,7 +46,7 @@ function buildLocalizedCards(
   ]
 }
 
-const CityLandingTemplate = ({ data, pageContext }: PageProps<any>) => {
+const CityLandingTemplate = ({ data, pageContext }) => {
   const cityData = data.citiesJson
   const allCities = data.allCitiesJson.nodes
   const serviceType = pageContext.serviceType
@@ -103,11 +99,10 @@ const CityLandingTemplate = ({ data, pageContext }: PageProps<any>) => {
         eyebrow={`${cityData.city}, ${
           cityData.stateCode
         } ${serviceConfig.displayName.toLowerCase()}`}
-        title={`${capitalizeFirst(
-          keywordSet.primaryKeyword
-        )} | Car buying concierge in ${cityData.city}`}
+        title={`${keywordSet.primaryKeywordDisplay} | Car buying concierge in ${cityData.city}`}
         description={`${keywordSet.primaryKeyword} support should feel local, direct and strategic. ${cityData.localizedPainPoint}`}
         accentLine={serviceConfig.heroAccent}
+        ctaNote="We research, negotiate and coordinate delivery. You just choose the car."
         heroImage={cityData.heroImage}
         primaryCta={{
           text: "Book consultation",
@@ -139,14 +134,12 @@ const CityLandingTemplate = ({ data, pageContext }: PageProps<any>) => {
       <LandingSection
         background="bg-white"
         eyebrow={`${cityData.region} Market`}
-        title={`${capitalizeFirst(
-          keywordSet.primaryKeyword
-        )} guidance starts with local context`}
+        title={`${keywordSet.primaryKeywordDisplay} guidance starts with local context`}
         description={cityData.localIntro}
       >
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,360px)]">
           <div className="space-y-5 text-lg leading-relaxed text-primary/80">
-            {cityData.supportingParagraphs.map((paragraph: string) => (
+            {cityData.supportingParagraphs.map(paragraph => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
@@ -155,7 +148,7 @@ const CityLandingTemplate = ({ data, pageContext }: PageProps<any>) => {
               Neighborhoods we hear about
             </p>
             <div className="flex flex-wrap gap-2">
-              {cityData.neighborhoods.map((area: string) => (
+              {cityData.neighborhoods.map(area => (
                 <span
                   key={area}
                   className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-primary shadow-sm"
@@ -179,7 +172,7 @@ const CityLandingTemplate = ({ data, pageContext }: PageProps<any>) => {
           )} usually reflect the same issue: local buying conditions matter.`}
       >
         <div className="grid gap-5 md:grid-cols-3">
-          {cityData.marketInsights.map((insight: string) => (
+          {cityData.marketInsights.map(insight => (
             <article
               key={insight}
               className="rounded-[24px] border border-white/70 bg-white p-6 shadow-sm"
@@ -228,7 +221,7 @@ const CityLandingTemplate = ({ data, pageContext }: PageProps<any>) => {
       >
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,360px)]">
           <div className="grid gap-4 md:grid-cols-3">
-            {keywordSet.secondaryKeywords.slice(0, 3).map((keyword: string) => (
+            {keywordSet.secondaryKeywords.slice(0, 3).map(keyword => (
               <div
                 key={keyword}
                 className="rounded-[20px] border border-white/70 bg-white p-5 shadow-sm"
@@ -356,7 +349,7 @@ const CityLandingTemplate = ({ data, pageContext }: PageProps<any>) => {
 
 export default CityLandingTemplate
 
-export const Head: HeadFC<any> = ({ data, pageContext, location }) => {
+export const Head = ({ data, pageContext, location }) => {
   const cityData = data.citiesJson
   const serviceType = pageContext.serviceType
   const title = buildCityMetaTitle(cityData, serviceType)

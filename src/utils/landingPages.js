@@ -231,6 +231,10 @@ export function getCityKeywordSet(cityData, serviceType) {
     return {
       primaryKeyword:
         cityData.usedPrimaryKeyword || `used car broker in ${cityData.city}`,
+      primaryKeywordDisplay:
+        cityData.usedPrimaryKeywordDisplay ||
+        cityData.usedPrimaryKeyword ||
+        `Used car broker in ${cityData.city}`,
       secondaryKeywords: cityData.usedSecondaryKeywords || [
         `used car buying service ${cityData.city}`,
         `help buying a used car ${cityData.city}`,
@@ -246,6 +250,10 @@ export function getCityKeywordSet(cityData, serviceType) {
 
   return {
     primaryKeyword: cityData.primaryKeyword,
+    primaryKeywordDisplay:
+      cityData.primaryKeywordDisplay ||
+      cityData.primaryKeyword ||
+      `Car broker in ${cityData.city}`,
     secondaryKeywords: cityData.secondaryKeywords || [],
     longTailKeywords: cityData.longTailKeywords || [],
   }

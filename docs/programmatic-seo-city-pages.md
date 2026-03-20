@@ -15,7 +15,7 @@ This implementation adds a JSON-driven SEO landing page system for:
   - `gatsby-source-filesystem` named `cities`
   - `gatsby-transformer-json`
 - Programmatic page creation: `gatsby-node.js`
-- Shared city template: `src/templates/city-landing.tsx`
+- Shared city template: `src/templates/city-landing.js`
 - Shared landing components: `src/components/landing/*`
 - Shared page/SEO helpers: `src/utils/landingPages.js`
 

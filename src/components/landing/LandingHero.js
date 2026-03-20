@@ -6,6 +6,7 @@ export default function LandingHero({
   title,
   description,
   accentLine,
+  ctaNote,
   primaryCta,
   secondaryCta,
   badgeItems = [],
@@ -76,6 +77,11 @@ export default function LandingHero({
                 </ServiceButton>
               )}
             </div>
+            {ctaNote && (
+              <p className="mt-4 max-w-[42rem] text-sm md:text-base text-white/80">
+                {ctaNote}
+              </p>
+            )}
           </div>
 
           <div className="rounded-[28px] border border-white/15 bg-white/10 p-6 md:p-8 backdrop-blur shadow-[0_18px_45px_rgba(0,0,0,0.22)]">

@@ -5,6 +5,7 @@
   "stateCode": "CA",
   "region": "West Coast",
   "primaryKeyword": "car broker in San Francisco",
+  "primaryKeywordDisplay": "Car broker in San Francisco",
   "secondaryKeywords": [
     "car buying service Bay Area",
     "auto broker San Francisco",
@@ -17,6 +18,7 @@
     "car delivery San Francisco"
   ],
   "usedPrimaryKeyword": "used car broker in San Francisco",
+  "usedPrimaryKeywordDisplay": "Used car broker in San Francisco",
   "usedSecondaryKeywords": [
     "used car buying service Bay Area",
     "used car concierge San Francisco",
@@ -28,31 +30,31 @@
     "avoid used car scams Bay Area"
   ],
   "heroImage": "/images/cities/san-francisco.jpg",
-  "localizedPainPoint": "Bay Area buyers deal with limited urban inventory, high EV competition and pricing pressure that spreads from Silicon Valley through the whole region.",
-  "localIntro": "The right car broker San Francisco buyers choose needs to understand Bay Area market behavior, not just vehicle specs. Urban inventory constraints, EV demand and cross-bridge shopping can distort value quickly if you are only watching local listings.",
+  "localizedPainPoint": "Buying a car in San Francisco often means dealing with limited city inventory, strong EV competition and pricing pressure that spreads across the Bay Area - making it easy to rush into the wrong deal.",
+  "localIntro": "A strong car broker in San Francisco should do more than send listings - they should help you make sense of a market where inventory is tight, demand is high and pricing can shift quickly. Between EV competition, city-lot constraints and Bay Area cross-shopping, many buyers lose leverage before they even narrow the right options.",
   "supportingParagraphs": [
-    "Buyers looking for a buy electric car Bay Area broker usually need help comparing incentives, inventory timing and which trims are worth waiting for. The same is true when limited inventory Bay Area cars pushes you toward a rushed decision.",
-    "We help clients compare city inventory, Peninsula stores and broader California options so the buying path fits the market instead of reacting to it."
+    "Buyers searching for help buying an electric car in the Bay Area usually need more than listings - they need help comparing incentives, timing and whether the right trim is worth waiting for.",
+    "We help you compare San Francisco, Peninsula and broader California inventory so you can move with a clear strategy instead of reacting to whatever happens to be available first."
   ],
   "marketInsights": [
-    "EV demand remains high and can create abrupt pricing differences on similar inventory.",
-    "Urban lot constraints mean some dealers show shallow local stock even in popular segments.",
-    "Silicon Valley cross-shopping influences pricing well beyond San Francisco proper."
+    "Strong EV demand can create big pricing differences between similar vehicles across the Bay Area.",
+    "Urban lot constraints often mean local inventory looks thinner than buyers expect, even in popular segments.",
+    "Cross-shopping from Silicon Valley and the Peninsula can push pricing higher well beyond San Francisco itself."
   ],
   "neighborhoods": ["SoMa", "Pac Heights", "Daly City"],
   "nearbyCities": ["los-angeles-ca", "san-diego-ca", "seattle-wa"],
   "faq": [
     {
       "question": "Is the Bay Area a difficult market for EV buyers?",
-      "answer": "It can be. Buyers often need an EV car buying service San Francisco drivers can use to compare inventory timing, incentives and markup pressure before committing."
+      "answer": "It can be. Many buyers need help comparing incentives, timing and inventory across the region before they know whether a deal is actually competitive."
     },
     {
       "question": "Do you only search San Francisco inventory?",
-      "answer": "No. Bay Area pricing often makes a wider California search smarter, especially when limited inventory Bay Area cars creates rushed dealership decisions."
+      "answer": "No. We often compare inventory across the Bay Area and beyond because local supply can be tight and broader California options sometimes create a better deal."
     },
     {
       "question": "Can you help coordinate delivery into San Francisco?",
-      "answer": "Yes. When the best option is outside the immediate market, we help map the purchase and car delivery San Francisco clients may need."
+      "answer": "Yes. If the best vehicle is outside the city or outside the Bay Area, we help coordinate the purchase and delivery process so the better option is still practical."
     }
   ]
 }
