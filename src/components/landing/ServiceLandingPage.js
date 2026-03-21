@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useMemo } from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import Layout from "../Layout"
 import HeroSocialProof from "../new-landing-2026/HeroSocialProof"
+import CallTextCtaBar from "../new-landing-2026/CallTextCtaBar"
 import HowItWorks from "../HowItWorks"
 import LandingHero from "./LandingHero"
 import LandingSection from "./LandingSection"
@@ -130,6 +131,9 @@ export default function ServiceLandingPage({ serviceType }) {
         badgeItems={config.heroBadges}
       />
 
+      <HeroSocialProof />
+      <CallTextCtaBar />
+
       <section className="bg-white">
         <div className="container mx-auto px-4 md:px-6 lg:max-w-[1280px] -mt-6 relative z-10">
           <div className="rounded-[24px] border border-primary/10 bg-white p-6 md:p-8 shadow-[0_16px_40px_rgba(20,31,34,0.08)]">
@@ -148,8 +152,6 @@ export default function ServiceLandingPage({ serviceType }) {
           </div>
         </div>
       </section>
-
-      <HeroSocialProof />
 
       <LandingSection
         background="bg-white"

@@ -3,6 +3,8 @@ import { graphql } from "gatsby"
 import Layout from "../components/Layout"
 import Seo from "../components/Seo"
 import HowItWorks from "../components/HowItWorks"
+import CallTextCtaBar from "../components/new-landing-2026/CallTextCtaBar"
+import HeroSocialProof from "../components/new-landing-2026/HeroSocialProof"
 import LandingHero from "../components/landing/LandingHero"
 import LandingSection from "../components/landing/LandingSection"
 import LandingFaqSection from "../components/landing/LandingFaqSection"
@@ -116,6 +118,9 @@ const CityLandingTemplate = ({ data, pageContext }) => {
         }}
         badgeItems={heroBadges}
       />
+
+      <HeroSocialProof />
+      <CallTextCtaBar />
 
       <section className="bg-white">
         <div className="container mx-auto px-4 md:px-6 lg:max-w-[1280px] -mt-6 relative z-10">
